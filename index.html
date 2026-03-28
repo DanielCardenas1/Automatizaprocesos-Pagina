@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatiza Procesos — Daniel Cárdenas · Colombia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0EFEC;
+  --s:#F7F6F3;
+  --w:#FFFFFF;
+  --ink:#1A1714;
+  --ink2:#6A6560;
+  --ink3:#A8A4A0;
+  --bdr:#E4E2DE;
+  --ez:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+
+.cur{position:fixed;z-index:99999;pointer-events:none;width:8px;height:8px;background:var(--ink);border-radius:50%;transform:translate(-50%,-50%);transition:width .25s var(--ez),height .25s var(--ez),opacity .2s}
+.cur.h{width:36px;height:36px;opacity:.12}
+
+.page-wrap{max-width:900px;margin:32px auto;background:var(--s);border-radius:24px;overflow:hidden;box-shadow:0 2px 40px rgba(0,0,0,.07)}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:0.5px solid var(--bdr);background:var(--s)}
+.nav-contact{font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;letter-spacing:.3px}
+.nav-mid{display:flex;gap:8px}
+.nav-btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--ink);background:var(--w);border:0.5px solid var(--bdr);padding:6px 14px;border-radius:100px;cursor:none;transition:background .2s}
+.nav-btn:hover{background:var(--ink);color:#fff}
+.nav-btn.dark{background:var(--ink);color:#fff}
+.nav-btn.dark:hover{background:#000}
+.nav-links{display:flex;gap:16px}
+.nav-links a{font-size:11px;color:var(--ink3);text-decoration:none;transition:color .2s;font-family:'DM Mono',monospace}
+.nav-links a:hover{color:var(--ink)}
+
+/* HERO */
+.hero{padding:52px 48px 56px;text-align:center;background:var(--s);border-bottom:0.5px solid var(--bdr)}
+.hero-avatar-wrap{position:relative;display:inline-block;margin-bottom:22px}
+.hero-avatar{width:76px;height:76px;border-radius:50%;background:var(--bdr);border:2px solid var(--bdr);display:flex;align-items:center;justify-content:center;margin:0 auto;overflow:hidden}
+.hero-avatar svg{width:32px;height:32px;opacity:.25}
+.hero-name-pill{position:absolute;top:4px;left:calc(100% + 10px);white-space:nowrap;background:var(--ink);color:#fff;font-size:11px;font-weight:500;padding:5px 12px;border-radius:100px;display:flex;align-items:center;gap:6px}
+.pill-dot{width:5px;height:5px;border-radius:50%;background:#6EE79A;animation:pdot 2.5s infinite}
+@keyframes pdot{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero-h{font-family:'DM Sans',sans-serif;font-size:clamp(36px,4.5vw,52px);font-weight:700;line-height:1.05;letter-spacing:-1.5px;color:var(--ink);margin-bottom:16px;opacity:0;animation:ri .8s var(--ez) .1s both}
+.hero-h em{font-style:italic;font-weight:400;color:var(--ink2)}
+@keyframes ri{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-sub{font-size:14px;color:var(--ink2);line-height:1.65;max-width:420px;margin:0 auto 28px;opacity:0;animation:ri .8s var(--ez) .2s both}
+
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:28px;opacity:0;animation:ri .8s var(--ez) .3s both}
+.btn-dark{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;background:var(--ink);color:#fff;border:none;padding:12px 22px;border-radius:100px;cursor:none;display:flex;align-items:center;gap:8px;transition:background .2s,transform .15s}
+.btn-dark:hover{background:#000;transform:translateY(-1px)}
+.btn-ghost{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink);background:none;border:0.5px solid var(--bdr);padding:12px 20px;border-radius:100px;cursor:none;transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(0,0,0,.03)}
+
+.hero-proof{display:flex;align-items:center;justify-content:center;gap:10px;opacity:0;animation:ri .8s var(--ez) .38s both}
+.proof-txt{font-size:12px;color:var(--ink3)}
+.proof-txt strong{color:var(--ink);font-weight:600}
+
+/* LOGO STRIP — clientes / entidades */
+.logo-strip{padding:20px 32px;display:flex;align-items:center;justify-content:space-around;border-bottom:0.5px solid var(--bdr);background:var(--w)}
+.logo-item{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:0.5px solid var(--bdr)}
+.stat{padding:28px 24px;border-right:0.5px solid var(--bdr);text-align:center}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'DM Sans',sans-serif;font-size:32px;font-weight:700;color:var(--ink);letter-spacing:-1.5px;line-height:1}
+.stat-l{font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.4}
+
+/* SERVICIOS */
+.svc-section{padding:52px 48px;border-bottom:0.5px solid var(--bdr);background:var(--s)}
+.sec-eyebrow{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.sec-h{font-family:'DM Sans',sans-serif;font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-.6px;margin-bottom:8px}
+.sec-h em{font-style:italic;font-weight:400;color:var(--ink2)}
+.sec-sub{font-size:13px;color:var(--ink2);margin-bottom:36px;max-width:520px;line-height:1.6}
+
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc-card{background:var(--w);border:0.5px solid var(--bdr);border-radius:12px;padding:20px;transition:box-shadow .2s}
+.svc-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.svc-ico{width:34px;height:34px;border:0.5px solid var(--bdr);border-radius:8px;background:var(--s);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:15px}
+.svc-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.svc-desc{font-size:12px;color:var(--ink2);line-height:1.55;margin-bottom:10px}
+.svc-price{font-size:12px;font-weight:600;color:var(--ink);font-family:'DM Mono',monospace}
+
+/* CASOS REALES */
+.casos-section{background:var(--w);border-bottom:0.5px solid var(--bdr)}
+.casos-header{padding:40px 48px 0;text-align:center}
+.casos-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.caso-card{padding:36px 40px;border-top:0.5px solid var(--bdr)}
+.caso-card:nth-child(odd){border-right:0.5px solid var(--bdr)}
+.caso-tag{display:inline-flex;align-items:center;gap:5px;background:var(--s);border:0.5px solid var(--bdr);font-family:'DM Mono',monospace;font-size:9px;color:var(--ink3);padding:4px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.caso-sector{width:5px;height:5px;border-radius:50%;background:var(--ink3)}
+.caso-title{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.4px;line-height:1.1;margin-bottom:10px}
+.caso-title em{font-style:italic;font-weight:400;color:var(--ink2)}
+.caso-desc{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:16px}
+.caso-metrics{display:flex;gap:16px}
+.caso-m{text-align:left}
+.caso-mn{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1}
+.caso-ml{font-size:10px;color:var(--ink3);margin-top:3px;line-height:1.3;font-family:'DM Mono',monospace}
+.caso-divider{height:1px;background:var(--bdr);margin:0 48px}
+
+/* CHAT / ASISTENTE IA */
+.ai-section{border-top:0.5px solid var(--bdr);border-bottom:0.5px solid var(--bdr);background:var(--w)}
+.ai-header{padding:40px 48px 0;text-align:center}
+.ai-header-tag{display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:6px 14px;border-radius:100px;letter-spacing:.5px;margin-bottom:16px}
+.ai-header-dot{width:6px;height:6px;border-radius:50%;background:#6EE79A;animation:pdot 2.5s infinite;flex-shrink:0}
+.ai-body{display:grid;grid-template-columns:1fr 1fr;border-top:0.5px solid var(--bdr);margin-top:32px}
+.ai-l{padding:40px;border-right:0.5px solid var(--bdr)}
+.ai-h{font-family:'DM Sans',sans-serif;font-size:24px;font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-.6px;margin-bottom:16px}
+.ai-h em{font-style:italic;font-weight:400;color:var(--ink2)}
+.ai-steps{display:flex;flex-direction:column;gap:0;border:0.5px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.ai-step{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:0.5px solid var(--bdr);transition:background .2s}
+.ai-step:last-child{border-bottom:none}
+.ai-step:hover{background:var(--s)}
+.step-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);flex-shrink:0;width:22px;margin-top:2px}
+.step-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.step-desc{font-size:12px;color:var(--ink2);line-height:1.5}
+.caso-strip{display:flex;gap:10px;align-items:flex-start;padding:13px 15px;background:var(--s);border:0.5px solid var(--bdr);border-left:2px solid var(--ink);border-radius:0 8px 8px 0}
+.caso-txt{font-size:12px;color:var(--ink2);line-height:1.5}
+.caso-txt strong{color:var(--ink);font-weight:600}
+.ai-r{padding:40px;background:var(--s);display:flex;flex-direction:column;justify-content:center;gap:10px}
+.ai-r-note{font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;text-align:center;letter-spacing:.3px}
+.chat-card{width:100%;background:var(--w);border:0.5px solid var(--bdr);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.chat-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:0.5px solid var(--bdr);background:var(--ink)}
+.chat-top-l{display:flex;align-items:center;gap:10px}
+.chat-sdot{width:7px;height:7px;border-radius:50%;background:#6EE79A;animation:pdot 2.5s infinite;flex-shrink:0}
+.chat-name{font-size:12px;font-weight:600;color:#fff}
+.chat-sub{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.5);margin-top:2px}
+.chat-badge{font-family:'DM Mono',monospace;font-size:9px;background:rgba(255,255,255,.15);color:#fff;border:0.5px solid rgba(255,255,255,.2);padding:3px 9px;border-radius:100px;letter-spacing:.3px}
+.chat-chips{display:flex;gap:5px;flex-wrap:wrap;padding:10px 14px;border-bottom:0.5px solid var(--bdr);background:var(--s)}
+.chip{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;background:var(--w);border:0.5px solid var(--bdr);color:var(--ink2);padding:5px 10px;border-radius:100px;cursor:none;transition:background .2s,border-color .2s,color .2s}
+.chip:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.chat-msgs{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:180px;max-height:240px;overflow-y:auto}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--bdr)}
+.msg{font-size:12px;line-height:1.6;max-width:88%}
+.msg-b{background:var(--s);border:0.5px solid var(--bdr);padding:10px 12px;border-radius:3px 10px 10px 10px;color:var(--ink2)}
+.msg-u{align-self:flex-end;background:var(--ink);color:#fff;padding:10px 12px;border-radius:10px 3px 10px 10px}
+.msg-r{background:var(--w);border:0.5px solid var(--bdr);border-left:2px solid var(--ink);padding:10px 12px;border-radius:3px 10px 10px 10px;color:var(--ink2);max-width:96%}
+.chat-inp{display:flex;gap:8px;padding:12px 14px;background:var(--s);border-top:0.5px solid var(--bdr)}
+.chat-field{flex:1;background:var(--w);border:0.5px solid var(--bdr);border-radius:100px;padding:9px 14px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:border-color .2s}
+.chat-field:focus{border-color:var(--ink)}
+.chat-send{background:var(--ink);color:#fff;border:none;border-radius:100px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:none;font-size:14px;transition:background .2s;flex-shrink:0}
+.chat-send:hover{background:#000}
+
+/* PERFIL */
+.perfil-section{display:grid;grid-template-columns:1fr 1fr;border-bottom:0.5px solid var(--bdr)}
+.perfil-l{padding:48px 40px;border-right:0.5px solid var(--bdr);background:var(--w)}
+.perfil-photo{margin-bottom:20px}
+.perfil-ph{width:72px;height:72px;border-radius:50%;background:var(--bdr);border:2px solid var(--bdr);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.perfil-ph svg{width:24px;height:24px;opacity:.2;color:var(--ink)}
+.perfil-ph span{font-size:8px;color:var(--ink3);font-family:'DM Mono',monospace}
+.perfil-id{margin-bottom:20px}
+.perfil-name{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.perfil-role{font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace}
+.perfil-bio{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:16px}
+.perfil-sep{height:0.5px;background:var(--bdr);margin:16px 0}
+.perfil-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ptag{font-family:'DM Mono',monospace;font-size:9px;background:var(--s);border:0.5px solid var(--bdr);color:var(--ink2);padding:4px 10px;border-radius:100px;letter-spacing:.3px}
+
+.perfil-r{padding:48px 40px;background:var(--s)}
+.perfil-h{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-.5px;margin-bottom:14px}
+.perfil-h em{font-style:italic;font-weight:400;color:var(--ink2)}
+.perfil-p{font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:12px}
+.ptools{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.ptool{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--w);border:0.5px solid var(--bdr);border-radius:8px}
+.ptool-ico{font-size:14px;flex-shrink:0;margin-top:1px}
+.ptool-name{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ptool-tags{font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace}
+
+/* CTA FINAL */
+.cta-section{padding:56px 48px;text-align:center;border-bottom:0.5px solid var(--bdr);background:var(--w)}
+.cta-icon{width:44px;height:44px;border:0.5px solid var(--bdr);border-radius:12px;background:var(--s);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.cta-h{font-family:'DM Sans',sans-serif;font-size:clamp(28px,4vw,38px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-1px;margin-bottom:12px}
+.cta-h em{font-style:italic;font-weight:400;color:var(--ink2)}
+.cta-sub{font-size:13px;color:var(--ink2);max-width:380px;margin:0 auto 28px;line-height:1.6}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px}
+.cta-note{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:.5px}
+
+/* FOOTER */
+footer{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:var(--s)}
+.fl{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3)}
+.fr{display:flex;gap:16px}
+.flnk{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);text-decoration:none;transition:color .2s}
+.flnk:hover{color:var(--ink)}
+
+/* ANIMATIONS */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ez),transform .7s var(--ez)}
+.rev.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}
+.d2{transition-delay:.2s}
+.d3{transition-delay:.3s}
+
+@media(max-width:640px){
+  .page-wrap{margin:0;border-radius:0}
+  .hero{padding:36px 24px}
+  .svc-grid{grid-template-columns:1fr}
+  .casos-grid{grid-template-columns:1fr}
+  .caso-card:nth-child(odd){border-right:none}
+  .ai-body{grid-template-columns:1fr}
+  .ai-l{border-right:none}
+  .ai-header{padding:32px 24px 0}
+  .perfil-section{grid-template-columns:1fr}
+  .perfil-l{border-right:none}
+  nav{padding:12px 20px}
+  .nav-links{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+.btn-caso{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--ink);background:none;border:0.5px solid var(--bdr);padding:6px 12px;border-radius:100px;cursor:pointer;margin-top:12px;transition:all .2s}
+.btn-caso:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .25s;pointer-events:none}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--w);border-radius:20px;width:100%;max-width:720px;max-height:90vh;overflow-y:auto;transform:translateY(16px);transition:transform .3s;box-shadow:0 24px 80px rgba(0,0,0,.2)}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-header{padding:20px 24px 14px;display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:var(--w);z-index:2;border-bottom:0.5px solid var(--bdr)}
+.modal-close{width:30px;height:30px;border-radius:50%;border:0.5px solid var(--bdr);background:var(--s);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--ink2)}
+.modal-close:hover{background:var(--bdr)}
+.modal-body{padding:20px 24px}
+.modal-tag{display:inline-flex;align-items:center;gap:5px;background:var(--s);border:0.5px solid var(--bdr);font-family:'DM Mono',monospace;font-size:9px;color:var(--ink3);padding:3px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.modal-title{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.5px;line-height:1.1;margin-bottom:14px}
+.modal-title em{font-style:italic;font-weight:400;color:var(--ink2)}
+.mtabs{display:flex;gap:0;border-bottom:0.5px solid var(--bdr);margin-bottom:16px}
+.mtab{font-size:12px;color:var(--ink3);padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all .2s}
+.mtab.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:500}
+.mtc{display:none}.mtc.on{display:block}
+.frow{display:grid;grid-template-columns:1fr 30px 1fr;align-items:start;gap:4px;margin-bottom:8px}
+.fbox{border-radius:10px;padding:12px 14px}
+.fp{background:#fef2f2;border:0.5px solid #fecaca}
+.fs{background:#f0fdf4;border:0.5px solid #bbf7d0}
+.fr{background:#eff6ff;border:0.5px solid #bfdbfe}
+.flb{font-size:9px;font-family:'DM Mono',monospace;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;font-weight:600}
+.flb-r{color:#dc2626}.flb-g{color:#16a34a}.flb-b{color:#2563eb}
+.ft2{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;line-height:1.3}
+.fd2{font-size:11px;color:var(--ink2);line-height:1.55}
+.fa{display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:15px;padding-top:16px}
+.fdv{display:flex;align-items:center;gap:8px;margin:8px 0}
+.fdvl{flex:1;height:0.5px;background:var(--bdr)}
+.fdvt{font-size:9px;font-family:'DM Mono',monospace;color:var(--ink3);letter-spacing:.8px;text-transform:uppercase}
+.tc2{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;background:var(--s);border-radius:8px;padding:12px;border:0.5px solid var(--bdr);margin-bottom:10px}
+.tc2-b{text-align:center}
+.tc2-n{font-size:18px;font-weight:700;letter-spacing:-.5px}
+.tc2-n.r{color:#dc2626}.tc2-n.g{color:#16a34a}
+.tc2-l{font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:2px}
+.mmt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.mmt-m{background:var(--s);border-radius:8px;padding:10px;text-align:center}
+.mmt-n{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-1px}
+.mmt-l{font-size:9px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:2px;line-height:1.3}
+.mcta{display:flex;align-items:center;gap:12px;background:var(--s);border-radius:10px;padding:12px 14px;border:0.5px solid var(--bdr);margin-top:14px;flex-wrap:wrap}
+.mcta-t{flex:1;min-width:160px}
+.mcta-t strong{font-size:12px;color:var(--ink);display:block;margin-bottom:2px}
+.mcta-t span{font-size:11px;color:var(--ink2)}
+.dtl{display:flex;flex-direction:column;gap:0}
+.dtl-s{display:grid;grid-template-columns:36px 1fr;gap:0;position:relative}
+.dtl-s::before{content:'';position:absolute;left:17px;top:36px;bottom:0;width:2px;background:var(--bdr);z-index:0}
+.dtl-s:last-child::before{display:none}
+.dtl-i{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;z-index:1;border:2px solid var(--bdr);background:var(--w);transition:all .4s;margin-top:2px}
+.dtl-i.act{border-color:var(--ink);background:var(--ink)}
+.dtl-i.dn{border-color:#22c55e;background:#22c55e}
+.dtl-b{padding:2px 0 18px 12px}
+.dtl-m{font-size:9px;font-family:'DM Mono',monospace;color:var(--ink3);margin-bottom:3px;letter-spacing:.5px;text-transform:uppercase}
+.dtl-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.dtl-d{font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:7px}
+.wm{border:0.5px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:8px}
+.wb{background:#2b5797;padding:5px 12px;display:flex;align-items:center;gap:6px}
+.wl{background:#fff;color:#2b5797;font-size:9px;font-weight:700;padding:2px 5px;border-radius:2px}
+.wb span{color:rgba(255,255,255,.75);font-size:10px}
+.wbody{background:#fff;padding:14px 18px;font-size:11px;color:#222;line-height:1.75}
+.wbody h4{font-size:12px;font-weight:600;margin-bottom:6px}
+.pc{background:var(--w);border:0.5px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:8px}
+.ph2{padding:10px 14px;border-bottom:0.5px solid var(--bdr);background:var(--s)}
+.pfrom{font-size:10px;color:var(--ink2);margin-bottom:1px}
+.psubj{font-size:12px;font-weight:500;color:var(--ink)}
+.pbody{padding:12px 14px}
+.plbl{font-size:9px;font-family:'DM Mono',monospace;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px}
+.pval{font-size:11px;color:var(--ink);line-height:1.5;margin-bottom:8px}
+.pdiv{height:0.5px;background:var(--bdr);margin:8px 0}
+.pprice{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-.5px}
+.pacts{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--bdr)}
+.pacc{padding:7px 14px;border-radius:8px;font-size:11px;cursor:pointer;border:none;font-weight:500;background:var(--ink);color:#fff;transition:all .2s}
+.pacc.clicked{background:#22c55e}
+.pask{padding:7px 12px;border-radius:8px;font-size:11px;cursor:pointer;background:var(--s);color:var(--ink);border:0.5px solid var(--bdr)}
+.delb{background:var(--w);border:0.5px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:8px}
+.delhd{padding:10px 14px;border-bottom:0.5px solid var(--bdr);background:var(--s);display:flex;align-items:center;justify-content:space-between}
+.delhd span{font-size:12px;font-weight:500;color:var(--ink)}
+.delfrom{font-size:10px;color:var(--ink2)}
+.delbody{padding:12px 14px}
+.dmsg{font-size:11px;color:var(--ink2);line-height:1.65;margin-bottom:10px;min-height:14px}
+.flist{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.fitem{display:flex;align-items:center;gap:8px;padding:8px 10px;border:0.5px solid var(--bdr);border-radius:8px;background:var(--s);opacity:0;transform:translateY(4px);transition:all .35s}
+.fitem.show{opacity:1;transform:translateY(0)}
+.fico{width:28px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0}
+.finfo{flex:1}
+.fname{font-size:11px;font-weight:500;color:var(--ink);font-family:'DM Mono',monospace}
+.fdesc2{font-size:10px;color:var(--ink2);margin-top:1px}
+.fdl{font-size:10px;color:var(--ink);cursor:pointer;padding:3px 8px;border:0.5px solid var(--bdr);border-radius:100px;flex-shrink:0}
+.fdl:hover{background:var(--ink);color:#fff}
+.bprev{border:0.5px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:8px}
+.bpbar{background:#1a1a1a;padding:5px 10px;display:flex;align-items:center;gap:5px}
+.bpdots{display:flex;gap:3px}
+.bpdots span{width:8px;height:8px;border-radius:50%}
+.bpdr{background:#ff5f57}.bpdy{background:#febc2e}.bpdg{background:#28c840}
+.bptitle{font-size:10px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;flex:1;text-align:center}
+.bplog{background:#1a1a1a;padding:8px 12px;font-family:'DM Mono',monospace;font-size:10px;min-height:56px}
+.bll{display:flex;gap:5px;line-height:1.8;opacity:0;transform:translateY(2px);transition:all .25s}
+.bll.show{opacity:1;transform:translateY(0)}
+.bts{color:#444;flex-shrink:0}
+.bok{color:#22c55e}.binf{color:#fff;font-weight:500}
+.bpcnt{background:#111;padding:5px 10px;display:flex;align-items:center;gap:6px;border-top:1px solid #2a2a2a}
+.cbadge2{display:inline-flex;align-items:center;gap:4px;background:#22c55e;color:#000;font-size:9px;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:100px;font-weight:600;flex-shrink:0}
+.cdot2{width:4px;height:4px;border-radius:50%;background:#000;animation:pd3 1s infinite}
+@keyframes pd3{0%,100%{opacity:1}50%{opacity:.4}}
+.cpb{flex:1;background:#333;border-radius:100px;height:3px;overflow:hidden}
+.cpf{height:3px;background:#22c55e;border-radius:100px;transition:width .15s}
+.gbox{background:var(--s);border:0.5px solid var(--bdr);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;opacity:0;transition:opacity .5s}
+.gbox.show{opacity:1}
+.gico{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.gtxt strong{font-size:11px;color:var(--ink);display:block;margin-bottom:2px}
+.gtxt span{font-size:10px;color:var(--ink2);line-height:1.5}
+.rbox{background:var(--w);border:1.5px solid #22c55e;border-radius:10px;padding:14px;margin-bottom:10px;text-align:center}
+.rbig{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-1px;margin-bottom:3px}
+.rsub{font-size:11px;color:var(--ink2)}
+
+</style>
+</head>
+<body>
+<div id="cur" class="cur"></div>
+
+<div class="page-wrap">
+
+<!-- NAV -->
+<nav>
+  <span class="nav-contact" style="font-family:'DM Mono',monospace;font-size:11px">danielkadioz@gmail.com</span>
+  <div class="nav-mid">
+    <a href="#casos" class="nav-btn">Casos reales</a>
+    <a href="#servicios" class="nav-btn">Servicios</a>
+  </div>
+  <div class="nav-links">
+    <a href="#asistente">Asistente</a>
+    <a href="#perfil">Perfil</a>
+    <a href="https://wa.me/573005333763" target="_blank" class="nav-btn dark">WhatsApp →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-avatar-wrap">
+    <div class="hero-avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    <div class="hero-name-pill"><div class="pill-dot"></div>Disponible · Colombia</div>
+  </div>
+
+  <h1 class="hero-h">Cada hora que pierdes<br/>en tareas manuales <em>tiene solución.</em></h1>
+  <p class="hero-sub">Diseño soluciones de automatización que eliminan el trabajo repetitivo de tu operación. Menos errores, menos tiempo perdido, más capacidad para lo que realmente importa.</p>
+
+  <div class="hero-btns">
+    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20automatizar%20un%20proceso" target="_blank" class="btn-dark">
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
+      Cuéntame tu proceso
+    </a>
+    <a href="#casos" class="btn-ghost">Ver casos reales</a>
+  </div>
+
+  <div class="hero-proof">
+    <span class="proof-txt"><strong>6 proyectos</strong> automatizados · entidades públicas y negocios privados · Colombia</span>
+  </div>
+</section>
+
+<!-- STRIP ENTIDADES -->
+<div class="logo-strip">
+  <span class="logo-item">Sector público</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Fuerzas militares</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Sector alimentos</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Pequeños negocios</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Remoto · Colombia</span>
+</div>
+
+<!-- STATS -->
+<div class="stats-grid">
+  <div class="stat rev"><div class="stat-n">×45</div><div class="stat-l">más liquidaciones<br/>por mes · sector público</div></div>
+  <div class="stat rev d1"><div class="stat-n">5d→1h</div><div class="stat-l">tiempo de conciliación<br/>bancaria reducido</div></div>
+  <div class="stat rev d2"><div class="stat-n">+9%</div><div class="stat-l">incremento en margen<br/>de utilidad · restaurantes</div></div>
+  <div class="stat rev d3"><div class="stat-n">$1.000M</div><div class="stat-l">en ingresos identificados<br/>y conciliados</div></div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="svc-section" id="servicios">
+  <div class="sec-eyebrow">Servicios · 01</div>
+  <h2 class="sec-h">Soluciones concretas<br/>para <em>operaciones reales.</em></h2>
+  <p class="sec-sub">No ofrezco tecnología por sí sola. Analizo tu operación, identifico dónde se pierde tiempo y dinero, y entrego una solución que funciona desde el primer día.</p>
+
+  <div class="svc-grid">
+    <div class="svc-card rev">
+      <div class="svc-ico">⚡</div>
+      <div class="svc-name">Automatización de procesos</div>
+      <div class="svc-desc">Convierto tareas manuales y repetitivas en flujos automáticos. Generación de documentos, cruces de información, llenado de formularios, reportes periódicos. Si lo haces a mano cada semana, existe una mejor forma de hacerlo.</div>
+      <div class="svc-price">Desde $800.000</div>
+    </div>
+    <div class="svc-card rev d1">
+      <div class="svc-ico">📊</div>
+      <div class="svc-name">Análisis y consolidación de datos</div>
+      <div class="svc-desc">Unifico información dispersa en múltiples archivos o sistemas y la convierto en un reporte claro y actualizado. Ideal para equipos que pierden horas cada semana consolidando datos de distintas fuentes antes de poder tomar decisiones.</div>
+      <div class="svc-price">Desde $500.000</div>
+    </div>
+    <div class="svc-card rev d2">
+      <div class="svc-ico">🌐</div>
+      <div class="svc-name">Páginas web y landing pages</div>
+      <div class="svc-desc">Desarrollo páginas funcionales y profesionales para negocios que necesitan presencia digital sin pagar mensualidades de agencia. Catálogos, páginas de venta y tiendas básicas entregadas en menos de una semana.</div>
+      <div class="svc-price">Desde $1.200.000</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASOS REALES -->
+<section id="casos">
+  <div class="casos-header rev" style="padding-bottom:32px">
+    <div class="sec-eyebrow" style="text-align:center">Casos reales · 02</div>
+    <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Resultados concretos<br/><em>en proyectos reales.</em></h2>
+  </div>
+
+  <div class="casos-grid">
+
+    <!-- CASO 1 -->
+    <div class="caso-card rev">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector público · educación</div>
+      <div class="caso-title">Liquidación pensional<br/><em>de 10 a 456 casos/mes</em></div>
+      <div class="caso-desc">Una entidad pública debía cobrarles a otras organizaciones su parte proporcional en el pago de pensiones de exempleados compartidos. El proceso exigía revisar documentos legales, consultar bases de datos, redactar cartas de cobro en Word y generar un PDF por cada caso. El equipo lograba resolver apenas 10 al mes. Con la automatización, el mismo volumen de trabajo pasó a procesarse de forma completa en un solo ciclo.</div>
+      <div class="caso-metrics">
+        <div class="caso-m"><div class="caso-mn">456</div><div class="caso-ml">casos/mes<br/>procesados</div></div>
+        <div class="caso-m"><div class="caso-mn">112</div><div class="caso-ml">entidades<br/>gestionadas</div></div>
+        <div class="caso-m"><div class="caso-mn">×45</div><div class="caso-ml">incremento<br/>de capacidad</div></div>
+      </div>
+      <button class="btn-caso" onclick="abrirModal('modal-pension')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <!-- CASO 2 -->
+    <div class="caso-card rev d1">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector público · financiero</div>
+      <div class="caso-title">Conciliación bancaria<br/><em>de 5 días a 1 hora</em></div>
+      <div class="caso-desc">138 sedes en todo el país generaban pagos que se descargaban del banco en un archivo Excel. Cruzar cada movimiento contra las facturas emitidas por cada sede requería que cuatro personas trabajaran durante cinco días seguidos. Más de 800 movimientos y $1.000 millones que nadie podía asignar con certeza hasta que llegaba ese informe. La automatización eliminó ese ciclo por completo.</div>
+      <div class="caso-metrics">
+        <div class="caso-m"><div class="caso-mn">5d→1h</div><div class="caso-ml">tiempo de<br/>procesamiento</div></div>
+        <div class="caso-m"><div class="caso-mn">800+</div><div class="caso-ml">movimientos<br/>analizados</div></div>
+        <div class="caso-m"><div class="caso-mn">$1.000M</div><div class="caso-ml">pesos<br/>conciliados</div></div>
+      </div>
+      <button class="btn-caso" onclick="abrirModal('modal-dxcr')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <!-- CASO 3 -->
+    <div class="caso-card rev">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector privado · restaurantes</div>
+      <div class="caso-title">Control de costos<br/><em>15% → 24% de margen</em></div>
+      <div class="caso-desc">Una operación con varios puntos de venta tenía ventas estables pero sin claridad sobre cuánto ganaba realmente en cada uno. No existía una estructura que midiera el costo por plato, el consumo real de ingredientes ni la rentabilidad por punto de venta. Se diseñó e implementó un sistema de costeo estándar que conectó las recetas con el inventario y las ventas, dando visibilidad total sobre dónde se ganaba y dónde se perdía dinero.</div>
+      <div class="caso-metrics">
+        <div class="caso-m"><div class="caso-mn">+9pts</div><div class="caso-ml">de margen<br/>de utilidad</div></div>
+        <div class="caso-m"><div class="caso-mn">100%</div><div class="caso-ml">trazabilidad<br/>por punto</div></div>
+        <div class="caso-m"><div class="caso-mn">ZEUS</div><div class="caso-ml">sistema<br/>implementado</div></div>
+      </div>
+      <button class="btn-caso" onclick="abrirModal('modal-zeus')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <!-- CASO 4 -->
+    <div class="caso-card rev d1">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector privado · alimentos</div>
+      <div class="caso-title">Presencia digital<br/><em>para negocio de hojaldre</em></div>
+      <div class="caso-desc">Un negocio de hojaldre congelado premium dirigido a otros negocios no contaba con ninguna presencia digital. Sus clientes potenciales no podían ver el catálogo, entender el modelo de distribución ni calcular la rentabilidad de revender el producto. Se desarrolló una landing page profesional con catálogo completo, calculadora de márgenes para redistribuidores y contacto directo por WhatsApp, lista en menos de una semana.</div>
+      <div class="caso-metrics">
+        <div class="caso-m"><div class="caso-mn">&lt;1sem</div><div class="caso-ml">tiempo de<br/>entrega</div></div>
+        <div class="caso-m"><div class="caso-mn">$0</div><div class="caso-ml">costo mensual<br/>de operación</div></div>
+        <div class="caso-m"><div class="caso-mn">Next.js</div><div class="caso-ml">tecnología<br/>escalable</div></div>
+      </div>
+      <button class="btn-caso" onclick="abrirModal('modal-hojaldre')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+  </div>
+
+  <!-- CASO 5 — INVIMA full width -->
+  <div style="padding:36px 40px;border-top:0.5px solid var(--bdr);background:var(--s)" class="rev">
+    <div style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div class="caso-tag"><div class="caso-sector"></div>Sector público · regulatorio</div>
+        <div class="caso-title" style="margin-bottom:10px">Registro INVIMA<br/><em>600 fichas automatizadas</em></div>
+        <div class="caso-desc">Para comercializar un producto alimenticio en Colombia es obligatorio registrarlo ante el INVIMA mediante una ficha técnica detallada por producto. Una entidad tenía 63 registros pendientes, cada uno con múltiples fichas que debían llenarse manualmente copiando datos desde diferentes bases de datos. El proceso era lento, propenso a errores y representaba un cuello de botella crítico. Se automatizó la extracción y el llenado de fichas, reduciendo semanas de trabajo a horas.</div>
+      </div>
+      <div style="display:flex;gap:24px;align-items:flex-start;padding-top:32px">
+        <div class="caso-m"><div class="caso-mn">600+</div><div class="caso-ml">fichas técnicas<br/>generadas</div></div>
+        <div class="caso-m"><div class="caso-mn">63</div><div class="caso-ml">registros<br/>completados</div></div>
+        <div class="caso-m"><div class="caso-mn">0</div><div class="caso-ml">errores por<br/>copia manual</div></div>
+      </div>
+      <button class="btn-caso" onclick="abrirModal('modal-invima')" style="margin-top:14px">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+
+  <!-- CASO 6 — Evaluador SENA full width -->
+  <div style="padding:36px 40px;border-top:0.5px solid var(--bdr);background:var(--w)" class="rev">
+    <div style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div class="caso-tag"><div class="caso-sector"></div>Sector público · planeación</div>
+        <div class="caso-title" style="margin-bottom:10px">Evaluación de proyectos<br/><em>100 proyectos procesados automáticamente</em></div>
+        <div class="caso-desc">Una entidad pública debía evaluar y calificar los proyectos productivos de decenas de centros de formación en todo el país. Cada proyecto incluía archivos de proyección financiera y planes de mercadeo en distintos formatos, enviados por múltiples centros de forma independiente. Consolidar esa información, aplicar los criterios de evaluación y generar los reportes por centro tomaba semanas de trabajo manual. Se desarrolló un sistema automatizado que lee los archivos de cada proyecto, aplica los criterios de calificación definidos y genera reportes consolidados por centro y por regional, reduciendo el proceso de semanas a horas.</div>
+      </div>
+      <div style="display:flex;gap:24px;align-items:flex-start;padding-top:32px">
+        <div class="caso-m"><div class="caso-mn">100+</div><div class="caso-ml">proyectos<br/>evaluados</div></div>
+        <div class="caso-m"><div class="caso-mn">33</div><div class="caso-ml">regionales<br/>procesadas</div></div>
+        <div class="caso-m"><div class="caso-mn">semanas→horas</div><div class="caso-ml">reducción en<br/>tiempo de proceso</div></div>
+      </div>
+      <button class="btn-caso" onclick="abrirModal('modal-evaluador')" style="margin-top:14px">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+
+  <!-- CASO 7 — BOT FORMULARIOS full width -->
+  <div style="padding:36px 40px;border-top:0.5px solid var(--bdr);background:var(--s)" class="rev">
+    <div style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div class="caso-tag"><div class="caso-sector"></div>Sector privado · automatización RPA</div>
+        <div class="caso-title" style="margin-bottom:10px">Cargue masivo automatizado<br/><em>350 beneficiarios en 1h 47min</em></div>
+        <div class="caso-desc">Una organización debía ingresar manualmente los datos de 350 beneficiarios en un sistema web, copiando campo por campo desde un archivo Excel. Con una persona dedicada exclusivamente a esta tarea, el proceso tomaba entre 4 y 5 días hábiles con errores de digitación frecuentes. Se desarrolló un bot en Python con Selenium que abre el navegador, inicia sesión, navega al formulario correcto y llena cada registro automáticamente. Al finalizar verifica que los datos quedaron correctos y genera un reporte detallado.</div>
+        <button class="btn-caso" onclick="abrirModal('modal-icbf')" style="margin-top:14px">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+      <div style="display:flex;gap:24px;align-items:flex-start;padding-top:32px">
+        <div class="caso-m"><div class="caso-mn">350</div><div class="caso-ml">beneficiarios<br/>procesados</div></div>
+        <div class="caso-m"><div class="caso-mn">5d→1h47</div><div class="caso-ml">reducción en<br/>tiempo de proceso</div></div>
+        <div class="caso-m"><div class="caso-mn">0</div><div class="caso-ml">errores de<br/>digitación</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASISTENTE IA -->
+<section class="ai-section" id="asistente">
+  <div class="ai-header rev">
+    <div class="ai-header-tag"><div class="ai-header-dot"></div>Asistente IA · Diagnóstico gratuito · 04</div>
+    <h2 class="sec-h" style="text-align:center;max-width:460px;margin:0 auto 8px">¿Tu operación tiene<br/><em>procesos automatizables?</em></h2>
+    <p style="font-size:13px;color:var(--ink2);text-align:center;max-width:420px;margin:0 auto">Descríbelo en el chat. La inteligencia artificial evalúa tu caso al instante y si identifica una oportunidad real, te conecta directamente conmigo.</p>
+  </div>
+  <div class="ai-body">
+    <div class="ai-l rev">
+      <h2 class="ai-h">Así funciona<br/><em>el diagnóstico</em></h2>
+      <div class="ai-steps">
+        <div class="ai-step">
+          <div class="step-num">01</div>
+          <div><div class="step-title">Describís el proceso en tus palabras</div><div class="step-desc">Sin tecnicismos. Basta con explicar qué hacés, con qué frecuencia y cuánto tiempo te toma.</div></div>
+        </div>
+        <div class="ai-step">
+          <div class="step-num">02</div>
+          <div><div class="step-title">La IA analiza si tiene solución</div><div class="step-desc">Evalúa el potencial de automatización, el ahorro estimado de tiempo y el tipo de solución aplicable.</div></div>
+        </div>
+        <div class="ai-step">
+          <div class="step-num">03</div>
+          <div><div class="step-title">Hablamos y definimos los detalles</div><div class="step-desc">Si el caso tiene potencial, me contactás por WhatsApp y en menos de 24 horas tenés una propuesta concreta.</div></div>
+        </div>
+      </div>
+      <div class="caso-strip">
+        <div class="caso-txt"><strong>El diagnóstico no tiene costo.</strong> Si después de analizarlo no puedo ayudarte, te lo digo con claridad. No propongo soluciones que no agregan valor real.</div>
+      </div>
+    </div>
+    <div class="ai-r rev d1">
+      <div class="ai-r-note">↓ Escribe o elige un ejemplo · respuesta inmediata</div>
+      <div class="chat-card">
+        <div class="chat-top">
+          <div class="chat-top-l">
+            <div class="chat-sdot"></div>
+            <div>
+              <div class="chat-name">Asistente IA — Automatiza Procesos</div>
+              <div class="chat-sub">Powered by IA · conectado con Daniel Cárdenas</div>
+            </div>
+          </div>
+          <div class="chat-badge">● En línea</div>
+        </div>
+        <div class="chat-chips">
+          <div class="chip" data-t="Cruzo facturas en Excel cada semana">Facturas Excel</div>
+          <div class="chip" data-t="Hago reportes manuales para mis jefes">Reportes</div>
+          <div class="chip" data-t="Liquido nómina o cobros a mano">Nómina/cobros</div>
+          <div class="chip" data-t="Lleno formularios repetitivos">Formularios</div>
+          <div class="chip" data-t="Consolido datos de varias fuentes">Consolidar datos</div>
+        </div>
+        <div class="chat-msgs" id="chatMsgs">
+          <div class="msg msg-b">Hola 👋 Soy el asistente IA de Daniel. Cuéntame qué haces manualmente cada semana y te digo si se puede automatizar, cuánto tiempo ahorrarías y qué costaría resolverlo.</div>
+        </div>
+        <div class="chat-inp">
+          <input class="chat-field" id="chatInput" type="text" placeholder="Ej: consolido 10 archivos Excel cada lunes...">
+          <button class="chat-send" id="sendBtn">→</button>
+        </div>
+      </div>
+      <div class="ai-r-note">Las respuestas son orientativas · la propuesta final la hace Daniel</div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFIL -->
+<section class="perfil-section" id="perfil">
+  <div class="perfil-l rev">
+    <div class="perfil-photo">
+      <div class="perfil-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </div>
+    </div>
+    <div class="perfil-id">
+      <div class="perfil-name">Daniel Cárdenas Espinosa</div>
+      <div class="perfil-role">Administrador de Empresas · Especialización en Alta Gerencia</div>
+    </div>
+    <div class="perfil-bio">Ser administrador y especialista en Alta Gerencia me enseñó algo que ningún curso de tecnología podría: entender exactamente qué duele en una organización. Eso lo aprendí trabajando en el SENA, en las Fuerzas Militares y en el sector privado. Y es lo que aplico en cada solución que diseño.</div>
+    <div class="perfil-sep"></div>
+    <div class="perfil-tags">
+      <span class="ptag">Python</span>
+      <span class="ptag">Power Query</span>
+      <span class="ptag">VBA</span>
+      <span class="ptag">MySQL</span>
+      <span class="ptag">Next.js</span>
+      <span class="ptag">SIIF Nación</span>
+      <span class="ptag">ZEUS</span>
+      <span class="ptag">eCollect</span>
+      <span class="ptag">IA aplicada</span>
+      <span class="ptag">CX · Customer Experience</span>
+    </div>
+  </div>
+
+  <div class="perfil-r rev d1">
+    <div class="sec-eyebrow">Sobre mí · 05</div>
+    <h2 class="perfil-h">Administración<br/>y tecnología<br/><em>en una sola solución.</em></h2>
+    <p class="perfil-p">La mayoría de quienes automatizan procesos vienen del mundo técnico y aprenden sobre el negocio. Yo vengo del negocio y aprendí la tecnología. Esa diferencia define cómo abordo cada proyecto: primero entiendo qué duele en la operación, luego diseño la solución más simple y efectiva para resolverlo.</p>
+    <p class="perfil-p">He trabajado en procesos financieros nacionales con el SENA, en estructuras de costos para operaciones de restaurantes de las Fuerzas Militares, y en automatización documental para cumplimiento regulatorio. Cuento además con formación internacional en Experiencia del Cliente (CX) por EUDE Business School de España. Trabajo de forma completamente remota con organizaciones en toda Colombia.</p>
+    <div class="perfil-sep"></div>
+    <div class="ptools">
+      <div class="ptool">
+        <div class="ptool-ico">📊</div>
+        <div><div class="ptool-name">Automatización y análisis de datos</div><div class="ptool-tags">Python · Power Query · Excel avanzado · VBA · MySQL · Bases de datos</div></div>
+      </div>
+      <div class="ptool">
+        <div class="ptool-ico">🌐</div>
+        <div><div class="ptool-name">Desarrollo web</div><div class="ptool-tags">Next.js · TypeScript · HTML/CSS · Landing pages · Ecommerce básico</div></div>
+      </div>
+      <div class="ptool">
+        <div class="ptool-ico">🏛️</div>
+        <div><div class="ptool-name">Sistemas y plataformas institucionales</div><div class="ptool-tags">SIIF Nación · ZEUS · eCollect · SGARC · Facturación electrónica · IGAC · CICA</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section rev">
+  <div class="cta-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  </div>
+  <h2 class="cta-h">¿Hay un proceso<br/>que te está <em>costando tiempo?</em></h2>
+  <p class="cta-sub">Cuéntame cómo funciona. En menos de 24 horas te digo si tiene solución, cómo la implementaría y cuánto costaría. Sin compromiso.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20automatizar%20un%20proceso" target="_blank" class="btn-dark">
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
+      Escribir por WhatsApp
+    </a>
+    <a href="mailto:danielkadioz@gmail.com" class="btn-ghost">Enviar correo</a>
+  </div>
+  <div class="cta-note">Sin costo · Sin compromiso · Respuesta en menos de 24h</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">© 2025 Daniel Gerardo Cárdenas · Automatización de Procesos · Colombia</div>
+  <div class="fr">
+    <a href="#casos" class="flnk">Casos reales</a>
+    <a href="#servicios" class="flnk">Servicios</a>
+    <a href="#asistente" class="flnk">Diagnóstico</a>
+    <a href="#perfil" class="flnk">Perfil</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+const cur=document.getElementById('cur');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
+document.querySelectorAll('a,button,.chip,.svc-card,.caso-card,.ptool,.ai-step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('h'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('h'));
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+// CHAT IA — Diagnostica y propone solución, luego lleva a WhatsApp
+const DIAGNOSTICOS = {
+  factura: {
+    titulo: "Automatización de conciliación de facturas",
+    desc: "Este proceso tiene alto potencial de automatización. La solución consiste en consolidar todos los archivos de facturas en una base de datos unificada mediante Power Query o Python, aplicar reglas de cruce automático por número, fecha o NIT, y generar un reporte de diferencias listo para revisión. El tiempo de procesamiento pasa de horas a minutos. La solución se entrega en 3 a 5 días hábiles.",
+    cta: "Quiero automatizar mi proceso de facturas"
+  },
+  reporte: {
+    titulo: "Automatización de reportes periódicos",
+    desc: "Los reportes que se generan de forma repetida son los más fáciles de automatizar. La solución conecta las fuentes de datos directamente con una plantilla de reporte que se actualiza sola cada vez que se ejecuta. Sin copiar, sin pegar, sin errores. Dependiendo de la complejidad, la entrega toma entre 2 y 5 días hábiles.",
+    cta: "Quiero automatizar mis reportes"
+  },
+  nomina: {
+    titulo: "Automatización de liquidación y cobros",
+    desc: "Los procesos de liquidación, sea nómina, pensiones o cobros, siguen una lógica repetitiva que se puede sistematizar completamente. La solución lee los datos desde Excel o una base de datos, aplica las fórmulas y reglas definidas, genera los documentos de cobro o liquidación en PDF y organiza el envío. Lo que toma días pasa a ejecutarse en minutos.",
+    cta: "Quiero automatizar mi proceso de liquidación"
+  },
+  formulario: {
+    titulo: "Automatización de llenado de formularios",
+    desc: "El llenado masivo de formularios, sean físicos digitalizados o formularios web, se puede automatizar extrayendo los datos desde una base de datos o archivo Excel y completando cada campo de forma automática. Esto elimina errores de transcripción y reduce el tiempo de diligenciamiento de días a minutos. Casos como este ya se han implementado para procesos regulatorios con cientos de registros.",
+    cta: "Quiero automatizar el llenado de formularios"
+  },
+  consolidar: {
+    titulo: "Consolidación automática de fuentes de datos",
+    desc: "Cuando la información viene de múltiples archivos, sistemas o personas, consolidarla manualmente genera errores y consume tiempo valioso. La solución unifica todas las fuentes en una base de datos centralizada con Power Query o Python, aplica las validaciones necesarias y entrega un archivo maestro limpio y actualizado. El proceso pasa de horas a segundos cada vez que se ejecuta.",
+    cta: "Quiero consolidar mis datos automáticamente"
+  },
+  web: {
+    titulo: "Desarrollo de página web o landing page",
+    desc: "Una página web profesional con catálogo, formulario de contacto y diseño moderno se puede entregar en menos de una semana. La solución incluye diseño responsive, optimización para móviles, integración con WhatsApp y hosting gratuito. Sin mensualidades de agencia. Ideal para negocios que necesitan presencia digital funcional sin grandes inversiones.",
+    cta: "Quiero una página web para mi negocio"
+  },
+  default: {
+    titulo: "Análisis de automatización de procesos",
+    desc: "Basado en lo que describes, este proceso tiene potencial de automatización. La solución implica mapear cada paso del flujo actual, identificar los cuellos de botella y diseñar una versión automatizada que elimine el trabajo manual repetitivo. El resultado típico es una reducción del 70% al 90% del tiempo operativo. Para darte una propuesta exacta necesito conocer los detalles del proceso.",
+    cta: "Quiero analizar mi proceso"
+  }
+};
+
+function detectarTipo(texto) {
+  const s = texto.toLowerCase();
+  if (/factura|pago|cruzar|cruce|conciliac/.test(s)) return 'factura';
+  if (/reporte|tablero|dashboard|informe|indicador/.test(s)) return 'reporte';
+  if (/n[oó]mina|liquid|pension|cobro|cartera|cuota/.test(s)) return 'nomina';
+  if (/formulario|llenar|diligenciar|ficha|registro/.test(s)) return 'formulario';
+  if (/consolid|unif|juntar|varios archivos|fuentes/.test(s)) return 'consolidar';
+  if (/p[aá]gina|web|tienda|landing|sitio/.test(s)) return 'web';
+  return 'default';
+}
+
+function addMsg(txt, type) {
+  const b = document.getElementById('chatMsgs');
+  const m = document.createElement('div');
+  m.className = 'msg msg-' + type;
+  m.textContent = txt;
+  m.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s';
+  b.appendChild(m);
+  requestAnimationFrame(() => { m.style.opacity = '1'; m.style.transform = 'translateY(0)' });
+  b.scrollTop = b.scrollHeight;
+}
+
+function addMsgHTML(html, type) {
+  const b = document.getElementById('chatMsgs');
+  const m = document.createElement('div');
+  m.className = 'msg msg-' + type;
+  m.innerHTML = html;
+  m.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s';
+  b.appendChild(m);
+  requestAnimationFrame(() => { m.style.opacity = '1'; m.style.transform = 'translateY(0)' });
+  b.scrollTop = b.scrollHeight;
+}
+
+function addCTA(diagnostico) {
+  const b = document.getElementById('chatMsgs');
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;margin-top:4px';
+  const waUrl = `https://wa.me/573005333763?text=${encodeURIComponent('Hola Daniel, ' + diagnostico.cta + ': ' + diagnostico.titulo)}`;
+  wrap.innerHTML = `<a href="${waUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-size:11px;font-weight:600;padding:9px 16px;border-radius:100px;text-decoration:none;font-family:'DM Sans',sans-serif">
+    <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
+    Hablar con Daniel por WhatsApp →
+  </a>`;
+  b.appendChild(wrap);
+  requestAnimationFrame(() => { wrap.style.opacity = '1'; wrap.style.transform = 'translateY(0)' });
+  b.scrollTop = b.scrollHeight;
+}
+
+function send(v) {
+  if (!v.trim()) return;
+  addMsg(v, 'u');
+  document.getElementById('chatInput').value = '';
+  
+  // Typing indicator
+  setTimeout(() => {
+    const b = document.getElementById('chatMsgs');
+    const t = document.createElement('div');
+    t.className = 'msg msg-b';
+    t.id = 'typing';
+    t.textContent = 'Analizando tu proceso...';
+    t.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;font-style:italic;color:var(--ink3)';
+    b.appendChild(t);
+    requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateY(0)' });
+    b.scrollTop = b.scrollHeight;
+
+    setTimeout(() => {
+      const typing = document.getElementById('typing');
+      if (typing) typing.remove();
+      
+      const tipo = detectarTipo(v);
+      const d = DIAGNOSTICOS[tipo];
+      
+      // Mensaje 1: título del diagnóstico
+      addMsg(`✓ Diagnóstico: ${d.titulo}`, 'r');
+      
+      // Mensaje 2: descripción de la solución
+      setTimeout(() => {
+        addMsg(d.desc, 'r');
+        // Mensaje 3: botón CTA
+        setTimeout(() => addCTA(d), 600);
+      }, 500);
+      
+    }, 1400);
+  }, 300);
+}
+document.getElementById('sendBtn').addEventListener('click',()=>send(document.getElementById('chatInput').value));
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')send(e.target.value)});
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>send(c.dataset.t)));
+
+function abrirModal(id){
+  const m=document.getElementById(id);
+  if(!m)return;
+  m.classList.add('open');
+  document.body.style.overflow='hidden';
+  if(id==='modal-icbf'){
+    setTimeout(()=>{
+      const wt=document.getElementById('dwtyped');
+      if(wt&&wt.innerHTML===''){
+        dWIdx=0;
+        (function step(){
+          if(!wt)return;
+          const ch=WTEXT[dWIdx];
+          wt.innerHTML+=(ch==='\n'?'<br>':ch);
+          dWIdx++;
+          if(dWIdx<WTEXT.length){dWTimer=setTimeout(step,14);}
+        })();
+      }
+    },400);
+  }
+}
+function cerrarModal(id){
+  const m=document.getElementById(id);
+  if(m){m.classList.remove('open');document.body.style.overflow='';}
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});
+    document.body.style.overflow='';
+  }
+});
+setTimeout(function(){
+  document.querySelectorAll('.modal-overlay').forEach(function(m){
+    m.addEventListener('click',function(e){if(e.target===m){m.classList.remove('open');document.body.style.overflow='';}});
+  });
+},500);
+function mTab(prefix,tab,btn){
+  document.querySelectorAll('#modal-'+prefix+' .mtc').forEach(function(t){t.classList.remove('on');});
+  document.querySelectorAll('#modal-'+prefix+' .mtab').forEach(function(t){t.classList.remove('on');});
+  var tc=document.getElementById(prefix+'-'+tab);if(tc)tc.classList.add('on');
+  if(btn)btn.classList.add('on');
+  if(prefix==='icbf'&&tab==='demo'){
+    setTimeout(function(){
+      var wt=document.getElementById('dwtyped');
+      if(wt&&wt.innerHTML===''){
+        dWIdx=0;
+        (function step(){
+          if(!wt)return;
+          var ch=WTEXT[dWIdx];
+          wt.innerHTML+=(ch==='\n'?'<br>':ch);
+          dWIdx++;
+          if(dWIdx<WTEXT.length){dWTimer=setTimeout(step,14);}
+        })();
+      }
+    },200);
+  }
+}
+var WTEXT='Actualmente ingresamos la información de 350 beneficiarios en el sistema web de forma manual. El proceso consiste en abrir el formulario, copiar los datos de cada persona desde un archivo Excel e ingresar uno a uno: nombre, documento, fecha de nacimiento, modalidad, dirección, teléfono y datos del acudiente.\n\nCon una persona dedicada exclusivamente a esto, el proceso toma entre 4 y 5 días hábiles. Se cometen errores de digitación con frecuencia y corregirlos toma tiempo adicional.';
+var dWIdx=0,dWTimer=null,dBotInt=null;
+function dSetI(id,cls){var el=document.getElementById(id);if(el)el.className='dtl-i'+(cls?' '+cls:'');}
+function dShow(id){var el=document.getElementById(id);if(el){el.style.display='';setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'nearest'});},150);}}
+function dGoS1(){clearTimeout(dWTimer);dSetI('dic0','dn');dShow('ds1');setTimeout(function(){dSetI('dic1','act');},200);}
+function dAccept(){
+  var btn=document.getElementById('daccbtn');
+  if(btn){btn.textContent='Propuesta aceptada ✓';btn.classList.add('clicked');btn.disabled=true;}
+  setTimeout(function(){dGoS2();},700);
+}
+function dGoS2(){
+  dSetI('dic1','dn');dShow('ds2');setTimeout(function(){dSetI('dic2','act');},200);
+  var msg=document.getElementById('ddmsg');
+  var txt='Hola, aquí está la entrega completa. El bot quedó listo con tus datos reales. La guía explica paso a paso cómo ejecutarlo. Te envío también la invitación para la sesión en vivo. Cualquier ajuste en los primeros 30 días lo resuelvo sin costo adicional.';
+  var i=0;var iv=setInterval(function(){if(msg)msg.textContent=txt.substring(0,i+1);i++;if(i>=txt.length)clearInterval(iv);},13);
+  var files=[
+    {ico:'PY',name:'bot_carga_masiva.py',desc:'Bot principal — lee el Excel y llena el sistema automáticamente',color:'#3776ab'},
+    {ico:'MD',name:'GUIA_USO.md',desc:'Instrucciones de instalación, configuración y ejecución paso a paso',color:'#555'},
+    {ico:'CAL',name:'sesion_entrega.ics',desc:'Invitación sesión en vivo — Google Meet · 45 minutos',color:'#c53030'},
+  ];
+  var list=document.getElementById('dflist');
+  if(list){files.forEach(function(f,i){
+    var item=document.createElement('div');item.className='fitem';
+    item.innerHTML='<div class="fico" style="background:'+f.color+'">'+f.ico+'</div><div class="finfo"><div class="fname">'+f.name+'</div><div class="fdesc2">'+f.desc+'</div></div><div class="fdl">Descargar</div>';
+    list.appendChild(item);setTimeout(function(){item.classList.add('show');},700+i*350);
+  });}
+  setTimeout(function(){var br=document.getElementById('dbot-run');if(br)br.style.display='block';dRunBot();},1800);
+}
+function dAddLog(txt,cls,delay){
+  return new Promise(function(res){setTimeout(function(){
+    var c=document.getElementById('dbotlog');if(!c){res();return;}
+    var d=document.createElement('div');d.className='bll';
+    var now=new Date();var ts=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0');
+    d.innerHTML='<span class="bts">['+ts+']</span><span class="'+(cls||'')+'">'+txt+'</span>';
+    c.appendChild(d);requestAnimationFrame(function(){d.classList.add('show');});c.scrollTop=c.scrollHeight;res();
+  },delay||0);});
+}
+async function dRunBot(){
+  await dAddLog('Iniciando bot_carga_masiva.py','binf',100);
+  await dAddLog('Excel leído: 350 beneficiarios · 19 grupos','bok',500);
+  await dAddLog('Login exitoso — navegando al formulario','bok',900);
+  await dAddLog('Cargue masivo iniciado...','',1200);
+  var reg=1;
+  dBotInt=setInterval(function(){
+    reg=Math.min(reg+4,350);var pct=Math.round(reg/350*100);
+    var ce=document.getElementById('dbcnt');if(ce)ce.textContent='Beneficiario '+reg+' de 350';
+    var pf=document.getElementById('dbcpf');if(pf)pf.style.width=pct+'%';
+    var pe=document.getElementById('dbcpct');if(pe)pe.textContent=pct+'%';
+    if(reg>=350){
+      clearInterval(dBotInt);
+      dAddLog('350 registros procesados — 334 OK · 16 observaciones','bok',200);
+      setTimeout(function(){var g=document.getElementById('dgarantia');if(g)g.classList.add('show');},800);
+      setTimeout(function(){dGoS3();},1600);
+    }
+  },60);
+}
+function dGoS3(){dSetI('dic2','dn');dShow('ds3');setTimeout(function(){dSetI('dic3','act');setTimeout(function(){dSetI('dic3','dn');},600);},200);}
+function dReset(){
+  clearTimeout(dWTimer);if(dBotInt)clearInterval(dBotInt);dWIdx=0;
+  var wt=document.getElementById('dwtyped');if(wt)wt.innerHTML='';
+  ['ds1','ds2','ds3'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+  ['dic0','dic1','dic2','dic3'].forEach(function(id){dSetI(id,'');});dSetI('dic0','act');
+  var fl=document.getElementById('dflist');if(fl)fl.innerHTML='';
+  var dm=document.getElementById('ddmsg');if(dm)dm.textContent='';
+  var bl=document.getElementById('dbotlog');if(bl)bl.innerHTML='';
+  var br=document.getElementById('dbot-run');if(br)br.style.display='none';
+  var bc=document.getElementById('dbcnt');if(bc)bc.textContent='Beneficiario 1 de 350';
+  var bf=document.getElementById('dbcpf');if(bf)bf.style.width='0%';
+  var bp=document.getElementById('dbcpct');if(bp)bp.textContent='0%';
+  var g=document.getElementById('dgarantia');if(g)g.classList.remove('show');
+  var btn=document.getElementById('daccbtn');
+  if(btn){btn.textContent='Acepto la propuesta →';btn.classList.remove('clicked');btn.disabled=false;}
+}
+
+
+// ── DEMO BOT TRES FASES ──
+var DNAMES=['Valentina Morales','Santiago Pérez','Isabella Ramírez','Mateo González','Sofía Herrera','Sebastián López','Camila Torres','Nicolás Rodríguez','Valeria Martínez','Samuel Vargas','Luciana Díaz','Mariana Ruiz','Paula Mendoza','Tomás Reyes','Andrés Rojas','Natalia Gutiérrez','Felipe Sánchez','Julián Medina','Laura Hernández','Diego Patiño','Daniela Cárdenas','Esteban Ríos','Sara Ibáñez','Juan Ortiz','Manuela Restrepo'];
+var DGRUPOS=['D2-001','D2-002','D2-003','D2-004','D2-005','D2-006','D2-007','D2-008','D2-009','D2-010','D2-011','D2-012','D2-013','D2-014','D2-015','D2-016','D2-017','D2-018','D2-019'];
+var DMODS=['CDI Institucional','CDI Familiar','HCB','CDI Institucional','CDI Familiar'];
+var DALL=[];
+var dRegInt=null;
+var dXlBuilt=false;
+
+function dGenB(i){
+  var n=DNAMES[i%DNAMES.length];
+  var doc=String(10000000+i*73+i%97).slice(0,8);
+  var tel='311'+String(1000000+i*97).slice(0,7);
+  var dir='Calle '+((i%30)+1)+' #'+((i%15)+1)+'-'+((i%50)+10)+' Duitama';
+  var acud=DNAMES[(i+9)%DNAMES.length];
+  var grupo=DGRUPOS[i%DGRUPOS.length];
+  var mod=DMODS[i%DMODS.length];
+  var ok=i%17!==5&&i%23!==11;
+  var obs=ok?'':i%2===0?'Doc ilegible':'Dirección incompleta';
+  return {n:n,doc:doc,tel:tel,dir:dir,acud:acud,grupo:grupo,mod:mod,ok:ok,obs:obs};
+}
+
+function dBuildXl(){
+  if(dXlBuilt)return;
+  DALL=[];
+  for(var i=0;i<100;i++)DALL.push(dGenB(i));
+  var body=document.getElementById('dxlbody');
+  if(!body){console.log('dxlbody not found');return;}
+  body.innerHTML='';
+  var cols='24px repeat(7,1fr)';
+  var hdr=document.createElement('div');
+  hdr.className='xlrow xlhdr';hdr.style.gridTemplateColumns=cols;
+  hdr.innerHTML='<div class="xlc rn" style="background:#155d35;color:#fff"></div>'+
+    ['NOMBRE','DOC','MODALIDAD','ACUDIENTE','TEL','DIRECCIÓN','GRUPO']
+    .map(function(h){return '<div class="xlc hc">'+h+'</div>';}).join('');
+  body.appendChild(hdr);
+  for(var j=0;j<100;j++){
+    var r=DALL[j];
+    var fade=j>20;
+    var row=document.createElement('div');
+    row.className='xlrow'+(j===0?' xlact':j<5?' xlhl':'');
+    row.id='dxr'+j;
+    row.style.gridTemplateColumns=cols;
+    if(fade)row.style.opacity=String(Math.max(0.06,1-(j-20)*0.05));
+    row.innerHTML='<div class="xlc rn">'+(j+3)+'</div>'+
+      '<div class="xlc'+(fade?' fade':'')+'">'+r.n+'</div>'+
+      '<div class="xlc'+(fade?' fade':'')+'" style="font-size:9px">'+r.doc+'</div>'+
+      '<div class="xlc'+(fade?' fade':'')+'">'+r.mod+'</div>'+
+      '<div class="xlc'+(fade?' fade':'')+'">'+r.acud+'</div>'+
+      '<div class="xlc'+(fade?' fade':'')+'">'+r.tel+'</div>'+
+      '<div class="xlc'+(fade?' fade':'')+'">'+r.dir+'</div>'+
+      '<div class="xlc'+(fade?' fade':'')+'" style="font-weight:500">'+r.grupo+'</div>';
+    body.appendChild(row);
+  }
+  dXlBuilt=true;
+}
+
+function dSetPhase(n){
+  ['dph0','dph1','dph2'].forEach(function(id,i){
+    var el=document.getElementById(id);if(!el)return;
+    if(i<n)el.className='dph dn';
+    else if(i===n)el.className='dph on';
+    else el.className='dph';
+  });
+  ['dst0','dst1','dst2'].forEach(function(id,i){
+    var el=document.getElementById(id);
+    if(el)el.style.display=(i===n?'':'none');
+  });
+}
+
+function dTypeF(id,val,delay){
+  return new Promise(function(res){
+    setTimeout(function(){
+      var el=document.getElementById(id);if(!el){res();return;}
+      el.textContent='';el.classList.add('tp');
+      var i=0;var spd=Math.max(20,38-val.length);
+      var iv=setInterval(function(){
+        el.textContent=val.substring(0,i+1);i++;
+        if(i>=val.length){clearInterval(iv);el.classList.remove('tp');el.classList.add('dn');res();}
+      },spd);
+    },delay||0);
+  });
+}
+
+function dAnimNum(id,to,delay){
+  setTimeout(function(){
+    var el=document.getElementById(id);if(!el)return;
+    var c=0;var step=Math.ceil(to/20);
+    var iv=setInterval(function(){c=Math.min(c+step,to);el.textContent=c;if(c>=to)clearInterval(iv);},55);
+  },delay||0);
+}
+
+async function dFillRec(idx){
+  var r=DALL[idx];
+  var fields=['df1','df2','df3','df4','df5'];
+  var vals=[r.n,r.doc,r.mod,r.grupo,r.dir];
+  fields.forEach(function(fid){var el=document.getElementById(fid);if(el){el.textContent='';el.className='dfi'+(fid==='df5'?' s2':'');}});
+  var sv=document.getElementById('dfsave');if(sv){sv.style.opacity='.4';sv.style.background='#8b1a1a';}
+  var sd=document.getElementById('dfsaved');if(sd)sd.style.display='none';
+  var ft=document.getElementById('dftitle');if(ft)ft.textContent='Nuevo beneficiario — '+(idx+1)+' de 100';
+  var bc=document.getElementById('dbct');if(bc)bc.textContent=''+(idx+1)+'/100';
+  var bt=document.getElementById('dbtabt');if(bt)bt.textContent='Sistema — Beneficiario '+(idx+1)+'/100';
+  document.querySelectorAll('.xlact').forEach(function(e){e.classList.remove('xlact');});
+  var xr=document.getElementById('dxr'+idx);if(xr)xr.classList.add('xlact');
+  var d=0;
+  for(var i=0;i<fields.length;i++){await dTypeF(fields[i],vals[i],d);d+=220;}
+  await new Promise(function(res){setTimeout(res,d+80);});
+  if(sv){sv.style.opacity='1';sv.style.background='#166534';}
+  if(sd){sd.style.display='flex';var st=document.getElementById('dfsavedtxt');if(st)st.textContent='Registro '+(idx+1)+' guardado — siguiente...';}
+  await new Promise(function(res){setTimeout(res,350);});
+}
+
+async function dStartBot(){
+  if(!dXlBuilt||DALL.length===0){dBuildXl();}
+  dSetPhase(1);
+  await dFillRec(0);
+  await dFillRec(1);
+  var reg=2;
+  dRegInt=setInterval(function(){
+    reg=Math.min(reg+2,100);
+    var pct=Math.round(reg/100*100);
+    var cr=document.getElementById('dcreg');if(cr)cr.textContent='Beneficiario '+reg+' de 100';
+    var pf=document.getElementById('dcpf');if(pf)pf.style.width=pct+'%';
+    var pc=document.getElementById('dcpct');if(pc)pc.textContent=pct+'%';
+    var ft=document.getElementById('dftitle');if(ft)ft.textContent='Nuevo beneficiario — '+reg+' de 100';
+    var bc=document.getElementById('dbct');if(bc)bc.textContent=''+reg+'/100';
+    var bt=document.getElementById('dbtabt');if(bt)bt.textContent='Sistema — Beneficiario '+reg+'/100';
+    var sd=document.getElementById('dfsaved');if(sd)sd.style.display='flex';
+    var st=document.getElementById('dfsavedtxt');if(st)st.textContent='Registro '+reg+' guardado — siguiente...';
+    if(reg>=100){clearInterval(dRegInt);setTimeout(function(){dShowReport();},600);}
+  },75);
+}
+
+function dShowReport(){
+  dSetPhase(2);
+  var tb=document.getElementById('drtb');if(!tb)return;
+  var sample=[];
+  for(var i=0;i<100;i+=11)sample.push({r:DALL[i],idx:i});
+  sample.forEach(function(o,si){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td style="color:var(--ink3)">'+(o.idx+1)+'</td>'+
+      '<td style="font-size:9px">'+o.r.n+'</td>'+
+      '<td style="font-size:9px;font-family:var(--font-mono)">'+o.r.grupo+'</td>'+
+      '<td>5/5</td>'+
+      '<td><span class="dbk '+(o.r.ok?'ok':'wn')+'">'+(o.r.ok?'Correcto':'Observación')+'</span></td>';
+    tr.style.opacity='0';tr.style.transition='opacity .2s';
+    tb.appendChild(tr);
+    setTimeout(function(){tr.style.opacity='1';},si*40);
+  });
+  var sum=document.createElement('tr');
+  sum.innerHTML='<td colspan="5" style="font-size:9px;color:var(--ink3);font-style:italic;text-align:center;padding:6px">100 registros procesados en total</td>';
+  tb.appendChild(sum);
+  dAnimNum('dm0',100,200);dAnimNum('dm1',94,600);dAnimNum('dm2',6,1000);
+}
+
+function dDlReport(){
+  var now=new Date();
+  var txt='==============================\nREPORTE CARGUE BENEFICIARIOS\n==============================\n';
+  txt+='Fecha: '+now.toLocaleDateString('es-CO')+' '+now.toLocaleTimeString('es-CO')+'\n';
+  txt+='Total: 100 | Correctos: 94 | Observaciones: 6\n';
+  txt+='Tiempo: 1h 47min vs +5 dias manual\n------------------------------\n\n';
+  DALL.forEach(function(r,i){
+    txt+='['+String(i+1).padStart(3,'0')+'] '+r.n+' | '+r.grupo+' | '+(r.ok?'OK':'OBS: '+r.obs)+'\n';
+  });
+  txt+='\n==============================\nDaniel Cardenas Espinosa\n==============================\n';
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));
+  a.download='reporte_beneficiarios_'+now.toISOString().slice(0,10)+'.txt';
+  a.click();
+}
+
+function dReset(){
+  if(dRegInt)clearInterval(dRegInt);
+  var tb=document.getElementById('drtb');if(tb)tb.innerHTML='';
+  ['df1','df2','df3','df4','df5'].forEach(function(id){var el=document.getElementById(id);if(el){el.textContent='';el.className='dfi'+(id==='df5'?' s2':'');}});
+  var sv=document.getElementById('dfsave');if(sv){sv.style.opacity='.4';sv.style.background='#8b1a1a';}
+  var sd=document.getElementById('dfsaved');if(sd)sd.style.display='none';
+  var cr=document.getElementById('dcreg');if(cr)cr.textContent='Beneficiario 1 de 100';
+  var pf=document.getElementById('dcpf');if(pf)pf.style.width='0%';
+  var pc=document.getElementById('dcpct');if(pc)pc.textContent='0%';
+  ['dm0','dm1','dm2'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent='0';});
+  document.querySelectorAll('.xlact').forEach(function(e){e.classList.remove('xlact');});
+  var xr=document.getElementById('dxr0');if(xr)xr.classList.add('xlact');
+  dSetPhase(0);
+}
+
+// Build excel when tab opens
+var _origMTab=window.mTab;
+window.mTab=function(prefix,tab,btn){
+  if(_origMTab)_origMTab(prefix,tab,btn);
+  if(prefix==='icbf'&&tab==='demo'){setTimeout(function(){dBuildXl();},300);}
+};
+
+</script>
+<div class="modal-overlay" id="modal-pension">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · educación</div><div class="modal-title">Liquidación pensional<br/><em>de 10 a 456 casos/mes</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-pension')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="mtabs">
+      <div class="mtab on" onclick="mTab('pension','flujo',this)">Flujo del proyecto</div>
+      <div class="mtab" onclick="mTab('pension','demo',this)">Demo interactivo</div>
+    </div>
+    <div class="mtc on" id="pension-flujo">
+      <div class="frow">
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">10 liquidaciones manuales al mes</div><div class="fd2">Cada caso exigía revisar resoluciones, cruzar bases de datos, redactar cartas en Word y generar PDFs. Con 4 personas el techo era 10 casos al mes.</div></div>
+        <div class="fa">&#8594;</div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema automatizado de liquidación masiva</div><div class="fd2">Se automatizó la lectura de bases de datos, el cálculo de cuotas proporcionales, la generación de cartas y la conversión a PDF en un solo proceso.</div></div>
+      </div>
+      <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">456 casos por mes — mismo equipo — sin contratar más personal</div><div class="fd2">El proceso que tardaba un mes ahora se ejecuta en horas. La capacidad aumentó 45 veces.</div></div>
+      <div class="mmt"><div class="mmt-m"><div class="mmt-n">456</div><div class="mmt-l">casos/mes<br/>procesados</div></div><div class="mmt-m"><div class="mmt-n">112</div><div class="mmt-l">entidades<br/>gestionadas</div></div><div class="mmt-m"><div class="mmt-n">×45</div><div class="mmt-l">incremento<br/>de capacidad</div></div></div>
+    </div>
+    <div class="mtc" id="pension-demo">
+      <div style="background:var(--s);border-radius:10px;padding:18px;text-align:center;border:0.5px solid var(--bdr)">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Demo interactivo próximamente</div>
+        <div style="font-size:11px;color:var(--ink2)">Escríbeme y te explico el proceso en detalle.</div>
+      </div>
+    </div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes procesos de liquidación o cobro repetitivos?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20liquidaci%C3%B3n" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+    </div>
+  </div>
+</div>
+</div><div class="modal-overlay" id="modal-dxcr">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · financiero</div><div class="modal-title">Conciliación bancaria<br/><em>de 5 días a 1 hora</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-dxcr')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="mtabs">
+      <div class="mtab on" onclick="mTab('dxcr','flujo',this)">Flujo del proyecto</div>
+      <div class="mtab" onclick="mTab('dxcr','demo',this)">Demo interactivo</div>
+    </div>
+    <div class="mtc on" id="dxcr-flujo">
+      <div class="frow">
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">$1.000 millones en movimientos sin cruzar cada mes</div><div class="fd2">138 sedes generaban pagos que se descargaban del banco como un Excel. Cruzar cada movimiento contra las facturas emitidas por cada sede requería 4 personas durante 5 días seguidos. Sin ese informe nadie podía cerrar la contabilidad.</div></div>
+        <div class="fa">&#8594;</div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Conciliación automatizada con Python y Power Query</div><div class="fd2">Un proceso que toma el Excel descargado del banco, aplica reglas de cruce por valor, fecha y referencia contra las facturas de cada sede, identifica cada movimiento y genera el reporte consolidado listo para contabilidad.</div></div>
+      </div>
+      <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">De 5 días a 1 hora — 800 movimientos procesados por ciclo</div><div class="fd2">El proceso que requería 4 personas durante una semana completa ahora corre en una hora. $1.000 millones cruzados automáticamente por ciclo.</div></div>
+      <div class="mmt"><div class="mmt-m"><div class="mmt-n">5d→1h</div><div class="mmt-l">tiempo de<br/>procesamiento</div></div><div class="mmt-m"><div class="mmt-n">800+</div><div class="mmt-l">movimientos<br/>analizados</div></div><div class="mmt-m"><div class="mmt-n">$1.000M</div><div class="mmt-l">pesos<br/>conciliados</div></div></div>
+    </div>
+    <div class="mtc" id="dxcr-demo">
+      <div style="background:var(--s);border-radius:10px;padding:18px;text-align:center;border:0.5px solid var(--bdr)">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Demo interactivo próximamente</div>
+        <div style="font-size:11px;color:var(--ink2)">Escríbeme y te explico el proceso en detalle.</div>
+      </div>
+    </div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes datos bancarios o procesos de conciliación manual?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20conciliaci%C3%B3n" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+    </div>
+  </div>
+</div>
+</div><div class="modal-overlay" id="modal-zeus">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector privado · restaurantes</div><div class="modal-title">Control de costos<br/><em>15% → 24% de margen</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-zeus')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="mtabs">
+      <div class="mtab on" onclick="mTab('zeus','flujo',this)">Flujo del proyecto</div>
+      <div class="mtab" onclick="mTab('zeus','demo',this)">Demo interactivo</div>
+    </div>
+    <div class="mtc on" id="zeus-flujo">
+      <div class="frow">
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Ventas estables pero rentabilidad desconocida</div><div class="fd2">Varios puntos de venta sin estructura de costos por plato. Era imposible saber qué ítems generaban pérdidas o qué punto era rentable.</div></div>
+        <div class="fa">&#8594;</div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema de costeo estándar implementado en ZEUS</div><div class="fd2">Recetas estándar conectadas con costos reales de ingredientes, consumo por preparación y ventas por punto. Visibilidad total en tiempo real.</div></div>
+      </div>
+      <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">El margen subió del 15% al 24% sin aumentar precios</div><div class="fd2">Con información real sobre costos la operación eliminó ítems no rentables y optimizó compras.</div></div>
+      <div class="mmt"><div class="mmt-m"><div class="mmt-n">+9pts</div><div class="mmt-l">margen<br/>ganado</div></div><div class="mmt-m"><div class="mmt-n">100%</div><div class="mmt-l">trazabilidad<br/>por punto</div></div><div class="mmt-m"><div class="mmt-n">ZEUS</div><div class="mmt-l">sistema<br/>implementado</div></div></div>
+    </div>
+    <div class="mtc" id="zeus-demo">
+      <div style="background:var(--s);border-radius:10px;padding:18px;text-align:center;border:0.5px solid var(--bdr)">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Demo interactivo próximamente</div>
+        <div style="font-size:11px;color:var(--ink2)">Escríbeme y te explico el proceso en detalle.</div>
+      </div>
+    </div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿No sabes cuánto ganas por producto o punto de venta?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20costeo" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+    </div>
+  </div>
+</div>
+</div><div class="modal-overlay" id="modal-hojaldre">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector privado · alimentos</div><div class="modal-title">Presencia digital<br/><em>para negocio de hojaldre</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-hojaldre')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="mtabs">
+      <div class="mtab on" onclick="mTab('hojaldre','flujo',this)">Flujo del proyecto</div>
+      <div class="mtab" onclick="mTab('hojaldre','demo',this)">Demo interactivo</div>
+    </div>
+    <div class="mtc on" id="hojaldre-flujo">
+      <div class="frow">
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Producto premium sin canal digital</div><div class="fd2">Negocio de hojaldre congelado que dependía del voz a voz. Los clientes potenciales no podían ver el catálogo ni calcular la rentabilidad de revender.</div></div>
+        <div class="fa">&#8594;</div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Landing page con catálogo y calculadora de márgenes</div><div class="fd2">Página en Next.js con catálogo completo y calculadora para que el redistribuidor vea cuánto ganaría. Con contacto directo por WhatsApp.</div></div>
+      </div>
+      <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">Canal digital entregado en menos de una semana</div><div class="fd2">El negocio pasó del voz a voz a un canal permanente que muestra el producto y facilita el contacto.</div></div>
+      <div class="mmt"><div class="mmt-m"><div class="mmt-n"><1sem</div><div class="mmt-l">tiempo de<br/>entrega</div></div><div class="mmt-m"><div class="mmt-n">$0</div><div class="mmt-l">costo mensual<br/>de operación</div></div><div class="mmt-m"><div class="mmt-n">Next.js</div><div class="mmt-l">tecnología<br/>escalable</div></div></div>
+    </div>
+    <div class="mtc" id="hojaldre-demo">
+      <div style="background:var(--s);border-radius:10px;padding:18px;text-align:center;border:0.5px solid var(--bdr)">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Demo interactivo próximamente</div>
+        <div style="font-size:11px;color:var(--ink2)">Escríbeme y te explico el proceso en detalle.</div>
+      </div>
+    </div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tu negocio necesita presencia digital?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20p%C3%A1gina%20web" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+    </div>
+  </div>
+</div>
+</div><div class="modal-overlay" id="modal-invima">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · regulatorio</div><div class="modal-title">Registro sanitario<br/><em>600 fichas automatizadas</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-invima')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="mtabs">
+      <div class="mtab on" onclick="mTab('invima','flujo',this)">Flujo del proyecto</div>
+      <div class="mtab" onclick="mTab('invima','demo',this)">Demo interactivo</div>
+    </div>
+    <div class="mtc on" id="invima-flujo">
+      <div class="frow">
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">63 registros pendientes, cientos de fichas por llenar</div><div class="fd2">Cada producto requiere una ficha técnica detallada. Con 63 registros y múltiples fichas por registro, el llenado manual tomaba semanas con errores frecuentes.</div></div>
+        <div class="fa">&#8594;</div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Extracción y llenado automático de fichas</div><div class="fd2">Se automatizó la lectura de bases de datos, la extracción de campos y el llenado secuencial de fichas. Sin intervención manual.</div></div>
+      </div>
+      <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">600 fichas generadas — 0 errores de transcripción</div><div class="fd2">Lo que tomaba semanas se redujo a horas con información exacta extraída de la fuente original.</div></div>
+      <div class="mmt"><div class="mmt-m"><div class="mmt-n">600+</div><div class="mmt-l">fichas<br/>generadas</div></div><div class="mmt-m"><div class="mmt-n">63</div><div class="mmt-l">registros<br/>completados</div></div><div class="mmt-m"><div class="mmt-n">0</div><div class="mmt-l">errores por<br/>transcripción</div></div></div>
+    </div>
+    <div class="mtc" id="invima-demo">
+      <div style="background:var(--s);border-radius:10px;padding:18px;text-align:center;border:0.5px solid var(--bdr)">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Demo interactivo próximamente</div>
+        <div style="font-size:11px;color:var(--ink2)">Escríbeme y te explico el proceso en detalle.</div>
+      </div>
+    </div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes formularios o fichas que llenar masivamente?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20fichas" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+    </div>
+  </div>
+</div>
+</div><div class="modal-overlay" id="modal-evaluador">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · planeación</div><div class="modal-title">Evaluación de proyectos<br/><em>100 proyectos automatizados</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-evaluador')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="mtabs">
+      <div class="mtab on" onclick="mTab('evaluador','flujo',this)">Flujo del proyecto</div>
+      <div class="mtab" onclick="mTab('evaluador','demo',this)">Demo interactivo</div>
+    </div>
+    <div class="mtc on" id="evaluador-flujo">
+      <div class="frow">
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Semanas evaluando archivos manualmente</div><div class="fd2">Decenas de centros enviaban proyectos en Excel y Word. Cada evaluador debía abrirlos, revisar criterios de calificación y consolidar resultados. Proceso de semanas con riesgo de inconsistencias.</div></div>
+        <div class="fa">&#8594;</div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema automatizado de evaluación y calificación</div><div class="fd2">Python que lee los archivos, extrae datos financieros, aplica criterios de calificación y genera reportes por proyecto, centro y regional. Sin abrir archivos manualmente.</div></div>
+      </div>
+      <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">100 proyectos evaluados — semanas reducidas a horas</div><div class="fd2">Reportes con criterios uniformes, eliminando inconsistencias entre evaluadores.</div></div>
+      <div class="mmt"><div class="mmt-m"><div class="mmt-n">100+</div><div class="mmt-l">proyectos<br/>evaluados</div></div><div class="mmt-m"><div class="mmt-n">33</div><div class="mmt-l">regionales<br/>procesadas</div></div><div class="mmt-m"><div class="mmt-n">sem→h</div><div class="mmt-l">reducción<br/>de tiempo</div></div></div>
+    </div>
+    <div class="mtc" id="evaluador-demo">
+      <div style="background:var(--s);border-radius:10px;padding:18px;text-align:center;border:0.5px solid var(--bdr)">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Demo interactivo próximamente</div>
+        <div style="font-size:11px;color:var(--ink2)">Escríbeme y te explico el proceso en detalle.</div>
+      </div>
+    </div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Evalúas o calificas información de múltiples fuentes?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20del%20evaluador" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+    </div>
+  </div>
+</div>
+</div><div class="modal-overlay" id="modal-icbf">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Automatización · RPA</div><div class="modal-title">Bot de cargue masivo<br/><em>350 beneficiarios automatizados</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-icbf')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="mtabs">
+      <div class="mtab on" onclick="mTab('icbf','flujo',this)">Flujo del proyecto</div>
+      <div class="mtab" onclick="mTab('icbf','demo',this)" style="display:flex;align-items:center;gap:6px">Demo interactivo <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;animation:pdemo 1.5s infinite;flex-shrink:0"></span></div>
+    </div>
+    <div class="mtc on" id="icbf-flujo">
+      <div class="frow">
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">350 registros ingresados a mano</div><div class="fd2">Un operador copiaba datos desde un Excel campo por campo en un formulario web. Con 350 beneficiarios en 19 grupos, el proceso tomaba más de 5 días hábiles con errores de digitación frecuentes.</div></div>
+        <div class="fa">&#8594;</div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Bot RPA que automatiza el flujo completo</div><div class="fd2">Bot en Python con Selenium que inicia sesión, navega al formulario y llena cada campo leyendo los datos del Excel. Al finalizar verifica y genera un reporte.</div></div>
+      </div>
+      <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+      <div class="fbox fr" style="margin-bottom:12px"><div class="flb flb-b">El resultado</div><div class="ft2">350 beneficiarios en 1h 47min</div><div class="fd2">Los más de 5 días de trabajo manual quedaron reducidos a una ejecución desatendida de 1 hora y 47 minutos con verificación automática incluida.</div></div>
+      <div class="tc2"><div class="tc2-b"><div class="tc2-n r">+5 días</div><div class="tc2-l">proceso manual</div></div><div style="font-size:16px;color:var(--ink3)">&#8594;</div><div class="tc2-b"><div class="tc2-n g">1h 47min</div><div class="tc2-l">automatizado</div></div></div>
+    </div>
+    <div class="mtc" id="icbf-demo">
+<style>
+.xldemo{border:0.5px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:.7rem}
+.xlt{background:#1D6F42;padding:6px 12px;display:flex;align-items:center;gap:7px}
+.xlt-logo{background:#fff;color:#1D6F42;font-size:9px;font-weight:700;padding:2px 5px;border-radius:2px}
+.xlt span{color:rgba(255,255,255,.75);font-size:10px}
+.xlrib{background:#f0f0f0;padding:2px 10px;display:flex;gap:12px;border-bottom:1px solid #d0d0d0}
+.xlrib span{font-size:9px;color:#555}
+.xlcols{background:#f0f0f0;border-bottom:1px solid #d0d0d0;display:grid;grid-template-columns:24px repeat(7,1fr)}
+.xlch{font-size:9px;color:#555;text-align:center;padding:2px;border-right:1px solid #d0d0d0;font-weight:500;overflow:hidden}
+.xlbody{max-height:160px;overflow-y:auto}
+.xlbody::-webkit-scrollbar{width:4px}
+.xlbody::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+.xlrow{display:grid;grid-template-columns:24px repeat(7,1fr);border-bottom:0.5px solid #f0f0f0}
+.xlrow.xlhdr{background:#217346}
+.xlrow.xlact{background:#fff9e6;outline:2px solid #1D6F42;outline-offset:-2px}
+.xlrow.xlhl{background:#e8f4e8}
+.xlc{font-size:9px;color:#222;padding:2px 4px;border-right:0.5px solid #ebebeb;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:flex;align-items:center;min-height:19px}
+.xlc.rn{color:#888;justify-content:center;background:#f5f5f5;border-right:1px solid #d8d8d8;width:24px;flex-shrink:0}
+.xlc.hc{color:#fff;font-size:9px;font-weight:600}
+.xlc.fade{color:#ccc}
+.xlst{background:#217346;padding:2px 10px;display:flex;gap:14px}
+.xlst span{font-size:9px;color:rgba(255,255,255,.8)}
+.brdemo{border:0.5px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:.7rem}
+.brdemo-top{background:#3c3c3c;padding:6px 10px}
+.brdemo-tab{background:#f1f3f4;border-radius:5px 5px 0 0;padding:3px 12px;font-size:10px;color:#333;display:inline-flex;align-items:center;gap:4px;margin-bottom:4px}
+.brdemo-fav{width:10px;height:10px;background:#c53030;border-radius:2px;flex-shrink:0}
+.brdemo-ctrl{display:flex;align-items:center;gap:7px}
+.brdemo-btns{display:flex;gap:4px}
+.brdemo-btns span{width:10px;height:10px;border-radius:50%}
+.bbc{background:#ff5f57}.bbm{background:#febc2e}.bbx{background:#28c840}
+.brdemo-url{flex:1;background:#fff;border:1px solid #888;border-radius:20px;padding:2px 10px;font-size:10px;font-family:var(--font-mono);color:#333;display:flex;align-items:center;gap:4px}
+.brdemo-pg{background:#f0f0f0}
+.brdemo-sysh{background:#8b1a1a;padding:7px 12px;display:flex;align-items:center;gap:8px}
+.brdemo-syslo{background:#fff;border-radius:2px;padding:2px 6px;font-size:9px;font-weight:700;color:#8b1a1a}
+.brdemo-sysh span{color:#fff;font-size:10px}
+.brdemo-usr{margin-left:auto;font-size:9px;color:rgba(255,255,255,.6);font-family:var(--font-mono)}
+.brdemo-layout{display:grid;grid-template-columns:130px 1fr;min-height:170px;overflow:hidden}
+.brdemo-menu{background:#fff;border-right:1px solid #e0e0e0;padding:4px 0}
+.brdemo-mg{font-size:8px;font-weight:600;color:#999;padding:4px 8px 2px;text-transform:uppercase;letter-spacing:.5px}
+.brdemo-mi{display:flex;align-items:center;gap:5px;padding:4px 8px;font-size:10px;color:#555;border-left:2px solid transparent}
+.brdemo-mi.on{background:#fff5f5;color:#8b1a1a;border-left-color:#8b1a1a;font-weight:500}
+.brdemo-mi.hl{background:#fffde7;animation:dmhl .6s ease}
+@keyframes dmhl{0%,100%{background:#fffde7}50%{background:#fff3c4}}
+.brdemo-mico{width:10px;height:10px;border-radius:2px;background:currentColor;opacity:.3;flex-shrink:0}
+.brdemo-sc{background:#f9f9f9;padding:10px 12px;overflow:hidden;min-width:0}
+.brdemo-bc{font-size:9px;color:#888;margin-bottom:6px;display:flex;gap:4px;align-items:center;overflow:hidden;white-space:nowrap}
+.brdemo-bc .cur{color:#8b1a1a;font-weight:500}
+.dfcard{background:#fff;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden}
+.dfcard-hd{background:#f5f5f5;padding:5px 10px;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;justify-content:space-between}
+.dfcard-t{font-size:10px;font-weight:600;color:#333}
+.dfsave{background:#8b1a1a;color:#fff;border:none;border-radius:2px;padding:2px 8px;font-size:9px;cursor:default;opacity:.4;transition:all .3s}
+.dfgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:8px}
+.dfg{display:flex;flex-direction:column;gap:2px}
+.dfg label{font-size:9px;color:#888}
+.dfi{border:1px solid #ccc;border-radius:2px;padding:2px 6px;font-size:10px;color:#333;background:#fff;min-height:20px;display:flex;align-items:center;position:relative;overflow:hidden}
+.dfi.tp{border-color:#1D6F42;background:#f0fff4}
+.dfi.tp::after{content:'|';color:#1D6F42;animation:dcur .7s infinite;position:absolute;right:3px;font-size:11px}
+@keyframes dcur{0%,100%{opacity:1}50%{opacity:0}}
+.dfi.dn{border-color:#bbb}
+.dfi.s2{grid-column:span 2}
+.dfsaved{display:none;align-items:center;gap:5px;padding:5px 8px;background:#f0fdf4;border-top:1px solid #bbf7d0;font-size:9px;color:#166534}
+.dfsaved-ico{width:12px;height:12px;border-radius:50%;background:#22c55e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;flex-shrink:0}
+.dcrow{display:flex;align-items:center;gap:8px;margin-bottom:.6rem}
+.dcbadge{display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:#fff;font-size:10px;font-family:'DM Mono',monospace;padding:3px 10px;border-radius:100px;white-space:nowrap;flex-shrink:0}
+.dcdot{width:5px;height:5px;border-radius:50%;background:#6EE79A;animation:dpd 1.5s infinite}
+@keyframes dpd{0%,100%{opacity:1}50%{opacity:.3}}
+.dcpb{flex:1;background:var(--s);border-radius:100px;height:4px;overflow:hidden}
+.dcpf{height:4px;background:#22c55e;border-radius:100px;transition:width .15s}
+.dphases{display:flex;gap:3px;margin-bottom:.8rem;background:var(--s);border-radius:8px;padding:3px;overflow:hidden}
+.dph{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 8px;border-radius:6px;font-size:10px;color:var(--ink3);transition:all .3s;cursor:default;white-space:nowrap}
+.dph.on{background:var(--w);color:var(--ink);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.dph.dn{color:var(--ink3)}
+.dph-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.dph.on .dph-dot{background:#22c55e;animation:dpd 1.5s infinite}
+.dtc{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;background:var(--s);border-radius:8px;padding:10px 12px;border:0.5px solid var(--bdr);margin-bottom:.7rem}
+.dtcb{text-align:center}
+.dtcn{font-size:18px;font-weight:700;letter-spacing:-.5px}
+.dtcn.r{color:#dc2626}.dtcn.g{color:#16a34a}
+.dtcl{font-size:9px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:2px}
+.dm3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.dmc{background:var(--s);border-radius:7px;padding:8px;text-align:center}
+.dmcn{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-1px}
+.dmcl{font-size:9px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:2px}
+.drpanel{background:var(--w);border:0.5px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:.7rem}
+.drbar{background:var(--s);padding:6px 10px;border-bottom:0.5px solid var(--bdr);display:flex;align-items:center;gap:6px}
+.drdots{display:flex;gap:3px}
+.drdots span{width:8px;height:8px;border-radius:50%}
+.drd-r{background:#ff5f57}.drd-y{background:#febc2e}.drd-g{background:#28c840}
+.drt{font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;flex:1;text-align:center}
+.drta{width:100%;border-collapse:collapse;font-size:10px}
+.drta th{text-align:left;padding:5px 7px;font-size:9px;color:var(--ink3);border-bottom:0.5px solid var(--bdr);background:var(--s);font-weight:500}
+.drta td{padding:5px 7px;border-bottom:0.5px solid var(--bdr);color:var(--ink)}
+.drta tr:last-child td{border-bottom:none}
+.dbk{font-size:8px;padding:2px 5px;border-radius:100px;display:inline-block}
+.dbk.ok{background:#dcfce7;color:#166534}
+.dbk.wn{background:#fef3c7;color:#92400e}
+.dbtns{display:flex;gap:7px;flex-wrap:wrap;margin-top:.5rem}
+.dbtn{padding:7px 14px;border-radius:8px;font-size:11px;cursor:pointer;border:0.5px solid var(--bdr);background:var(--w);color:var(--ink);transition:all .15s}
+.dbtn:hover{background:var(--s)}
+.dbtn.pr{background:var(--ink);color:#fff;border-color:var(--ink)}
+</style>
+
+<div class="dphases">
+  <div class="dph on" id="dph0"><div class="dph-dot"></div>Excel</div>
+  <div class="dph" id="dph1"><div class="dph-dot"></div>Bot cargando</div>
+  <div class="dph" id="dph2"><div class="dph-dot"></div>Reporte</div>
+</div>
+
+<!-- FASE EXCEL -->
+<div id="dst0">
+  <div class="xldemo">
+    <div class="xlt"><div class="xlt-logo">X</div><span>CARQUE_MASIVO_2026_DUITAMA_D.xlsx — 100 beneficiarios · 7 columnas</span></div>
+    <div class="xlrib"><span>Archivo</span><span>Inicio</span><span>Insertar</span><span>Datos</span><span>Vista</span></div>
+    <div class="xlcols"><div class="xlch"></div><div class="xlch">NOMBRE</div><div class="xlch">DOC</div><div class="xlch">MODALIDAD</div><div class="xlch">ACUDIENTE</div><div class="xlch">TEL</div><div class="xlch">DIRECCIÓN</div><div class="xlch">GRUPO</div></div>
+    <div class="xlbody" id="dxlbody"></div>
+    <div class="xlst"><span>Listo</span><span>100 beneficiarios · 19 grupos · Duitama 2026</span><span>100%</span></div>
+  </div>
+  <div class="dbtns"><button class="dbtn pr" onclick="dStartBot()">Ejecutar bot →</button></div>
+</div>
+
+<!-- FASE BOT -->
+<div id="dst1" style="display:none">
+  <div class="dcrow">
+    <div class="dcbadge"><div class="dcdot"></div><span id="dcreg">Beneficiario 1 de 100</span></div>
+    <div class="dcpb"><div class="dcpf" id="dcpf" style="width:0%"></div></div>
+    <span style="font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace" id="dcpct">0%</span>
+  </div>
+  <div class="brdemo">
+    <div class="brdemo-top">
+      <div class="brdemo-tab"><div class="brdemo-fav"></div><span id="dbtabt">Sistema — Beneficiario 1/100</span></div>
+      <div class="brdemo-ctrl">
+        <div class="brdemo-btns"><span class="bbc"></span><span class="bbm"></span><span class="bbx"></span></div>
+        <div class="brdemo-url"><span style="color:#1a73e8;font-size:9px">🔒</span><span id="durl">sistema.gov.co/beneficiarios/nuevo</span></div>
+      </div>
+    </div>
+    <div class="brdemo-pg">
+      <div class="brdemo-sysh"><div class="brdemo-syslo">SIS</div><span>Registro de beneficiarios</span><div class="brdemo-usr">operador.sistema</div></div>
+      <div class="brdemo-layout">
+        <div class="brdemo-menu">
+          <div class="brdemo-mg">Módulos</div>
+          <div class="brdemo-mi"><div class="brdemo-mico"></div>Formularios</div>
+          <div class="brdemo-mi hl" id="dmi1" style="padding-left:14px;font-size:9px"><div class="brdemo-mico" style="width:9px;height:9px"></div>Beneficiarios</div>
+          <div class="brdemo-mi on" id="dmi2" style="padding-left:20px;font-size:9px"><div class="brdemo-mico" style="width:7px;height:7px"></div>Nuevo registro</div>
+        </div>
+        <div class="brdemo-sc">
+          <div class="brdemo-bc"><span>Beneficiarios</span><span class="sep">›</span><span class="cur" id="dbct">Nuevo — 1 de 100</span></div>
+          <div class="dfcard">
+            <div class="dfcard-hd">
+              <div class="dfcard-t" id="dftitle">Nuevo beneficiario — 1 de 100</div>
+              <div class="dfsave" id="dfsave">Guardar</div>
+            </div>
+            <div class="dfgrid">
+              <div class="dfg"><label>Nombre *</label><div class="dfi" id="df1"></div></div>
+              <div class="dfg"><label>Documento *</label><div class="dfi" id="df2"></div></div>
+              <div class="dfg"><label>Modalidad *</label><div class="dfi" id="df3"></div></div>
+              <div class="dfg"><label>Grupo UDS *</label><div class="dfi" id="df4"></div></div>
+              <div class="dfg s2"><label>Dirección *</label><div class="dfi" id="df5"></div></div>
+            </div>
+            <div class="dfsaved" id="dfsaved"><div class="dfsaved-ico">✓</div><span id="dfsavedtxt">Registro 1 guardado</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FASE REPORTE -->
+<div id="dst2" style="display:none">
+  <div class="dtc">
+    <div class="dtcb"><div class="dtcn r">+5 días</div><div class="dtcl">proceso manual</div></div>
+    <div style="font-size:14px;color:var(--ink3)">→</div>
+    <div class="dtcb"><div class="dtcn g">1h 47min</div><div class="dtcl">automatizado</div></div>
+  </div>
+  <div class="dm3">
+    <div class="dmc"><div class="dmcn" id="dm0">0</div><div class="dmcl">beneficiarios<br/>procesados</div></div>
+    <div class="dmc"><div class="dmcn" id="dm1">0</div><div class="dmcl">sin errores<br/>verificados</div></div>
+    <div class="dmc"><div class="dmcn" id="dm2">0</div><div class="dmcl">con<br/>observaciones</div></div>
+  </div>
+  <div class="drpanel">
+    <div class="drbar"><div class="drdots"><span class="drd-r"></span><span class="drd-y"></span><span class="drd-g"></span></div><div class="drt">reporte_verificacion_beneficiarios.txt</div></div>
+    <table class="drta"><thead><tr><th>#</th><th>Beneficiario</th><th>Grupo</th><th>Campos</th><th>Estado</th></tr></thead><tbody id="drtb"></tbody></table>
+  </div>
+  <div class="dbtns">
+    <button class="dbtn pr" onclick="dDlReport()">Descargar reporte .txt</button>
+    <button class="dbtn" onclick="dReset()">Reiniciar demo</button>
+  </div>
+</div>
+
+</div></div>
+    </div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes un proceso de cargue repetitivo?</strong><span>Cuéntame el sistema y el volumen. Lo automatizamos.</span></div>
+      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20demo%20del%20bot" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
