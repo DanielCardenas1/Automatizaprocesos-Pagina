@@ -387,6 +387,10 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 .cat-badge{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--ink3);background:var(--w);border:0.5px solid var(--bdr);padding:3px 8px;border-radius:100px;display:inline-block;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase}
 .cat-cta{font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:500;color:var(--ink);background:none;border:0.5px solid var(--bdr);padding:7px 10px;border-radius:100px;cursor:pointer;width:100%;transition:all .2s}
 .cat-cta:hover,.cat-cta:active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat-extra{display:none}
+.cat-grid.expanded .cat-extra{display:block}
+.cat-more-btn{display:block;margin:16px auto 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink2);background:none;border:0.5px solid var(--bdr);padding:8px 16px;border-radius:100px;cursor:pointer;transition:all .2s}
+.cat-more-btn:hover{border-color:var(--ink);color:var(--ink)}
 
 /* IDEA */
 .idea-section{padding:52px 40px;background:var(--s);border-bottom:0.5px solid var(--bdr)}
@@ -437,11 +441,11 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   <span class="nav-contact" style="font-family:'DM Mono',monospace;font-size:11px">danielkadioz@gmail.com</span>
   <div class="nav-mid">
     <a href="#casos" class="nav-btn">Casos reales</a>
-    <a href="#servicios" class="nav-btn">Servicios</a>
   </div>
   <div class="nav-links">
     <a href="#diagnostico">Diagnóstico</a>
     <a href="#catalogo">Catálogo</a>
+    <a href="#servicios">Precios</a>
     <a href="#perfil">Perfil</a>
     <a href="https://wa.me/573005333763" target="_blank" class="nav-btn dark">WhatsApp →</a>
   </div>
@@ -671,16 +675,17 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   <div class="sec-eyebrow">Catálogo · 02</div>
   <h2 class="sec-h">Soluciones listas<br/>para <em>usar, en construcción.</em></h2>
   <p class="sec-sub">Cada solución que construimos para un cliente puede convertirse después en una herramienta lista para otros. Este catálogo se va llenando con cada proyecto.</p>
-  <div class="cat-grid">
+  <div class="cat-grid" id="catGrid">
     <div class="cat-card rev"><div class="cat-ico">📑</div><div class="cat-badge">Próximamente</div><div class="cat-name">Consolidador de Excel</div><button class="cat-cta" onclick="catalogoNecesito('Consolidador de Excel')">Necesito algo parecido</button></div>
     <div class="cat-card rev"><div class="cat-ico">📥</div><div class="cat-badge">Próximamente</div><div class="cat-name">Carga masiva a plataformas</div><button class="cat-cta" onclick="catalogoNecesito('Carga masiva a plataformas')">Necesito algo parecido</button></div>
     <div class="cat-card rev"><div class="cat-ico">📄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de documentos</div><button class="cat-cta" onclick="catalogoNecesito('Generador de documentos')">Necesito algo parecido</button></div>
     <div class="cat-card rev"><div class="cat-ico">🔄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Conciliador de movimientos</div><button class="cat-cta" onclick="catalogoNecesito('Conciliador de movimientos')">Necesito algo parecido</button></div>
-    <div class="cat-card rev"><div class="cat-ico">📎</div><div class="cat-badge">Próximamente</div><div class="cat-name">Extractor de datos en PDF</div><button class="cat-cta" onclick="catalogoNecesito('Extractor de datos en PDF')">Necesito algo parecido</button></div>
-    <div class="cat-card rev"><div class="cat-ico">📊</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de reportes</div><button class="cat-cta" onclick="catalogoNecesito('Generador de reportes')">Necesito algo parecido</button></div>
-    <div class="cat-card rev"><div class="cat-ico">🔍</div><div class="cat-badge">Próximamente</div><div class="cat-name">Comparador de bases de datos</div><button class="cat-cta" onclick="catalogoNecesito('Comparador de bases de datos')">Necesito algo parecido</button></div>
-    <div class="cat-card rev"><div class="cat-ico">🧹</div><div class="cat-badge">Próximamente</div><div class="cat-name">Limpieza y validación de datos</div><button class="cat-cta" onclick="catalogoNecesito('Limpieza y validación de datos')">Necesito algo parecido</button></div>
+    <div class="cat-card cat-extra rev"><div class="cat-ico">📎</div><div class="cat-badge">Próximamente</div><div class="cat-name">Extractor de datos en PDF</div><button class="cat-cta" onclick="catalogoNecesito('Extractor de datos en PDF')">Necesito algo parecido</button></div>
+    <div class="cat-card cat-extra rev"><div class="cat-ico">📊</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de reportes</div><button class="cat-cta" onclick="catalogoNecesito('Generador de reportes')">Necesito algo parecido</button></div>
+    <div class="cat-card cat-extra rev"><div class="cat-ico">🔍</div><div class="cat-badge">Próximamente</div><div class="cat-name">Comparador de bases de datos</div><button class="cat-cta" onclick="catalogoNecesito('Comparador de bases de datos')">Necesito algo parecido</button></div>
+    <div class="cat-card cat-extra rev"><div class="cat-ico">🧹</div><div class="cat-badge">Próximamente</div><div class="cat-name">Limpieza y validación de datos</div><button class="cat-cta" onclick="catalogoNecesito('Limpieza y validación de datos')">Necesito algo parecido</button></div>
   </div>
+  <button class="cat-more-btn" id="catMoreBtn" type="button" onclick="toggleCatalogo()">Ver 4 soluciones más ↓</button>
 </section>
 
 <!-- IDEA -->
@@ -723,29 +728,29 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
-<!-- SERVICIOS -->
+<!-- RANGOS DE REFERENCIA (antes "Servicios") -->
 <section class="svc-section" id="servicios">
-  <div class="sec-eyebrow">Servicios · 05</div>
-  <h2 class="sec-h">Soluciones concretas<br/>para <em>operaciones reales.</em></h2>
-  <p class="sec-sub">No ofrezco tecnología por sí sola. Analizo tu operación, identifico dónde se pierde tiempo y dinero, y entrego una solución que funciona desde el primer día.</p>
+  <div class="sec-eyebrow">Rangos de referencia · 05</div>
+  <h2 class="sec-h">¿Cuánto cuesta<br/><em>resolverlo?</em></h2>
+  <p class="sec-sub">Cada caso es distinto — el diagnóstico de arriba te da el número exacto. Esto es solo para que tengas una idea de la inversión según el tipo de proyecto.</p>
 
   <div class="svc-grid">
     <div class="svc-card rev">
       <div class="svc-ico">⚡</div>
-      <div class="svc-name">Automatización de procesos</div>
-      <div class="svc-desc">Convierto tareas manuales y repetitivas en flujos automáticos. Generación de documentos, cruces de información, llenado de formularios, reportes periódicos. Si lo haces a mano cada semana, existe una mejor forma de hacerlo.</div>
+      <div class="svc-name">Automatizar un proceso manual</div>
+      <div class="svc-desc">Documentos, cruces de información, formularios, reportes que hoy haces a mano.</div>
       <div class="svc-price">Desde $800.000</div>
     </div>
     <div class="svc-card rev d1">
       <div class="svc-ico">📊</div>
-      <div class="svc-name">Análisis y consolidación de datos</div>
-      <div class="svc-desc">Unifico información dispersa en múltiples archivos o sistemas y la convierto en un reporte claro y actualizado. Ideal para equipos que pierden horas cada semana consolidando datos de distintas fuentes antes de poder tomar decisiones.</div>
+      <div class="svc-name">Consolidar y ordenar datos</div>
+      <div class="svc-desc">Unificar información dispersa en un reporte claro y actualizado.</div>
       <div class="svc-price">Desde $500.000</div>
     </div>
     <div class="svc-card rev d2">
       <div class="svc-ico">🌐</div>
-      <div class="svc-name">Páginas web y landing pages</div>
-      <div class="svc-desc">Desarrollo páginas funcionales y profesionales para negocios que necesitan presencia digital sin pagar mensualidades de agencia. Catálogos, páginas de venta y tiendas básicas entregadas en menos de una semana.</div>
+      <div class="svc-name">Presencia digital</div>
+      <div class="svc-desc">Página con catálogo y contacto directo, sin mensualidades de agencia.</div>
       <div class="svc-price">Desde $1.200.000</div>
     </div>
   </div>
@@ -1158,6 +1163,15 @@ function casoAbrirDiagnostico(id, texto) {
     document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
     heroInput.focus();
   }, 350);
+}
+
+// ============ CATÁLOGO → expandir / colapsar ============
+function toggleCatalogo() {
+  const grid = document.getElementById('catGrid');
+  const btn = document.getElementById('catMoreBtn');
+  const expanded = grid.classList.toggle('expanded');
+  btn.textContent = expanded ? 'Ver menos ↑' : 'Ver 4 soluciones más ↓';
+  trackEvent('cta_seleccionado', { cta: expanded ? 'catalogo_ver_mas' : 'catalogo_ver_menos' });
 }
 
 // ============ CATÁLOGO → "Necesito algo parecido" ============
