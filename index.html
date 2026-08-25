@@ -807,12 +807,12 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   <div class="cta-icon">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
   </div>
-  <h2 class="cta-h">¿Hay un proceso<br/>que te está <em>costando tiempo?</em></h2>
-  <p class="cta-sub">Cuéntame cómo funciona. En menos de 24 horas te digo si tiene solución, cómo la implementaría y cuánto costaría. Sin compromiso.</p>
+  <h2 class="cta-h" id="ctaFinalH">¿Hay un proceso<br/>que te está <em>costando tiempo?</em></h2>
+  <p class="cta-sub" id="ctaFinalSub">Cuéntame cómo funciona. En menos de 24 horas te digo si tiene solución, cómo la implementaría y cuánto costaría. Sin compromiso.</p>
   <div class="cta-btns">
-    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20automatizar%20un%20proceso" target="_blank" class="btn-dark">
+    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20automatizar%20un%20proceso" target="_blank" class="btn-dark" id="ctaFinalWa">
       <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
-      Escribir por WhatsApp
+      <span id="ctaFinalWaLabel">Escribir por WhatsApp</span>
     </a>
     <a href="mailto:danielkadioz@gmail.com" class="btn-ghost">Enviar correo</a>
   </div>
@@ -866,6 +866,18 @@ function saveLead(lead) {
     leads.push(Object.assign({ fecha: new Date().toISOString() }, lead));
     localStorage.setItem('ap_leads', JSON.stringify(leads));
   } catch (e) {}
+}
+
+// ============ CTA FINAL — se vuelve contextual tras un diagnóstico/idea ============
+function actualizarCtaFinal(opts) {
+  const h = document.getElementById('ctaFinalH');
+  const sub = document.getElementById('ctaFinalSub');
+  const wa = document.getElementById('ctaFinalWa');
+  const waLabel = document.getElementById('ctaFinalWaLabel');
+  if (h) h.innerHTML = opts.heading;
+  if (sub) sub.textContent = opts.sub;
+  if (wa) wa.href = opts.waUrl;
+  if (waLabel) waLabel.textContent = opts.waLabel;
 }
 
 // ============ DIAGNÓSTICO — motor de reglas evolucionado ============
@@ -936,6 +948,10 @@ function scrollToDiag() {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function esIdea(texto) {
+  return /\bidea\b/i.test(texto);
+}
+
 function iniciarDiagnostico(texto, origen) {
   texto = (texto || '').trim();
   if (!texto) return;
@@ -943,7 +959,14 @@ function iniciarDiagnostico(texto, origen) {
   trackEvent('inicio_diagnostico', { origen: diagState.origen });
   trackEvent('problema_enviado', { texto: texto, tipo: diagState.tipo });
   const b = document.getElementById('chatMsgs');
-  b.innerHTML = '';
+  if (b.dataset.used === '1') {
+    const div = document.createElement('div');
+    div.style.cssText = 'text-align:center;margin:16px 0 6px;font-family:\'DM Mono\',monospace;font-size:9.5px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase';
+    div.textContent = '— nuevo caso —';
+    b.appendChild(div);
+  } else {
+    b.dataset.used = '1';
+  }
   addMsg(texto, 'u');
   scrollToDiag();
   setTimeout(preguntarFrecuencia, 550);
@@ -1018,16 +1041,80 @@ function mostrarResultado() {
   b.scrollTop = b.scrollHeight;
   trackEvent('diagnostico_completado', { tipo: diagState.tipo, potencial: d.potencial });
   trackEvent('resultado_mostrado', { tipo: diagState.tipo });
+  actualizarCtaFinal({
+    heading: 'Ya tienes un diagnóstico<br/>listo. <em>Retómalo cuando quieras.</em>',
+    sub: d.problema + ' — ' + d.siguiente,
+    waUrl: waUrl,
+    waLabel: d.ctaLabel
+  });
 }
 
 // ============ HERO — input principal ============
 const heroInput = document.getElementById('heroInput');
 const heroSubmit = document.getElementById('heroSubmit');
+const heroDefaultPlaceholder = heroInput.placeholder;
+let heroDirectMode = false;
+
+function irDirectoAWhatsapp(texto) {
+  trackEvent('inicio_diagnostico', { origen: 'puerta_directa' });
+  trackEvent('problema_enviado', { texto: texto, tipo: 'directo' });
+  const b = document.getElementById('chatMsgs');
+  if (b.dataset.used === '1') {
+    const div = document.createElement('div');
+    div.style.cssText = 'text-align:center;margin:16px 0 6px;font-family:\'DM Mono\',monospace;font-size:9.5px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase';
+    div.textContent = '— nuevo caso —';
+    b.appendChild(div);
+  } else {
+    b.dataset.used = '1';
+  }
+  addMsg(texto, 'u');
+  scrollToDiag();
+  setTimeout(() => {
+    addMsg('Perfecto, vamos directo al grano. Cuéntaselo a Daniel y te responde con los detalles.', 'b');
+    const waUrl = 'https://wa.me/573005333763?text=' + encodeURIComponent('Hola Daniel, ya sé lo que necesito: ' + texto);
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'opacity:0;transition:opacity .3s;margin-top:6px';
+    const btn = document.createElement('a');
+    btn.href = waUrl; btn.target = '_blank'; btn.className = 'btn-dark'; btn.style.cssText = 'font-size:12px;padding:10px 16px;display:inline-flex';
+    btn.textContent = 'Contarle esto a Daniel →';
+    btn.addEventListener('click', () => {
+      trackEvent('cta_seleccionado', { cta: 'directo' });
+      trackEvent('conversion', { tipo: 'directo' });
+      trackEvent('whatsapp_iniciado', { origen: 'puerta_directa' });
+      saveLead({ tipo_solicitud: 'directo', problema_original: texto, diagnostico: 'Solicitud directa', solucion_propuesta: 'Por definir en conversación', nivel_oportunidad: 'Alto', siguiente_paso: 'Conversación directa', origen: 'puerta_directa' });
+    });
+    wrap.appendChild(btn);
+    b.appendChild(wrap);
+    requestAnimationFrame(() => { wrap.style.opacity = '1'; });
+    b.scrollTop = b.scrollHeight;
+    actualizarCtaFinal({
+      heading: 'Ya le contaste a Daniel<br/>lo que <em>necesitas.</em>',
+      sub: texto,
+      waUrl: waUrl,
+      waLabel: 'Contarle esto a Daniel'
+    });
+  }, 500);
+}
+
 function submitHero() {
   const v = heroInput.value;
   if (!v.trim()) return;
-  iniciarDiagnostico(v, 'hero');
   heroInput.value = '';
+  if (heroDirectMode) {
+    heroDirectMode = false;
+    heroInput.placeholder = heroDefaultPlaceholder;
+    irDirectoAWhatsapp(v);
+    return;
+  }
+  if (esIdea(v)) {
+    trackEvent('inicio_diagnostico', { origen: 'hero_idea' });
+    const el = document.getElementById('idea');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const ii = document.getElementById('ideaInput');
+    if (ii) { ii.value = v; setTimeout(() => ii.focus(), 400); }
+    return;
+  }
+  iniciarDiagnostico(v, 'hero');
 }
 heroSubmit.addEventListener('click', submitHero);
 heroInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitHero(); } });
@@ -1039,20 +1126,24 @@ document.querySelectorAll('#heroExamples .ex-chip').forEach(c => c.addEventListe
 // ============ PUERTAS DE ENTRADA ============
 document.getElementById('doorProblema').addEventListener('click', () => {
   trackEvent('inicio_diagnostico', { origen: 'puerta_problema' });
+  heroDirectMode = false;
   heroInput.placeholder = 'Cuéntame qué proceso manual te quita tiempo...';
   heroInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
   heroInput.focus();
 });
 document.getElementById('doorIdea').addEventListener('click', () => {
   trackEvent('inicio_diagnostico', { origen: 'puerta_idea' });
+  heroDirectMode = false;
   const el = document.getElementById('idea');
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   setTimeout(() => { const ii = document.getElementById('ideaInput'); if (ii) ii.focus(); }, 400);
 });
 document.getElementById('doorSe').addEventListener('click', () => {
-  trackEvent('inicio_diagnostico', { origen: 'puerta_directa' });
-  const el = document.getElementById('catalogo');
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  trackEvent('inicio_diagnostico', { origen: 'puerta_directa_click' });
+  heroDirectMode = true;
+  heroInput.placeholder = 'Cuéntame exactamente qué necesitas construir o automatizar...';
+  heroInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  heroInput.focus();
 });
 
 // ============ CASOS → "Tengo un problema parecido" ============
@@ -1061,6 +1152,8 @@ function casoAbrirDiagnostico(id, texto) {
   const overlay = document.querySelector('.modal-overlay.open');
   if (overlay) { overlay.classList.remove('open'); document.body.style.overflow = ''; }
   setTimeout(() => {
+    heroDirectMode = false;
+    heroInput.placeholder = heroDefaultPlaceholder;
     heroInput.value = texto;
     document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
     heroInput.focus();
@@ -1070,6 +1163,8 @@ function casoAbrirDiagnostico(id, texto) {
 // ============ CATÁLOGO → "Necesito algo parecido" ============
 function catalogoNecesito(nombre) {
   trackEvent('cta_seleccionado', { cta: 'catalogo_necesito', solucion: nombre });
+  heroDirectMode = false;
+  heroInput.placeholder = heroDefaultPlaceholder;
   heroInput.value = 'Necesito algo parecido a: ' + nombre;
   document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
   heroInput.focus();
@@ -1102,6 +1197,12 @@ function analizarIdea() {
       trackEvent('conversion', { tipo: 'aterrizar_idea' });
       trackEvent('whatsapp_iniciado', { origen: 'idea' });
       saveLead({ tipo_solicitud: 'idea', problema_original: v, diagnostico: 'Idea por estructurar', solucion_propuesta: 'Prototipo mínimo', nivel_oportunidad: 'Por confirmar', siguiente_paso: 'Conversación de aterrizaje', origen: 'idea' });
+    });
+    actualizarCtaFinal({
+      heading: 'Ya le contaste tu idea<br/>a <em>Daniel.</em>',
+      sub: v,
+      waUrl: waUrl,
+      waLabel: 'Quiero aterrizar esta idea'
     });
   }, 900);
 }
