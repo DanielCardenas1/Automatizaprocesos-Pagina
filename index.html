@@ -907,6 +907,49 @@ function detectarTipo(texto) {
   return 'default';
 }
 
+// ============ PERSONALIZACIÓN — el bot lee tus propias palabras ============
+// No es una IA real: extrae cantidades, fuentes y objetos que el usuario ya
+// escribió y los inserta en la respuesta, para que dos personas en la misma
+// categoría no reciban el mismo texto plano.
+const AP_FUENTES = ['excel', 'plataforma', 'sistema', 'base de datos', 'pdf', 'formulario', 'correo', 'whatsapp', 'drive', 'sheets', 'word', 'erp', 'crm', 'correo electrónico'];
+const AP_OBJETOS = ['facturas', 'nómina', 'nomina', 'pensiones', 'inventario', 'medicamentos', 'clientes', 'beneficiarios', 'proyectos', 'contratos', 'pagos', 'cobros', 'pedidos', 'historias clínicas', 'pacientes', 'empleados', 'proveedores', 'matrículas', 'matriculas', 'estudiantes', 'productos', 'pólizas', 'polizas', 'solicitudes', 'órdenes', 'ordenes', 'citas', 'reservas', 'fichas', 'registros', 'formularios', 'documentos', 'reportes'];
+
+function extraerDetalles(texto) {
+  const s = texto.toLowerCase();
+  const numMatch = texto.match(/(\d+)\s+([a-záéíóúñ]+(?:\s+[a-záéíóúñ]+)?)/i);
+  const cantidad = numMatch ? numMatch[0].trim().replace(/\s+/g, ' ') : null;
+  const fuente = AP_FUENTES.find(f => s.includes(f)) || null;
+  const objeto = AP_OBJETOS.find(o => s.includes(o)) || null;
+  return { cantidad, fuente, objeto };
+}
+
+function personalizarDiagnostico(d, texto) {
+  const det = extraerDetalles(texto);
+  const fuenteTxt = det.fuente ? (det.fuente === 'excel' ? 'Excel' : det.fuente) : null;
+  const cantidadLower = det.cantidad ? det.cantidad.toLowerCase() : '';
+  const fuenteYaEnCantidad = det.fuente && cantidadLower.includes(det.fuente);
+
+  const piezas = [];
+  if (det.cantidad) piezas.push(det.cantidad);
+  if (det.objeto && !cantidadLower.includes(det.objeto)) piezas.push(det.objeto);
+
+  let problema = d.problema;
+  const detalle = [piezas.join(', '), (fuenteTxt && !fuenteYaEnCantidad) ? ('vía ' + fuenteTxt) : null].filter(Boolean).join(' ');
+  if (detalle) problema += ' — en tu caso: ' + detalle + '.';
+
+  let solucion = d.solucion;
+  if (fuenteTxt) {
+    solucion = solucion.replace(/\.\s*$/, '') + ', partiendo de tu' + (det.fuente === 'excel' ? 's archivos Excel' : ' ' + det.fuente) + '.';
+  }
+
+  let siguiente = d.siguiente;
+  if (det.objeto) {
+    siguiente = siguiente.replace(/\.\s*$/, '') + ', usando tus datos reales de ' + det.objeto + '.';
+  }
+
+  return { problema, solucion, siguiente };
+}
+
 function addMsg(txt, type) {
   const b = document.getElementById('chatMsgs');
   const m = document.createElement('div');
@@ -933,7 +976,7 @@ function addChips(options, onPick) {
   const b = document.getElementById('chatMsgs');
   const wrap = document.createElement('div');
   wrap.className = 'diag-quick';
-  wrap.style.cssText = 'opacity:0;transition:opacity .3s;margin-top:2px';
+  wrap.style.cssText = 'opacity:0;transition:opacity .3s;margin-top:2px;pointer-events:none';
   options.forEach(opt => {
     const c = document.createElement('button');
     c.type = 'button'; c.className = 'qchip'; c.textContent = opt;
@@ -941,8 +984,10 @@ function addChips(options, onPick) {
     wrap.appendChild(c);
   });
   b.appendChild(wrap);
-  requestAnimationFrame(() => { wrap.style.opacity = '1' });
   b.scrollTop = b.scrollHeight;
+  requestAnimationFrame(() => { wrap.style.opacity = '1'; b.scrollTop = b.scrollHeight; });
+  // Bloquea clics mientras el layout se reacomoda (evita que un clic aterrice en el chip equivocado)
+  setTimeout(() => { wrap.style.pointerEvents = 'auto'; }, 350);
 }
 
 // ============ ESTADO DEL DIAGNÓSTICO ============
@@ -1008,6 +1053,7 @@ function mostrarTyping() {
 function mostrarResultado() {
   const typing = document.getElementById('typing'); if (typing) typing.remove();
   const d = DIAGNOSTICOS[diagState.tipo] || DIAGNOSTICOS.default;
+  const p = personalizarDiagnostico(d, diagState.textoOriginal);
   const esfuerzoTxt = (diagState.esfuerzo && diagState.esfuerzo !== 'No estoy seguro') ? diagState.esfuerzo + ' por ciclo' : 'Por confirmar en la conversación';
   const badgeClass = d.potencial === 'Alto' ? '' : (d.potencial === 'Medio' ? 'med' : 'low');
   const b = document.getElementById('chatMsgs');
@@ -1015,17 +1061,17 @@ function mostrarResultado() {
   card.className = 'result-card';
   card.innerHTML = '<div class="result-badge ' + badgeClass + '">● Oportunidad detectada · Potencial ' + d.potencial + '</div>' +
     '<div class="result-grid">' +
-      '<div class="result-item full"><div class="result-l">Problema identificado</div><div class="result-v">' + d.problema + '</div></div>' +
+      '<div class="result-item full"><div class="result-l">Problema identificado</div><div class="result-v">' + p.problema + '</div></div>' +
       '<div class="result-item"><div class="result-l">Frecuencia</div><div class="result-v">' + (diagState.frecuencia || '—') + '</div></div>' +
       '<div class="result-item"><div class="result-l">Esfuerzo estimado</div><div class="result-v">' + esfuerzoTxt + '</div></div>' +
-      '<div class="result-item full"><div class="result-l">Posible solución</div><div class="result-v">' + d.solucion + '</div></div>' +
-      '<div class="result-item full"><div class="result-l">Siguiente paso recomendado</div><div class="result-v">' + d.siguiente + '</div></div>' +
+      '<div class="result-item full"><div class="result-l">Posible solución</div><div class="result-v">' + p.solucion + '</div></div>' +
+      '<div class="result-item full"><div class="result-l">Siguiente paso recomendado</div><div class="result-v">' + p.siguiente + '</div></div>' +
     '</div>' +
     '<div class="result-sep"></div>' +
     '<div class="result-ctas"></div>';
   b.appendChild(card);
   const ctas = card.querySelector('.result-ctas');
-  const waMsg = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos.\nMi problema: ' + diagState.textoOriginal + '\nFrecuencia: ' + (diagState.frecuencia || '-') + '\nDiagnóstico: ' + d.problema + '\nQuiero: ' + d.ctaLabel;
+  const waMsg = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos.\nMi problema: ' + diagState.textoOriginal + '\nFrecuencia: ' + (diagState.frecuencia || '-') + '\nDiagnóstico: ' + p.problema + '\nQuiero: ' + d.ctaLabel;
   const waUrl = 'https://wa.me/573005333763?text=' + encodeURIComponent(waMsg);
   const btnPrimary = document.createElement('a');
   btnPrimary.href = waUrl; btnPrimary.target = '_blank'; btnPrimary.className = 'btn-dark'; btnPrimary.style.cssText = 'font-size:12px;padding:10px 16px';
@@ -1034,7 +1080,7 @@ function mostrarResultado() {
     trackEvent('cta_seleccionado', { cta: d.ctaTipo });
     trackEvent(d.ctaTipo === 'prototipo' ? 'prototipo_solicitado' : 'conversion', { tipo: d.ctaTipo });
     trackEvent('whatsapp_iniciado', { origen: 'resultado_diagnostico' });
-    saveLead({ tipo_solicitud: d.ctaTipo, problema_original: diagState.textoOriginal, diagnostico: d.problema, solucion_propuesta: d.solucion, nivel_oportunidad: d.potencial, siguiente_paso: d.siguiente, frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen });
+    saveLead({ tipo_solicitud: d.ctaTipo, problema_original: diagState.textoOriginal, diagnostico: p.problema, solucion_propuesta: p.solucion, nivel_oportunidad: d.potencial, siguiente_paso: p.siguiente, frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen });
   });
   const waUrl2 = 'https://wa.me/573005333763?text=' + encodeURIComponent('Hola Daniel, quiero hablar sobre: ' + diagState.textoOriginal);
   const btnSecondary = document.createElement('a');
@@ -1048,7 +1094,7 @@ function mostrarResultado() {
   trackEvent('resultado_mostrado', { tipo: diagState.tipo });
   actualizarCtaFinal({
     heading: 'Ya tienes un diagnóstico<br/>listo. <em>Retómalo cuando quieras.</em>',
-    sub: d.problema + ' — ' + d.siguiente,
+    sub: p.problema + ' — ' + p.siguiente,
     waUrl: waUrl,
     waLabel: d.ctaLabel
   });
