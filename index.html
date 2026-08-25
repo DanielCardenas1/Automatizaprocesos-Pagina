@@ -329,6 +329,102 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 .rbig{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-1px;margin-bottom:3px}
 .rsub{font-size:11px;color:var(--ink2)}
 
+/* ============ EVOLUCIÓN MVP COMERCIAL ============ */
+
+/* HERO INTERACTIVO */
+.hero-input-card{max-width:640px;margin:0 auto 18px;background:var(--w);border:1px solid var(--bdr);border-radius:18px;padding:8px;box-shadow:0 8px 32px rgba(0,0,0,.06);opacity:0;animation:ri .8s var(--ez) .25s both}
+.hero-textarea{width:100%;border:none;background:transparent;resize:none;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);padding:14px 14px 6px;min-height:60px;outline:none;line-height:1.5;cursor:auto}
+.hero-textarea::placeholder{color:var(--ink3)}
+.hero-input-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 8px 6px 14px;gap:8px}
+.hero-input-hint{font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace}
+.hero-submit{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:var(--ink);color:#fff;border:none;padding:10px 18px;border-radius:100px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s,transform .15s;flex-shrink:0}
+.hero-submit:hover{background:#000;transform:translateY(-1px)}
+.hero-examples{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:640px;margin:0 auto 30px;opacity:0;animation:ri .8s var(--ez) .35s both}
+.ex-chip{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--ink2);background:var(--w);border:0.5px solid var(--bdr);padding:6px 12px;border-radius:100px;cursor:pointer;transition:all .2s}
+.ex-chip:hover,.ex-chip:active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* PUERTAS DE ENTRADA */
+.doors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:760px;margin:0 auto}
+.door-card{background:var(--w);border:0.5px solid var(--bdr);border-radius:14px;padding:16px 14px;text-align:left;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.door-card:hover,.door-card:active{border-color:var(--ink);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.door-ico{font-size:17px;margin-bottom:8px}
+.door-title{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.door-desc{font-size:11px;color:var(--ink2);line-height:1.45}
+
+/* DIAGNÓSTICO evolucionado */
+.diag-section{background:var(--w);border-top:0.5px solid var(--bdr);border-bottom:0.5px solid var(--bdr)}
+.diag-inner{max-width:640px;margin:0 auto;padding:36px 24px}
+.diag-quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.qchip{font-family:'DM Sans',sans-serif;font-size:11.5px;font-weight:500;background:var(--w);border:1px solid var(--bdr);color:var(--ink);padding:8px 14px;border-radius:100px;cursor:pointer;transition:all .2s}
+.qchip:hover,.qchip:active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.result-card{background:var(--w);border:1.5px solid var(--ink);border-radius:16px;padding:18px;margin-top:8px;opacity:0;transform:translateY(8px);transition:all .45s var(--ez);max-width:100%}
+.result-card.show{opacity:1;transform:translateY(0)}
+.result-badge{display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:0.5px solid #bbf7d0;color:#166534;font-family:'DM Mono',monospace;font-size:9.5px;font-weight:600;padding:4px 10px;border-radius:100px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:14px}
+.result-badge.med{background:#fffbeb;border-color:#fde68a;color:#92400e}
+.result-badge.low{background:var(--s);border-color:var(--bdr);color:var(--ink2)}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.result-item.full{grid-column:1/-1}
+.result-l{font-size:9.5px;font-family:'DM Mono',monospace;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
+.result-v{font-size:13px;color:var(--ink);line-height:1.5;font-weight:500}
+.result-sep{height:0.5px;background:var(--bdr);margin:14px 0}
+.result-ctas{display:flex;flex-wrap:wrap;gap:8px}
+
+/* PASO */
+.paso-section{padding:52px 40px;background:var(--s);border-bottom:0.5px solid var(--bdr)}
+.paso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.paso-node{background:var(--w);border:0.5px solid var(--bdr);border-radius:14px;padding:20px 16px}
+.paso-letter{width:32px;height:32px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-bottom:12px;font-family:'DM Mono',monospace}
+.paso-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.paso-desc{font-size:11.5px;color:var(--ink2);line-height:1.55}
+
+/* CATÁLOGO */
+.cat-section{padding:52px 40px;background:var(--w);border-bottom:0.5px solid var(--bdr)}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.cat-card{background:var(--s);border:0.5px solid var(--bdr);border-radius:12px;padding:16px;transition:box-shadow .2s}
+.cat-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.cat-ico{font-size:16px;margin-bottom:10px}
+.cat-name{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.cat-badge{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--ink3);background:var(--w);border:0.5px solid var(--bdr);padding:3px 8px;border-radius:100px;display:inline-block;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase}
+.cat-cta{font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:500;color:var(--ink);background:none;border:0.5px solid var(--bdr);padding:7px 10px;border-radius:100px;cursor:pointer;width:100%;transition:all .2s}
+.cat-cta:hover,.cat-cta:active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* IDEA */
+.idea-section{padding:52px 40px;background:var(--s);border-bottom:0.5px solid var(--bdr)}
+.idea-card{max-width:640px;margin:24px auto 0;background:var(--w);border:0.5px solid var(--bdr);border-radius:16px;padding:20px}
+.idea-textarea{width:100%;border:0.5px solid var(--bdr);border-radius:10px;background:var(--s);resize:vertical;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);padding:12px 14px;min-height:80px;outline:none;line-height:1.55;transition:border-color .2s;cursor:auto}
+.idea-textarea:focus{border-color:var(--ink)}
+.idea-btn{margin-top:10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:var(--ink);color:#fff;border:none;padding:10px 18px;border-radius:100px;cursor:pointer}
+.idea-btn:hover{background:#000}
+.idea-result{margin-top:16px}
+
+/* MODELO / PROTOTIPADO */
+.model-section{padding:52px 40px;background:var(--w);border-bottom:0.5px solid var(--bdr)}
+.proto-flow{display:flex;align-items:flex-start;gap:4px;flex-wrap:wrap;justify-content:center;margin:26px 0 36px;padding:20px 12px;background:var(--s);border-radius:14px;border:0.5px solid var(--bdr)}
+.proto-node{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:76px;text-align:center}
+.proto-dot{width:32px;height:32px;border-radius:50%;background:var(--w);border:1.5px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:13px}
+.proto-lbl{font-size:9.5px;color:var(--ink2);line-height:1.3;font-weight:500}
+.proto-arr{color:var(--ink3);font-size:13px;flex-shrink:0;padding-top:8px}
+.model-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.model-card{background:var(--s);border:0.5px solid var(--bdr);border-radius:14px;padding:18px 16px}
+.model-card.on{border-color:var(--ink);background:var(--w)}
+.model-n{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:8px}
+.model-t{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.model-tag{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:.4px;text-transform:uppercase;padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:8px}
+.model-tag.free{background:#f0fdf4;color:#166534}
+.model-tag.paid{background:#fffbeb;color:#92400e}
+.model-d{font-size:11px;color:var(--ink2);line-height:1.55}
+
+@media(max-width:640px){
+  .doors-grid{grid-template-columns:1fr}
+  .paso-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .model-grid{grid-template-columns:1fr 1fr}
+  .result-grid{grid-template-columns:1fr}
+  .proto-flow{gap:2px 2px;padding:14px 8px}
+  .proto-node{min-width:60px}
+  .proto-lbl{font-size:9px}
+  .cat-section,.idea-section,.model-section,.paso-section{padding:40px 20px}
+}
 </style>
 </head>
 <body>
@@ -344,13 +440,14 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <a href="#servicios" class="nav-btn">Servicios</a>
   </div>
   <div class="nav-links">
-    <a href="#asistente">Asistente</a>
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#catalogo">Catálogo</a>
     <a href="#perfil">Perfil</a>
     <a href="https://wa.me/573005333763" target="_blank" class="nav-btn dark">WhatsApp →</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO INTERACTIVO -->
 <section class="hero">
   <div class="hero-avatar-wrap">
     <div class="hero-avatar">
@@ -359,19 +456,77 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <div class="hero-name-pill"><div class="pill-dot"></div>Disponible · Colombia</div>
   </div>
 
-  <h1 class="hero-h">Cada hora que pierdes<br/>en tareas manuales <em>tiene solución.</em></h1>
-  <p class="hero-sub">Diseño soluciones de automatización que eliminan el trabajo repetitivo de tu operación. Menos errores, menos tiempo perdido, más capacidad para lo que realmente importa.</p>
+  <h1 class="hero-h">¿Qué quieres hacer<br/><em>más fácil?</em></h1>
+  <p class="hero-sub">No necesitas saber de tecnología. Cuéntame qué haces y buscamos juntos una forma más sencilla de resolverlo.</p>
 
-  <div class="hero-btns">
-    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20automatizar%20un%20proceso" target="_blank" class="btn-dark">
-      <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
-      Cuéntame tu proceso
-    </a>
-    <a href="#casos" class="btn-ghost">Ver casos reales</a>
+  <div class="hero-input-card">
+    <textarea class="hero-textarea" id="heroInput" rows="2" placeholder="Ej: todos los lunes consolido 15 archivos Excel a mano..."></textarea>
+    <div class="hero-input-bar">
+      <span class="hero-input-hint">↵ para analizar</span>
+      <button class="hero-submit" id="heroSubmit" type="button">Analizar mi caso →</button>
+    </div>
   </div>
 
-  <div class="hero-proof">
-    <span class="proof-txt"><strong>6 proyectos</strong> automatizados · entidades públicas y negocios privados · Colombia</span>
+  <div class="hero-examples" id="heroExamples">
+    <span class="ex-chip" data-t="Tengo que cargar 400 registros en una plataforma.">Cargar 400 registros</span>
+    <span class="ex-chip" data-t="Todos los lunes consolido 15 archivos Excel.">Consolidar 15 Excel</span>
+    <span class="ex-chip" data-t="Genero cientos de documentos manualmente.">Generar documentos</span>
+    <span class="ex-chip" data-t="Copio información de un sistema a otro.">Copiar entre sistemas</span>
+    <span class="ex-chip" data-t="Tengo una idea para una plataforma.">Tengo una idea</span>
+  </div>
+
+  <div class="doors-grid rev">
+    <button class="door-card" id="doorProblema" type="button">
+      <div class="door-ico">🧩</div>
+      <div class="door-title">Tengo un problema</div>
+      <div class="door-desc">Algo manual, lento o repetitivo que te quita tiempo.</div>
+    </button>
+    <button class="door-card" id="doorIdea" type="button">
+      <div class="door-ico">💡</div>
+      <div class="door-title">Tengo una idea</div>
+      <div class="door-desc">Un producto o plataforma que quieres aterrizar.</div>
+    </button>
+    <button class="door-card" id="doorSe" type="button">
+      <div class="door-ico">🎯</div>
+      <div class="door-title">Ya sé qué necesito</div>
+      <div class="door-desc">Sabes exactamente qué construir o automatizar.</div>
+    </button>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section class="diag-section" id="diagnostico">
+  <div class="diag-inner">
+    <div class="ai-header-tag" style="margin-bottom:16px"><div class="ai-header-dot"></div>Diagnóstico gratuito · respuesta inmediata</div>
+    <div class="chat-card" style="box-shadow:none;border:0.5px solid var(--bdr)">
+      <div class="chat-top">
+        <div class="chat-top-l">
+          <div class="chat-sdot"></div>
+          <div>
+            <div class="chat-name">Diagnóstico — Automatiza Procesos</div>
+            <div class="chat-sub">Analiza lo que escribiste arriba · conectado con Daniel Cárdenas</div>
+          </div>
+        </div>
+        <div class="chat-badge">● En línea</div>
+      </div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="msg msg-b">Hola 👋 Cuéntame arriba qué haces manualmente cada semana. Te digo si tiene solución, qué tan grande es la oportunidad y cuál sería el siguiente paso.</div>
+      </div>
+    </div>
+    <div class="ai-r-note" style="margin-top:10px">Las respuestas son orientativas · la propuesta final la hace Daniel</div>
+  </div>
+</section>
+
+<!-- PASO -->
+<section class="paso-section rev" id="paso">
+  <div class="sec-eyebrow" style="text-align:center">Cómo trabajamos</div>
+  <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">Un camino simple,<br/><em>no una metodología aburrida.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Esto es lo que pasa después de que cuentas tu problema. Le decimos PASO.</p>
+  <div class="paso-grid">
+    <div class="paso-node rev"><div class="paso-letter">P</div><div class="paso-title">Problema</div><div class="paso-desc">Entendemos qué está pasando hoy en tu operación, en tus propias palabras.</div></div>
+    <div class="paso-node rev d1"><div class="paso-letter">A</div><div class="paso-title">Análisis</div><div class="paso-desc">Revisamos el proceso, identificamos el desperdicio y confirmamos si hay una oportunidad real.</div></div>
+    <div class="paso-node rev d2"><div class="paso-letter">S</div><div class="paso-title">Solución</div><div class="paso-desc">Diseñamos la forma más simple de resolverlo y, si hace falta, construimos un prototipo que lo demuestre.</div></div>
+    <div class="paso-node rev d3"><div class="paso-letter">O</div><div class="paso-title">Operación</div><div class="paso-desc">Implementamos, mantenemos o convertimos la solución en una herramienta que puedas reutilizar.</div></div>
   </div>
 </section>
 
@@ -396,38 +551,10 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   <div class="stat rev d3"><div class="stat-n">$1.000M</div><div class="stat-l">en ingresos identificados<br/>y conciliados</div></div>
 </div>
 
-<!-- SERVICIOS -->
-<section class="svc-section" id="servicios">
-  <div class="sec-eyebrow">Servicios · 01</div>
-  <h2 class="sec-h">Soluciones concretas<br/>para <em>operaciones reales.</em></h2>
-  <p class="sec-sub">No ofrezco tecnología por sí sola. Analizo tu operación, identifico dónde se pierde tiempo y dinero, y entrego una solución que funciona desde el primer día.</p>
-
-  <div class="svc-grid">
-    <div class="svc-card rev">
-      <div class="svc-ico">⚡</div>
-      <div class="svc-name">Automatización de procesos</div>
-      <div class="svc-desc">Convierto tareas manuales y repetitivas en flujos automáticos. Generación de documentos, cruces de información, llenado de formularios, reportes periódicos. Si lo haces a mano cada semana, existe una mejor forma de hacerlo.</div>
-      <div class="svc-price">Desde $800.000</div>
-    </div>
-    <div class="svc-card rev d1">
-      <div class="svc-ico">📊</div>
-      <div class="svc-name">Análisis y consolidación de datos</div>
-      <div class="svc-desc">Unifico información dispersa en múltiples archivos o sistemas y la convierto en un reporte claro y actualizado. Ideal para equipos que pierden horas cada semana consolidando datos de distintas fuentes antes de poder tomar decisiones.</div>
-      <div class="svc-price">Desde $500.000</div>
-    </div>
-    <div class="svc-card rev d2">
-      <div class="svc-ico">🌐</div>
-      <div class="svc-name">Páginas web y landing pages</div>
-      <div class="svc-desc">Desarrollo páginas funcionales y profesionales para negocios que necesitan presencia digital sin pagar mensualidades de agencia. Catálogos, páginas de venta y tiendas básicas entregadas en menos de una semana.</div>
-      <div class="svc-price">Desde $1.200.000</div>
-    </div>
-  </div>
-</section>
-
 <!-- CASOS REALES -->
 <section id="casos">
   <div class="casos-header rev" style="padding-bottom:32px">
-    <div class="sec-eyebrow" style="text-align:center">Casos reales · 02</div>
+    <div class="sec-eyebrow" style="text-align:center">Casos reales · 01</div>
     <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Resultados concretos<br/><em>en proyectos reales.</em></h2>
   </div>
 
@@ -539,63 +666,87 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
-<!-- ASISTENTE IA -->
-<section class="ai-section" id="asistente">
-  <div class="ai-header rev">
-    <div class="ai-header-tag"><div class="ai-header-dot"></div>Asistente IA · Diagnóstico gratuito · 04</div>
-    <h2 class="sec-h" style="text-align:center;max-width:460px;margin:0 auto 8px">¿Tu operación tiene<br/><em>procesos automatizables?</em></h2>
-    <p style="font-size:13px;color:var(--ink2);text-align:center;max-width:420px;margin:0 auto">Descríbelo en el chat. La inteligencia artificial evalúa tu caso al instante y si identifica una oportunidad real, te conecta directamente conmigo.</p>
+<!-- CATÁLOGO -->
+<section class="cat-section rev" id="catalogo">
+  <div class="sec-eyebrow">Catálogo · 02</div>
+  <h2 class="sec-h">Soluciones listas<br/>para <em>usar, en construcción.</em></h2>
+  <p class="sec-sub">Cada solución que construimos para un cliente puede convertirse después en una herramienta lista para otros. Este catálogo se va llenando con cada proyecto.</p>
+  <div class="cat-grid">
+    <div class="cat-card rev"><div class="cat-ico">📑</div><div class="cat-badge">Próximamente</div><div class="cat-name">Consolidador de Excel</div><button class="cat-cta" onclick="catalogoNecesito('Consolidador de Excel')">Necesito algo parecido</button></div>
+    <div class="cat-card rev"><div class="cat-ico">📥</div><div class="cat-badge">Próximamente</div><div class="cat-name">Carga masiva a plataformas</div><button class="cat-cta" onclick="catalogoNecesito('Carga masiva a plataformas')">Necesito algo parecido</button></div>
+    <div class="cat-card rev"><div class="cat-ico">📄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de documentos</div><button class="cat-cta" onclick="catalogoNecesito('Generador de documentos')">Necesito algo parecido</button></div>
+    <div class="cat-card rev"><div class="cat-ico">🔄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Conciliador de movimientos</div><button class="cat-cta" onclick="catalogoNecesito('Conciliador de movimientos')">Necesito algo parecido</button></div>
+    <div class="cat-card rev"><div class="cat-ico">📎</div><div class="cat-badge">Próximamente</div><div class="cat-name">Extractor de datos en PDF</div><button class="cat-cta" onclick="catalogoNecesito('Extractor de datos en PDF')">Necesito algo parecido</button></div>
+    <div class="cat-card rev"><div class="cat-ico">📊</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de reportes</div><button class="cat-cta" onclick="catalogoNecesito('Generador de reportes')">Necesito algo parecido</button></div>
+    <div class="cat-card rev"><div class="cat-ico">🔍</div><div class="cat-badge">Próximamente</div><div class="cat-name">Comparador de bases de datos</div><button class="cat-cta" onclick="catalogoNecesito('Comparador de bases de datos')">Necesito algo parecido</button></div>
+    <div class="cat-card rev"><div class="cat-ico">🧹</div><div class="cat-badge">Próximamente</div><div class="cat-name">Limpieza y validación de datos</div><button class="cat-cta" onclick="catalogoNecesito('Limpieza y validación de datos')">Necesito algo parecido</button></div>
   </div>
-  <div class="ai-body">
-    <div class="ai-l rev">
-      <h2 class="ai-h">Así funciona<br/><em>el diagnóstico</em></h2>
-      <div class="ai-steps">
-        <div class="ai-step">
-          <div class="step-num">01</div>
-          <div><div class="step-title">Describís el proceso en tus palabras</div><div class="step-desc">Sin tecnicismos. Basta con explicar qué hacés, con qué frecuencia y cuánto tiempo te toma.</div></div>
-        </div>
-        <div class="ai-step">
-          <div class="step-num">02</div>
-          <div><div class="step-title">La IA analiza si tiene solución</div><div class="step-desc">Evalúa el potencial de automatización, el ahorro estimado de tiempo y el tipo de solución aplicable.</div></div>
-        </div>
-        <div class="ai-step">
-          <div class="step-num">03</div>
-          <div><div class="step-title">Hablamos y definimos los detalles</div><div class="step-desc">Si el caso tiene potencial, me contactás por WhatsApp y en menos de 24 horas tenés una propuesta concreta.</div></div>
-        </div>
-      </div>
-      <div class="caso-strip">
-        <div class="caso-txt"><strong>El diagnóstico no tiene costo.</strong> Si después de analizarlo no puedo ayudarte, te lo digo con claridad. No propongo soluciones que no agregan valor real.</div>
-      </div>
+</section>
+
+<!-- IDEA -->
+<section class="idea-section rev" id="idea">
+  <div class="sec-eyebrow" style="text-align:center">Tengo una idea · 03</div>
+  <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">¿Tienes una idea?<br/><em>Te ayudo a aterrizarla.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Escribe libremente: qué problema resuelve, para quién, cómo se te ocurre que funcionaría. No hace falta que esté completo.</p>
+  <div class="idea-card">
+    <textarea class="idea-textarea" id="ideaInput" placeholder="Ej: tengo la idea de una app que ayude a restaurantes pequeños a controlar sus costos sin necesitar un contador..."></textarea>
+    <button class="idea-btn" id="ideaBtn" type="button">Estructurar mi idea →</button>
+    <div class="idea-result" id="ideaResult"></div>
+  </div>
+</section>
+
+<!-- MODELO / PROTOTIPADO -->
+<section class="model-section rev" id="modelo">
+  <div class="sec-eyebrow" style="text-align:center">Cómo reducimos el riesgo · 04</div>
+  <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">No tienes que construir todo<br/><em>para saber si funciona.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Primero comprobamos que la solución tiene sentido, antes de pedirte una gran inversión.</p>
+
+  <div class="proto-flow">
+    <div class="proto-node"><div class="proto-dot">🧩</div><div class="proto-lbl">Idea o<br/>problema</div></div>
+    <span class="proto-arr">→</span>
+    <div class="proto-node"><div class="proto-dot">🔎</div><div class="proto-lbl">Análisis</div></div>
+    <span class="proto-arr">→</span>
+    <div class="proto-node"><div class="proto-dot">⚙️</div><div class="proto-lbl">Prototipo</div></div>
+    <span class="proto-arr">→</span>
+    <div class="proto-node"><div class="proto-dot">🧪</div><div class="proto-lbl">Prueba</div></div>
+    <span class="proto-arr">→</span>
+    <div class="proto-node"><div class="proto-dot">✅</div><div class="proto-lbl">Decisión</div></div>
+    <span class="proto-arr">→</span>
+    <div class="proto-node"><div class="proto-dot">🚀</div><div class="proto-lbl">Implementación</div></div>
+  </div>
+
+  <div class="model-grid">
+    <div class="model-card on rev"><div class="model-n">01</div><span class="model-tag free">Gratis</span><div class="model-t">Diagnóstico</div><div class="model-d">Cuentas tu problema o idea y recibes una primera lectura de si tiene solución.</div></div>
+    <div class="model-card rev d1"><div class="model-n">02</div><span class="model-tag paid">De pago</span><div class="model-t">Prototipo</div><div class="model-d">Construimos una primera versión para comprobar que funciona. Si sigues a implementación, su valor se descuenta del proyecto final.</div></div>
+    <div class="model-card rev d2"><div class="model-n">03</div><div class="model-t">Implementación</div><div class="model-d">Convertimos el prototipo validado en una solución real dentro de tu operación.</div></div>
+    <div class="model-card rev d3"><div class="model-n">04</div><div class="model-t">Producto / suscripción</div><div class="model-d">Si la solución es reutilizable, puede convertirse en una herramienta disponible para otros clientes.</div></div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="svc-section" id="servicios">
+  <div class="sec-eyebrow">Servicios · 05</div>
+  <h2 class="sec-h">Soluciones concretas<br/>para <em>operaciones reales.</em></h2>
+  <p class="sec-sub">No ofrezco tecnología por sí sola. Analizo tu operación, identifico dónde se pierde tiempo y dinero, y entrego una solución que funciona desde el primer día.</p>
+
+  <div class="svc-grid">
+    <div class="svc-card rev">
+      <div class="svc-ico">⚡</div>
+      <div class="svc-name">Automatización de procesos</div>
+      <div class="svc-desc">Convierto tareas manuales y repetitivas en flujos automáticos. Generación de documentos, cruces de información, llenado de formularios, reportes periódicos. Si lo haces a mano cada semana, existe una mejor forma de hacerlo.</div>
+      <div class="svc-price">Desde $800.000</div>
     </div>
-    <div class="ai-r rev d1">
-      <div class="ai-r-note">↓ Escribe o elige un ejemplo · respuesta inmediata</div>
-      <div class="chat-card">
-        <div class="chat-top">
-          <div class="chat-top-l">
-            <div class="chat-sdot"></div>
-            <div>
-              <div class="chat-name">Asistente IA — Automatiza Procesos</div>
-              <div class="chat-sub">Powered by IA · conectado con Daniel Cárdenas</div>
-            </div>
-          </div>
-          <div class="chat-badge">● En línea</div>
-        </div>
-        <div class="chat-chips">
-          <div class="chip" data-t="Cruzo facturas en Excel cada semana">Facturas Excel</div>
-          <div class="chip" data-t="Hago reportes manuales para mis jefes">Reportes</div>
-          <div class="chip" data-t="Liquido nómina o cobros a mano">Nómina/cobros</div>
-          <div class="chip" data-t="Lleno formularios repetitivos">Formularios</div>
-          <div class="chip" data-t="Consolido datos de varias fuentes">Consolidar datos</div>
-        </div>
-        <div class="chat-msgs" id="chatMsgs">
-          <div class="msg msg-b">Hola 👋 Soy el asistente IA de Daniel. Cuéntame qué haces manualmente cada semana y te digo si se puede automatizar, cuánto tiempo ahorrarías y qué costaría resolverlo.</div>
-        </div>
-        <div class="chat-inp">
-          <input class="chat-field" id="chatInput" type="text" placeholder="Ej: consolido 10 archivos Excel cada lunes...">
-          <button class="chat-send" id="sendBtn">→</button>
-        </div>
-      </div>
-      <div class="ai-r-note">Las respuestas son orientativas · la propuesta final la hace Daniel</div>
+    <div class="svc-card rev d1">
+      <div class="svc-ico">📊</div>
+      <div class="svc-name">Análisis y consolidación de datos</div>
+      <div class="svc-desc">Unifico información dispersa en múltiples archivos o sistemas y la convierto en un reporte claro y actualizado. Ideal para equipos que pierden horas cada semana consolidando datos de distintas fuentes antes de poder tomar decisiones.</div>
+      <div class="svc-price">Desde $500.000</div>
+    </div>
+    <div class="svc-card rev d2">
+      <div class="svc-ico">🌐</div>
+      <div class="svc-name">Páginas web y landing pages</div>
+      <div class="svc-desc">Desarrollo páginas funcionales y profesionales para negocios que necesitan presencia digital sin pagar mensualidades de agencia. Catálogos, páginas de venta y tiendas básicas entregadas en menos de una semana.</div>
+      <div class="svc-price">Desde $1.200.000</div>
     </div>
   </div>
 </section>
@@ -629,7 +780,7 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   </div>
 
   <div class="perfil-r rev d1">
-    <div class="sec-eyebrow">Sobre mí · 05</div>
+    <div class="sec-eyebrow">Sobre mí · 06</div>
     <h2 class="perfil-h">Administración<br/>y tecnología<br/><em>en una sola solución.</em></h2>
     <p class="perfil-p">La mayoría de quienes automatizan procesos vienen del mundo técnico y aprenden sobre el negocio. Yo vengo del negocio y aprendí la tecnología. Esa diferencia define cómo abordo cada proyecto: primero entiendo qué duele en la operación, luego diseño la solución más simple y efectiva para resolverlo.</p>
     <p class="perfil-p">He trabajado en procesos financieros nacionales con el SENA, en estructuras de costos para operaciones de restaurantes de las Fuerzas Militares, y en automatización documental para cumplimiento regulatorio. Cuento además con formación internacional en Experiencia del Cliente (CX) por EUDE Business School de España. Trabajo de forma completamente remota con organizaciones en toda Colombia.</p>
@@ -673,8 +824,8 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   <div class="fl">© 2025 Daniel Gerardo Cárdenas · Automatización de Procesos · Colombia</div>
   <div class="fr">
     <a href="#casos" class="flnk">Casos reales</a>
-    <a href="#servicios" class="flnk">Servicios</a>
-    <a href="#asistente" class="flnk">Diagnóstico</a>
+    <a href="#catalogo" class="flnk">Catálogo</a>
+    <a href="#diagnostico" class="flnk">Diagnóstico</a>
     <a href="#perfil" class="flnk">Perfil</a>
   </div>
 </footer>
@@ -694,43 +845,38 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 }),{threshold:.08});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 
-// CHAT IA — Diagnostica y propone solución, luego lleva a WhatsApp
+// ============ ANALÍTICA (MVP, sin backend) ============
+function trackEvent(name, data) {
+  data = data || {};
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(Object.assign({ event: name, ts: new Date().toISOString() }, data));
+  try {
+    const log = JSON.parse(localStorage.getItem('ap_events') || '[]');
+    log.push(Object.assign({ event: name, ts: new Date().toISOString() }, data));
+    localStorage.setItem('ap_events', JSON.stringify(log.slice(-300)));
+  } catch (e) {}
+}
+trackEvent('visita');
+
+// ============ LEADS (MVP, sin backend) ============
+// Cuando exista un backend, reemplazar por un fetch('/api/leads', {method:'POST', body: JSON.stringify(lead)})
+function saveLead(lead) {
+  try {
+    const leads = JSON.parse(localStorage.getItem('ap_leads') || '[]');
+    leads.push(Object.assign({ fecha: new Date().toISOString() }, lead));
+    localStorage.setItem('ap_leads', JSON.stringify(leads));
+  } catch (e) {}
+}
+
+// ============ DIAGNÓSTICO — motor de reglas evolucionado ============
 const DIAGNOSTICOS = {
-  factura: {
-    titulo: "Automatización de conciliación de facturas",
-    desc: "Este proceso tiene alto potencial de automatización. La solución consiste en consolidar todos los archivos de facturas en una base de datos unificada mediante Power Query o Python, aplicar reglas de cruce automático por número, fecha o NIT, y generar un reporte de diferencias listo para revisión. El tiempo de procesamiento pasa de horas a minutos. La solución se entrega en 3 a 5 días hábiles.",
-    cta: "Quiero automatizar mi proceso de facturas"
-  },
-  reporte: {
-    titulo: "Automatización de reportes periódicos",
-    desc: "Los reportes que se generan de forma repetida son los más fáciles de automatizar. La solución conecta las fuentes de datos directamente con una plantilla de reporte que se actualiza sola cada vez que se ejecuta. Sin copiar, sin pegar, sin errores. Dependiendo de la complejidad, la entrega toma entre 2 y 5 días hábiles.",
-    cta: "Quiero automatizar mis reportes"
-  },
-  nomina: {
-    titulo: "Automatización de liquidación y cobros",
-    desc: "Los procesos de liquidación, sea nómina, pensiones o cobros, siguen una lógica repetitiva que se puede sistematizar completamente. La solución lee los datos desde Excel o una base de datos, aplica las fórmulas y reglas definidas, genera los documentos de cobro o liquidación en PDF y organiza el envío. Lo que toma días pasa a ejecutarse en minutos.",
-    cta: "Quiero automatizar mi proceso de liquidación"
-  },
-  formulario: {
-    titulo: "Automatización de llenado de formularios",
-    desc: "El llenado masivo de formularios, sean físicos digitalizados o formularios web, se puede automatizar extrayendo los datos desde una base de datos o archivo Excel y completando cada campo de forma automática. Esto elimina errores de transcripción y reduce el tiempo de diligenciamiento de días a minutos. Casos como este ya se han implementado para procesos regulatorios con cientos de registros.",
-    cta: "Quiero automatizar el llenado de formularios"
-  },
-  consolidar: {
-    titulo: "Consolidación automática de fuentes de datos",
-    desc: "Cuando la información viene de múltiples archivos, sistemas o personas, consolidarla manualmente genera errores y consume tiempo valioso. La solución unifica todas las fuentes en una base de datos centralizada con Power Query o Python, aplica las validaciones necesarias y entrega un archivo maestro limpio y actualizado. El proceso pasa de horas a segundos cada vez que se ejecuta.",
-    cta: "Quiero consolidar mis datos automáticamente"
-  },
-  web: {
-    titulo: "Desarrollo de página web o landing page",
-    desc: "Una página web profesional con catálogo, formulario de contacto y diseño moderno se puede entregar en menos de una semana. La solución incluye diseño responsive, optimización para móviles, integración con WhatsApp y hosting gratuito. Sin mensualidades de agencia. Ideal para negocios que necesitan presencia digital funcional sin grandes inversiones.",
-    cta: "Quiero una página web para mi negocio"
-  },
-  default: {
-    titulo: "Análisis de automatización de procesos",
-    desc: "Basado en lo que describes, este proceso tiene potencial de automatización. La solución implica mapear cada paso del flujo actual, identificar los cuellos de botella y diseñar una versión automatizada que elimine el trabajo manual repetitivo. El resultado típico es una reducción del 70% al 90% del tiempo operativo. Para darte una propuesta exacta necesito conocer los detalles del proceso.",
-    cta: "Quiero analizar mi proceso"
-  }
+  factura: { problema: "Cruce y conciliación manual de facturas o pagos", solucion: "Consolidar los archivos en una base única y aplicar reglas de cruce automático por número, fecha o NIT.", potencial: "Alto", siguiente: "Construir un prototipo con una muestra real de tus archivos.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
+  reporte: { problema: "Elaboración manual de reportes periódicos", solucion: "Conectar tus fuentes de datos a una plantilla que se actualiza sola cada vez que se ejecuta.", potencial: "Alto", siguiente: "Construir un prototipo con uno de tus reportes actuales.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
+  nomina: { problema: "Liquidación manual de nómina, pensiones o cobros", solucion: "Leer los datos desde tu archivo o base de datos y generar los documentos de cobro o liquidación automáticamente.", potencial: "Alto", siguiente: "Analizar tu proceso actual a fondo.", ctaLabel: "Analizar mi proceso", ctaTipo: "analisis" },
+  formulario: { problema: "Llenado manual y repetitivo de formularios, fichas o cargue de registros", solucion: "Extraer los datos desde tu base o Excel y completar cada campo automáticamente, con verificación al final.", potencial: "Alto", siguiente: "Construir un prototipo con un lote pequeño de tus datos.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
+  consolidar: { problema: "Consolidación manual de información dispersa en varias fuentes", solucion: "Unificar todas las fuentes en una base centralizada con validaciones automáticas.", potencial: "Alto", siguiente: "Construir un prototipo con tus archivos actuales.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
+  web: { problema: "Falta de presencia digital o canal de venta online", solucion: "Una página con catálogo, contacto directo por WhatsApp y diseño responsive, sin mensualidades de agencia.", potencial: "Medio", siguiente: "Definir contigo el contenido y la estructura.", ctaLabel: "Adaptar esta solución", ctaTipo: "adaptar" },
+  default: { problema: "Proceso manual con potencial de automatización", solucion: "Mapear el flujo actual, identificar los cuellos de botella y diseñar una versión automatizada.", potencial: "Medio", siguiente: "Conversar los detalles para confirmar el potencial real.", ctaLabel: "Analizar mi proceso", ctaTipo: "analisis" }
 };
 
 function detectarTipo(texto) {
@@ -738,8 +884,8 @@ function detectarTipo(texto) {
   if (/factura|pago|cruzar|cruce|conciliac/.test(s)) return 'factura';
   if (/reporte|tablero|dashboard|informe|indicador/.test(s)) return 'reporte';
   if (/n[oó]mina|liquid|pension|cobro|cartera|cuota/.test(s)) return 'nomina';
-  if (/formulario|llenar|diligenciar|ficha|registro/.test(s)) return 'formulario';
-  if (/consolid|unif|juntar|varios archivos|fuentes/.test(s)) return 'consolidar';
+  if (/formulario|llenar|diligenciar|ficha|registro|cargar|cargue|plataforma/.test(s)) return 'formulario';
+  if (/consolid|unif|juntar|varios archivos|fuentes|excel/.test(s)) return 'consolidar';
   if (/p[aá]gina|web|tienda|landing|sitio/.test(s)) return 'web';
   return 'default';
 }
@@ -766,60 +912,201 @@ function addMsgHTML(html, type) {
   b.scrollTop = b.scrollHeight;
 }
 
-function addCTA(diagnostico) {
+function addChips(options, onPick) {
   const b = document.getElementById('chatMsgs');
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;margin-top:4px';
-  const waUrl = `https://wa.me/573005333763?text=${encodeURIComponent('Hola Daniel, ' + diagnostico.cta + ': ' + diagnostico.titulo)}`;
-  wrap.innerHTML = `<a href="${waUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-size:11px;font-weight:600;padding:9px 16px;border-radius:100px;text-decoration:none;font-family:'DM Sans',sans-serif">
-    <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
-    Hablar con Daniel por WhatsApp →
-  </a>`;
+  wrap.className = 'diag-quick';
+  wrap.style.cssText = 'opacity:0;transition:opacity .3s;margin-top:2px';
+  options.forEach(opt => {
+    const c = document.createElement('button');
+    c.type = 'button'; c.className = 'qchip'; c.textContent = opt;
+    c.addEventListener('click', () => { wrap.remove(); onPick(opt); });
+    wrap.appendChild(c);
+  });
   b.appendChild(wrap);
-  requestAnimationFrame(() => { wrap.style.opacity = '1'; wrap.style.transform = 'translateY(0)' });
+  requestAnimationFrame(() => { wrap.style.opacity = '1' });
   b.scrollTop = b.scrollHeight;
 }
 
-function send(v) {
-  if (!v.trim()) return;
-  addMsg(v, 'u');
-  document.getElementById('chatInput').value = '';
-  
-  // Typing indicator
-  setTimeout(() => {
-    const b = document.getElementById('chatMsgs');
-    const t = document.createElement('div');
-    t.className = 'msg msg-b';
-    t.id = 'typing';
-    t.textContent = 'Analizando tu proceso...';
-    t.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;font-style:italic;color:var(--ink3)';
-    b.appendChild(t);
-    requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateY(0)' });
-    b.scrollTop = b.scrollHeight;
+// ============ ESTADO DEL DIAGNÓSTICO ============
+let diagState = { tipo: null, textoOriginal: '', frecuencia: null, esfuerzo: null, origen: 'directo' };
 
-    setTimeout(() => {
-      const typing = document.getElementById('typing');
-      if (typing) typing.remove();
-      
-      const tipo = detectarTipo(v);
-      const d = DIAGNOSTICOS[tipo];
-      
-      // Mensaje 1: título del diagnóstico
-      addMsg(`✓ Diagnóstico: ${d.titulo}`, 'r');
-      
-      // Mensaje 2: descripción de la solución
-      setTimeout(() => {
-        addMsg(d.desc, 'r');
-        // Mensaje 3: botón CTA
-        setTimeout(() => addCTA(d), 600);
-      }, 500);
-      
-    }, 1400);
-  }, 300);
+function scrollToDiag() {
+  const el = document.getElementById('diagnostico');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-document.getElementById('sendBtn').addEventListener('click',()=>send(document.getElementById('chatInput').value));
-document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')send(e.target.value)});
-document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>send(c.dataset.t)));
+
+function iniciarDiagnostico(texto, origen) {
+  texto = (texto || '').trim();
+  if (!texto) return;
+  diagState = { tipo: detectarTipo(texto), textoOriginal: texto, frecuencia: null, esfuerzo: null, origen: origen || 'directo' };
+  trackEvent('inicio_diagnostico', { origen: diagState.origen });
+  trackEvent('problema_enviado', { texto: texto, tipo: diagState.tipo });
+  const b = document.getElementById('chatMsgs');
+  b.innerHTML = '';
+  addMsg(texto, 'u');
+  scrollToDiag();
+  setTimeout(preguntarFrecuencia, 550);
+}
+
+function preguntarFrecuencia() {
+  addMsg('Entiendo. ¿Con qué frecuencia lo haces?', 'b');
+  addChips(['Diaria', 'Semanal', 'Quincenal', 'Mensual', 'Ocasional'], handleFrecuencia);
+}
+function handleFrecuencia(v) {
+  diagState.frecuencia = v;
+  addMsg(v, 'u');
+  setTimeout(preguntarEsfuerzo, 450);
+}
+function preguntarEsfuerzo() {
+  addMsg('¿Cuánto tiempo te toma cada vez?', 'b');
+  addChips(['Menos de 1h', '1–3h', '3–6h', 'Más de 6h', 'No estoy seguro'], handleEsfuerzo);
+}
+function handleEsfuerzo(v) {
+  diagState.esfuerzo = v;
+  addMsg(v, 'u');
+  setTimeout(mostrarTyping, 400);
+}
+function mostrarTyping() {
+  const b = document.getElementById('chatMsgs');
+  const t = document.createElement('div');
+  t.className = 'msg msg-b'; t.id = 'typing'; t.textContent = 'Analizando tu proceso...';
+  t.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;font-style:italic;color:var(--ink3)';
+  b.appendChild(t);
+  requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateY(0)' });
+  b.scrollTop = b.scrollHeight;
+  setTimeout(mostrarResultado, 1300);
+}
+function mostrarResultado() {
+  const typing = document.getElementById('typing'); if (typing) typing.remove();
+  const d = DIAGNOSTICOS[diagState.tipo] || DIAGNOSTICOS.default;
+  const esfuerzoTxt = (diagState.esfuerzo && diagState.esfuerzo !== 'No estoy seguro') ? diagState.esfuerzo + ' por ciclo' : 'Por confirmar en la conversación';
+  const badgeClass = d.potencial === 'Alto' ? '' : (d.potencial === 'Medio' ? 'med' : 'low');
+  const b = document.getElementById('chatMsgs');
+  const card = document.createElement('div');
+  card.className = 'result-card';
+  card.innerHTML = '<div class="result-badge ' + badgeClass + '">● Oportunidad detectada · Potencial ' + d.potencial + '</div>' +
+    '<div class="result-grid">' +
+      '<div class="result-item full"><div class="result-l">Problema identificado</div><div class="result-v">' + d.problema + '</div></div>' +
+      '<div class="result-item"><div class="result-l">Frecuencia</div><div class="result-v">' + (diagState.frecuencia || '—') + '</div></div>' +
+      '<div class="result-item"><div class="result-l">Esfuerzo estimado</div><div class="result-v">' + esfuerzoTxt + '</div></div>' +
+      '<div class="result-item full"><div class="result-l">Posible solución</div><div class="result-v">' + d.solucion + '</div></div>' +
+      '<div class="result-item full"><div class="result-l">Siguiente paso recomendado</div><div class="result-v">' + d.siguiente + '</div></div>' +
+    '</div>' +
+    '<div class="result-sep"></div>' +
+    '<div class="result-ctas"></div>';
+  b.appendChild(card);
+  const ctas = card.querySelector('.result-ctas');
+  const waMsg = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos.\nMi problema: ' + diagState.textoOriginal + '\nFrecuencia: ' + (diagState.frecuencia || '-') + '\nDiagnóstico: ' + d.problema + '\nQuiero: ' + d.ctaLabel;
+  const waUrl = 'https://wa.me/573005333763?text=' + encodeURIComponent(waMsg);
+  const btnPrimary = document.createElement('a');
+  btnPrimary.href = waUrl; btnPrimary.target = '_blank'; btnPrimary.className = 'btn-dark'; btnPrimary.style.cssText = 'font-size:12px;padding:10px 16px';
+  btnPrimary.textContent = d.ctaLabel + ' →';
+  btnPrimary.addEventListener('click', () => {
+    trackEvent('cta_seleccionado', { cta: d.ctaTipo });
+    trackEvent(d.ctaTipo === 'prototipo' ? 'prototipo_solicitado' : 'conversion', { tipo: d.ctaTipo });
+    trackEvent('whatsapp_iniciado', { origen: 'resultado_diagnostico' });
+    saveLead({ tipo_solicitud: d.ctaTipo, problema_original: diagState.textoOriginal, diagnostico: d.problema, solucion_propuesta: d.solucion, nivel_oportunidad: d.potencial, siguiente_paso: d.siguiente, frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen });
+  });
+  const waUrl2 = 'https://wa.me/573005333763?text=' + encodeURIComponent('Hola Daniel, quiero hablar sobre: ' + diagState.textoOriginal);
+  const btnSecondary = document.createElement('a');
+  btnSecondary.href = waUrl2; btnSecondary.target = '_blank'; btnSecondary.className = 'btn-ghost'; btnSecondary.style.cssText = 'font-size:12px;padding:10px 16px';
+  btnSecondary.textContent = 'Quiero hablar con alguien';
+  btnSecondary.addEventListener('click', () => trackEvent('whatsapp_iniciado', { origen: 'hablar_con_alguien' }));
+  ctas.appendChild(btnPrimary); ctas.appendChild(btnSecondary);
+  requestAnimationFrame(() => card.classList.add('show'));
+  b.scrollTop = b.scrollHeight;
+  trackEvent('diagnostico_completado', { tipo: diagState.tipo, potencial: d.potencial });
+  trackEvent('resultado_mostrado', { tipo: diagState.tipo });
+}
+
+// ============ HERO — input principal ============
+const heroInput = document.getElementById('heroInput');
+const heroSubmit = document.getElementById('heroSubmit');
+function submitHero() {
+  const v = heroInput.value;
+  if (!v.trim()) return;
+  iniciarDiagnostico(v, 'hero');
+  heroInput.value = '';
+}
+heroSubmit.addEventListener('click', submitHero);
+heroInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitHero(); } });
+document.querySelectorAll('#heroExamples .ex-chip').forEach(c => c.addEventListener('click', () => {
+  heroInput.value = c.dataset.t;
+  heroInput.focus();
+}));
+
+// ============ PUERTAS DE ENTRADA ============
+document.getElementById('doorProblema').addEventListener('click', () => {
+  trackEvent('inicio_diagnostico', { origen: 'puerta_problema' });
+  heroInput.placeholder = 'Cuéntame qué proceso manual te quita tiempo...';
+  heroInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  heroInput.focus();
+});
+document.getElementById('doorIdea').addEventListener('click', () => {
+  trackEvent('inicio_diagnostico', { origen: 'puerta_idea' });
+  const el = document.getElementById('idea');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => { const ii = document.getElementById('ideaInput'); if (ii) ii.focus(); }, 400);
+});
+document.getElementById('doorSe').addEventListener('click', () => {
+  trackEvent('inicio_diagnostico', { origen: 'puerta_directa' });
+  const el = document.getElementById('catalogo');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+// ============ CASOS → "Tengo un problema parecido" ============
+function casoAbrirDiagnostico(id, texto) {
+  trackEvent('cta_seleccionado', { cta: 'caso_parecido', caso: id });
+  const overlay = document.querySelector('.modal-overlay.open');
+  if (overlay) { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  setTimeout(() => {
+    heroInput.value = texto;
+    document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    heroInput.focus();
+  }, 350);
+}
+
+// ============ CATÁLOGO → "Necesito algo parecido" ============
+function catalogoNecesito(nombre) {
+  trackEvent('cta_seleccionado', { cta: 'catalogo_necesito', solucion: nombre });
+  heroInput.value = 'Necesito algo parecido a: ' + nombre;
+  document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  heroInput.focus();
+}
+
+// ============ TENGO UNA IDEA ============
+function analizarIdea() {
+  const ideaInput = document.getElementById('ideaInput');
+  const v = ideaInput.value.trim();
+  if (!v) return;
+  trackEvent('idea_enviada', { texto: v });
+  const out = document.getElementById('ideaResult');
+  out.innerHTML = '<div style="font-size:11px;color:var(--ink3);font-style:italic;padding-top:6px">Estructurando tu idea...</div>';
+  setTimeout(() => {
+    const waMsg = 'Hola Daniel, quiero aterrizar esta idea en Automatiza Procesos:\n' + v;
+    const waUrl = 'https://wa.me/573005333763?text=' + encodeURIComponent(waMsg);
+    const safe = v.replace(/</g, '&lt;');
+    out.innerHTML = '<div class="result-card show">' +
+      '<div class="result-badge med">● Primer esbozo</div>' +
+      '<div class="result-grid">' +
+        '<div class="result-item full"><div class="result-l">Lo que describes</div><div class="result-v">' + safe + '</div></div>' +
+        '<div class="result-item full"><div class="result-l">Qué habría que validar primero</div><div class="result-v">Si existe un cliente dispuesto a usar esto y pagar por ello, antes de construir la versión completa.</div></div>' +
+        '<div class="result-item full"><div class="result-l">Primer prototipo recomendado</div><div class="result-v">Una versión mínima que resuelva el paso más doloroso del proceso que describes, no la plataforma completa.</div></div>' +
+      '</div>' +
+      '<div class="result-sep"></div>' +
+      '<div class="result-ctas"><a href="' + waUrl + '" target="_blank" class="btn-dark" style="font-size:12px;padding:10px 16px" id="ideaCta">Quiero aterrizar esta idea →</a></div>' +
+    '</div>';
+    const ideaCta = document.getElementById('ideaCta');
+    if (ideaCta) ideaCta.addEventListener('click', () => {
+      trackEvent('conversion', { tipo: 'aterrizar_idea' });
+      trackEvent('whatsapp_iniciado', { origen: 'idea' });
+      saveLead({ tipo_solicitud: 'idea', problema_original: v, diagnostico: 'Idea por estructurar', solucion_propuesta: 'Prototipo mínimo', nivel_oportunidad: 'Por confirmar', siguiente_paso: 'Conversación de aterrizaje', origen: 'idea' });
+    });
+  }, 900);
+}
+const ideaBtn = document.getElementById('ideaBtn');
+if (ideaBtn) ideaBtn.addEventListener('click', analizarIdea);
 
 function abrirModal(id){
   const m=document.getElementById(id);
@@ -1175,7 +1462,7 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mcta">
       <div class="mcta-t"><strong>¿Tienes procesos de liquidación o cobro repetitivos?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
-      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20liquidaci%C3%B3n" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('pension','¿Tu proceso también implica generar cartas o documentos legales repetitivos cruzando bases de datos?')">Tengo un problema parecido</button>
     </div>
   </div>
 </div>
@@ -1208,7 +1495,7 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mcta">
       <div class="mcta-t"><strong>¿Tienes datos bancarios o procesos de conciliación manual?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
-      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20conciliaci%C3%B3n" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('dxcr','¿Tu proceso también implica cruzar información bancaria o financiera contra otro sistema o archivo?')">Tengo un problema parecido</button>
     </div>
   </div>
 </div>
@@ -1241,7 +1528,7 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mcta">
       <div class="mcta-t"><strong>¿No sabes cuánto ganas por producto o punto de venta?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
-      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20costeo" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('zeus','¿Tu negocio también necesita saber cuánto gana realmente por producto o punto de venta?')">Tengo un problema parecido</button>
     </div>
   </div>
 </div>
@@ -1274,7 +1561,7 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mcta">
       <div class="mcta-t"><strong>¿Tu negocio necesita presencia digital?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
-      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20p%C3%A1gina%20web" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('hojaldre','Necesito presencia digital para mi negocio, como una página con catálogo y contacto por WhatsApp.')">Tengo un problema parecido</button>
     </div>
   </div>
 </div>
@@ -1307,7 +1594,7 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mcta">
       <div class="mcta-t"><strong>¿Tienes formularios o fichas que llenar masivamente?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
-      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20de%20fichas" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('invima','¿Tu proceso también implica llenar fichas o formularios repetitivos con datos que ya tienes en otro lugar?')">Tengo un problema parecido</button>
     </div>
   </div>
 </div>
@@ -1340,7 +1627,7 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mcta">
       <div class="mcta-t"><strong>¿Evalúas o calificas información de múltiples fuentes?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
-      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20caso%20del%20evaluador" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('evaluador','¿Tu proceso también implica evaluar o calificar información que llega de muchas fuentes distintas?')">Tengo un problema parecido</button>
     </div>
   </div>
 </div>
@@ -1558,7 +1845,7 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mcta">
       <div class="mcta-t"><strong>¿Tienes un proceso de cargue repetitivo?</strong><span>Cuéntame el sistema y el volumen. Lo automatizamos.</span></div>
-      <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20vi%20el%20demo%20del%20bot" target="_blank" class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap">WhatsApp &#8594;</a>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('icbf','¿Tu proceso también implica cargar muchos registros manualmente en una plataforma o sistema web?')">Tengo un problema parecido</button>
     </div>
   </div>
 </div>
