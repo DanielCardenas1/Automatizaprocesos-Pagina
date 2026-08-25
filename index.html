@@ -885,7 +885,28 @@ function actualizarCtaFinal(opts) {
   if (waLabel) waLabel.textContent = opts.waLabel;
 }
 
-// ============ DIAGNÓSTICO — motor de reglas evolucionado ============
+// ============ SEGUNDO CEREBRO — base de conocimiento (KB) ============
+// Transcrito de asistente-conocimiento.md. Es la fuente de verdad de casos
+// reales, precios y contacto. Si el .md cambia, refleja el cambio aquí
+// también — no hay backend que lo cargue en vivo desde un archivo estático.
+const KB = {
+  contacto: { whatsapp: '573005333763', email: 'danielkadioz@gmail.com' },
+  // Señales = patrones que delatan que el problema descrito se parece a un
+  // caso YA resuelto. Sirven para "detección de soluciones reutilizables":
+  // si el usuario describe algo con ese patrón, se le cita el caso real y
+  // se le enlaza al modal existente — nunca se inventa un caso nuevo.
+  casos: [
+    { id: 'pension', modalId: 'modal-pension', resumen: 'liquidación pensional: de 10 a 456 casos/mes automatizando cartas de cobro y cálculo de cuotas', senales: [/liquid/i, /pension/i, /cobr.*(otra|otras|otro)/i, /carta.*cobro/i, /resoluci/i] },
+    { id: 'dxcr', modalId: 'modal-dxcr', resumen: 'conciliación bancaria: de 5 días a 1 hora cruzando pagos de 138 sedes contra facturas', senales: [/\bsede/i, /\bbanco\b/i, /concili/i, /cruz.*(movim|pago)/i, /extracto/i] },
+    { id: 'zeus', modalId: 'modal-zeus', resumen: 'costeo de restaurantes: margen del 15% al 24% sabiendo cuánto se gana por plato', senales: [/cu[aá]nto\s+gan/i, /costo\s+por\s+(plato|producto|unidad)/i, /margen/i, /rentabilidad/i, /punto\s+de\s+venta/i] },
+    { id: 'hojaldre', modalId: 'modal-hojaldre', resumen: 'presencia digital para un negocio sin página: catálogo y calculadora de márgenes en menos de una semana', senales: [/sin\s+p[aá]gina/i, /cat[aá]logo/i, /redistribuidor/i, /revender/i] },
+    { id: 'invima', modalId: 'modal-invima', resumen: 'llenado de fichas técnicas regulatorias: 600+ fichas generadas sin errores de transcripción', senales: [/ficha\s+t[eé]cnica/i, /registro\s+sanitario/i, /invima/i, /copi.*dato/i] },
+    { id: 'evaluador', modalId: 'modal-evaluador', resumen: 'evaluación de proyectos de múltiples centros: de semanas a horas aplicando criterios de calificación', senales: [/eval[uú].*proyecto/i, /calific/i, /criterios?\s+de\s+(evaluaci|calificaci)/i, /centros?\s+de\s+formaci/i, /regional/i] },
+    { id: 'icbf', modalId: 'modal-icbf', resumen: 'bot que carga registros uno por uno en un sistema web: 350 beneficiarios en 1h 47min', senales: [/cargue\s+masivo/i, /uno\s+(a|por)\s+uno/i, /beneficiario/i, /carg.*registro/i, /formulario\s+web/i, /sistema\s+web/i, /plataforma/i] }
+  ]
+};
+
+// ============ DIAGNÓSTICO — plantillas por categoría ============
 const DIAGNOSTICOS = {
   factura: { problema: "Cruce y conciliación manual de facturas o pagos", solucion: "Consolidar los archivos en una base única y aplicar reglas de cruce automático por número, fecha o NIT.", potencial: "Alto", siguiente: "Construir un prototipo con una muestra real de tus archivos.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
   reporte: { problema: "Elaboración manual de reportes periódicos", solucion: "Conectar tus fuentes de datos a una plantilla que se actualiza sola cada vez que se ejecuta.", potencial: "Alto", siguiente: "Construir un prototipo con uno de tus reportes actuales.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
@@ -896,15 +917,87 @@ const DIAGNOSTICOS = {
   default: { problema: "Proceso manual con potencial de automatización", solucion: "Mapear el flujo actual, identificar los cuellos de botella y diseñar una versión automatizada.", potencial: "Medio", siguiente: "Conversar los detalles para confirmar el potencial real.", ctaLabel: "Analizar mi proceso", ctaTipo: "analisis" }
 };
 
-function detectarTipo(texto) {
+// ============ SEGUNDO CEREBRO — entendimiento y análisis ============
+// En vez de "primer match gana" (como antes), se puntúan TODAS las
+// categorías. Eso permite calcular confianza y detectar ambigüedad real.
+const CATEGORIA_SENALES = {
+  factura: [/factura/i, /\bpag/i, /cruz/i, /cruce/i, /concili/i],
+  reporte: [/report/i, /tablero/i, /dashboard/i, /informe/i, /indicador/i],
+  nomina: [/n[oó]mina/i, /liquid/i, /pension/i, /\bcobr/i, /cartera/i, /cuota/i],
+  formulario: [/formulario/i, /llen/i, /diligenc/i, /ficha/i, /registro/i, /\bcarg/i, /plataforma/i],
+  consolidar: [/consolid/i, /unif/i, /junt/i, /varios archivos/i, /fuentes/i, /excel/i],
+  web: [/p[aá]gina/i, /\bweb\b/i, /tienda/i, /landing/i, /sitio/i]
+};
+const CATEGORIA_LABEL = {
+  factura: 'Cruzar facturas o pagos',
+  reporte: 'Armar reportes',
+  nomina: 'Liquidar nómina, pensiones o cobros',
+  formulario: 'Llenar formularios o cargar registros',
+  consolidar: 'Consolidar información de varias fuentes',
+  web: 'Crear una página o presencia digital'
+};
+// Categorías donde "frecuencia" y "esfuerzo" son preguntas relevantes.
+// Una página web es un proyecto de una sola vez — preguntar "¿cada cuánto
+// lo haces?" no tiene sentido ahí, por eso queda en false.
+const CATEGORIA_RECURRENTE = { factura: true, reporte: true, nomina: true, formulario: true, consolidar: true, web: false, default: true };
+
+function analizarSenales(texto) {
   const s = texto.toLowerCase();
-  if (/factura|pago|cruzar|cruce|conciliac/.test(s)) return 'factura';
-  if (/reporte|tablero|dashboard|informe|indicador/.test(s)) return 'reporte';
-  if (/n[oó]mina|liquid|pension|cobro|cartera|cuota/.test(s)) return 'nomina';
-  if (/formulario|llenar|diligenciar|ficha|registro|cargar|cargue|plataforma/.test(s)) return 'formulario';
-  if (/consolid|unif|juntar|varios archivos|fuentes|excel/.test(s)) return 'consolidar';
-  if (/p[aá]gina|web|tienda|landing|sitio/.test(s)) return 'web';
-  return 'default';
+  const scores = {};
+  Object.keys(CATEGORIA_SENALES).forEach(cat => {
+    scores[cat] = CATEGORIA_SENALES[cat].filter(rx => rx.test(s)).length;
+  });
+  const ranked = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+  const top = ranked[0];
+  const segundo = ranked[1];
+  const topScore = scores[top];
+  const segundoScore = scores[segundo];
+  const tipo = topScore > 0 ? top : 'default';
+  const ambiguo = topScore > 0 && topScore === segundoScore;
+
+  let confianza = 'baja';
+  if (topScore >= 2 && !ambiguo) confianza = 'alta';
+  else if (topScore >= 1) confianza = 'media';
+
+  // Detección de soluciones reutilizables: ¿este problema se parece a un caso real ya resuelto?
+  // Esto es independiente de las 6 categorías genéricas — un caso real puede
+  // matchear fuerte (ej. "evaluar proyectos") aunque no encaje en ninguna
+  // categoría general. Si hay match fuerte con evidencia real, no tiene
+  // sentido escalar como "sin certeza": hay un caso concreto que citar.
+  let casoSugerido = null, mejorScore = 0;
+  KB.casos.forEach(c => {
+    const score = c.senales.filter(rx => rx.test(s)).length;
+    if (score >= 2 && score > mejorScore) { casoSugerido = c; mejorScore = score; }
+  });
+  if (casoSugerido && confianza === 'baja') confianza = 'media';
+
+  return { tipo, confianza, ambiguo, candidatoB: segundo, casoSugerido };
+}
+
+// Si el usuario ya dijo "cada semana" en su texto libre, no se le vuelve a preguntar.
+function detectarFrecuenciaEnTexto(texto) {
+  const s = texto.toLowerCase();
+  if (/cada d[ií]a|diari\w*/.test(s)) return 'Diaria';
+  if (/cada semana|semanal\w*/.test(s)) return 'Semanal';
+  if (/quincenal|cada quince/.test(s)) return 'Quincenal';
+  if (/cada mes|mensual\w*/.test(s)) return 'Mensual';
+  if (/ocasional|de vez en cuando|rara vez/.test(s)) return 'Ocasional';
+  return null;
+}
+function detectarEsfuerzoEnTexto(texto) {
+  const s = texto.toLowerCase();
+  const horas = s.match(/(\d+)\s*(?:a\s*\d+\s*)?h(?:oras?)?\b/);
+  if (horas) {
+    const n = parseInt(horas[1], 10);
+    if (n < 1) return 'Menos de 1h';
+    if (n <= 3) return '1–3h';
+    if (n <= 6) return '3–6h';
+    return 'Más de 6h';
+  }
+  if (/todo el d[ií]a|el d[ií]a entero/.test(s)) return 'Más de 6h';
+  if (/medio d[ií]a/.test(s)) return '3–6h';
+  if (/\d+\s*minutos?/.test(s)) return 'Menos de 1h';
+  return null;
 }
 
 // ============ PERSONALIZACIÓN — el bot lee tus propias palabras ============
@@ -991,7 +1084,7 @@ function addChips(options, onPick) {
 }
 
 // ============ ESTADO DEL DIAGNÓSTICO ============
-let diagState = { tipo: null, textoOriginal: '', frecuencia: null, esfuerzo: null, origen: 'directo' };
+let diagState = { tipo: null, confianza: null, ambiguo: false, candidatoB: null, casoSugerido: null, textoOriginal: '', frecuencia: null, esfuerzo: null, origen: 'directo' };
 
 function scrollToDiag() {
   const el = document.getElementById('diagnostico');
@@ -1005,9 +1098,20 @@ function esIdea(texto) {
 function iniciarDiagnostico(texto, origen) {
   texto = (texto || '').trim();
   if (!texto) return;
-  diagState = { tipo: detectarTipo(texto), textoOriginal: texto, frecuencia: null, esfuerzo: null, origen: origen || 'directo' };
+  const analisis = analizarSenales(texto);
+  diagState = {
+    tipo: analisis.tipo,
+    confianza: analisis.confianza,
+    ambiguo: analisis.ambiguo,
+    candidatoB: analisis.candidatoB,
+    casoSugerido: analisis.casoSugerido,
+    textoOriginal: texto,
+    frecuencia: detectarFrecuenciaEnTexto(texto),
+    esfuerzo: detectarEsfuerzoEnTexto(texto),
+    origen: origen || 'directo'
+  };
   trackEvent('inicio_diagnostico', { origen: diagState.origen });
-  trackEvent('problema_enviado', { texto: texto, tipo: diagState.tipo });
+  trackEvent('problema_enviado', { texto: texto, tipo: diagState.tipo, confianza: diagState.confianza });
   const b = document.getElementById('chatMsgs');
   if (b.dataset.used === '1') {
     const div = document.createElement('div');
@@ -1019,7 +1123,43 @@ function iniciarDiagnostico(texto, origen) {
   }
   addMsg(texto, 'u');
   scrollToDiag();
-  setTimeout(preguntarFrecuencia, 550);
+  setTimeout(avanzarDiagnostico, 550);
+}
+
+// El siguiente paso se decide en cada llamada según lo que YA se sabe —
+// esto es lo que hace las preguntas adaptativas en vez de un guion fijo:
+// si el texto ya traía la frecuencia, o la categoría no la necesita
+// (una web no es "recurrente"), ese paso simplemente se salta.
+function avanzarDiagnostico() {
+  if (diagState.ambiguo) {
+    diagState.ambiguo = false;
+    return preguntarDesambiguacion();
+  }
+  if (CATEGORIA_RECURRENTE[diagState.tipo] && !diagState.frecuencia) return preguntarFrecuencia();
+  if (CATEGORIA_RECURRENTE[diagState.tipo] && !diagState.esfuerzo) return preguntarEsfuerzo();
+  return mostrarTyping();
+}
+
+// Evaluación de alternativas: cuando dos categorías empatan en señales,
+// en vez de forzar una, se le pregunta al usuario cuál describe mejor su caso.
+function preguntarDesambiguacion() {
+  const labelA = CATEGORIA_LABEL[diagState.tipo];
+  const labelB = CATEGORIA_LABEL[diagState.candidatoB];
+  if (!labelA || !labelB) return avanzarDiagnostico();
+  addMsg('Para entender mejor: ¿tu caso se parece más a esto...', 'b');
+  addChips([labelA, labelB, 'Ninguna de las dos'], (v) => {
+    addMsg(v, 'u');
+    if (v === labelA) {
+      diagState.confianza = 'alta';
+    } else if (v === labelB) {
+      diagState.tipo = diagState.candidatoB;
+      diagState.confianza = 'alta';
+    } else {
+      diagState.tipo = 'default';
+      diagState.confianza = 'baja';
+    }
+    setTimeout(avanzarDiagnostico, 450);
+  });
 }
 
 function preguntarFrecuencia() {
@@ -1029,7 +1169,7 @@ function preguntarFrecuencia() {
 function handleFrecuencia(v) {
   diagState.frecuencia = v;
   addMsg(v, 'u');
-  setTimeout(preguntarEsfuerzo, 450);
+  setTimeout(avanzarDiagnostico, 450);
 }
 function preguntarEsfuerzo() {
   addMsg('¿Cuánto tiempo te toma cada vez?', 'b');
@@ -1038,7 +1178,7 @@ function preguntarEsfuerzo() {
 function handleEsfuerzo(v) {
   diagState.esfuerzo = v;
   addMsg(v, 'u');
-  setTimeout(mostrarTyping, 400);
+  setTimeout(avanzarDiagnostico, 400);
 }
 function mostrarTyping() {
   const b = document.getElementById('chatMsgs');
@@ -1050,29 +1190,80 @@ function mostrarTyping() {
   b.scrollTop = b.scrollHeight;
   setTimeout(mostrarResultado, 1300);
 }
+
 function mostrarResultado() {
   const typing = document.getElementById('typing'); if (typing) typing.remove();
+  const b = document.getElementById('chatMsgs');
+  const card = document.createElement('div');
+  card.className = 'result-card';
+
+  if (diagState.confianza === 'baja') {
+    // ============ ESCALAMIENTO — el segundo cerebro reconoce que no tiene certeza ============
+    // Regla del documento de conocimiento: si no hay suficiente información,
+    // se reconoce la incertidumbre y se escala a Daniel. Nunca se inventa
+    // una solución para quedar bien.
+    const textoSeguro = diagState.textoOriginal.replace(/</g, '&lt;');
+    card.innerHTML = '<div class="result-badge low">● Caso particular · revisión directa recomendada</div>' +
+      '<div class="result-grid">' +
+        '<div class="result-item full"><div class="result-l">Lo que describes</div><div class="result-v">' + textoSeguro + '</div></div>' +
+        '<div class="result-item full"><div class="result-l">Por qué te recomiendo hablar directo con Daniel</div><div class="result-v">Tu caso tiene particularidades que el diagnóstico automático no puede evaluar con certeza. Prefiero decírtelo con honestidad a darte una respuesta genérica que no aplique.</div></div>' +
+        '<div class="result-item full"><div class="result-l">Siguiente paso recomendado</div><div class="result-v">Escríbele directo — en menos de 24h te confirma si tiene solución.</div></div>' +
+      '</div>' +
+      '<div class="result-sep"></div>' +
+      '<div class="result-ctas"></div>';
+    b.appendChild(card);
+    const ctasEsc = card.querySelector('.result-ctas');
+    const waMsgEsc = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos pero mi caso no encajó en ninguna categoría automática.\nLo que describo: ' + diagState.textoOriginal + (diagState.frecuencia ? '\nFrecuencia: ' + diagState.frecuencia : '') + (diagState.esfuerzo ? '\nTiempo: ' + diagState.esfuerzo : '');
+    const waUrlEsc = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent(waMsgEsc);
+    const btnEsc = document.createElement('a');
+    btnEsc.href = waUrlEsc; btnEsc.target = '_blank'; btnEsc.className = 'btn-dark'; btnEsc.style.cssText = 'font-size:12px;padding:10px 16px';
+    btnEsc.textContent = 'Hablar con Daniel →';
+    btnEsc.addEventListener('click', () => {
+      trackEvent('cta_seleccionado', { cta: 'escalado' });
+      trackEvent('whatsapp_iniciado', { origen: 'escalado_baja_confianza' });
+      saveLead({ tipo_solicitud: 'escalado', problema_original: diagState.textoOriginal, diagnostico: 'Sin match automático — revisión manual', solucion_propuesta: null, nivel_oportunidad: 'Por confirmar', siguiente_paso: 'Conversación directa', frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen });
+    });
+    ctasEsc.appendChild(btnEsc);
+    requestAnimationFrame(() => card.classList.add('show'));
+    b.scrollTop = b.scrollHeight;
+    trackEvent('diagnostico_completado', { tipo: diagState.tipo, confianza: diagState.confianza });
+    trackEvent('escalado_baja_confianza', { texto: diagState.textoOriginal });
+    actualizarCtaFinal({
+      heading: 'Ya le escribiste a Daniel<br/><em>tu caso puntual.</em>',
+      sub: diagState.textoOriginal,
+      waUrl: waUrlEsc,
+      waLabel: 'Hablar con Daniel'
+    });
+    return;
+  }
+
+  // ============ RESULTADO CON CONFIANZA MEDIA/ALTA ============
   const d = DIAGNOSTICOS[diagState.tipo] || DIAGNOSTICOS.default;
   const p = personalizarDiagnostico(d, diagState.textoOriginal);
   const esfuerzoTxt = (diagState.esfuerzo && diagState.esfuerzo !== 'No estoy seguro') ? diagState.esfuerzo + ' por ciclo' : 'Por confirmar en la conversación';
   const badgeClass = d.potencial === 'Alto' ? '' : (d.potencial === 'Medio' ? 'med' : 'low');
-  const b = document.getElementById('chatMsgs');
-  const card = document.createElement('div');
-  card.className = 'result-card';
+  const caso = diagState.casoSugerido;
+  const casoRow = caso ? ('<div class="result-item full"><div class="result-l">Ya resolvimos un patrón parecido</div><div class="result-v">' + caso.resumen + ' <span class="ver-caso-link" style="text-decoration:underline;cursor:pointer;font-weight:600">Ver caso real →</span></div></div>') : '';
   card.innerHTML = '<div class="result-badge ' + badgeClass + '">● Oportunidad detectada · Potencial ' + d.potencial + '</div>' +
     '<div class="result-grid">' +
       '<div class="result-item full"><div class="result-l">Problema identificado</div><div class="result-v">' + p.problema + '</div></div>' +
       '<div class="result-item"><div class="result-l">Frecuencia</div><div class="result-v">' + (diagState.frecuencia || '—') + '</div></div>' +
       '<div class="result-item"><div class="result-l">Esfuerzo estimado</div><div class="result-v">' + esfuerzoTxt + '</div></div>' +
       '<div class="result-item full"><div class="result-l">Posible solución</div><div class="result-v">' + p.solucion + '</div></div>' +
+      casoRow +
       '<div class="result-item full"><div class="result-l">Siguiente paso recomendado</div><div class="result-v">' + p.siguiente + '</div></div>' +
     '</div>' +
     '<div class="result-sep"></div>' +
     '<div class="result-ctas"></div>';
   b.appendChild(card);
+  const verCaso = card.querySelector('.ver-caso-link');
+  if (verCaso && caso) verCaso.addEventListener('click', () => {
+    trackEvent('cta_seleccionado', { cta: 'ver_caso_sugerido', caso: caso.id });
+    abrirModal(caso.modalId);
+  });
   const ctas = card.querySelector('.result-ctas');
   const waMsg = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos.\nMi problema: ' + diagState.textoOriginal + '\nFrecuencia: ' + (diagState.frecuencia || '-') + '\nDiagnóstico: ' + p.problema + '\nQuiero: ' + d.ctaLabel;
-  const waUrl = 'https://wa.me/573005333763?text=' + encodeURIComponent(waMsg);
+  const waUrl = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent(waMsg);
   const btnPrimary = document.createElement('a');
   btnPrimary.href = waUrl; btnPrimary.target = '_blank'; btnPrimary.className = 'btn-dark'; btnPrimary.style.cssText = 'font-size:12px;padding:10px 16px';
   btnPrimary.textContent = d.ctaLabel + ' →';
@@ -1080,9 +1271,9 @@ function mostrarResultado() {
     trackEvent('cta_seleccionado', { cta: d.ctaTipo });
     trackEvent(d.ctaTipo === 'prototipo' ? 'prototipo_solicitado' : 'conversion', { tipo: d.ctaTipo });
     trackEvent('whatsapp_iniciado', { origen: 'resultado_diagnostico' });
-    saveLead({ tipo_solicitud: d.ctaTipo, problema_original: diagState.textoOriginal, diagnostico: p.problema, solucion_propuesta: p.solucion, nivel_oportunidad: d.potencial, siguiente_paso: p.siguiente, frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen });
+    saveLead({ tipo_solicitud: d.ctaTipo, problema_original: diagState.textoOriginal, diagnostico: p.problema, solucion_propuesta: p.solucion, nivel_oportunidad: d.potencial, siguiente_paso: p.siguiente, frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen, caso_sugerido: caso ? caso.id : null });
   });
-  const waUrl2 = 'https://wa.me/573005333763?text=' + encodeURIComponent('Hola Daniel, quiero hablar sobre: ' + diagState.textoOriginal);
+  const waUrl2 = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent('Hola Daniel, quiero hablar sobre: ' + diagState.textoOriginal);
   const btnSecondary = document.createElement('a');
   btnSecondary.href = waUrl2; btnSecondary.target = '_blank'; btnSecondary.className = 'btn-ghost'; btnSecondary.style.cssText = 'font-size:12px;padding:10px 16px';
   btnSecondary.textContent = 'Quiero hablar con alguien';
@@ -1090,7 +1281,7 @@ function mostrarResultado() {
   ctas.appendChild(btnPrimary); ctas.appendChild(btnSecondary);
   requestAnimationFrame(() => card.classList.add('show'));
   b.scrollTop = b.scrollHeight;
-  trackEvent('diagnostico_completado', { tipo: diagState.tipo, potencial: d.potencial });
+  trackEvent('diagnostico_completado', { tipo: diagState.tipo, potencial: d.potencial, confianza: diagState.confianza });
   trackEvent('resultado_mostrado', { tipo: diagState.tipo });
   actualizarCtaFinal({
     heading: 'Ya tienes un diagnóstico<br/>listo. <em>Retómalo cuando quieras.</em>',
