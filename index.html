@@ -689,12 +689,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <div class="cat-card rev"><div class="cat-ico">📥</div><div class="cat-badge">Próximamente</div><div class="cat-name">Carga masiva a plataformas</div><button class="cat-cta" onclick="catalogoNecesito('Carga masiva a plataformas')">Necesito algo parecido</button></div>
     <div class="cat-card rev"><div class="cat-ico">📄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de documentos</div><button class="cat-cta" onclick="catalogoNecesito('Generador de documentos')">Necesito algo parecido</button></div>
     <div class="cat-card rev"><div class="cat-ico">🔄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Conciliador de movimientos</div><button class="cat-cta" onclick="catalogoNecesito('Conciliador de movimientos')">Necesito algo parecido</button></div>
-    <div class="cat-card cat-extra rev"><div class="cat-ico">📎</div><div class="cat-badge">Próximamente</div><div class="cat-name">Extractor de datos en PDF</div><button class="cat-cta" onclick="catalogoNecesito('Extractor de datos en PDF')">Necesito algo parecido</button></div>
-    <div class="cat-card cat-extra rev"><div class="cat-ico">📊</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de reportes</div><button class="cat-cta" onclick="catalogoNecesito('Generador de reportes')">Necesito algo parecido</button></div>
-    <div class="cat-card cat-extra rev"><div class="cat-ico">🔍</div><div class="cat-badge">Próximamente</div><div class="cat-name">Comparador de bases de datos</div><button class="cat-cta" onclick="catalogoNecesito('Comparador de bases de datos')">Necesito algo parecido</button></div>
-    <div class="cat-card cat-extra rev"><div class="cat-ico">🧹</div><div class="cat-badge">Próximamente</div><div class="cat-name">Limpieza y validación de datos</div><button class="cat-cta" onclick="catalogoNecesito('Limpieza y validación de datos')">Necesito algo parecido</button></div>
   </div>
-  <button class="cat-more-btn" id="catMoreBtn" type="button" onclick="toggleCatalogo()">Ver 4 soluciones más ↓</button>
 </section>
 
 <!-- IDEA -->
@@ -714,20 +709,6 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   <div class="sec-eyebrow" style="text-align:center">Cómo reducimos el riesgo · 04</div>
   <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">No tienes que construir todo<br/><em>para saber si funciona.</em></h2>
   <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Primero comprobamos que la solución tiene sentido, antes de pedirte una gran inversión.</p>
-
-  <div class="proto-flow">
-    <div class="proto-node"><div class="proto-dot">🧩</div><div class="proto-lbl">Idea o<br/>problema</div></div>
-    <span class="proto-arr">→</span>
-    <div class="proto-node"><div class="proto-dot">🔎</div><div class="proto-lbl">Análisis</div></div>
-    <span class="proto-arr">→</span>
-    <div class="proto-node"><div class="proto-dot">⚙️</div><div class="proto-lbl">Prototipo</div></div>
-    <span class="proto-arr">→</span>
-    <div class="proto-node"><div class="proto-dot">🧪</div><div class="proto-lbl">Prueba</div></div>
-    <span class="proto-arr">→</span>
-    <div class="proto-node"><div class="proto-dot">✅</div><div class="proto-lbl">Decisión</div></div>
-    <span class="proto-arr">→</span>
-    <div class="proto-node"><div class="proto-dot">🚀</div><div class="proto-lbl">Implementación</div></div>
-  </div>
 
   <div class="model-grid">
     <div class="model-card on rev"><div class="model-n">01</div><span class="model-tag free">Gratis</span><div class="model-t">Diagnóstico</div><div class="model-d">Cuentas tu problema o idea y recibes una primera lectura de si tiene solución.</div></div>
@@ -835,7 +816,7 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
 
 <!-- FOOTER -->
 <footer>
-  <div class="fl">© 2025 Daniel Gerardo Cárdenas · Automatización de Procesos · Colombia</div>
+  <div class="fl">© 2026 Daniel Gerardo Cárdenas · Automatización de Procesos · Colombia</div>
   <div class="fr">
     <a href="#casos" class="flnk">Casos reales</a>
     <a href="#catalogo" class="flnk">Catálogo</a>
@@ -1415,6 +1396,19 @@ const FLUJO_TEXTOS = {
   default: { actual: 'Lo resuelves manualmente cada vez que se necesita', propuesto: 'Por definir junto con Daniel una vez se entienda mejor el caso' }
 };
 
+// Mapea cada arquetipo a uno de los 3 rangos de referencia ya documentados
+// en la sección de precios (asistente-conocimiento.md) — nunca se inventa
+// una cifra nueva, solo se cita cuál de los 3 rangos existentes aplica.
+const PRECIO_REFERENCIA = {
+  comunicacion_recurrente: 'Desde $800.000 — automatizar un proceso manual',
+  carga_masiva: 'Desde $800.000 — automatizar un proceso manual',
+  generacion_documentos: 'Desde $800.000 — automatizar un proceso manual',
+  consolidacion: 'Desde $500.000 — consolidar y ordenar datos',
+  traspaso_manual: 'Desde $500.000 — consolidar y ordenar datos',
+  organizacion_almacenamiento: 'Desde $500.000 — consolidar y ordenar datos',
+  presencia_digital: 'Desde $1.200.000 — presencia digital'
+};
+
 // Salidas del diagnóstico: 🟢 viable / 🟡 investigar / 🔴 no recomendado /
 // 👤 escalar. Nunca se fuerza una salida positiva para no perder al usuario.
 function calcularViabilidad(c) {
@@ -1463,6 +1457,10 @@ function cerrarCaso() {
   // Regla: no asumir que la solución que el usuario propuso (bot, app...)
   // es la correcta — se analiza el problema primero, y esto se lo dice.
   const solucionPropuestaRow = caso.hechos.solucion_propuesta_usuario ? ('<div class="result-item full"><div class="result-l">Sobre lo que mencionaste</div><div class="result-v">Puede que termine siendo eso — pero primero conviene validar el problema y buscar la forma más simple de resolverlo, antes de asumir la tecnología.</div></div>') : '';
+  // Cierre real: no dejar que la persona tenga que bajar a buscar el precio
+  // por su cuenta. Cita uno de los 3 rangos ya documentados, nunca uno nuevo.
+  const precioRef = (viab.codigo === '🟢' || viab.codigo === '🟡') ? PRECIO_REFERENCIA[caso.arquetipo] : null;
+  const precioRow = precioRef ? ('<div class="result-item full"><div class="result-l">Rango de referencia</div><div class="result-v">' + precioRef + ' · cada caso es distinto, el número exacto sale de hablar con Daniel</div></div>') : '';
 
   card.innerHTML = '<div class="result-badge ' + viab.clase + '">' + viab.codigo + ' ' + viab.label + '</div>' +
     '<div class="result-grid">' +
@@ -1470,6 +1468,7 @@ function cerrarCaso() {
       '<div class="result-item full"><div class="result-l">Así funciona hoy</div><div class="result-v">' + flujo.actual + '</div></div>' +
       ((viab.codigo === '🟢' || viab.codigo === '🟡') ? '<div class="result-item full"><div class="result-l">Una forma posible de hacerlo</div><div class="result-v">' + flujo.propuesto + '</div></div>' : '') +
       solucionPropuestaRow +
+      precioRow +
       casoRow +
       '<div class="result-item full"><div class="result-l">Qué falta confirmar</div><div class="result-v">' + faltanHtml + '</div></div>' +
       '<div class="result-item full"><div class="result-l">Por qué</div><div class="result-v">' + viab.motivo + '</div></div>' +
@@ -1687,15 +1686,6 @@ function casoAbrirDiagnostico(id, texto) {
     document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
     heroInput.focus();
   }, 350);
-}
-
-// ============ CATÁLOGO → expandir / colapsar ============
-function toggleCatalogo() {
-  const grid = document.getElementById('catGrid');
-  const btn = document.getElementById('catMoreBtn');
-  const expanded = grid.classList.toggle('expanded');
-  btn.textContent = expanded ? 'Ver menos ↑' : 'Ver 4 soluciones más ↓';
-  trackEvent('cta_seleccionado', { cta: expanded ? 'catalogo_ver_mas' : 'catalogo_ver_menos' });
 }
 
 // ============ CATÁLOGO → "Necesito algo parecido" ============
