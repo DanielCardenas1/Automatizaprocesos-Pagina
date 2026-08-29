@@ -78,8 +78,7 @@ Fuente de esta sección: `BASE_MAESTRA_PERFIL.md` y `PERFIL_PERSONAL_CONTEXTO.md
 
 ✅ **Corregido (2026-08-29):** el caso de liquidación pensional pasó de "10" a "**8** casos/mes" en todo el sitio y en la sección 6, siguiendo la Base Maestra (consistente en sus 3 versiones de CV). El incremento de capacidad pasó de ×45 a **×57** (456/8), y ya no dice "con 4 personas" en el problema — esa cifra pertenece a un logro distinto (reducción de un proceso administrativo aparte), no a este caso.
 
-⚠️ **Sigue pendiente — no cambiar en el sitio sin que Daniel confirme:**
-Caso ZEUS (control de costos): el sitio dice margen "**15%** → 24%"; la propia Base Maestra de Daniel encontró la cifra **18%→24%** en una versión de CV y **15%→24%** en otras dos — la marca explícitamente como discrepancia sin resolver, no como algo que ya sepa cuál es correcto.
+✅ **Resuelto (2026-08-29, confirmado por Daniel):** caso ZEUS (control de costos), margen **15% → 24%** — es la cifra que aparece en 2 de las 3 versiones de CV de la Base Maestra (18%→24% solo aparece en 1), y es la que ya usa el sitio. Queda cerrado, no seguir marcando como discrepancia.
 
 ---
 
