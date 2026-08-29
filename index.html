@@ -878,7 +878,7 @@ function saveLead(lead) {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(Object.assign({
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: 'Nuevo lead — Automatiza Procesos',
+        subject: conFecha.email_subject || 'Nuevo lead — Automatiza Procesos',
         from_name: 'Diagnóstico Automatiza Procesos'
       }, conFecha))
     }).catch(() => {});
@@ -1498,11 +1498,36 @@ function cerrarCaso() {
     '</div>' +
     '<div class="result-sep"></div>' +
     precioNota +
-    '<div class="result-ctas"></div>';
+    '<div class="result-ctas"></div>' +
+    // Captura de contacto opcional: alguien que no da el paso de escribir
+    // por WhatsApp puede preferir que Daniel le escriba a él. Sin esto no
+    // hay ningún dato con el que buscar de vuelta a esa persona — el lead
+    // que manda saveLead() más abajo describe el problema, no a quién.
+    (viab.codigo !== '🔴' ? ('<div class="result-sep" style="margin:14px 0 10px"></div>' +
+      '<div class="result-contact-txt" style="font-size:11.5px;color:var(--ink2);margin-bottom:8px">¿Prefieres que te escriba Daniel en vez de escribirle tú? Déjale tu WhatsApp o correo.</div>' +
+      '<div class="chat-inp" style="padding:0;background:none;border-top:none">' +
+        '<input type="text" class="chat-field result-contact-input" placeholder="Tu WhatsApp o correo" autocomplete="off">' +
+        '<button type="button" class="chat-send result-contact-send" aria-label="Enviar">→</button>' +
+      '</div>') : '');
   b.appendChild(card);
 
   const verCaso = card.querySelector('.ver-caso-link');
   if (verCaso && caso.casoSugerido) verCaso.addEventListener('click', () => { trackEvent('cta_seleccionado', { cta: 'ver_caso_sugerido', caso: caso.casoSugerido.id }); abrirModal(caso.casoSugerido.modalId); });
+
+  const contactInput = card.querySelector('.result-contact-input');
+  const contactSend = card.querySelector('.result-contact-send');
+  if (contactInput && contactSend) {
+    const enviarContacto = () => {
+      const valor = contactInput.value.trim();
+      if (!valor) return;
+      trackEvent('cta_seleccionado', { cta: 'contacto_directo' });
+      saveLead({ tipo_solicitud: 'Quiere que le escriban', contacto: valor, problema_original: caso.textoOriginal, arquetipo: caso.arquetipo, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, email_subject: '📞 Alguien quiere que le escribas — Automatiza Procesos' });
+      const wrap = contactInput.closest('.chat-inp');
+      if (wrap) wrap.outerHTML = '<div style="font-size:11.5px;color:var(--ink2)">Listo — Daniel te escribe pronto.</div>';
+    };
+    contactSend.addEventListener('click', enviarContacto);
+    contactInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); enviarContacto(); } });
+  }
 
   const ctas = card.querySelector('.result-ctas');
   const ctaLabel = viab.codigo === '🟢' ? 'Construir prototipo' : 'Hablar con Daniel';
