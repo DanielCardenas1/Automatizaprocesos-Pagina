@@ -76,20 +76,23 @@ CX · Customer Experience (certificación EUDE)
 
 ---
 
-## 5. Conocimientos en IA — 🔲 SECCIÓN PENDIENTE (la más importante de llenar)
+## 5. Conocimientos en IA
 
-Esto es lo único que tengo hoy, y es insuficiente para que el asistente hable con autoridad sobre este tema:
+Herramientas de IA que Daniel usa y domina (confirmado por Daniel, 2026-08-29):
 
-- El sitio trae el tag **"IA aplicada"** en el perfil, sin detalle.
-- El motor de diagnóstico actual de la página **es un sistema de reglas en JavaScript** (detecta palabras clave, no es IA generativa real todavía).
+- **GitHub Copilot** dentro de **VS Code** — ahí se construye la mayor parte de los prototipos.
+- **Claude Code** — desarrollo asistido por IA.
+- **ChatGPT** y **Gemini** — apoyo general.
+- **Higgsfield** — generación de imágenes cuando el proyecto lo requiere.
 
-🔲 **Necesito que me cuentes, con el mismo nivel de detalle que las otras secciones:**
-1. ¿Qué herramientas de IA usas o dominas? (ej. ChatGPT/GPT-4, Claude, APIs de OpenAI/Anthropic, modelos open-source, n8n, Make/Zapier con IA, LangChain, agentes, etc.)
-2. ¿Has construido algo real con IA para un cliente? (aunque no esté todavía como "caso" en la página — si es real y tiene resultado, lo agregamos como caso también)
-3. ¿Sabes de prompt engineering, RAG, fine-tuning, agentes autónomos, o tu conocimiento es más de "uso aplicado" de herramientas ya hechas?
-4. ¿Automatizaciones con IA integradas a flujos de negocio (ej. clasificar correos, generar documentos con IA, chatbots reales)?
+Esto son herramientas de **uso aplicado** (asistentes de desarrollo y generación de contenido), no investigación de modelos. El asistente puede decir con seguridad que Daniel usa asistentes de IA (Copilot, Claude Code) como parte de cómo construye los prototipos y automatizaciones — es real y verificable, no una promesa vacía.
 
-Sin esto, el asistente **no debe** afirmar experiencia en IA más allá de "aplico IA en automatizaciones cuando el caso lo requiere" — genérico y seguro, no específico.
+🔲 **Sigue pendiente** (no afirmar sin confirmación):
+1. ¿Sabes de prompt engineering, RAG, fine-tuning, agentes autónomos, o tu conocimiento es más de "uso aplicado" de herramientas ya hechas? (la evidencia actual apunta a uso aplicado, pero no está confirmado explícitamente)
+2. ¿Automatizaciones con IA integradas a flujos de negocio de un cliente (ej. clasificar correos, generar documentos con IA, chatbots reales), más allá del motor de diagnóstico por reglas de la propia página?
+3. ¿Algún caso real con cliente donde el resultado haya dependido de IA generativa (no solo de que Daniel la haya usado para construir la herramienta)? Si existe, se agrega como caso nuevo en la sección 6 — nunca se inventa uno.
+
+Sin lo anterior, el asistente puede decir que Daniel **usa** IA como herramienta de desarrollo (hecho confirmado), pero **no debe** afirmar experiencia en prompt engineering, RAG, agentes autónomos, ni citar un caso de cliente con IA que no esté documentado.
 
 ---
 
