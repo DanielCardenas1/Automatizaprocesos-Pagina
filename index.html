@@ -146,7 +146,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
 .msg-u{align-self:flex-end;background:var(--ink);color:#fff;padding:10px 12px;border-radius:10px 3px 10px 10px}
 .msg-r{background:var(--w);border:0.5px solid var(--bdr);border-left:2px solid var(--ink);padding:10px 12px;border-radius:3px 10px 10px 10px;color:var(--ink2);max-width:96%}
 .chat-inp{display:flex;gap:8px;padding:12px 14px;background:var(--s);border-top:0.5px solid var(--bdr)}
-.chat-field{flex:1;background:var(--w);border:0.5px solid var(--bdr);border-radius:100px;padding:9px 14px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:border-color .2s}
+.chat-field{flex:1;background:var(--w);border:0.5px solid var(--bdr);border-radius:100px;padding:9px 14px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:border-color .2s;cursor:auto}
 .chat-field:focus{border-color:var(--ink)}
 .chat-send{background:var(--ink);color:#fff;border:none;border-radius:100px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:none;font-size:14px;transition:background .2s;flex-shrink:0}
 .chat-send:hover{background:#000}
@@ -515,6 +515,10 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
       </div>
       <div class="chat-msgs" id="chatMsgs">
         <div class="msg msg-b">Hola 👋 Cuéntame arriba qué haces manualmente cada semana. Te digo si tiene solución, qué tan grande es la oportunidad y cuál sería el siguiente paso.</div>
+      </div>
+      <div class="chat-inp" id="chatInpWrap" style="display:none">
+        <input class="chat-field" id="chatFieldInput" type="text" placeholder="Escribe tu respuesta..." autocomplete="off">
+        <button class="chat-send" id="chatFieldSend" type="button" aria-label="Enviar">→</button>
       </div>
     </div>
     <div class="ai-r-note" style="margin-top:10px">Las respuestas son orientativas · la propuesta final la hace Daniel</div>
@@ -885,7 +889,7 @@ function actualizarCtaFinal(opts) {
   if (waLabel) waLabel.textContent = opts.waLabel;
 }
 
-// ============ SEGUNDO CEREBRO — base de conocimiento (KB) ============
+// ============ SEGUNDO CEREBRO V3 — base de conocimiento (KB) ============
 // Transcrito de asistente-conocimiento.md. Es la fuente de verdad de casos
 // reales, precios y contacto. Si el .md cambia, refleja el cambio aquí
 // también — no hay backend que lo cargue en vivo desde un archivo estático.
@@ -906,82 +910,91 @@ const KB = {
   ]
 };
 
-// ============ DIAGNÓSTICO — plantillas por categoría ============
-const DIAGNOSTICOS = {
-  factura: { problema: "Cruce y conciliación manual de facturas o pagos", solucion: "Consolidar los archivos en una base única y aplicar reglas de cruce automático por número, fecha o NIT.", potencial: "Alto", siguiente: "Construir un prototipo con una muestra real de tus archivos.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
-  reporte: { problema: "Elaboración manual de reportes periódicos", solucion: "Conectar tus fuentes de datos a una plantilla que se actualiza sola cada vez que se ejecuta.", potencial: "Alto", siguiente: "Construir un prototipo con uno de tus reportes actuales.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
-  nomina: { problema: "Liquidación manual de nómina, pensiones o cobros", solucion: "Leer los datos desde tu archivo o base de datos y generar los documentos de cobro o liquidación automáticamente.", potencial: "Alto", siguiente: "Analizar tu proceso actual a fondo.", ctaLabel: "Analizar mi proceso", ctaTipo: "analisis" },
-  formulario: { problema: "Llenado manual y repetitivo de formularios, fichas o cargue de registros", solucion: "Extraer los datos desde tu base o Excel y completar cada campo automáticamente, con verificación al final.", potencial: "Alto", siguiente: "Construir un prototipo con un lote pequeño de tus datos.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
-  consolidar: { problema: "Consolidación manual de información dispersa en varias fuentes", solucion: "Unificar todas las fuentes en una base centralizada con validaciones automáticas.", potencial: "Alto", siguiente: "Construir un prototipo con tus archivos actuales.", ctaLabel: "Construir prototipo", ctaTipo: "prototipo" },
-  web: { problema: "Falta de presencia digital o canal de venta online", solucion: "Una página con catálogo, contacto directo por WhatsApp y diseño responsive, sin mensualidades de agencia.", potencial: "Medio", siguiente: "Definir contigo el contenido y la estructura.", ctaLabel: "Adaptar esta solución", ctaTipo: "adaptar" },
-  default: { problema: "Proceso manual con potencial de automatización", solucion: "Mapear el flujo actual, identificar los cuellos de botella y diseñar una versión automatizada.", potencial: "Medio", siguiente: "Conversar los detalles para confirmar el potencial real.", ctaLabel: "Analizar mi proceso", ctaTipo: "analisis" }
+// ============ ARQUETIPOS — la FORMA del proceso, no la profesión ============
+// No hay categorías por sector (odontología, veterinaria, floristería...).
+// Hay categorías por el tipo de fricción operativa. Dos negocios de
+// sectores distintos con el mismo arquetipo reciben la misma lógica de
+// preguntas — eso es lo que hace el motor generalizable en vez de un
+// guion por profesión. "decisivo" = preguntas que cambian la
+// recomendación (siempre vale la pena hacerlas). "dimensionador" =
+// preguntas que solo sirven para calcular tamaño/impacto — nunca se
+// hacen solo porque el dato está vacío (regla 8 del brief de Daniel).
+const ARQUETIPOS = {
+  comunicacion_recurrente: {
+    label: 'Comunicación recurrente con terceros',
+    senales: [/record(ar|arle|atorio)/i, /avis[ae]/i, /notific/i, /confirmaci[oó]n/i, /whatsapp/i, /\bcita/i, /vencimient/i],
+    decisivo: ['fuente_evento'],
+    dimensionador: ['volumen_frecuencia']
+  },
+  carga_masiva: {
+    label: 'Carga de registros uno por uno en un sistema',
+    // "llenar formularios/fichas/matrículas" es el mismo arquetipo que
+    // "cargar registros" — el cuello de botella y la pregunta decisiva
+    // (¿la plataforma permite importar o toca uno por uno?) son iguales.
+    senales: [/uno\s+a\s+uno/i, /uno\s+por\s+uno/i, /cargar/i, /subir/i, /ingresar/i, /digitar/i, /plataforma/i, /\bsistema\b/i, /formulario/i, /diligenc/i, /matricul/i, /\bficha/i, /\bllenar\b/i],
+    decisivo: ['capacidad_plataforma'],
+    dimensionador: ['volumen_frecuencia']
+  },
+  consolidacion: {
+    label: 'Consolidar información de varias fuentes',
+    senales: [/consolid/i, /unific/i, /juntar/i, /varios\s+archiv/i, /\d+\s+archiv/i, /\d+\s+document/i, /excel/i, /reporte/i, /informe/i],
+    decisivo: ['estructura_fuentes'],
+    dimensionador: ['volumen_frecuencia']
+  },
+  traspaso_manual: {
+    label: 'Traspasar información de un canal informal a un registro estructurado',
+    senales: [/copi[ao]/i, /transcrib/i, /anotar/i, /pasar.*a\s+(mano|hoja|excel)/i, /whatsapp.*hoja/i],
+    decisivo: ['formato_entrada'],
+    dimensionador: ['volumen_frecuencia']
+  },
+  generacion_documentos: {
+    label: 'Generar documentos o reportes a partir de datos',
+    senales: [/generar/i, /redactar/i, /elaborar/i, /\bcarta/i, /\bpdf\b/i, /documento/i],
+    decisivo: ['fuente_datos'],
+    dimensionador: ['volumen_frecuencia']
+  },
+  organizacion_almacenamiento: {
+    label: 'Organizar o clasificar información',
+    senales: [/organiz/i, /clasific/i, /archivar/i, /carpeta/i, /historial/i],
+    decisivo: ['criterio_clasificacion'],
+    dimensionador: ['fuente_datos']
+  },
+  presencia_digital: {
+    label: 'Presencia digital o canal de venta',
+    senales: [/p[aá]gina/i, /\bweb\b/i, /tienda/i, /landing/i, /\bsitio\b/i, /sin\s+p[aá]gina/i],
+    decisivo: ['objetivo_canal'],
+    dimensionador: []
+  }
 };
 
-// ============ SEGUNDO CEREBRO — entendimiento y análisis ============
-// En vez de "primer match gana" (como antes), se puntúan TODAS las
-// categorías. Eso permite calcular confianza y detectar ambigüedad real.
-const CATEGORIA_SENALES = {
-  factura: [/factura/i, /\bpag/i, /cruz/i, /cruce/i, /concili/i],
-  reporte: [/report/i, /tablero/i, /dashboard/i, /informe/i, /indicador/i],
-  nomina: [/n[oó]mina/i, /liquid/i, /pension/i, /\bcobr/i, /cartera/i, /cuota/i],
-  formulario: [/formulario/i, /llen/i, /diligenc/i, /ficha/i, /registro/i, /\bcarg/i, /plataforma/i],
-  consolidar: [/consolid/i, /unif/i, /junt/i, /varios archivos/i, /fuentes/i, /excel/i],
-  web: [/p[aá]gina/i, /\bweb\b/i, /tienda/i, /landing/i, /sitio/i]
-};
-const CATEGORIA_LABEL = {
-  factura: 'Cruzar facturas o pagos',
-  reporte: 'Armar reportes',
-  nomina: 'Liquidar nómina, pensiones o cobros',
-  formulario: 'Llenar formularios o cargar registros',
-  consolidar: 'Consolidar información de varias fuentes',
-  web: 'Crear una página o presencia digital'
-};
-// Categorías donde "frecuencia" y "esfuerzo" son preguntas relevantes.
-// Una página web es un proyecto de una sola vez — preguntar "¿cada cuánto
-// lo haces?" no tiene sentido ahí, por eso queda en false.
-const CATEGORIA_RECURRENTE = { factura: true, reporte: true, nomina: true, formulario: true, consolidar: true, web: false, default: true };
-
-function analizarSenales(texto) {
+function clasificarArquetipo(texto) {
   const s = texto.toLowerCase();
   const scores = {};
-  Object.keys(CATEGORIA_SENALES).forEach(cat => {
-    scores[cat] = CATEGORIA_SENALES[cat].filter(rx => rx.test(s)).length;
-  });
+  Object.keys(ARQUETIPOS).forEach(k => { scores[k] = ARQUETIPOS[k].senales.filter(rx => rx.test(s)).length; });
   const ranked = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
-  const top = ranked[0];
-  const segundo = ranked[1];
-  const topScore = scores[top];
-  const segundoScore = scores[segundo];
-  const tipo = topScore > 0 ? top : 'default';
-  const ambiguo = topScore > 0 && topScore === segundoScore;
-
-  let confianza = 'baja';
-  if (topScore >= 2 && !ambiguo) confianza = 'alta';
-  else if (topScore >= 1) confianza = 'media';
-
-  // Detección de soluciones reutilizables: ¿este problema se parece a un caso real ya resuelto?
-  // Esto es independiente de las 6 categorías genéricas — un caso real puede
-  // matchear fuerte (ej. "evaluar proyectos") aunque no encaje en ninguna
-  // categoría general. Si hay match fuerte con evidencia real, no tiene
-  // sentido escalar como "sin certeza": hay un caso concreto que citar.
-  let casoSugerido = null, mejorScore = 0;
-  KB.casos.forEach(c => {
-    const score = c.senales.filter(rx => rx.test(s)).length;
-    if (score >= 2 && score > mejorScore) { casoSugerido = c; mejorScore = score; }
-  });
-  if (casoSugerido && confianza === 'baja') confianza = 'media';
-
-  return { tipo, confianza, ambiguo, candidatoB: segundo, casoSugerido };
+  const top = ranked[0], segundo = ranked[1];
+  const topScore = scores[top], segundoScore = scores[segundo];
+  return { tipo: topScore > 0 ? top : 'default', score: topScore, segundo: segundoScore > 0 ? segundo : null, segundoScore, ambiguo: topScore > 0 && topScore === segundoScore };
 }
 
-// Si el usuario ya dijo "cada semana" en su texto libre, no se le vuelve a preguntar.
+// ============ EXTRACCIÓN DE HECHOS ============
+// Cada extractor es independiente y genérico (no depende del sector). Un
+// hecho solo se guarda si el texto lo afirma explícitamente — nunca se
+// inventa ni se asume un valor por defecto (regla de no inventar).
+const AP_OBJETOS = ['facturas', 'nómina', 'nomina', 'pensiones', 'inventario', 'medicamentos', 'clientes', 'beneficiarios', 'proyectos', 'contratos', 'pagos', 'cobros', 'pedidos', 'historias clínicas', 'historial', 'historiales', 'pacientes', 'mascotas', 'empleados', 'proveedores', 'matrículas', 'matriculas', 'estudiantes', 'productos', 'pólizas', 'polizas', 'solicitudes', 'órdenes', 'ordenes', 'citas', 'casos', 'reservas', 'fichas', 'registros', 'formularios', 'documentos', 'reportes'];
+const AP_FUENTES = ['excel', 'plataforma', 'sistema', 'base de datos', 'pdf', 'formulario', 'correo', 'whatsapp', 'drive', 'sheets', 'word', 'erp', 'crm', 'carpetas', 'papel'];
+
 function detectarFrecuenciaEnTexto(texto) {
   const s = texto.toLowerCase();
-  if (/cada d[ií]a|diari\w*/.test(s)) return 'Diaria';
-  if (/cada semana|semanal\w*/.test(s)) return 'Semanal';
-  if (/quincenal|cada quince/.test(s)) return 'Quincenal';
-  if (/cada mes|mensual\w*/.test(s)) return 'Mensual';
-  if (/ocasional|de vez en cuando|rara vez/.test(s)) return 'Ocasional';
+  // \b en todos los patrones: sin esto, "anual" hacía match dentro de
+  // "manualmente" y marcaba frecuencia Anual en textos que solo decían
+  // que el proceso era manual — un hecho inventado a partir de ruido.
+  if (/\bcada d[ií]a\b|\bdiari[ao]s?\b|\bcada noche\b/.test(s)) return 'Diaria';
+  if (/\bcada semana\b|\bsemanal(es)?\b/.test(s)) return 'Semanal';
+  if (/\bquincenal(es)?\b|\bcada quince\b/.test(s)) return 'Quincenal';
+  if (/\bcada mes\b|\bmensual(es)?\b|\bmes\s+a\s+mes\b/.test(s)) return 'Mensual';
+  if (/\bcada a[ñn]o\b|\banual(es)?\b/.test(s)) return 'Anual';
+  if (/\bocasional(es)?\b|\bde vez en cuando\b|\brara vez\b/.test(s)) return 'Ocasional';
   return null;
 }
 function detectarEsfuerzoEnTexto(texto) {
@@ -999,48 +1012,501 @@ function detectarEsfuerzoEnTexto(texto) {
   if (/\d+\s*minutos?/.test(s)) return 'Menos de 1h';
   return null;
 }
-
-// ============ PERSONALIZACIÓN — el bot lee tus propias palabras ============
-// No es una IA real: extrae cantidades, fuentes y objetos que el usuario ya
-// escribió y los inserta en la respuesta, para que dos personas en la misma
-// categoría no reciban el mismo texto plano.
-const AP_FUENTES = ['excel', 'plataforma', 'sistema', 'base de datos', 'pdf', 'formulario', 'correo', 'whatsapp', 'drive', 'sheets', 'word', 'erp', 'crm', 'correo electrónico'];
-const AP_OBJETOS = ['facturas', 'nómina', 'nomina', 'pensiones', 'inventario', 'medicamentos', 'clientes', 'beneficiarios', 'proyectos', 'contratos', 'pagos', 'cobros', 'pedidos', 'historias clínicas', 'pacientes', 'empleados', 'proveedores', 'matrículas', 'matriculas', 'estudiantes', 'productos', 'pólizas', 'polizas', 'solicitudes', 'órdenes', 'ordenes', 'citas', 'reservas', 'fichas', 'registros', 'formularios', 'documentos', 'reportes'];
-
-function extraerDetalles(texto) {
+function detectarCantidad(texto) {
+  const m = texto.match(/(\d+)\s+([a-záéíóúñ]+(?:\s+[a-záéíóúñ]+)?)/i);
+  return m ? m[0].trim().replace(/\s+/g, ' ') : null;
+}
+function detectarObjeto(texto) {
   const s = texto.toLowerCase();
-  const numMatch = texto.match(/(\d+)\s+([a-záéíóúñ]+(?:\s+[a-záéíóúñ]+)?)/i);
-  const cantidad = numMatch ? numMatch[0].trim().replace(/\s+/g, ' ') : null;
-  const fuente = AP_FUENTES.find(f => s.includes(f)) || null;
-  const objeto = AP_OBJETOS.find(o => s.includes(o)) || null;
-  return { cantidad, fuente, objeto };
+  // Se toma la coincidencia que aparece más temprano EN EL TEXTO (no la
+  // primera del diccionario) — así "12 documentos... reporte de nómina"
+  // reconoce "documentos" como el objeto central, no "nómina" solo porque
+  // esa palabra esté antes en la lista interna.
+  let mejor = null, mejorIdx = Infinity;
+  AP_OBJETOS.forEach(o => { const idx = s.indexOf(o); if (idx !== -1 && idx < mejorIdx) { mejor = o; mejorIdx = idx; } });
+  if (mejor) return mejor;
+  // Fallback genérico: qué viene después de un verbo típico de intake, sin
+  // depender de una lista cerrada de sustantivos por profesión.
+  const m = texto.match(/(?:tengo que|me toca|debo|necesito|tengo)\s+([a-záéíóúñ\s]{3,40}?)(?:[.,]|$)/i);
+  return m ? m[1].trim() : null;
+}
+function detectarFuente(texto) {
+  const s = texto.toLowerCase();
+  return AP_FUENTES.find(f => s.includes(f)) || null;
+}
+// Heurística de género para el demostrativo plural — sin esto "Esos
+// facturas"/"Esos nómina" suena mal. No es gramática real, solo mira la
+// terminación (facturas, pólizas, citas → femenino), suficiente para el
+// puñado de sustantivos que puede devolver detectarObjeto.
+function esosOEsas(objeto) {
+  if (!objeto) return 'Esos';
+  return /as$/i.test(objeto.trim()) ? 'Esas' : 'Esos';
+}
+function detectaSolucionPropuesta(texto) {
+  return /\b(quiero|necesito|me gustar[ií]a)\s+(un|una)\s+(app|aplicaci[oó]n|bot|sistema|plataforma|software)\b/i.test(texto);
+}
+function esRespuestaAmbigua(texto) {
+  const s = texto.toLowerCase().trim();
+  // OJO: \w y \b en JS solo reconocen [A-Za-z0-9_] — una tilde (é, í, á...)
+  // justo antes de un \b rompe el boundary y el patrón deja de matchear
+  // ("no sé" con tilde no matcheaba /no\s+s[ée]\b/). Por eso aquí el corte
+  // de palabra se hace con un lookahead explícito que sí conoce acentos,
+  // en vez de \b, en cualquier patrón que termine en una vocal con tilde.
+  const finPalabra = '(?![a-záéíóúñ])';
+  return new RegExp('no\\s+s[ée]' + finPalabra).test(s)
+    || /no\s+tengo\s+idea/.test(s)
+    || /m[aá]s\s+o\s+menos/.test(s)
+    || /\bdepende\b/.test(s)
+    || /no\s+estoy\s+segur/.test(s)
+    || /otra\s+persona/.test(s)
+    || /^tal\s+vez\b/.test(s)
+    || new RegExp('^quiz[aá]s' + finPalabra).test(s)
+    || /^creo\s+que\b/.test(s);
 }
 
-function personalizarDiagnostico(d, texto) {
-  const det = extraerDetalles(texto);
-  const fuenteTxt = det.fuente ? (det.fuente === 'excel' ? 'Excel' : det.fuente) : null;
-  const cantidadLower = det.cantidad ? det.cantidad.toLowerCase() : '';
-  const fuenteYaEnCantidad = det.fuente && cantidadLower.includes(det.fuente);
+// Lee TODOS los hechos genéricos que el texto afirma. Se llama sobre cada
+// mensaje del usuario (no solo el primero) — así una respuesta larga con
+// ruido igual aporta datos aunque no conteste literalmente la pregunta.
+function extraerHechos(texto) {
+  const h = {};
+  const frecuencia = detectarFrecuenciaEnTexto(texto); if (frecuencia) h.frecuencia = frecuencia;
+  const esfuerzo = detectarEsfuerzoEnTexto(texto); if (esfuerzo) h.esfuerzo = esfuerzo;
+  const cantidad = detectarCantidad(texto); if (cantidad) h.cantidad = cantidad;
+  const objeto = detectarObjeto(texto); if (objeto) h.objeto = objeto;
+  const fuente = detectarFuente(texto); if (fuente) h.fuente = fuente;
+  if (detectaSolucionPropuesta(texto)) h.solucion_propuesta_usuario = true;
+  return h;
+}
+function fusionarHechos(c, nuevos) {
+  Object.keys(nuevos).forEach(k => { if (c.hechos[k] === undefined || c.hechos[k] === null) c.hechos[k] = nuevos[k]; });
+}
 
-  const piezas = [];
-  if (det.cantidad) piezas.push(det.cantidad);
-  if (det.objeto && !cantidadLower.includes(det.objeto)) piezas.push(det.objeto);
+// ============ CATÁLOGO DE PREGUNTAS DE ALTO VALOR ============
+// Cada slot es genérico: aplica a cualquier profesión que caiga en ese
+// arquetipo. La pregunta se personaliza con hechos ya extraídos (objeto),
+// pero la lógica de CUÁL preguntar no depende del sector del usuario.
+// Una respuesta puede no tener marcadores de incertidumbre ("no sé",
+// "depende") y aun así no responder nada concreto — reconoce la EXISTENCIA
+// de un dato sin decir cuál es (ej. "en un formato que tenemos"). Esto
+// también debe forzar una reformulación, no solo la incertidumbre explícita.
+function esRespuestaVaga(texto) {
+  const s = texto.toLowerCase().trim().replace(/[.!]+$/, '');
+  return /^(en\s+)?(un|una|el|la|los|las)\s+(formato|sistema|proceso|forma|manera)\s+que\s+tenemos$/.test(s)
+      || /^(ya\s+)?(lo\s+)?tenemos(\s+algo)?$/.test(s)
+      || /^(algo\s+)?as[ií]$/.test(s)
+      || s.length < 4;
+}
 
-  let problema = d.problema;
-  const detalle = [piezas.join(', '), (fuenteTxt && !fuenteYaEnCantidad) ? ('vía ' + fuenteTxt) : null].filter(Boolean).join(' ');
-  if (detalle) problema += ' — en tu caso: ' + detalle + '.';
+// Cada slot es genérico: aplica a cualquier profesión que caiga en ese
+// arquetipo. "guardar" devuelve true si logró interpretar algo concreto y
+// false si la respuesta fue vaga — un false dispara UNA reformulación
+// (ver responderCaso) en vez de aceptar cualquier texto como hecho.
+const SLOTS = {
+  fuente_evento: {
+    pregunta: (c) => `¿Dónde tienes actualmente registrada ${c.hechos.objeto ? 'la información de ' + c.hechos.objeto : 'la información que dispara esto'}?`,
+    reformular: (c) => `Sin problema — pensando en cómo lo llevas hoy, ¿ese registro está en digital (Excel, un sistema) o lo llevas de otra forma?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.fuente_evento = texto.trim(); return true; }
+  },
+  capacidad_plataforma: {
+    pregunta: (c) => `¿Sabes si esa plataforma permite cargar varios registros a la vez (importar desde Excel o algo así), o solo se puede uno por uno?`,
+    reformular: (c) => `Entiendo que no es claro todavía. ¿Alguna vez has visto ahí una opción de "importar" o "cargar archivo", aunque no la hayas usado?`,
+    // "desconocida" es en sí misma una resolución honesta (dispara 🟡 más
+    // adelante) — nunca hay que insistir dos veces en esta pregunta.
+    guardar: (texto, c) => {
+      const s = texto.toLowerCase();
+      if (/no\s+s[ée]|no\s+tengo\s+idea|no\s+estoy\s+segur/.test(s)) { c.hechos.capacidad_plataforma = 'desconocida'; return true; }
+      if (/\bno\b/.test(s) && !/no\s+s[ée]/.test(s)) { c.hechos.capacidad_plataforma = 'no_permite'; return true; }
+      if (/\bs[ií]\b|permite|tiene\s+(importaci|api)/.test(s)) { c.hechos.capacidad_plataforma = 'permite'; return true; }
+      c.hechos.capacidad_plataforma = 'desconocida';
+      return true;
+    }
+  },
+  estructura_fuentes: {
+    pregunta: (c) => `¿${c.hechos.objeto ? esosOEsas(c.hechos.objeto) + ' ' + c.hechos.objeto : 'Los archivos'} mantienen la misma estructura (mismas columnas) cada vez, o cada uno viene diferente?`,
+    reformular: (c) => `Perfecto, ya tienen un formato establecido. ¿Lo llenan directamente en el computador o lo imprimen y llenan a mano?`,
+    // Clasificación por patrones con "false" honesto si no hay match — a
+    // diferencia de capacidad_plataforma (que siempre resuelve a algo, aunque
+    // sea "desconocida"), esto SÍ es seguro de intentar contra el mensaje
+    // original antes de preguntar (ver intentarDesdeTexto en iniciarCaso).
+    intentarDesdeTexto: true,
+    guardar: (texto, c) => {
+      const s = texto.toLowerCase();
+      // "igual" solo? demasiado ambiguo en español coloquial ("toca
+      // hacerlo igual" = de todos modos, no "misma estructura") — exige
+      // que acompañe a un sustantivo de forma/estructura para contar.
+      if (/mism[ao]s?\s+(estructura|formato|columnas?|orden)|estandar|homog[eé]ne|siempre\s+igual/.test(s)) { c.hechos.estructura_fuentes = 'consistente'; return true; }
+      if (/diferent|distint|cambia|var[ií]a|desorden/.test(s)) { c.hechos.estructura_fuentes = 'inconsistente'; return true; }
+      return false;
+    },
+    // La reformulación cambia el espacio de respuesta (digital vs. papel,
+    // no mismo/distinto) — por eso necesita su propia interpretación en
+    // vez de reusar "guardar" contra un patrón que ya no aplica.
+    guardarReformulado: (texto, c) => {
+      const s = texto.toLowerCase();
+      if (/computador|digital|\bpc\b|excel|sistema|correo|whatsapp/.test(s)) { c.hechos.estructura_fuentes = 'consistente_digital'; return true; }
+      if (/imprim|papel|\bmano\b|f[ií]sico/.test(s)) { c.hechos.estructura_fuentes = 'fisico'; return true; }
+      return false;
+    }
+  },
+  formato_entrada: {
+    pregunta: (c) => `¿La información te llega siempre con los mismos datos (por ejemplo qué piden, para quién, dirección), o cada mensaje viene distinto?`,
+    reformular: (c) => `Sin problema — ¿alguien más además de ti llega a pasar esos datos, o solo tú lo haces?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.formato_entrada = texto.trim(); return true; }
+  },
+  fuente_datos: {
+    pregunta: (c) => `¿De dónde salen los datos que necesitas para ${c.hechos.objeto ? 'generar ' + c.hechos.objeto : 'esto'}?`,
+    reformular: (c) => `Sin problema — ¿esa información está en digital o tienes que buscarla en papel?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.fuente_datos = texto.trim(); return true; }
+  },
+  criterio_clasificacion: {
+    pregunta: (c) => `¿Qué decide dónde va cada ${c.hechos.objeto || 'registro'}: el nombre, la fecha, el tipo, u otro criterio?`,
+    reformular: (c) => `Entiendo que no hay una regla fija todavía. ¿Quién decide hoy dónde va cada uno?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.criterio_clasificacion = texto.trim(); return true; }
+  },
+  objetivo_canal: {
+    pregunta: (c) => `¿Qué necesitas que la persona pueda hacer ahí: ver catálogo, comprar, contactarte directo, o varias cosas?`,
+    reformular: (c) => `Sin problema — ¿lo principal es que te encuentren y te escriban, o que puedan ver información antes de escribirte?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.objetivo_canal = texto.trim(); return true; }
+  },
+  volumen_frecuencia: {
+    pregunta: (c) => `Para calcular el impacto real — ¿más o menos cuántas veces pasa esto y cada cuánto?`,
+    reformular: (c) => `Sin un número exacto está bien — ¿dirías que es varias veces por semana, o menos seguido que eso?`,
+    guardar: (texto, c) => {
+      const f = detectarFrecuenciaEnTexto(texto); if (f) c.hechos.frecuencia = f;
+      const cant = detectarCantidad(texto); if (cant) c.hechos.cantidad = cant;
+      if (!f && !cant) { if (esRespuestaVaga(texto)) return false; c.hechos.volumen_frecuencia = texto.trim(); }
+      return true;
+    }
+  }
+};
 
-  let solucion = d.solucion;
-  if (fuenteTxt) {
-    solucion = solucion.replace(/\.\s*$/, '') + ', partiendo de tu' + (det.fuente === 'excel' ? 's archivos Excel' : ' ' + det.fuente) + '.';
+// ============ ESTADO ÚNICO DE CONVERSACIÓN + MEMORIA DEL CASO ============
+const MAX_PREGUNTAS = 4;
+function casoNuevo() {
+  return {
+    activo: false, arquetipo: null, arquetipoAmbiguo: false, arquetipoCandidatoB: null,
+    hechos: {}, textoOriginal: '', casoSugerido: null,
+    preguntasHechas: [], slotPendiente: null, reformulado: {},
+    investigar: false, origen: 'directo'
+  };
+}
+let caso = casoNuevo();
+
+function mostrarInputChat(mostrar) {
+  const wrap = document.getElementById('chatInpWrap');
+  if (wrap) wrap.style.display = mostrar ? 'flex' : 'none';
+}
+
+function reiniciarSiHabiaCaso() {
+  const b = document.getElementById('chatMsgs');
+  if (b.dataset.used === '1') {
+    const div = document.createElement('div');
+    div.style.cssText = 'text-align:center;margin:16px 0 6px;font-family:\'DM Mono\',monospace;font-size:9.5px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase';
+    div.textContent = '— nuevo caso —';
+    b.appendChild(div);
+  } else {
+    b.dataset.used = '1';
+  }
+}
+
+// Punto de entrada ÚNICO para arrancar un caso (llamado tanto desde el
+// hero como desde un cambio de tema detectado a mitad de conversación).
+function iniciarCaso(texto, origen) {
+  texto = (texto || '').trim();
+  if (!texto) return;
+  caso = casoNuevo();
+  caso.activo = true;
+  caso.origen = origen || 'directo';
+  caso.textoOriginal = texto;
+  const clasif = clasificarArquetipo(texto);
+  caso.arquetipo = clasif.tipo;
+  caso.arquetipoAmbiguo = clasif.ambiguo;
+  caso.arquetipoCandidatoB = clasif.segundo;
+  fusionarHechos(caso, extraerHechos(texto));
+
+  const s = texto.toLowerCase();
+  let casoSugerido = null, mejorScore = 0;
+  KB.casos.forEach(cs => {
+    const score = cs.senales.filter(rx => rx.test(s)).length;
+    if (score >= 2 && score > mejorScore) { casoSugerido = cs; mejorScore = score; }
+  });
+  caso.casoSugerido = casoSugerido;
+
+  // Si el mensaje inicial ya trae la respuesta a la pregunta decisiva
+  // (ej. "algunos vienen bien y otros vienen todos desordenados"), no hay
+  // que volver a preguntarla — principio de fricción mínima. Solo se
+  // intenta contra slots marcados intentarDesdeTexto: clasificadores por
+  // patrón con un "no sé interpretar esto" honesto, nunca los de texto
+  // libre (esos aceptarían el párrafo entero como respuesta y fabricarían
+  // un hecho que el texto no dijo específicamente).
+  const arqInicial = ARQUETIPOS[caso.arquetipo];
+  if (arqInicial) {
+    arqInicial.decisivo.forEach(slotId => {
+      const slot = SLOTS[slotId];
+      if (slot && slot.intentarDesdeTexto && caso.hechos[slotId] === undefined) slot.guardar(texto, caso);
+    });
   }
 
-  let siguiente = d.siguiente;
-  if (det.objeto) {
-    siguiente = siguiente.replace(/\.\s*$/, '') + ', usando tus datos reales de ' + det.objeto + '.';
+  trackEvent('inicio_diagnostico', { origen: caso.origen });
+  trackEvent('problema_enviado', { texto: texto, arquetipo: caso.arquetipo });
+
+  reiniciarSiHabiaCaso();
+  addMsg(texto, 'u');
+  scrollToDiag();
+  setTimeout(procesarSiguientePaso, 550);
+}
+
+// Punto de entrada ÚNICO para responder dentro de un caso activo (chip o
+// texto libre llegan aquí siempre por el mismo camino).
+function responderCaso(texto) {
+  texto = (texto || '').trim();
+  if (!texto || !caso.activo) return;
+
+  const slotId = caso.slotPendiente;
+
+  // Reanclaje del arquetipo "default": la respuesta se suma al texto
+  // original y se reclasifica, en vez de tratarse como un slot fijo.
+  if (slotId === '__reanclar__') {
+    addMsg(texto, 'u');
+    scrollToDiag();
+    caso.textoOriginal += ' ' + texto;
+    const clasif = clasificarArquetipo(caso.textoOriginal);
+    caso.arquetipo = clasif.tipo;
+    caso.arquetipoAmbiguo = clasif.ambiguo;
+    caso.arquetipoCandidatoB = clasif.segundo;
+    fusionarHechos(caso, extraerHechos(texto));
+    caso.slotPendiente = null;
+    setTimeout(procesarSiguientePaso, 450);
+    return;
   }
 
-  return { problema, solucion, siguiente };
+  // Cambio de tema: si la respuesta trae un disparador de problema nuevo y
+  // no encaja con el caso activo, se abre un caso nuevo en vez de forzarla
+  // como respuesta al slot pendiente.
+  const disparadorNuevoCaso = /\b(tengo que|necesito|me toca|otra pregunta|otra cosa)\b/i.test(texto);
+  const clasifNueva = clasificarArquetipo(texto);
+  if (slotId && disparadorNuevoCaso && clasifNueva.tipo !== 'default' && clasifNueva.tipo !== caso.arquetipo && clasifNueva.score >= 2 && !esRespuestaAmbigua(texto)) {
+    addMsg(texto, 'u');
+    scrollToDiag();
+    setTimeout(() => iniciarCaso(texto, 'chat_nuevo_tema'), 400);
+    return;
+  }
+
+  addMsg(texto, 'u');
+  scrollToDiag();
+  fusionarHechos(caso, extraerHechos(texto));
+
+  if (slotId) {
+    const slot = SLOTS[slotId];
+    // Dos motivos para reformular en vez de aceptar la respuesta: (a) trae
+    // un marcador explícito de incertidumbre ("no sé", "depende"), o (b)
+    // el propio slot no logró interpretar nada concreto (guardar → false),
+    // como cuando alguien confirma que "algo" existe sin decir qué es.
+    const esSegundoIntento = caso.reformulado[slotId] === true;
+    const fnGuardar = (esSegundoIntento && slot.guardarReformulado) ? slot.guardarReformulado : slot.guardar;
+    const ambigua = esRespuestaAmbigua(texto);
+    const yaResuelto = !ambigua ? fnGuardar(texto, caso) : false;
+    const necesitaReformular = (ambigua || yaResuelto === false) && !caso.reformulado[slotId];
+    if (necesitaReformular) {
+      caso.reformulado[slotId] = true;
+      setTimeout(() => { addMsg(slot.reformular(caso), 'b'); mostrarInputChat(true); }, 450);
+      return;
+    }
+    if ((ambigua || yaResuelto === false) && caso.reformulado[slotId]) {
+      // Ya se intentó aclarar una vez y sigue sin resolverse: el motor deja
+      // de insistir en este slot y lo marca como no confirmable.
+      caso.hechos[slotId] = 'sin_confirmar';
+      caso.investigar = true;
+    }
+    caso.slotPendiente = null;
+  }
+  setTimeout(procesarSiguientePaso, 450);
+}
+
+// ============ MOTOR DE DECISIÓN DE PREGUNTAS ============
+// Elige, entre lo que todavía no se sabe, la ÚNICA pregunta cuya respuesta
+// puede cambiar la recomendación. Nunca pregunta dos veces lo mismo (un
+// slot resuelto deja de estar "undefined") y nunca supera MAX_PREGUNTAS.
+function elegirSiguientePregunta(c) {
+  if (c.preguntasHechas.length >= MAX_PREGUNTAS) return null;
+  if (c.arquetipoAmbiguo) return { slot: '__desambiguar__' };
+
+  const arq = ARQUETIPOS[c.arquetipo];
+  if (!arq) {
+    // Arquetipo "default": no hay hipótesis de forma del proceso todavía.
+    // Vale UNA pregunta abierta para reanclar, nunca más que esa.
+    if (!c.preguntasHechas.some(p => p.slot === '__reanclar__')) return { slot: '__reanclar__' };
+    return null;
+  }
+  for (const slotId of arq.decisivo) {
+    if (c.hechos[slotId] === undefined) return { slot: slotId };
+  }
+  // Los slots "dimensionador" (volumen/frecuencia) NUNCA se preguntan solo
+  // porque el dato esté vacío — regla explícita del brief. Si el caso ya
+  // tiene lo decisivo resuelto, se cierra; lo que falte de tamaño queda
+  // listado en "qué falta confirmar" del diagnóstico final, no como turno.
+  return null;
+}
+
+function procesarSiguientePaso() {
+  const decision = elegirSiguientePregunta(caso);
+  if (!decision) return mostrarTyping();
+  if (decision.slot === '__desambiguar__') return preguntarDesambiguacion();
+  if (decision.slot === '__reanclar__') return preguntarReanclaje();
+
+  caso.slotPendiente = decision.slot;
+  caso.preguntasHechas.push({ slot: decision.slot });
+  addMsg(SLOTS[decision.slot].pregunta(caso), 'b');
+  mostrarInputChat(true);
+}
+
+// Evaluación de alternativas: cuando dos arquetipos empatan en señales, se
+// le pregunta al usuario cuál describe mejor su caso en vez de forzar uno.
+function preguntarDesambiguacion() {
+  caso.arquetipoAmbiguo = false;
+  const labelA = ARQUETIPOS[caso.arquetipo] ? ARQUETIPOS[caso.arquetipo].label : null;
+  const labelB = ARQUETIPOS[caso.arquetipoCandidatoB] ? ARQUETIPOS[caso.arquetipoCandidatoB].label : null;
+  if (!labelA || !labelB) return procesarSiguientePaso();
+  mostrarInputChat(false);
+  addMsg('Para entender mejor: ¿tu caso se parece más a esto...', 'b');
+  addChips([labelA, labelB, 'Ninguna de las dos'], (v) => {
+    addMsg(v, 'u');
+    if (v === labelB) caso.arquetipo = caso.arquetipoCandidatoB;
+    else if (v !== labelA) caso.arquetipo = 'default';
+    setTimeout(procesarSiguientePaso, 450);
+  });
+}
+
+function preguntarReanclaje() {
+  caso.preguntasHechas.push({ slot: '__reanclar__' });
+  caso.slotPendiente = '__reanclar__';
+  addMsg('Cuéntame un poco más — ¿qué haces exactamente, paso a paso, la próxima vez que te toque hacer esto?', 'b');
+  mostrarInputChat(true);
+}
+
+function mostrarTyping() {
+  mostrarInputChat(false);
+  const b = document.getElementById('chatMsgs');
+  const t = document.createElement('div');
+  t.className = 'msg msg-b'; t.id = 'typing'; t.textContent = 'Analizando tu proceso...';
+  t.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;font-style:italic;color:var(--ink3)';
+  b.appendChild(t);
+  requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateY(0)' });
+  b.scrollTop = b.scrollHeight;
+  setTimeout(cerrarCaso, 1200);
+}
+
+// ============ SALIDA DEL DIAGNÓSTICO ============
+// Plantillas de flujo por ARQUETIPO (no por profesión) — misma mecánica
+// para un consultorio o una veterinaria si comparten la forma del proceso.
+const FLUJO_TEXTOS = {
+  comunicacion_recurrente: { actual: 'Revisas manualmente cuándo toca avisar → escribes el mensaje uno por uno → lo envías por WhatsApp', propuesto: 'El sistema revisa la fuente automáticamente → arma el mensaje → lo envía o te lo deja listo para confirmar' },
+  carga_masiva: { actual: 'Abres cada registro en tu archivo → lo copias campo por campo → lo pegas en la plataforma', propuesto: 'El sistema lee tu archivo → llena cada campo automáticamente → verifica que quedó correcto' },
+  consolidacion: { actual: 'Abres cada archivo por separado → copias la información en uno solo → revisas que no falte nada', propuesto: 'El sistema junta los archivos automáticamente → valida que la estructura coincida → entrega un archivo consolidado' },
+  traspaso_manual: { actual: 'Recibes la información por un canal informal → la transcribes a mano a tu registro → avisas al siguiente paso', propuesto: 'El sistema toma la información apenas llega → la registra en el formato correcto → avisa automáticamente al siguiente paso' },
+  generacion_documentos: { actual: 'Buscas los datos de cada caso → los copias en la plantilla → generas el documento uno por uno', propuesto: 'El sistema toma los datos de la fuente → llena la plantilla → genera todos los documentos de una vez' },
+  organizacion_almacenamiento: { actual: 'Revisas cada registro → decides dónde va → lo guardas manualmente', propuesto: 'El sistema aplica el criterio de clasificación → organiza cada registro en su lugar → deja trazabilidad de qué se guardó' },
+  presencia_digital: { actual: 'No existe un canal digital propio → todo depende del contacto manual o el voz a voz', propuesto: 'Una página muestra el catálogo/información → el cliente contacta directo por WhatsApp' },
+  default: { actual: 'Lo resuelves manualmente cada vez que se necesita', propuesto: 'Por definir junto con Daniel una vez se entienda mejor el caso' }
+};
+
+// Salidas del diagnóstico: 🟢 viable / 🟡 investigar / 🔴 no recomendado /
+// 👤 escalar. Nunca se fuerza una salida positiva para no perder al usuario.
+function calcularViabilidad(c) {
+  if (c.hechos.capacidad_plataforma === 'desconocida' || c.investigar) {
+    return { codigo: '🟡', label: 'Necesita investigación', clase: 'med',
+      motivo: 'Hay una oportunidad real, pero depende de algo que todavía no está confirmado. Prefiero comprobarlo antes de decirte que se puede — no voy a inventar si una plataforma permite algo que no he verificado.' };
+  }
+  if (c.arquetipo === 'default') {
+    return { codigo: '👤', label: 'Escalar a Daniel', clase: 'low',
+      motivo: 'No quiero darte una respuesta improvisada — este caso necesita que Daniel lo revise directamente.' };
+  }
+  if (c.hechos.frecuencia === 'Ocasional' && c.hechos.esfuerzo === 'Menos de 1h') {
+    return { codigo: '🔴', label: 'No recomendado por ahora', clase: 'low',
+      motivo: 'Por lo que cuentas, esto pasa poco y toma poco tiempo — probablemente no justifica el costo de automatizarlo todavía.' };
+  }
+  return { codigo: '🟢', label: 'Viable', clase: '',
+    motivo: 'Hay información suficiente para proponer una ruta concreta.' };
+}
+
+function faltaPorConfirmar(c) {
+  const faltantes = [];
+  const arq = ARQUETIPOS[c.arquetipo];
+  if (arq) {
+    arq.decisivo.forEach(s => { if (c.hechos[s] === 'sin_confirmar' || c.hechos[s] === undefined) faltantes.push(SLOTS[s] ? SLOTS[s].pregunta(c) : s); });
+  } else {
+    faltantes.push('Todavía no identificamos con claridad qué tipo de proceso es este — hace falta que Daniel lo revise directamente.');
+  }
+  if (arq && !c.hechos.frecuencia && !c.hechos.cantidad) faltantes.push('El volumen o la frecuencia exacta, para dimensionar el esfuerzo.');
+  return faltantes;
+}
+
+function cerrarCaso() {
+  const typing = document.getElementById('typing'); if (typing) typing.remove();
+  mostrarInputChat(false);
+  caso.activo = false;
+  const b = document.getElementById('chatMsgs');
+  const card = document.createElement('div');
+  card.className = 'result-card';
+
+  const viab = calcularViabilidad(caso);
+  const flujo = FLUJO_TEXTOS[caso.arquetipo] || FLUJO_TEXTOS.default;
+  const textoSeguro = caso.textoOriginal.replace(/</g, '&lt;');
+  const faltan = faltaPorConfirmar(caso);
+  const faltanHtml = faltan.length ? faltan.map(f => '<div>· ' + f + '</div>').join('') : 'Nada crítico — con esto ya se puede avanzar.';
+  const casoRow = caso.casoSugerido ? ('<div class="result-item full"><div class="result-l">Ya resolvimos un patrón parecido</div><div class="result-v">' + caso.casoSugerido.resumen + ' <span class="ver-caso-link" style="text-decoration:underline;cursor:pointer;font-weight:600">Ver caso real →</span></div></div>') : '';
+  // Regla: no asumir que la solución que el usuario propuso (bot, app...)
+  // es la correcta — se analiza el problema primero, y esto se lo dice.
+  const solucionPropuestaRow = caso.hechos.solucion_propuesta_usuario ? ('<div class="result-item full"><div class="result-l">Sobre lo que mencionaste</div><div class="result-v">Puede que termine siendo eso — pero primero conviene validar el problema y buscar la forma más simple de resolverlo, antes de asumir la tecnología.</div></div>') : '';
+
+  card.innerHTML = '<div class="result-badge ' + viab.clase + '">' + viab.codigo + ' ' + viab.label + '</div>' +
+    '<div class="result-grid">' +
+      '<div class="result-item full"><div class="result-l">Lo que entendí</div><div class="result-v">' + textoSeguro + '</div></div>' +
+      '<div class="result-item full"><div class="result-l">Así funciona hoy</div><div class="result-v">' + flujo.actual + '</div></div>' +
+      ((viab.codigo === '🟢' || viab.codigo === '🟡') ? '<div class="result-item full"><div class="result-l">Una forma posible de hacerlo</div><div class="result-v">' + flujo.propuesto + '</div></div>' : '') +
+      solucionPropuestaRow +
+      casoRow +
+      '<div class="result-item full"><div class="result-l">Qué falta confirmar</div><div class="result-v">' + faltanHtml + '</div></div>' +
+      '<div class="result-item full"><div class="result-l">Por qué</div><div class="result-v">' + viab.motivo + '</div></div>' +
+    '</div>' +
+    '<div class="result-sep"></div>' +
+    '<div class="result-ctas"></div>';
+  b.appendChild(card);
+
+  const verCaso = card.querySelector('.ver-caso-link');
+  if (verCaso && caso.casoSugerido) verCaso.addEventListener('click', () => { trackEvent('cta_seleccionado', { cta: 'ver_caso_sugerido', caso: caso.casoSugerido.id }); abrirModal(caso.casoSugerido.modalId); });
+
+  const ctas = card.querySelector('.result-ctas');
+  const ctaLabel = viab.codigo === '🟢' ? 'Construir prototipo' : 'Hablar con Daniel';
+  const waMsg = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos.\nMi problema: ' + caso.textoOriginal + '\nResultado: ' + viab.codigo + ' ' + viab.label + '\nHechos: ' + JSON.stringify(caso.hechos);
+  const waUrl = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent(waMsg);
+  const btnPrimary = document.createElement('a');
+  btnPrimary.href = waUrl; btnPrimary.target = '_blank'; btnPrimary.className = 'btn-dark'; btnPrimary.style.cssText = 'font-size:12px;padding:10px 16px';
+  btnPrimary.textContent = ctaLabel + ' →';
+  btnPrimary.addEventListener('click', () => {
+    trackEvent('cta_seleccionado', { cta: ctaLabel });
+    trackEvent('whatsapp_iniciado', { origen: 'resultado_diagnostico' });
+    saveLead({ tipo_solicitud: ctaLabel, problema_original: caso.textoOriginal, arquetipo: caso.arquetipo, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, caso_sugerido: caso.casoSugerido ? caso.casoSugerido.id : null });
+  });
+  ctas.appendChild(btnPrimary);
+  if (viab.codigo === '🟢') {
+    const waUrl2 = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent('Hola Daniel, quiero hablar sobre: ' + caso.textoOriginal);
+    const btnSecondary = document.createElement('a');
+    btnSecondary.href = waUrl2; btnSecondary.target = '_blank'; btnSecondary.className = 'btn-ghost'; btnSecondary.style.cssText = 'font-size:12px;padding:10px 16px';
+    btnSecondary.textContent = 'Quiero hablar con alguien';
+    btnSecondary.addEventListener('click', () => trackEvent('whatsapp_iniciado', { origen: 'hablar_con_alguien' }));
+    ctas.appendChild(btnSecondary);
+  }
+
+  requestAnimationFrame(() => card.classList.add('show'));
+  b.scrollTop = b.scrollHeight;
+  trackEvent('diagnostico_completado', { arquetipo: caso.arquetipo, viabilidad: viab.codigo, preguntas: caso.preguntasHechas.length });
+  actualizarCtaFinal({
+    heading: 'Ya tienes un diagnóstico<br/>listo. <em>Retómalo cuando quieras.</em>',
+    sub: viab.codigo + ' ' + viab.label + ' — ' + caso.textoOriginal,
+    waUrl: waUrl,
+    waLabel: ctaLabel
+  });
 }
 
 function addMsg(txt, type) {
@@ -1083,9 +1549,6 @@ function addChips(options, onPick) {
   setTimeout(() => { wrap.style.pointerEvents = 'auto'; }, 350);
 }
 
-// ============ ESTADO DEL DIAGNÓSTICO ============
-let diagState = { tipo: null, confianza: null, ambiguo: false, candidatoB: null, casoSugerido: null, textoOriginal: '', frecuencia: null, esfuerzo: null, origen: 'directo' };
-
 function scrollToDiag() {
   const el = document.getElementById('diagnostico');
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1093,202 +1556,6 @@ function scrollToDiag() {
 
 function esIdea(texto) {
   return /\bidea\b/i.test(texto);
-}
-
-function iniciarDiagnostico(texto, origen) {
-  texto = (texto || '').trim();
-  if (!texto) return;
-  const analisis = analizarSenales(texto);
-  diagState = {
-    tipo: analisis.tipo,
-    confianza: analisis.confianza,
-    ambiguo: analisis.ambiguo,
-    candidatoB: analisis.candidatoB,
-    casoSugerido: analisis.casoSugerido,
-    textoOriginal: texto,
-    frecuencia: detectarFrecuenciaEnTexto(texto),
-    esfuerzo: detectarEsfuerzoEnTexto(texto),
-    origen: origen || 'directo'
-  };
-  trackEvent('inicio_diagnostico', { origen: diagState.origen });
-  trackEvent('problema_enviado', { texto: texto, tipo: diagState.tipo, confianza: diagState.confianza });
-  const b = document.getElementById('chatMsgs');
-  if (b.dataset.used === '1') {
-    const div = document.createElement('div');
-    div.style.cssText = 'text-align:center;margin:16px 0 6px;font-family:\'DM Mono\',monospace;font-size:9.5px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase';
-    div.textContent = '— nuevo caso —';
-    b.appendChild(div);
-  } else {
-    b.dataset.used = '1';
-  }
-  addMsg(texto, 'u');
-  scrollToDiag();
-  setTimeout(avanzarDiagnostico, 550);
-}
-
-// El siguiente paso se decide en cada llamada según lo que YA se sabe —
-// esto es lo que hace las preguntas adaptativas en vez de un guion fijo:
-// si el texto ya traía la frecuencia, o la categoría no la necesita
-// (una web no es "recurrente"), ese paso simplemente se salta.
-function avanzarDiagnostico() {
-  if (diagState.ambiguo) {
-    diagState.ambiguo = false;
-    return preguntarDesambiguacion();
-  }
-  if (CATEGORIA_RECURRENTE[diagState.tipo] && !diagState.frecuencia) return preguntarFrecuencia();
-  if (CATEGORIA_RECURRENTE[diagState.tipo] && !diagState.esfuerzo) return preguntarEsfuerzo();
-  return mostrarTyping();
-}
-
-// Evaluación de alternativas: cuando dos categorías empatan en señales,
-// en vez de forzar una, se le pregunta al usuario cuál describe mejor su caso.
-function preguntarDesambiguacion() {
-  const labelA = CATEGORIA_LABEL[diagState.tipo];
-  const labelB = CATEGORIA_LABEL[diagState.candidatoB];
-  if (!labelA || !labelB) return avanzarDiagnostico();
-  addMsg('Para entender mejor: ¿tu caso se parece más a esto...', 'b');
-  addChips([labelA, labelB, 'Ninguna de las dos'], (v) => {
-    addMsg(v, 'u');
-    if (v === labelA) {
-      diagState.confianza = 'alta';
-    } else if (v === labelB) {
-      diagState.tipo = diagState.candidatoB;
-      diagState.confianza = 'alta';
-    } else {
-      diagState.tipo = 'default';
-      diagState.confianza = 'baja';
-    }
-    setTimeout(avanzarDiagnostico, 450);
-  });
-}
-
-function preguntarFrecuencia() {
-  addMsg('Entiendo. ¿Con qué frecuencia lo haces?', 'b');
-  addChips(['Diaria', 'Semanal', 'Quincenal', 'Mensual', 'Ocasional'], handleFrecuencia);
-}
-function handleFrecuencia(v) {
-  diagState.frecuencia = v;
-  addMsg(v, 'u');
-  setTimeout(avanzarDiagnostico, 450);
-}
-function preguntarEsfuerzo() {
-  addMsg('¿Cuánto tiempo te toma cada vez?', 'b');
-  addChips(['Menos de 1h', '1–3h', '3–6h', 'Más de 6h', 'No estoy seguro'], handleEsfuerzo);
-}
-function handleEsfuerzo(v) {
-  diagState.esfuerzo = v;
-  addMsg(v, 'u');
-  setTimeout(avanzarDiagnostico, 400);
-}
-function mostrarTyping() {
-  const b = document.getElementById('chatMsgs');
-  const t = document.createElement('div');
-  t.className = 'msg msg-b'; t.id = 'typing'; t.textContent = 'Analizando tu proceso...';
-  t.style.cssText = 'opacity:0;transform:translateY(7px);transition:opacity .3s,transform .3s;font-style:italic;color:var(--ink3)';
-  b.appendChild(t);
-  requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateY(0)' });
-  b.scrollTop = b.scrollHeight;
-  setTimeout(mostrarResultado, 1300);
-}
-
-function mostrarResultado() {
-  const typing = document.getElementById('typing'); if (typing) typing.remove();
-  const b = document.getElementById('chatMsgs');
-  const card = document.createElement('div');
-  card.className = 'result-card';
-
-  if (diagState.confianza === 'baja') {
-    // ============ ESCALAMIENTO — el segundo cerebro reconoce que no tiene certeza ============
-    // Regla del documento de conocimiento: si no hay suficiente información,
-    // se reconoce la incertidumbre y se escala a Daniel. Nunca se inventa
-    // una solución para quedar bien.
-    const textoSeguro = diagState.textoOriginal.replace(/</g, '&lt;');
-    card.innerHTML = '<div class="result-badge low">● Caso particular · revisión directa recomendada</div>' +
-      '<div class="result-grid">' +
-        '<div class="result-item full"><div class="result-l">Lo que describes</div><div class="result-v">' + textoSeguro + '</div></div>' +
-        '<div class="result-item full"><div class="result-l">Por qué te recomiendo hablar directo con Daniel</div><div class="result-v">Tu caso tiene particularidades que el diagnóstico automático no puede evaluar con certeza. Prefiero decírtelo con honestidad a darte una respuesta genérica que no aplique.</div></div>' +
-        '<div class="result-item full"><div class="result-l">Siguiente paso recomendado</div><div class="result-v">Escríbele directo — en menos de 24h te confirma si tiene solución.</div></div>' +
-      '</div>' +
-      '<div class="result-sep"></div>' +
-      '<div class="result-ctas"></div>';
-    b.appendChild(card);
-    const ctasEsc = card.querySelector('.result-ctas');
-    const waMsgEsc = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos pero mi caso no encajó en ninguna categoría automática.\nLo que describo: ' + diagState.textoOriginal + (diagState.frecuencia ? '\nFrecuencia: ' + diagState.frecuencia : '') + (diagState.esfuerzo ? '\nTiempo: ' + diagState.esfuerzo : '');
-    const waUrlEsc = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent(waMsgEsc);
-    const btnEsc = document.createElement('a');
-    btnEsc.href = waUrlEsc; btnEsc.target = '_blank'; btnEsc.className = 'btn-dark'; btnEsc.style.cssText = 'font-size:12px;padding:10px 16px';
-    btnEsc.textContent = 'Hablar con Daniel →';
-    btnEsc.addEventListener('click', () => {
-      trackEvent('cta_seleccionado', { cta: 'escalado' });
-      trackEvent('whatsapp_iniciado', { origen: 'escalado_baja_confianza' });
-      saveLead({ tipo_solicitud: 'escalado', problema_original: diagState.textoOriginal, diagnostico: 'Sin match automático — revisión manual', solucion_propuesta: null, nivel_oportunidad: 'Por confirmar', siguiente_paso: 'Conversación directa', frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen });
-    });
-    ctasEsc.appendChild(btnEsc);
-    requestAnimationFrame(() => card.classList.add('show'));
-    b.scrollTop = b.scrollHeight;
-    trackEvent('diagnostico_completado', { tipo: diagState.tipo, confianza: diagState.confianza });
-    trackEvent('escalado_baja_confianza', { texto: diagState.textoOriginal });
-    actualizarCtaFinal({
-      heading: 'Ya le escribiste a Daniel<br/><em>tu caso puntual.</em>',
-      sub: diagState.textoOriginal,
-      waUrl: waUrlEsc,
-      waLabel: 'Hablar con Daniel'
-    });
-    return;
-  }
-
-  // ============ RESULTADO CON CONFIANZA MEDIA/ALTA ============
-  const d = DIAGNOSTICOS[diagState.tipo] || DIAGNOSTICOS.default;
-  const p = personalizarDiagnostico(d, diagState.textoOriginal);
-  const esfuerzoTxt = (diagState.esfuerzo && diagState.esfuerzo !== 'No estoy seguro') ? diagState.esfuerzo + ' por ciclo' : 'Por confirmar en la conversación';
-  const badgeClass = d.potencial === 'Alto' ? '' : (d.potencial === 'Medio' ? 'med' : 'low');
-  const caso = diagState.casoSugerido;
-  const casoRow = caso ? ('<div class="result-item full"><div class="result-l">Ya resolvimos un patrón parecido</div><div class="result-v">' + caso.resumen + ' <span class="ver-caso-link" style="text-decoration:underline;cursor:pointer;font-weight:600">Ver caso real →</span></div></div>') : '';
-  card.innerHTML = '<div class="result-badge ' + badgeClass + '">● Oportunidad detectada · Potencial ' + d.potencial + '</div>' +
-    '<div class="result-grid">' +
-      '<div class="result-item full"><div class="result-l">Problema identificado</div><div class="result-v">' + p.problema + '</div></div>' +
-      '<div class="result-item"><div class="result-l">Frecuencia</div><div class="result-v">' + (diagState.frecuencia || '—') + '</div></div>' +
-      '<div class="result-item"><div class="result-l">Esfuerzo estimado</div><div class="result-v">' + esfuerzoTxt + '</div></div>' +
-      '<div class="result-item full"><div class="result-l">Posible solución</div><div class="result-v">' + p.solucion + '</div></div>' +
-      casoRow +
-      '<div class="result-item full"><div class="result-l">Siguiente paso recomendado</div><div class="result-v">' + p.siguiente + '</div></div>' +
-    '</div>' +
-    '<div class="result-sep"></div>' +
-    '<div class="result-ctas"></div>';
-  b.appendChild(card);
-  const verCaso = card.querySelector('.ver-caso-link');
-  if (verCaso && caso) verCaso.addEventListener('click', () => {
-    trackEvent('cta_seleccionado', { cta: 'ver_caso_sugerido', caso: caso.id });
-    abrirModal(caso.modalId);
-  });
-  const ctas = card.querySelector('.result-ctas');
-  const waMsg = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos.\nMi problema: ' + diagState.textoOriginal + '\nFrecuencia: ' + (diagState.frecuencia || '-') + '\nDiagnóstico: ' + p.problema + '\nQuiero: ' + d.ctaLabel;
-  const waUrl = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent(waMsg);
-  const btnPrimary = document.createElement('a');
-  btnPrimary.href = waUrl; btnPrimary.target = '_blank'; btnPrimary.className = 'btn-dark'; btnPrimary.style.cssText = 'font-size:12px;padding:10px 16px';
-  btnPrimary.textContent = d.ctaLabel + ' →';
-  btnPrimary.addEventListener('click', () => {
-    trackEvent('cta_seleccionado', { cta: d.ctaTipo });
-    trackEvent(d.ctaTipo === 'prototipo' ? 'prototipo_solicitado' : 'conversion', { tipo: d.ctaTipo });
-    trackEvent('whatsapp_iniciado', { origen: 'resultado_diagnostico' });
-    saveLead({ tipo_solicitud: d.ctaTipo, problema_original: diagState.textoOriginal, diagnostico: p.problema, solucion_propuesta: p.solucion, nivel_oportunidad: d.potencial, siguiente_paso: p.siguiente, frecuencia: diagState.frecuencia, esfuerzo: diagState.esfuerzo, origen: diagState.origen, caso_sugerido: caso ? caso.id : null });
-  });
-  const waUrl2 = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent('Hola Daniel, quiero hablar sobre: ' + diagState.textoOriginal);
-  const btnSecondary = document.createElement('a');
-  btnSecondary.href = waUrl2; btnSecondary.target = '_blank'; btnSecondary.className = 'btn-ghost'; btnSecondary.style.cssText = 'font-size:12px;padding:10px 16px';
-  btnSecondary.textContent = 'Quiero hablar con alguien';
-  btnSecondary.addEventListener('click', () => trackEvent('whatsapp_iniciado', { origen: 'hablar_con_alguien' }));
-  ctas.appendChild(btnPrimary); ctas.appendChild(btnSecondary);
-  requestAnimationFrame(() => card.classList.add('show'));
-  b.scrollTop = b.scrollHeight;
-  trackEvent('diagnostico_completado', { tipo: diagState.tipo, potencial: d.potencial, confianza: diagState.confianza });
-  trackEvent('resultado_mostrado', { tipo: diagState.tipo });
-  actualizarCtaFinal({
-    heading: 'Ya tienes un diagnóstico<br/>listo. <em>Retómalo cuando quieras.</em>',
-    sub: p.problema + ' — ' + p.siguiente,
-    waUrl: waUrl,
-    waLabel: d.ctaLabel
-  });
 }
 
 // ============ HERO — input principal ============
@@ -1356,7 +1623,7 @@ function submitHero() {
     if (ii) { ii.value = v; setTimeout(() => ii.focus(), 400); }
     return;
   }
-  iniciarDiagnostico(v, 'hero');
+  iniciarCaso(v, 'hero');
 }
 heroSubmit.addEventListener('click', submitHero);
 heroInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitHero(); } });
@@ -1364,6 +1631,21 @@ document.querySelectorAll('#heroExamples .ex-chip').forEach(c => c.addEventListe
   heroInput.value = c.dataset.t;
   heroInput.focus();
 }));
+
+// ============ CHAT — input de respuestas dentro de un caso activo ============
+// Enter y botón llaman a la misma función; ella es la única puerta de
+// entrada para respuestas de seguimiento (texto libre, no solo chips).
+const chatFieldInput = document.getElementById('chatFieldInput');
+const chatFieldSend = document.getElementById('chatFieldSend');
+function enviarRespuestaChat() {
+  if (!chatFieldInput) return;
+  const v = chatFieldInput.value;
+  if (!v.trim()) return;
+  chatFieldInput.value = '';
+  responderCaso(v);
+}
+if (chatFieldSend) chatFieldSend.addEventListener('click', enviarRespuestaChat);
+if (chatFieldInput) chatFieldInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); enviarRespuestaChat(); } });
 
 // ============ PUERTAS DE ENTRADA ============
 document.getElementById('doorProblema').addEventListener('click', () => {
