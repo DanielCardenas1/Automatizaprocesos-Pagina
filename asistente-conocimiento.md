@@ -41,19 +41,44 @@ Reglas de posicionamiento (no negociables, vienen del brief original del negocio
 
 ## 3. Formación y trayectoria profesional
 
-- Administrador de Empresas, con especialización en Alta Gerencia.
-- Formación internacional en **Experiencia del Cliente (CX)** por **EUDE Business School** (España).
-- Experiencia laboral en:
-  - **SENA** — procesos financieros nacionales (incluye el caso de liquidación pensional y el de evaluación de proyectos productivos, ver sección 7).
-  - **Fuerzas Militares** — estructuras de costos para operaciones de restaurantes (ver caso ZEUS, sección 7).
-  - **Sector privado** — automatización documental para cumplimiento regulatorio (ver caso INVIMA, sección 7).
-- Frase de posicionamiento personal (bio real del sitio):
+Fuente de esta sección: `BASE_MAESTRA_PERFIL.md` y `PERFIL_PERSONAL_CONTEXTO.md`, carpeta "Postulacion Vacantes" del escritorio — documento propio de Daniel, verificado línea por línea contra actas de grado, diplomas y certificaciones laborales oficiales. Confirmado 2026-08-29.
+
+**Datos profesionales:** Tarjeta profesional T.P. 196684 (Administración de Empresas). Tunja, Boyacá.
+
+**Formación académica:**
+- **Especialización en Alta Gerencia** (virtual) — Fundación Universitaria del Área Andina — graduado **26 de febrero de 2026** (Acta de Grado No. 1037).
+- **Administrador de Empresas**, título profesional — Fundación Universitaria del Área Andina — graduado **9 de agosto de 2024** (Acta de Grado No. 1015).
+- Especialidad en CX: Customer Experience (250 horas, nota A/Sobresaliente) — **EUDE Business School**, Madrid (virtual) — completado 24 de marzo de 2025. Incluye módulos de CX e Inteligencia Artificial, User Experience Design, User Interface Design.
+- Bachiller Académico con Orientación Militar — Colegio Militar Coronel Juan José Rondón, Tunja — graduado 2011.
+
+**Formación complementaria** (con certificado):
+- Bootcamp Análisis de Datos Nivel Básico (159 horas) — Talento Tech / MinTIC — completado 28 de julio de 2026.
+- Data Fundamentals — IBM SkillsBuild — credencial expedida octubre de 2025.
+- Microsoft Copilot (9 horas) — Platzi — aprobado 31 de agosto de 2025. **Es el curso que usó para automatizar el caso de liquidación pensional del SENA** (ver sección 5).
+- Uso del SECOP II para Ciudadanos — Colombia Compra Eficiente — 3 de febrero de 2026.
+- Servicio al Cliente (48 horas) — SENA — 3 de abril de 2024.
+- Reconocedor Predial Urbano Rural (60 horas) — IGAC — 14 de marzo de 2025.
+- Herramienta de Captura de Información Catastral Alfanumérica (22 horas) — IGAC — 25 de septiembre de 2025.
+- Seminario de Marketing Sensorial y Experiencial (6 horas) — Universidad Antonio Nariño, Tunja — 9 de noviembre de 2023.
+
+⚠️ **Límite explícito de la propia Base Maestra de Daniel — no sobrevender:** el bootcamp de análisis de datos es de **nivel básico**. No hay evidencia de Power BI, ni de SQL/Python de nivel intermedio o superior, ni de herramientas de automatización dedicadas (Power Automate, RPA). La automatización que hace Daniel es con Excel/Copilot/asistentes de IA generalistas, no con software de automatización especializado. El asistente **nunca** debe afirmar que Daniel domina Power BI, RPA formal, o SQL/Python más allá de nivel básico asistido por IA.
+
+**Experiencia laboral relevante para Automatiza Procesos:**
+- **SENA** (oct. 2024 – dic. 2025, dos contratos de prestación de servicios) — Dirección Administrativa y Financiera, Grupo de Recaudo y Cartera. De aquí salen los casos de liquidación pensional, conciliación bancaria e INVIMA (sección 6).
+- **Círculo de Suboficiales de las Fuerzas Militares — Sede Los Trupillos**, Santa Marta (2024) — Analista de Costos (de aquí sale el caso ZEUS) y Ejecutivo Comercial.
+- **Aldasan Ltda.**, Tunja — Representante Legal (ene. 2021 – jun. 2024) — dirección administrativa, legal y contractual; licitaciones públicas.
+- **Construcol Ltda.**, Tunja — Administrador Operativo (oct. 2019 – oct. 2020) y, antes, Almacenista y Encargado de Compras en Construcol/Arconstrucol (abr. 2016 – feb. 2019).
+- **HENCA (Asesorías y Servicios Contables)**, Tunja — Auxiliar de Archivo Contable (2014–2015).
+
+**Frase de posicionamiento personal (bio real del sitio):**
 
   > "Mi formación en Administración y Alta Gerencia me enseñó algo que ningún curso de tecnología puede: entender con precisión qué duele en una organización."
 
   > "La mayoría de quienes automatizan procesos vienen del mundo técnico y aprenden sobre el negocio. Yo vengo del negocio y aprendí la tecnología. Esa diferencia define cómo abordo cada proyecto: primero entiendo qué duele en la operación, luego diseño la solución más simple y efectiva para resolverlo."
 
-🔲 **Pendiente:** ¿alguna certificación técnica formal (cursos, bootcamps, certificaciones de Python/datos/IA) que no esté listada abajo?
+⚠️ **Dos cifras que la propia Base Maestra de Daniel marca como sin resolver — no cambiar en el sitio sin que Daniel confirme cuál es correcta:**
+1. Caso liquidación pensional: el sitio dice "de **10** a 456 casos/mes"; la Base Maestra (consistente en sus 3 versiones de CV) dice "de **8** casos/mes a 456".
+2. Caso ZEUS (control de costos): el sitio dice margen "**15%** → 24%"; la Base Maestra encontró la cifra **18%→24%** en una versión de CV y **15%→24%** en otras dos, sin resolver cuál es la correcta.
 
 ---
 
@@ -87,12 +112,13 @@ Herramientas de IA que Daniel usa y domina (confirmado por Daniel, 2026-08-29):
 
 Esto son herramientas de **uso aplicado** (asistentes de desarrollo y generación de contenido), no investigación de modelos. El asistente puede decir con seguridad que Daniel usa asistentes de IA (Copilot, Claude Code) como parte de cómo construye los prototipos y automatizaciones — es real y verificable, no una promesa vacía.
 
+✅ **Pregunta 2 respondida** (fuente: CV personal, confirmado 2026-08-29): el caso de **liquidación pensional del SENA** (caso real #1, sección 6 — 456 casos/mes, 112 entidades) se diseñó y automatizó **con apoyo de Microsoft Copilot** (formación: Curso Microsoft Copilot, Platzi, 9 horas, 2025). Esto sí es un caso real de IA integrada a un flujo de negocio de un cliente/empleador, con resultado medido — el asistente puede citarlo así: "el caso de liquidación pensional se automatizó con apoyo de Microsoft Copilot".
+
 🔲 **Sigue pendiente** (no afirmar sin confirmación):
 1. ¿Sabes de prompt engineering, RAG, fine-tuning, agentes autónomos, o tu conocimiento es más de "uso aplicado" de herramientas ya hechas? (la evidencia actual apunta a uso aplicado, pero no está confirmado explícitamente)
-2. ¿Automatizaciones con IA integradas a flujos de negocio de un cliente (ej. clasificar correos, generar documentos con IA, chatbots reales), más allá del motor de diagnóstico por reglas de la propia página?
-3. ¿Algún caso real con cliente donde el resultado haya dependido de IA generativa (no solo de que Daniel la haya usado para construir la herramienta)? Si existe, se agrega como caso nuevo en la sección 6 — nunca se inventa uno.
+2. ¿Algún otro caso real (además del de liquidación pensional) donde el resultado haya dependido de IA generativa? Si existe, se agrega como caso nuevo en la sección 6 — nunca se inventa uno.
 
-Sin lo anterior, el asistente puede decir que Daniel **usa** IA como herramienta de desarrollo (hecho confirmado), pero **no debe** afirmar experiencia en prompt engineering, RAG, agentes autónomos, ni citar un caso de cliente con IA que no esté documentado.
+Sin lo anterior, el asistente puede decir que Daniel **usa** IA como herramienta de desarrollo y que la usó en el caso de liquidación pensional (hechos confirmados), pero **no debe** afirmar experiencia en prompt engineering, RAG, agentes autónomos, ni citar otro caso de cliente con IA que no esté documentado.
 
 ---
 
