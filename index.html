@@ -569,6 +569,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   <div class="casos-header rev" style="padding-bottom:32px">
     <div class="sec-eyebrow" style="text-align:center">Casos reales · 01</div>
     <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Resultados concretos<br/><em>en proyectos reales.</em></h2>
+    <p class="sec-sub" style="text-align:center;margin:10px auto 0;max-width:480px">Estos son los casos donde ya hay un resultado medido — la mayoría llegaron por procesos grandes porque ahí es donde he tenido acceso hasta ahora. El mismo análisis aplica sin importar el tamaño del negocio: el diagnóstico de arriba es igual de válido si tu proceso mueve 12 archivos al mes que si mueve 800.</p>
   </div>
 
   <div class="casos-grid">
@@ -1479,9 +1480,11 @@ function cerrarCaso() {
   // es la correcta — se analiza el problema primero, y esto se lo dice.
   const solucionPropuestaRow = caso.hechos.solucion_propuesta_usuario ? ('<div class="result-item full"><div class="result-l">Sobre lo que mencionaste</div><div class="result-v">Puede que termine siendo eso — pero primero conviene validar el problema y buscar la forma más simple de resolverlo, antes de asumir la tecnología.</div></div>') : '';
   // Cierre real: no dejar que la persona tenga que bajar a buscar el precio
-  // por su cuenta. Cita uno de los 3 rangos ya documentados, nunca uno nuevo.
+  // por su cuenta — pero tampoco mezclarlo como si fuera un dato más del
+  // diagnóstico. Va como nota chica antes de los botones, igual de honesto
+  // pero sin competir con "quiero hablar con Daniel" por la atención.
   const precioRef = (viab.codigo === '🟢' || viab.codigo === '🟡') ? PRECIO_REFERENCIA[caso.arquetipo] : null;
-  const precioRow = precioRef ? ('<div class="result-item full"><div class="result-l">Rango de referencia</div><div class="result-v">' + precioRef + ' · cada caso es distinto, el número exacto sale de hablar con Daniel</div></div>') : '';
+  const precioNota = precioRef ? ('<div style="font-size:10.5px;color:var(--ink3);font-family:\'DM Mono\',monospace;text-align:center;margin:2px 0 10px">Rango de referencia: ' + precioRef + ' · cada caso es distinto</div>') : '';
 
   card.innerHTML = '<div class="result-badge ' + viab.clase + '">' + viab.codigo + ' ' + viab.label + '</div>' +
     '<div class="result-grid">' +
@@ -1489,12 +1492,12 @@ function cerrarCaso() {
       '<div class="result-item full"><div class="result-l">Así funciona hoy</div><div class="result-v">' + flujo.actual + '</div></div>' +
       ((viab.codigo === '🟢' || viab.codigo === '🟡') ? '<div class="result-item full"><div class="result-l">Una forma posible de hacerlo</div><div class="result-v">' + flujo.propuesto + '</div></div>' : '') +
       solucionPropuestaRow +
-      precioRow +
       casoRow +
       '<div class="result-item full"><div class="result-l">Qué falta confirmar</div><div class="result-v">' + faltanHtml + '</div></div>' +
       '<div class="result-item full"><div class="result-l">Por qué</div><div class="result-v">' + viab.motivo + '</div></div>' +
     '</div>' +
     '<div class="result-sep"></div>' +
+    precioNota +
     '<div class="result-ctas"></div>';
   b.appendChild(card);
 
