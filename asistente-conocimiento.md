@@ -76,9 +76,10 @@ Fuente de esta sección: `BASE_MAESTRA_PERFIL.md` y `PERFIL_PERSONAL_CONTEXTO.md
 
   > "La mayoría de quienes automatizan procesos vienen del mundo técnico y aprenden sobre el negocio. Yo vengo del negocio y aprendí la tecnología. Esa diferencia define cómo abordo cada proyecto: primero entiendo qué duele en la operación, luego diseño la solución más simple y efectiva para resolverlo."
 
-⚠️ **Dos cifras que la propia Base Maestra de Daniel marca como sin resolver — no cambiar en el sitio sin que Daniel confirme cuál es correcta:**
-1. Caso liquidación pensional: el sitio dice "de **10** a 456 casos/mes"; la Base Maestra (consistente en sus 3 versiones de CV) dice "de **8** casos/mes a 456".
-2. Caso ZEUS (control de costos): el sitio dice margen "**15%** → 24%"; la Base Maestra encontró la cifra **18%→24%** en una versión de CV y **15%→24%** en otras dos, sin resolver cuál es la correcta.
+✅ **Corregido (2026-08-29):** el caso de liquidación pensional pasó de "10" a "**8** casos/mes" en todo el sitio y en la sección 6, siguiendo la Base Maestra (consistente en sus 3 versiones de CV). El incremento de capacidad pasó de ×45 a **×57** (456/8), y ya no dice "con 4 personas" en el problema — esa cifra pertenece a un logro distinto (reducción de un proceso administrativo aparte), no a este caso.
+
+⚠️ **Sigue pendiente — no cambiar en el sitio sin que Daniel confirme:**
+Caso ZEUS (control de costos): el sitio dice margen "**15%** → 24%"; la propia Base Maestra de Daniel encontró la cifra **18%→24%** en una versión de CV y **15%→24%** en otras dos — la marca explícitamente como discrepancia sin resolver, no como algo que ya sepa cuál es correcto.
 
 ---
 
@@ -127,9 +128,9 @@ Sin lo anterior, el asistente puede decir que Daniel **usa** IA como herramienta
 > El asistente puede citar estos casos tal cual, pero **nunca puede inventar uno nuevo ni cambiar una cifra**. Si un visitante describe un problema que no calza con ninguno, el asistente debe decir que es un caso nuevo a evaluar, no forzar un caso existente.
 
 **1. Liquidación pensional — Sector público · educación (SENA)**
-- Problema: revisar documentos legales, consultar bases de datos, redactar cartas de cobro en Word, generar un PDF por caso. Techo manual: 10 casos/mes.
-- Solución: automatización de lectura de bases de datos, cálculo de cuotas proporcionales, generación de cartas y conversión a PDF.
-- Resultado: **456 casos/mes** (antes 10) · **112 entidades gestionadas** · **×45** incremento de capacidad.
+- Problema: revisar documentos legales, consultar bases de datos, redactar cartas de cobro en Word, generar un PDF por caso. Techo manual: 8 casos/mes.
+- Solución: automatización de lectura de bases de datos, cálculo de cuotas proporcionales, generación de cartas y conversión a PDF, con apoyo de Microsoft Copilot.
+- Resultado: **456 casos/mes** (antes 8) · **112 entidades gestionadas** · **×57** incremento de capacidad.
 
 **2. Conciliación bancaria — Sector público · financiero**
 - Problema: 138 sedes generaban pagos descargados del banco en Excel. Cruzar cada movimiento contra facturas por sede requería 4 personas durante 5 días seguidos.

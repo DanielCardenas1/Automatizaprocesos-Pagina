@@ -647,9 +647,9 @@ Entre ellos:
 
 ### Liquidación pensional
 
-456 casos/mes frente a 10 anteriormente.
+456 casos/mes frente a 8 anteriormente.
 112 entidades.
-×45 de capacidad.
+×57 de capacidad.
 
 ### Conciliación bancaria
 
