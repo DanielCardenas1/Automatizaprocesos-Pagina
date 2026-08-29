@@ -859,13 +859,28 @@ function trackEvent(name, data) {
 }
 trackEvent('visita');
 
-// ============ LEADS (MVP, sin backend) ============
-// Cuando exista un backend, reemplazar por un fetch('/api/leads', {method:'POST', body: JSON.stringify(lead)})
+// ============ LEADS ============
+// El localStorage por sí solo no sirve de nada: vive en el navegador del
+// visitante, Daniel nunca lo ve si esa persona no toca un CTA. Web3Forms
+// manda cada lead a danielkadioz@gmail.com sin necesitar backend propio.
+const WEB3FORMS_ACCESS_KEY = '9b941d91-076c-4b07-bbac-3d8ec2abb159';
 function saveLead(lead) {
+  const conFecha = Object.assign({ fecha: new Date().toISOString() }, lead);
   try {
     const leads = JSON.parse(localStorage.getItem('ap_leads') || '[]');
-    leads.push(Object.assign({ fecha: new Date().toISOString() }, lead));
+    leads.push(conFecha);
     localStorage.setItem('ap_leads', JSON.stringify(leads));
+  } catch (e) {}
+  try {
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.assign({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: 'Nuevo lead — Automatiza Procesos',
+        from_name: 'Diagnóstico Automatiza Procesos'
+      }, conFecha))
+    }).catch(() => {});
   } catch (e) {}
 }
 
@@ -1511,6 +1526,10 @@ function cerrarCaso() {
   requestAnimationFrame(() => card.classList.add('show'));
   b.scrollTop = b.scrollHeight;
   trackEvent('diagnostico_completado', { arquetipo: caso.arquetipo, viabilidad: viab.codigo, preguntas: caso.preguntasHechas.length });
+  // Se manda el lead apenas se muestra el resultado, sin esperar a que la
+  // persona toque un botón — si alguien recibe un 🟢 y cierra la pestaña
+  // sin escribir por WhatsApp, este es el único registro que sobrevive.
+  saveLead({ tipo_solicitud: 'diagnostico_completado', problema_original: caso.textoOriginal, arquetipo: caso.arquetipo, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, caso_sugerido: caso.casoSugerido ? caso.casoSugerido.id : null });
   actualizarCtaFinal({
     heading: 'Ya tienes un diagnóstico<br/>listo. <em>Retómalo cuando quieras.</em>',
     sub: viab.codigo + ' ' + viab.label + ' — ' + caso.textoOriginal,
