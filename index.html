@@ -202,6 +202,11 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 @media(max-width:640px){
   .page-wrap{margin:0;border-radius:0}
   .hero{padding:36px 24px}
+  /* En desktop el pill "Disponible" flota a la derecha del avatar
+     (left:calc(100% + 10px)); en pantallas angostas eso lo saca del
+     viewport. Aquí se centra debajo del avatar en vez de al lado. */
+  .hero-name-pill{position:static;display:inline-flex;margin-top:10px}
+  .hero-avatar-wrap{display:flex;flex-direction:column;align-items:center}
   .svc-grid{grid-template-columns:1fr}
   .casos-grid{grid-template-columns:1fr}
   .caso-card:nth-child(odd){border-right:none}
