@@ -1522,25 +1522,57 @@ function cerrarCaso() {
     // donde más vale dejar la puerta abierta para después, no cerrarla.
     ('<div class="result-sep" style="margin:14px 0 10px"></div>' +
       '<div class="result-contact-txt" style="font-size:11.5px;color:var(--ink2);margin-bottom:8px">' + (viab.codigo === '🔴' ? '¿Quieres que te avise si esto cambia (por ejemplo, si el volumen crece)? Déjame tu WhatsApp o correo.' : '¿Prefieres que te escriba Daniel en vez de escribirle tú? Déjale tu WhatsApp o correo.') + '</div>' +
+      '<div class="result-contact-form">' +
       '<div class="chat-inp" style="padding:0;background:none;border-top:none">' +
         '<input type="text" class="chat-field result-contact-input" placeholder="Tu WhatsApp o correo" autocomplete="off">' +
         '<button type="button" class="chat-send result-contact-send" aria-label="Enviar">→</button>' +
+      '</div>' +
+      // Aviso de tratamiento de datos + consentimiento explícito, exigido
+      // por Ley 1581 de 2012 (Habeas Data, Colombia) para cualquier dato
+      // de contacto que se recoja. Colapsado por defecto para no estorbar.
+      '<div class="result-consent" style="margin-top:8px">' +
+        '<span class="result-consent-toggle" style="font-size:10px;color:var(--ink3);text-decoration:underline;cursor:pointer;font-family:\'DM Mono\',monospace">Cómo uso tus datos ↓</span>' +
+        '<div class="result-consent-text" style="display:none;font-size:10px;color:var(--ink2);line-height:1.6;background:var(--s);border:0.5px solid var(--bdr);border-radius:8px;padding:10px;margin-top:6px">Al dejar tu WhatsApp o correo, autorizas a Daniel Cárdenas Espinosa (Automatiza Procesos) a contactarte sobre el diagnóstico que hiciste aquí. Ese dato, junto con el problema que describiste, se envía por correo a danielkadioz@gmail.com a través de un proveedor externo (Web3Forms) que solo se usa para entregar el mensaje — no se vende ni se comparte con nadie más. Puedes pedir que se elimine tu información cuando quieras escribiendo a danielkadioz@gmail.com. Tratamiento de datos conforme a la Ley 1581 de 2012 (Habeas Data, Colombia).</div>' +
+        '<label style="display:flex;align-items:flex-start;gap:6px;margin-top:8px;font-size:10.5px;color:var(--ink2);cursor:pointer">' +
+          '<input type="checkbox" class="result-consent-check" style="margin-top:2px;flex-shrink:0">' +
+          '<span>He leído y estoy de acuerdo con el uso de mis datos.</span>' +
+        '</label>' +
+        '<div class="result-consent-warn" style="display:none;font-size:10px;color:#dc2626;margin-top:4px">Marca la casilla para poder enviarlo.</div>' +
+      '</div>' +
       '</div>');
   b.appendChild(card);
 
   const verCaso = card.querySelector('.ver-caso-link');
   if (verCaso && caso.casoSugerido) verCaso.addEventListener('click', () => { trackEvent('cta_seleccionado', { cta: 'ver_caso_sugerido', caso: caso.casoSugerido.id }); abrirModal(caso.casoSugerido.modalId); });
 
+  const consentToggle = card.querySelector('.result-consent-toggle');
+  const consentText = card.querySelector('.result-consent-text');
+  if (consentToggle && consentText) {
+    consentToggle.addEventListener('click', () => {
+      const abierto = consentText.style.display !== 'none';
+      consentText.style.display = abierto ? 'none' : 'block';
+      consentToggle.textContent = abierto ? 'Cómo uso tus datos ↓' : 'Cómo uso tus datos ↑';
+    });
+  }
+
   const contactInput = card.querySelector('.result-contact-input');
   const contactSend = card.querySelector('.result-contact-send');
+  const consentCheck = card.querySelector('.result-consent-check');
+  const consentWarn = card.querySelector('.result-consent-warn');
   if (contactInput && contactSend) {
     const enviarContacto = () => {
       const valor = contactInput.value.trim();
       if (!valor) return;
+      if (consentCheck && !consentCheck.checked) {
+        if (consentWarn) consentWarn.style.display = 'block';
+        if (consentText) consentText.style.display = 'block';
+        return;
+      }
+      if (consentWarn) consentWarn.style.display = 'none';
       trackEvent('cta_seleccionado', { cta: 'contacto_directo' });
       const esFuturo = viab.codigo === '🔴';
       saveLead({ tipo_solicitud: esFuturo ? 'Avisar si cambia' : 'Quiere que le escriban', contacto: valor, problema_original: caso.textoOriginal, arquetipo: caso.arquetipo, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, email_subject: esFuturo ? '🔔 Avisar más adelante — Automatiza Procesos' : '📞 Alguien quiere que le escribas — Automatiza Procesos' });
-      const wrap = contactInput.closest('.chat-inp');
+      const wrap = contactInput.closest('.result-contact-form');
       if (wrap) wrap.outerHTML = '<div style="font-size:11.5px;color:var(--ink2)">' + (esFuturo ? 'Listo — te avisamos si esto cambia.' : 'Listo — Daniel te escribe pronto.') + '</div>';
     };
     contactSend.addEventListener('click', enviarContacto);
