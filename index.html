@@ -1497,6 +1497,10 @@ function cerrarCaso() {
   // pero sin competir con "quiero hablar con Daniel" por la atención.
   const precioRef = (viab.codigo === '🟢' || viab.codigo === '🟡') ? PRECIO_REFERENCIA[caso.arquetipo] : null;
   const precioNota = precioRef ? ('<div style="font-size:10.5px;color:var(--ink3);font-family:\'DM Mono\',monospace;text-align:center;margin:2px 0 10px">Rango de referencia: ' + precioRef + ' · cada caso es distinto</div>') : '';
+  // Responde de frente a la objeción más común ("esto mismo me lo da una
+  // IA gratis") justo en el momento en que a alguien se le ocurre pensarlo:
+  // recién vio el diagnóstico y está por decidir si vale la pena escribir.
+  const diferenciadorNota = (viab.codigo === '🟢' || viab.codigo === '🟡') ? ('<div style="font-size:11px;color:var(--ink2);text-align:center;margin:0 0 12px;line-height:1.5">Esto no es una respuesta genérica — es el primer paso para que Daniel lo construya y lo pruebe con tus datos reales.</div>') : '';
 
   card.innerHTML = '<div class="result-badge ' + viab.clase + '">' + viab.codigo + ' ' + viab.label + '</div>' +
     '<div class="result-grid">' +
@@ -1509,6 +1513,7 @@ function cerrarCaso() {
       '<div class="result-item full"><div class="result-l">Por qué</div><div class="result-v">' + viab.motivo + '</div></div>' +
     '</div>' +
     '<div class="result-sep"></div>' +
+    diferenciadorNota +
     precioNota +
     '<div class="result-ctas"></div>' +
     // Captura de contacto opcional — el texto cambia según el resultado:
