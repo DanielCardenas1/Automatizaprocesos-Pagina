@@ -402,13 +402,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 .result-sep{height:0.5px;background:var(--bdr);margin:14px 0}
 .result-ctas{display:flex;flex-wrap:wrap;gap:8px}
 
-/* PASO */
+/* PASO — layout reutilizado por "Un negocio, muchos recorridos" y "De un problema a un recorrido" */
 .paso-section{padding:52px 40px;background:var(--s);border-bottom:0.5px solid var(--bdr)}
-.paso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
-.paso-node{background:var(--w);border:0.5px solid var(--bdr);border-radius:14px;padding:20px 16px}
-.paso-letter{width:32px;height:32px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-bottom:12px;font-family:'DM Mono',monospace}
-.paso-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
-.paso-desc{font-size:11.5px;color:var(--ink2);line-height:1.55}
 
 /* Insignia "Próximamente" reutilizada por los casos placeholder (Al Natural, SENA Vitrina) */
 .cat-badge{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--ink3);background:var(--w);border:0.5px solid var(--bdr);padding:3px 8px;border-radius:100px;display:inline-block;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase}
@@ -440,7 +435,6 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 .model-d{font-size:11px;color:var(--ink2);line-height:1.55}
 
 @media(max-width:640px){
-  .paso-grid{grid-template-columns:1fr 1fr;gap:10px}
   .model-grid{grid-template-columns:1fr 1fr}
   .result-grid{grid-template-columns:1fr}
   .proto-flow{gap:2px 2px;padding:14px 8px}
@@ -462,7 +456,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <a href="#diagnostico" class="nav-btn">Qué podemos mejorar</a>
   </div>
   <div class="nav-links">
-    <a href="#paso">Cómo lo hacemos</a>
+    <a href="#metodo">Cómo lo hacemos</a>
     <a href="#casos">Ejemplos</a>
     <a href="#perfil">Sobre Daniel</a>
     <a href="https://wa.me/573005333763" target="_blank" class="nav-btn dark">WhatsApp →</a>
@@ -479,7 +473,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 
   <h1 class="hero-h">Tu negocio ya funciona.<br/><em>Hagamos que sea más fácil para tus clientes.</em></h1>
-  <p class="hero-sub">Diseñamos y automatizamos el recorrido digital de tu negocio para que tus clientes puedan encontrar lo que necesitan, consultar, elegir, comprar, agendar o volver sin complicaciones.</p>
+  <p class="hero-sub">Diseñamos y construimos el recorrido digital de tu negocio para que tus clientes puedan encontrar lo que necesitan, consultar, elegir, comprar, agendar o volver sin complicaciones.</p>
 
   <div class="hero-input-card">
     <textarea class="hero-textarea" id="heroInput" rows="2" placeholder="O cuéntame el problema con tus propias palabras..."></textarea>
@@ -583,19 +577,6 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
-<!-- PASO -->
-<section class="paso-section rev" id="paso">
-  <div class="sec-eyebrow" style="text-align:center">Cómo trabajamos</div>
-  <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">Un camino simple,<br/><em>no una metodología aburrida.</em></h2>
-  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Esto es lo que pasa después de que cuentas tu problema. Le decimos PASO.</p>
-  <div class="paso-grid">
-    <div class="paso-node rev"><div class="paso-letter">P</div><div class="paso-title">Problema</div><div class="paso-desc">Entendemos qué está pasando hoy en tu operación, en tus propias palabras.</div></div>
-    <div class="paso-node rev d1"><div class="paso-letter">A</div><div class="paso-title">Análisis</div><div class="paso-desc">Revisamos el proceso, identificamos el desperdicio y confirmamos si hay una oportunidad real.</div></div>
-    <div class="paso-node rev d2"><div class="paso-letter">S</div><div class="paso-title">Solución</div><div class="paso-desc">Diseñamos la forma más simple de resolverlo y, si hace falta, construimos un prototipo que lo demuestre.</div></div>
-    <div class="paso-node rev d3"><div class="paso-letter">O</div><div class="paso-title">Operación</div><div class="paso-desc">Implementamos, mantenemos o convertimos la solución en una herramienta que puedas reutilizar.</div></div>
-  </div>
-</section>
-
 <!-- CASOS REALES -->
 <section id="casos">
   <div class="casos-header rev" style="padding-bottom:32px">
@@ -609,8 +590,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <!-- 1. Hojaldito — único caso actual centrado en la experiencia del cliente (catálogo + calculadora + WhatsApp), no en un proceso interno. -->
     <div class="caso-card rev">
       <div class="caso-tag"><div class="caso-sector"></div>Sector privado · alimentos</div>
-      <div class="caso-title">Presencia digital<br/><em>para negocio de hojaldre</em></div>
-      <div class="caso-desc">Un negocio de hojaldre congelado premium dirigido a otros negocios no contaba con ninguna presencia digital. Sus clientes potenciales no podían ver el catálogo, entender el modelo de distribución ni calcular la rentabilidad de revender el producto. Se desarrolló una landing page profesional con catálogo completo, calculadora de márgenes para redistribuidores y contacto directo por WhatsApp, lista en menos de una semana.</div>
+      <div class="caso-title">Recorrido comercial<br/><em>para un negocio de hojaldre</em></div>
+      <div class="caso-desc">Un negocio de hojaldre congelado premium no tenía cómo lograr que un redistribuidor lo descubriera, entendiera el modelo de distribución, calculara si el negocio le convenía y diera el siguiente paso. Se diseñó ese recorrido completo — descubrir, entender, calcular la oportunidad, probar y contactar — con catálogo, calculadora de márgenes y contacto directo por WhatsApp, listo en menos de una semana.</div>
       <div class="caso-metrics">
         <div class="caso-m"><div class="caso-mn">&lt;1sem</div><div class="caso-ml">tiempo de<br/>entrega</div></div>
         <div class="caso-m"><div class="caso-mn">$0</div><div class="caso-ml">costo mensual<br/>de operación</div></div>
@@ -834,7 +815,8 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   <div class="perfil-r rev d1">
     <div class="sec-eyebrow">Sobre mí · 04</div>
     <h2 class="perfil-h">Entiendo el negocio.<br/>La tecnología<br/><em>es el medio.</em></h2>
-    <p class="perfil-p">Soy Administrador de Empresas y especialista en Alta Gerencia. Entiendo el negocio primero, y utilizo tecnología para convertir problemas concretos en experiencias y sistemas que funcionen.</p>
+    <p class="perfil-p">Analizo problemas de negocio, identifico dónde se está complicando la gestión o la interacción con las personas, y diseño soluciones digitales para hacerlo más sencillo.</p>
+    <p class="perfil-p">Dependiendo del problema, la solución puede ser una experiencia web, un sistema interno, una herramienta de información, un flujo comercial, una integración, automatización, o una combinación de tecnologías.</p>
     <ol style="margin:2px 0 18px;padding-left:18px;font-size:12.5px;color:var(--ink2);line-height:1.9">
       <li>Entender el problema empresarial</li>
       <li>Diseñar el recorrido del cliente</li>
@@ -842,7 +824,6 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
       <li>Construirlo con la tecnología adecuada</li>
     </ol>
     <p class="perfil-p">He trabajado en procesos financieros nacionales con el SENA, en estructuras de costos para operaciones de restaurantes de las Fuerzas Militares, y en automatización documental para cumplimiento regulatorio. Trabajo de forma completamente remota con organizaciones en toda Colombia.</p>
-    <p class="perfil-p">La mayoría de los prototipos que construyo se apoyan en asistentes de IA para moverme más rápido sin sacrificar criterio: GitHub Copilot dentro de VS Code y Claude Code para la parte de desarrollo, ChatGPT y Gemini como apoyo general, y Higgsfield cuando el proyecto necesita generación de imágenes.</p>
     <div class="perfil-sep"></div>
     <div class="ptools">
       <div class="ptool">
@@ -887,7 +868,7 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   <div class="fl">© 2026 Daniel Gerardo Cárdenas · Automatización de Procesos · Colombia</div>
   <div class="fr">
     <a href="#diagnostico" class="flnk">Qué podemos mejorar</a>
-    <a href="#paso" class="flnk">Cómo lo hacemos</a>
+    <a href="#metodo" class="flnk">Cómo lo hacemos</a>
     <a href="#casos" class="flnk">Ejemplos</a>
     <a href="#perfil" class="flnk">Sobre Daniel</a>
   </div>
@@ -973,7 +954,7 @@ const KB = {
     { id: 'pension', modalId: 'modal-pension', resumen: 'liquidación pensional: de 8 a 456 casos/mes automatizando cartas de cobro y cálculo de cuotas', senales: [/liquid/i, /pension/i, /cobr.*(otra|otras|otro)/i, /carta.*cobro/i, /resoluci/i] },
     { id: 'dxcr', modalId: 'modal-dxcr', resumen: 'conciliación bancaria: de 5 días a 1 hora cruzando pagos de 138 sedes contra facturas', senales: [/\bsede/i, /\bbanco\b/i, /concili/i, /cruz.*(movim|pago)/i, /extracto/i] },
     { id: 'zeus', modalId: 'modal-zeus', resumen: 'costeo de restaurantes: margen del 15% al 24% sabiendo cuánto se gana por plato', senales: [/cu[aá]nto\s+gan/i, /costo\s+por\s+(plato|producto|unidad)/i, /margen/i, /rentabilidad/i, /punto\s+de\s+venta/i] },
-    { id: 'hojaldre', modalId: 'modal-hojaldre', resumen: 'presencia digital para un negocio sin página: catálogo y calculadora de márgenes en menos de una semana', senales: [/sin\s+p[aá]gina/i, /cat[aá]logo/i, /redistribuidor/i, /revender/i] },
+    { id: 'hojaldre', modalId: 'modal-hojaldre', resumen: 'recorrido comercial para un redistribuidor: descubrir, entender, calcular la oportunidad y contactar, en menos de una semana', senales: [/sin\s+p[aá]gina/i, /cat[aá]logo/i, /redistribuidor/i, /revender/i] },
     { id: 'invima', modalId: 'modal-invima', resumen: 'llenado de fichas técnicas regulatorias: 600+ fichas generadas sin errores de transcripción', senales: [/ficha\s+t[eé]cnica/i, /registro\s+sanitario/i, /invima/i, /copi.*dato/i] },
     { id: 'evaluador', modalId: 'modal-evaluador', resumen: 'evaluación de proyectos de múltiples centros: de semanas a horas aplicando criterios de calificación', senales: [/eval[uú].*proyecto/i, /calific/i, /criterios?\s+de\s+(evaluaci|calificaci)/i, /centros?\s+de\s+formaci/i, /regional/i] },
     { id: 'icbf', modalId: 'modal-icbf', resumen: 'bot que carga registros uno por uno en un sistema web: 350 beneficiarios en 1h 47min', senales: [/cargue\s+masivo/i, /uno\s+(a|por)\s+uno/i, /beneficiario/i, /carg.*registro/i, /formulario\s+web/i, /sistema\s+web/i, /plataforma/i] }
@@ -2371,7 +2352,7 @@ window.mTab=function(prefix,tab,btn){
 </div><div class="modal-overlay" id="modal-hojaldre">
 <div class="modal-box">
   <div class="modal-header">
-    <div><div class="modal-tag">Sector privado · alimentos</div><div class="modal-title">Presencia digital<br/><em>para negocio de hojaldre</em></div></div>
+    <div><div class="modal-tag">Sector privado · alimentos</div><div class="modal-title">Recorrido comercial<br/><em>para un negocio de hojaldre</em></div></div>
     <div class="modal-close" onclick="cerrarModal('modal-hojaldre')">&#x2715;</div>
   </div>
   <div class="modal-body">
@@ -2381,12 +2362,12 @@ window.mTab=function(prefix,tab,btn){
     </div>
     <div class="mtc on" id="hojaldre-flujo">
       <div class="frow">
-        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Producto premium sin canal digital</div><div class="fd2">Negocio de hojaldre congelado que dependía del voz a voz. Los clientes potenciales no podían ver el catálogo ni calcular la rentabilidad de revender.</div></div>
+        <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Producto premium sin recorrido para llegar al redistribuidor</div><div class="fd2">Negocio de hojaldre congelado que dependía del voz a voz. El redistribuidor no tenía cómo descubrir el producto, entender el modelo ni calcular si el negocio le convenía.</div></div>
         <div class="fa">&#8594;</div>
-        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Landing page con catálogo y calculadora de márgenes</div><div class="fd2">Página en Next.js con catálogo completo y calculadora para que el redistribuidor vea cuánto ganaría. Con contacto directo por WhatsApp.</div></div>
+        <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Un recorrido: descubrir → entender → calcular la oportunidad → probar → contactar</div><div class="fd2">Página en Next.js que guía al redistribuidor desde que descubre el producto hasta que calcula su margen con la calculadora y contacta directo por WhatsApp.</div></div>
       </div>
       <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
-      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">Canal digital entregado en menos de una semana</div><div class="fd2">El negocio pasó del voz a voz a un canal permanente que muestra el producto y facilita el contacto.</div></div>
+      <div class="fbox fr" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">Canal digital entregado en menos de una semana</div><div class="fd2">El negocio pasó del voz a voz a un recorrido permanente que lleva al redistribuidor de descubrir el producto a iniciar una relación comercial.</div></div>
       <div class="mmt"><div class="mmt-m"><div class="mmt-n"><1sem</div><div class="mmt-l">tiempo de<br/>entrega</div></div><div class="mmt-m"><div class="mmt-n">$0</div><div class="mmt-l">costo mensual<br/>de operación</div></div><div class="mmt-m"><div class="mmt-n">Next.js</div><div class="mmt-l">tecnología<br/>escalable</div></div></div>
     </div>
     <div class="mtc" id="hojaldre-demo">
