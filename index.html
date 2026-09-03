@@ -349,12 +349,11 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 .ex-chip:hover,.ex-chip:active{background:var(--ink);color:#fff;border-color:var(--ink)}
 
 /* PUERTAS DE ENTRADA */
-.doors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:760px;margin:0 auto}
-.door-card{background:var(--w);border:0.5px solid var(--bdr);border-radius:14px;padding:16px 14px;text-align:left;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
-.door-card:hover,.door-card:active{border-color:var(--ink);box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.door-ico{font-size:17px;margin-bottom:8px}
-.door-title{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px}
-.door-desc{font-size:11px;color:var(--ink2);line-height:1.45}
+.doors-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;max-width:760px;margin:0 auto}
+.door-card{display:inline-flex;align-items:center;gap:7px;background:none;border:0.5px solid var(--bdr);border-radius:100px;padding:9px 16px;text-align:left;cursor:pointer;transition:border-color .2s,background .2s;font-family:'DM Sans',sans-serif}
+.door-card:hover,.door-card:active{border-color:var(--ink);background:rgba(0,0,0,.03)}
+.door-ico{font-size:13px}
+.door-title{font-size:12px;font-weight:500;color:var(--ink2)}
 
 /* DIAGNÓSTICO evolucionado */
 .diag-section{background:var(--w);border-top:0.5px solid var(--bdr);border-bottom:0.5px solid var(--bdr)}
@@ -424,7 +423,6 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 .model-d{font-size:11px;color:var(--ink2);line-height:1.55}
 
 @media(max-width:640px){
-  .doors-grid{grid-template-columns:1fr}
   .paso-grid{grid-template-columns:1fr 1fr;gap:10px}
   .cat-grid{grid-template-columns:1fr 1fr}
   .model-grid{grid-template-columns:1fr 1fr}
@@ -480,37 +478,31 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <a href="#casos" class="btn-ghost">Ver ejemplos</a>
   </div>
 
-  <p class="sec-eyebrow" style="text-align:center;margin-bottom:14px">¿Qué quieres hacer más fácil?</p>
+  <p class="sec-eyebrow" style="text-align:center;margin-bottom:14px">Por ejemplo — o cuéntanos el tuyo arriba, con tus palabras</p>
   <div class="doors-grid rev">
     <button class="door-card" id="patronVender" type="button">
-      <div class="door-ico">🛒</div>
-      <div class="door-title">Quiero vender más</div>
-      <div class="door-desc">Para negocios donde hay visitas, preguntas o interesados pero pocas conversiones.</div>
+      <span class="door-ico">🛒</span>
+      <span class="door-title">Quiero vender más</span>
     </button>
     <button class="door-card" id="patronElegir" type="button">
-      <div class="door-ico">🔎</div>
-      <div class="door-title">Quiero ayudar a mis clientes a elegir</div>
-      <div class="door-desc">Para negocios con muchos productos, servicios, opciones o información.</div>
+      <span class="door-ico">🔎</span>
+      <span class="door-title">Mis clientes no saben cuál elegir</span>
     </button>
     <button class="door-card" id="patronAgendar" type="button">
-      <div class="door-ico">📅</div>
-      <div class="door-title">Quiero facilitar citas o reservas</div>
-      <div class="door-desc">Para clínicas, veterinarias, profesionales, restaurantes, hoteles, etc.</div>
+      <span class="door-ico">📅</span>
+      <span class="door-title">Quiero facilitar las citas</span>
     </button>
     <button class="door-card" id="patronConsultar" type="button">
-      <div class="door-ico">💬</div>
-      <div class="door-title">Quiero facilitar las consultas</div>
-      <div class="door-desc">Para negocios donde los clientes hacen muchas preguntas antes de decidir.</div>
+      <span class="door-ico">💬</span>
+      <span class="door-title">Me hacen demasiadas preguntas</span>
     </button>
     <button class="door-card" id="patronCotizar" type="button">
-      <div class="door-ico">💰</div>
-      <div class="door-title">Quiero cotizaciones mejor organizadas</div>
-      <div class="door-desc">Para servicios personalizados o precios que dependen de varias variables.</div>
+      <span class="door-ico">💰</span>
+      <span class="door-title">Quiero recibir solicitudes mejor organizadas</span>
     </button>
     <button class="door-card" id="patronVolver" type="button">
-      <div class="door-ico">🔄</div>
-      <div class="door-title">Quiero que mis clientes vuelvan</div>
-      <div class="door-desc">Para recompra, seguimiento, mantenimiento, renovación o fidelización.</div>
+      <span class="door-ico">🔄</span>
+      <span class="door-title">Quiero que mis clientes vuelvan</span>
     </button>
   </div>
 </section>
@@ -947,50 +939,63 @@ const KB = {
 // tipo de tarea interna. Automatiza Procesos ya no clasifica "qué proceso
 // administrativo automatizamos" — clasifica "en qué parte del recorrido de
 // tus clientes hay fricción" (descubrir, elegir, agendar, consultar,
-// cotizar, volver). "decisivo" = LA pregunta cuya respuesta cambia qué
-// recomendamos. "soluciones" = biblioteca controlada — la IA clasifica e
-// interpreta lenguaje natural, pero nunca inventa una solución fuera de
-// esta lista (regla 6 del brief: nada de recomendaciones arbitrarias).
+// cotizar, volver). "apertura" = lectura humana del problema, mostrada
+// antes de preguntar nada. "preguntas" = banco ordenado de la mini-
+// consultoría de ese patrón (fase 2.5). "soluciones" = biblioteca
+// controlada — la IA clasifica e interpreta lenguaje natural, pero nunca
+// inventa una solución fuera de esta lista (regla 6 del brief).
 const PATRONES = {
   vender: {
     icono: '🛒', label: 'Quiero vender más',
-    senales: [/vender\s+m[aá]s/i, /visitas?\s+pero\s+no\s+compran/i, /me\s+escriben\s+pero\s+no\s+compran/i, /tengo\s+interesados/i, /conseguir\s+clientes/i, /convertir\s+mejor/i, /no\s+s[eé]\s+c[oó]mo\s+venderlos/i, /mejorar\s+mis\s+ventas/i, /genera\s+preguntas\s+pero\s+no\s+ventas/i, /captar\s+clientes/i, /pocas?\s+conversion/i],
-    decisivo: 'friccion_venta',
+    senales: [/vender\s+m[aá]s/i, /visitas?\s+pero\s+no\s+compran/i, /me\s+escriben\s+pero\s+no\s+compran/i, /tengo\s+interesados/i, /conseguir\s+clientes/i, /convertir\s+mejor/i, /no\s+s[eé]\s+c[oó]mo\s+venderlos/i, /mejorar\s+mis\s+ventas/i, /genera\s+preguntas\s+pero\s+no\s+ventas/i, /captar\s+clientes/i, /pocas?\s+conversion/i, /despu[eé]s\s+desaparecen/i, /preguntan\s+(el\s+)?precios?/i, /dejan\s+de\s+responder/i, /no\s+vuelven\s+a\s+escribir/i, /no\s+cierro\s+la\s+venta/i],
+    apertura: 'Por lo que cuentas, el problema parece estar en la conversión. Te llegan personas interesadas, pero algo se pierde entre que preguntan y que compran. Eso puede hacer que el contacto se enfríe, que la persona no vuelva a escribir, o que la venta dependa de que tú estés disponible para responder a tiempo.',
+    preguntas: ['friccion_venta', 'canal_contacto', 'que_preguntan_antes_comprar', 'que_pasa_si_no_respondes_rapido'],
+    friccionIds: ['friccion_venta', 'que_pasa_si_no_respondes_rapido'],
     recorrido: 'Descubre → Consulta → Decide → Compra, sin perder el contacto en el camino',
     soluciones: ['Landing comercial', 'Recorrido de venta guiado', 'Captura de leads', 'WhatsApp estructurado', 'Seguimiento comercial']
   },
   elegir: {
-    icono: '🔎', label: 'Quiero ayudar a mis clientes a elegir',
+    icono: '🔎', label: 'Mis clientes no saben cuál elegir',
     senales: [/muchos\s+productos/i, /no\s+saben?\s+cu[aá]l\s+elegir/i, /cu[aá]l\s+les\s+sirve/i, /muchas\s+opciones/i, /recomendar\s+productos/i, /\bcomparar\b/i, /cat[aá]logo/i, /caracter[ií]sticas/i, /necesidades\s+diferentes/i],
-    decisivo: 'sabe_elegir',
+    apertura: 'Por lo que cuentas, el problema parece estar en la elección. Tienes una oferta amplia, pero el cliente necesita demasiada ayuda para saber cuál opción le conviene. Eso puede hacer que termine preguntando por WhatsApp, abandone la búsqueda o elija sin suficiente seguridad.',
+    preguntas: ['que_debe_elegir', 'cuantas_opciones', 'que_pregunta_antes_elegir', 'como_ayudas_elegir', 'que_pasa_sin_encontrar'],
+    friccionIds: ['como_ayudas_elegir', 'que_pasa_sin_encontrar'],
     recorrido: 'Llega → Le preguntamos lo justo → Ve solo las opciones que aplican → Elige → Contacta',
     soluciones: ['Buscador con filtros', 'Selector guiado (quiz)', 'Catálogo personalizado', 'Comparador']
   },
   agendar: {
-    icono: '📅', label: 'Quiero facilitar citas o reservas',
+    icono: '📅', label: 'Quiero facilitar las citas',
     senales: [/\bcitas?\b/i, /reservas?/i, /\bagenda\b/i, /disponibilidad/i, /\bhorarios?\b/i, /reservar/i, /agendar/i, /calendario/i],
-    decisivo: 'como_agenda',
+    apertura: 'Por lo que cuentas, el problema parece estar en agendar o reservar. Coordinar esto manualmente toma tiempo y genera ida y vuelta innecesaria. Eso puede hacer que alguien se canse de esperar respuesta y termine buscando en otro lado.',
+    preguntas: ['que_agenda', 'como_agenda_hoy', 'info_antes_confirmar', 'quien_administra_agenda', 'que_pasa_despues_reservar'],
+    friccionIds: ['como_agenda_hoy', 'que_pasa_despues_reservar'],
     recorrido: 'Descubre → Elige el servicio → Ve disponibilidad → Agenda → Confirmación → Recordatorio',
     soluciones: ['Selector de servicio', 'Agenda con disponibilidad', 'Confirmación automática', 'Recordatorios', 'WhatsApp estructurado']
   },
   consultar: {
-    icono: '💬', label: 'Quiero facilitar las consultas',
-    senales: [/me\s+hacen\s+muchas\s+preguntas/i, /siempre\s+preguntan\s+lo\s+mismo/i, /puedan\s+consultar/i, /orientaci[oó]n/i, /asesor[ií]a/i, /\bdudas\b/i, /recomendaciones/i, /instrucciones/i],
-    decisivo: 'respuesta_depende',
+    icono: '💬', label: 'Me hacen demasiadas preguntas',
+    senales: [/hacen\s+muchas\s+preguntas/i, /siempre\s+preguntan\s+lo\s+mismo/i, /puedan\s+consultar/i, /orientaci[oó]n/i, /asesor[ií]a/i, /\bdudas\b/i, /recomendaciones/i, /instrucciones/i],
+    apertura: 'Por lo que cuentas, el problema parece estar en las consultas repetidas. Tus clientes preguntan antes de decidir, y responder uno por uno te quita tiempo. Eso puede hacer que alguien se quede sin respuesta a tiempo, o que termines contestando lo mismo una y otra vez.',
+    preguntas: ['que_preguntan_repetido', 'respuesta_depende', 'que_podria_autoconsultar', 'cuando_interviene_persona'],
+    friccionIds: ['que_preguntan_repetido', 'cuando_interviene_persona'],
     recorrido: 'Llega con una duda → La resuelve solo o con una guía → Si necesita más, se deriva al profesional',
     soluciones: ['Centro de información', 'FAQ inteligente', 'Consulta guiada', 'Derivación al profesional']
   },
   cotizar: {
-    icono: '💰', label: 'Quiero cotizaciones mejor organizadas',
+    icono: '💰', label: 'Quiero recibir solicitudes mejor organizadas',
     senales: [/cotizaci[oó]n(es)?/i, /presupuesto/i, /precio\s+personalizado/i, /depende\s+de\s+(cantidad|medida)/i, /servicios?\s+personalizados?/i, /\bsolicitar\b/i],
-    decisivo: 'de_que_depende_precio',
+    apertura: 'Por lo que cuentas, el problema parece estar en las cotizaciones. Tu precio depende de varias variables y armar cada una a mano toma tiempo. Eso puede hacer que la persona se vaya a comparar con alguien más mientras espera tu respuesta.',
+    preguntas: ['de_que_depende_precio', 'que_necesitas_para_cotizar', 'cuanto_tardas_cotizar', 'que_pasa_mientras_espera'],
+    friccionIds: ['que_necesitas_para_cotizar', 'que_pasa_mientras_espera'],
     recorrido: 'Describe lo que necesita → Recibe una estimación al momento → Confirma los detalles con Daniel',
     soluciones: ['Calculadora de precio', 'Configurador', 'Formulario inteligente', 'WhatsApp con info precargada']
   },
   volver: {
     icono: '🔄', label: 'Quiero que mis clientes vuelvan',
-    senales: [/clientes\s+existentes/i, /\brecompra\b/i, /\bseguimiento\b/i, /mantenimiento/i, /renovaci[oó]n/i, /recordatorios/i, /volver\s+a\s+comprar/i, /fidelizaci[oó]n/i],
-    decisivo: 'hace_seguimiento',
+    senales: [/clientes\s+existentes/i, /\brecompra\b/i, /\bseguimiento\b/i, /mantenimiento/i, /renovaci[oó]n/i, /recordatorios/i, /volver\s+a\s+comprar/i, /fidelizaci[oó]n/i, /no\s+vuelven/i, /compran\s+una\s+vez/i],
+    apertura: 'Por lo que cuentas, el problema parece estar en que el cliente no vuelve. Compra una vez, pero hoy no hay algo que sistemáticamente lo traiga de regreso. Eso puede hacer que la recompra dependa solo de que él se acuerde por su cuenta.',
+    preguntas: ['hace_seguimiento', 'cada_cuanto_podria_volver', 'que_le_haria_volver', 'como_te_encuentran_de_nuevo'],
+    friccionIds: [],
     recorrido: 'Compra → Se le hace seguimiento en el momento correcto → Vuelve o renueva',
     soluciones: ['Recordatorios automáticos', 'Historial de cliente', 'Campañas segmentadas', 'Seguimiento por WhatsApp']
   }
@@ -1066,6 +1071,15 @@ function detectarFuente(texto) {
 function detectaSolucionPropuesta(texto) {
   return /\b(quiero|necesito|me gustar[ií]a)\s+(un|una)\s+(app|aplicaci[oó]n|bot|sistema|plataforma|software)\b/i.test(texto);
 }
+// Señal para el patrón "elegir": no es una pregunta dedicada, se detecta
+// en cualquier respuesta del caso — igual que frecuencia/esfuerzo — para no
+// gastar una pregunta completa en algo que casi siempre se menciona solo.
+function detectarSabeElegir(texto) {
+  const s = texto.toLowerCase();
+  if (/no\s+sabe|no\s+tiene\s+claro|no\s+s[ée]\s+cu[aá]l|le\s+preguntan|pregunta(n)?\s+mucho|se\s+pierde|se\s+confunde|no\s+encuentra/.test(s)) return 'no_sabe';
+  if (/ya\s+sabe|tiene\s+claro|sabe\s+lo\s+que\s+quiere|llega\s+decidido/.test(s)) return 'sabe';
+  return null;
+}
 function esRespuestaAmbigua(texto) {
   const s = texto.toLowerCase().trim();
   // OJO: \w y \b en JS solo reconocen [A-Za-z0-9_] — una tilde (é, í, á...)
@@ -1100,6 +1114,7 @@ function extraerHechos(texto) {
   const objeto = detectarObjeto(texto); if (objeto) h.objeto = objeto;
   const fuente = detectarFuente(texto); if (fuente) h.fuente = fuente;
   if (detectaSolucionPropuesta(texto)) h.solucion_propuesta_usuario = true;
+  const sabeElegir = detectarSabeElegir(texto); if (sabeElegir) h.sabe_elegir = sabeElegir;
   return h;
 }
 function fusionarHechos(c, nuevos) {
@@ -1124,30 +1139,73 @@ function esRespuestaVaga(texto) {
 // "guardar" devuelve true si logró interpretar algo concreto y false si la
 // respuesta fue vaga — un false dispara UNA reformulación (ver
 // responderCaso) en vez de aceptar cualquier texto como hecho.
+// Fábrica para preguntas de texto libre: guarda la respuesta tal cual la
+// escribió la persona (nunca se reinterpreta ni se completa), y solo pide
+// reformular si la respuesta fue detectada como vaga (ver esRespuestaVaga).
+function slotTexto(campo, preguntaTxt, reformularTxt) {
+  return {
+    pregunta: () => preguntaTxt,
+    reformular: () => reformularTxt,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos[campo] = texto.trim(); return true; }
+  };
+}
+
 const SLOTS = {
-  friccion_venta: {
-    pregunta: () => `¿Qué ocurre después de que alguien muestra interés: se pierde el contacto, tarda mucho en responder, o no sabe qué hacer para comprar?`,
-    reformular: () => `Sin problema — pensando en la última vez que alguien preguntó y no compró, ¿qué pasó justo después?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.friccion_venta = texto.trim(); return true; }
-  },
-  sabe_elegir: {
-    pregunta: () => `¿Tu cliente normalmente ya sabe lo que necesita, o llega sin saber cuál opción le sirve?`,
-    reformular: () => `¿Dirías que la mayoría llega con una idea clara, o casi siempre preguntan "¿cuál me recomiendas?"?`,
-    guardar: (texto, c) => {
-      const s = texto.toLowerCase();
-      if (/no\s+sabe|no\s+tiene\s+claro|pregunt(a|an)|no\s+s[ée]\s+cu[aá]l/.test(s)) { c.hechos.sabe_elegir = 'no_sabe'; return true; }
-      if (/sabe|clar[oa]|ya\s+sabe|tiene\s+claro/.test(s)) { c.hechos.sabe_elegir = 'sabe'; return true; }
-      return false;
-    }
-  },
-  como_agenda: {
-    pregunta: () => `¿Cómo se agenda hoy: coordinando manualmente por WhatsApp o llamada, o ya usas algún calendario o sistema?`,
-    reformular: () => `¿Alguien tiene que estar pendiente de confirmar cada cita a mano, o ya hay algo automático?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.como_agenda = texto.trim(); return true; }
-  },
+  // — vender —
+  friccion_venta: slotTexto('friccion_venta',
+    '¿Qué ocurre después de que alguien muestra interés: se pierde el contacto, tarda mucho en responder, o no sabe qué hacer para comprar?',
+    'Sin problema — pensando en la última vez que alguien preguntó y no compró, ¿qué pasó justo después?'),
+  canal_contacto: slotTexto('canal_contacto',
+    '¿Por dónde te contactan principalmente: WhatsApp, Instagram, llamada, otro?',
+    'Sin problema — ¿cuál es el canal donde más te escriben?'),
+  que_preguntan_antes_comprar: slotTexto('que_preguntan_antes_comprar',
+    '¿Qué suelen preguntar antes de decidirse a comprar?',
+    'Piensa en la última venta: ¿qué te preguntó esa persona antes de decidirse?'),
+  que_pasa_si_no_respondes_rapido: slotTexto('que_pasa_si_no_respondes_rapido',
+    '¿Qué pasa si no alcanzas a responder rápido — vuelven a escribir o se van con otro?',
+    '¿Notas que se pierden ventas cuando te demoras en contestar?'),
+
+  // — elegir —
+  que_debe_elegir: slotTexto('que_debe_elegir',
+    '¿Qué tiene que elegir actualmente tu cliente?',
+    'Sin problema — ¿entre qué está decidiendo tu cliente: productos, servicios, opciones, paquetes?'),
+  cuantas_opciones: slotTexto('cuantas_opciones',
+    '¿Cuántas opciones tiene aproximadamente?',
+    'Dame un número aproximado — ¿son pocas (menos de 10) o son muchas?'),
+  que_pregunta_antes_elegir: slotTexto('que_pregunta_antes_elegir',
+    '¿Qué suele preguntar antes de decidir?',
+    'Piensa en la última vez: ¿qué te preguntó esa persona antes de elegir?'),
+  como_ayudas_elegir: slotTexto('como_ayudas_elegir',
+    '¿Cómo lo ayudas actualmente a elegir?',
+    '¿Le explicas tú directamente, le mandas un catálogo, o queda por su cuenta?'),
+  que_pasa_sin_encontrar: slotTexto('que_pasa_sin_encontrar',
+    '¿Qué pasa cuando no encuentra rápidamente una opción?',
+    '¿Se va, te escribe con más preguntas, o elige algo sin estar seguro?'),
+
+  // — agendar —
+  que_agenda: slotTexto('que_agenda',
+    '¿Qué puede agendar o reservar?',
+    'Sin problema — ¿qué tipo de cita, turno o reserva maneja tu negocio?'),
+  como_agenda_hoy: slotTexto('como_agenda_hoy',
+    '¿Cómo lo hacen actualmente?',
+    '¿Coordinan por WhatsApp o llamada a mano, o ya usas algún calendario?'),
+  info_antes_confirmar: slotTexto('info_antes_confirmar',
+    '¿Qué información necesitas antes de confirmar?',
+    'Piensa en la última cita que confirmaste — ¿qué datos necesitaste pedir antes?'),
+  quien_administra_agenda: slotTexto('quien_administra_agenda',
+    '¿Quién administra actualmente la agenda?',
+    '¿Lo haces tú directamente o alguien más de tu equipo?'),
+  que_pasa_despues_reservar: slotTexto('que_pasa_despues_reservar',
+    '¿Qué ocurre después de reservar?',
+    '¿Se manda una confirmación, un recordatorio, o queda solo agendado sin más seguimiento?'),
+
+  // — consultar —
+  que_preguntan_repetido: slotTexto('que_preguntan_repetido',
+    '¿Qué preguntas recibes repetidamente?',
+    'Piensa en esta semana — ¿cuál fue la pregunta que más se repitió?'),
   respuesta_depende: {
-    pregunta: () => `La respuesta que das, ¿casi siempre es la misma, o depende de cada cliente/producto/caso?`,
-    reformular: () => `¿Podrías escribir la respuesta una sola vez y que sirva para casi todos, o cada caso es realmente distinto?`,
+    pregunta: () => '¿Las respuestas que das dependen de cada cliente, o casi siempre son la misma?',
+    reformular: () => '¿Podrías escribir la respuesta una sola vez y que sirva para casi todos, o cada caso es realmente distinto?',
     guardar: (texto, c) => {
       const s = texto.toLowerCase();
       if (/depende|cada\s+(cliente|caso|producto)|var[ií]a/.test(s)) { c.hechos.respuesta_depende = 'depende'; return true; }
@@ -1155,14 +1213,31 @@ const SLOTS = {
       return false;
     }
   },
-  de_que_depende_precio: {
-    pregunta: () => `¿De qué depende el precio en tu caso: cantidad, medidas, tipo de servicio, otra cosa?`,
-    reformular: () => `Sin problema — dame un ejemplo: ¿qué cambia entre una cotización barata y una cara?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.de_que_depende_precio = texto.trim(); return true; }
-  },
+  que_podria_autoconsultar: slotTexto('que_podria_autoconsultar',
+    '¿Qué información podría consultar el cliente por sí mismo?',
+    '¿Hay algo que ya expliques siempre igual y que podría estar escrito en algún lado?'),
+  cuando_interviene_persona: slotTexto('cuando_interviene_persona',
+    '¿En qué momento debe intervenir una persona?',
+    '¿En qué punto la consulta ya no se puede resolver sola y necesita que tú o alguien del equipo responda?'),
+
+  // — cotizar —
+  de_que_depende_precio: slotTexto('de_que_depende_precio',
+    '¿De qué depende el precio en tu caso: cantidad, medidas, tipo de servicio, otra cosa?',
+    'Sin problema — dame un ejemplo: ¿qué cambia entre una cotización barata y una cara?'),
+  que_necesitas_para_cotizar: slotTexto('que_necesitas_para_cotizar',
+    '¿Qué información necesitas del cliente para poder cotizar?',
+    'Piensa en la última cotización que armaste — ¿qué datos le pediste primero?'),
+  cuanto_tardas_cotizar: slotTexto('cuanto_tardas_cotizar',
+    '¿Cuánto te toma armar una cotización hoy?',
+    '¿Es cosa de minutos, o te toma horas o incluso días?'),
+  que_pasa_mientras_espera: slotTexto('que_pasa_mientras_espera',
+    '¿Qué pasa mientras el cliente espera tu cotización — sigue buscando en otro lado?',
+    '¿Notas que algunos se van con otro mientras esperan tu respuesta?'),
+
+  // — volver —
   hace_seguimiento: {
-    pregunta: () => `¿Hoy haces algún tipo de seguimiento a quien ya te compró, o queda ahí hasta que vuelve por su cuenta?`,
-    reformular: () => `¿Le escribes tú en algún momento después de la compra, aunque sea de vez en cuando?`,
+    pregunta: () => '¿Hoy haces algún tipo de seguimiento a quien ya te compró, o queda ahí hasta que vuelve por su cuenta?',
+    reformular: () => '¿Le escribes tú en algún momento después de la compra, aunque sea de vez en cuando?',
     guardar: (texto, c) => {
       const s = texto.toLowerCase();
       if (/no\s+s[ée]|no\s+tengo\s+idea/.test(s)) { c.hechos.hace_seguimiento = 'desconocido'; return true; }
@@ -1170,17 +1245,26 @@ const SLOTS = {
       if (/\bs[ií]\b|a\s+veces|algo\s+hago|de\s+vez\s+en\s+cuando/.test(s)) { c.hechos.hace_seguimiento = 'si'; return true; }
       return false;
     }
-  }
+  },
+  cada_cuanto_podria_volver: slotTexto('cada_cuanto_podria_volver',
+    '¿Cada cuánto tendría sentido que un cliente vuelva a comprarte o renovar?',
+    'Aunque sea aproximado — ¿estamos hablando de semanas, meses, o es algo más esporádico?'),
+  que_le_haria_volver: slotTexto('que_le_haria_volver',
+    '¿Qué haría que un cliente decida volver en vez de buscar en otro lado?',
+    '¿Un recordatorio, una oferta, o simplemente que se acuerde de ti a tiempo?'),
+  como_te_encuentran_de_nuevo: slotTexto('como_te_encuentran_de_nuevo',
+    '¿Hoy cómo te vuelve a encontrar un cliente cuando quiere volver?',
+    '¿Te busca en WhatsApp, en redes, o tiene que preguntar de nuevo cómo contactarte?')
 };
 
 // ============ ESTADO ÚNICO DE CONVERSACIÓN + MEMORIA DEL CASO ============
-const MAX_PREGUNTAS = 4;
+const MAX_PREGUNTAS = 5;
 function casoNuevo() {
   return {
     activo: false, patron: null, patronesDetectados: null,
     hechos: {}, textoOriginal: '', casoSugerido: null,
     preguntasHechas: [], slotPendiente: null, reformulado: {},
-    investigar: false, origen: 'directo'
+    investigar: false, origen: 'directo', aperturaMostrada: false
   };
 }
 let caso = casoNuevo();
@@ -1230,6 +1314,16 @@ function iniciarCaso(texto, origen) {
   addMsg(texto, 'u');
   scrollToDiag();
 
+  // Caso fuera de los 6 patrones: no forzar una clasificación ni arrastrar
+  // a la persona por una pregunta más — se dice honestamente que no encaja
+  // y se cierra el caso escalando a Daniel (regla "caso fuera de los
+  // patrones" del brief).
+  if (clasif.tipo === 'default') {
+    caso.patron = 'default';
+    setTimeout(escalarSinPatron, 550);
+    return;
+  }
+
   // Regla 13 del brief: si el texto dispara más de un patrón, no forzar
   // uno solo — mostrar las oportunidades detectadas y dejar que la
   // persona elija cuál mejorar primero, en vez de adivinar por ella.
@@ -1268,20 +1362,6 @@ function responderCaso(texto) {
   if (!texto || !caso.activo) return;
 
   const slotId = caso.slotPendiente;
-
-  // Reanclaje del patrón "default": la respuesta se suma al texto
-  // original y se reclasifica, en vez de tratarse como un slot fijo.
-  if (slotId === '__reanclar__') {
-    addMsg(texto, 'u');
-    scrollToDiag();
-    caso.textoOriginal += ' ' + texto;
-    const clasif = clasificarPatron(caso.textoOriginal);
-    caso.patron = clasif.tipo;
-    fusionarHechos(caso, extraerHechos(texto));
-    caso.slotPendiente = null;
-    setTimeout(procesarSiguientePaso, 450);
-    return;
-  }
 
   // Cambio de tema: si la respuesta trae un disparador de problema nuevo y
   // no encaja con el caso activo, se abre un caso nuevo en vez de forzarla
@@ -1329,27 +1409,34 @@ function responderCaso(texto) {
 }
 
 // ============ MOTOR DE DECISIÓN DE PREGUNTAS ============
-// Elige la ÚNICA pregunta decisiva del patrón activo. Nunca pregunta dos
-// veces lo mismo (un slot resuelto deja de estar "undefined") y nunca
-// supera MAX_PREGUNTAS — en la práctica, casi siempre es solo 1.
+// Recorre el banco de preguntas del patrón activo EN ORDEN y devuelve la
+// primera que todavía no tiene respuesta. Nunca pregunta dos veces lo mismo
+// (un slot resuelto deja de estar "undefined") y nunca supera MAX_PREGUNTAS.
 function elegirSiguientePregunta(c) {
   if (c.preguntasHechas.length >= MAX_PREGUNTAS) return null;
-
   const p = PATRONES[c.patron];
-  if (!p) {
-    // Patrón "default": no hay hipótesis todavía. Vale UNA pregunta
-    // abierta para reanclar, nunca más que esa.
-    if (!c.preguntasHechas.some(x => x.slot === '__reanclar__')) return { slot: '__reanclar__' };
-    return null;
-  }
-  if (c.hechos[p.decisivo] === undefined) return { slot: p.decisivo };
-  return null;
+  if (!p) return null;
+  const pendiente = p.preguntas.find(slotId => c.hechos[slotId] === undefined);
+  return pendiente ? { slot: pendiente } : null;
 }
 
 function procesarSiguientePaso() {
+  const p = PATRONES[caso.patron];
+  // Antes de la primera pregunta, se muestra la lectura del problema en
+  // lenguaje humano (no un porcentaje) — regla del brief: "antes de
+  // proponer una solución, entender cómo funciona hoy".
+  if (p && !caso.aperturaMostrada) {
+    caso.aperturaMostrada = true;
+    addMsg(p.apertura, 'b');
+    setTimeout(() => {
+      addMsg('Antes de proponerte una solución, quiero entender un poco mejor cómo funciona hoy.', 'b');
+      setTimeout(procesarSiguientePaso, 700);
+    }, 900);
+    return;
+  }
+
   const decision = elegirSiguientePregunta(caso);
   if (!decision) return mostrarTyping();
-  if (decision.slot === '__reanclar__') return preguntarReanclaje();
 
   caso.slotPendiente = decision.slot;
   caso.preguntasHechas.push({ slot: decision.slot });
@@ -1378,11 +1465,12 @@ function mostrarOportunidadesMultiples() {
   }, 500);
 }
 
-function preguntarReanclaje() {
-  caso.preguntasHechas.push({ slot: '__reanclar__' });
-  caso.slotPendiente = '__reanclar__';
-  addMsg('Cuéntame un poco más — ¿qué haces exactamente, paso a paso, la próxima vez que te toque hacer esto?', 'b');
-  mostrarInputChat(true);
+// Caso fuera de los 6 patrones: no se inventa un recorrido genérico —
+// se dice honestamente y se cierra directo con la opción de hablar con
+// Daniel (regla "caso fuera de los patrones" del brief).
+function escalarSinPatron() {
+  addMsgHTML('Esto no encaja claramente con los problemas que estamos diagnosticando actualmente.<br/>Prefiero no darte una solución genérica que quizá no tenga sentido.<br/><br/>Cuéntame un poco más sobre el problema y lo revisamos contigo.', 'b');
+  setTimeout(cerrarCaso, 900);
 }
 
 function mostrarTyping() {
@@ -1399,30 +1487,51 @@ function mostrarTyping() {
 
 // ============ SALIDA DEL DIAGNÓSTICO ============
 // "Problema principal" y "Oportunidad" por patrón — se construyen con lo
-// que la persona realmente contestó, nunca con un dato que no dio.
+// que la persona realmente contestó, nunca con un dato que no dio. El
+// "problema" reutiliza la misma apertura que ya se mostró en el chat (regla:
+// consistencia entre lo que se dijo y lo que queda en el resultado). La
+// "fricción" se arma solo con hechos que la persona afirmó — si no hay
+// suficientes, se dice explícitamente que falta esa información.
+function armarFriccion(c, ids) {
+  const partes = ids.map(id => c.hechos[id]).filter(v => v && v !== 'sin_confirmar' && v !== 'desconocido');
+  if (!partes.length) return 'Necesitamos conocer esto para recomendarte el recorrido correcto.';
+  return partes.join(' ');
+}
 const NARRATIVA = {
   vender: {
-    problema: (c) => 'Te llegan personas interesadas, pero algo pasa entre que preguntan y que compran' + (c.hechos.friccion_venta ? ': ' + c.hechos.friccion_venta + '.' : '.'),
+    problema: () => PATRONES.vender.apertura,
+    friccion: (c) => armarFriccion(c, PATRONES.vender.friccionIds),
     oportunidad: () => 'Hay una oportunidad clara para guiar ese interés hasta la compra, en vez de dejar que la persona insista por su cuenta.'
   },
   elegir: {
-    problema: (c) => 'Tienes varias opciones y tus clientes ' + (c.hechos.sabe_elegir === 'sabe' ? 'suelen saber qué quieren' : 'no siempre saben cuál les conviene') + '.',
+    problema: () => PATRONES.elegir.apertura,
+    friccion: (c) => armarFriccion(c, PATRONES.elegir.friccionIds),
     oportunidad: (c) => c.hechos.sabe_elegir === 'sabe' ? 'Como ya suelen saber qué buscan, probablemente el mayor impacto está en otro punto del recorrido.' : 'Hay una oportunidad clara para ayudarles a decidir sin que tengan que preguntarte uno por uno.'
   },
   agendar: {
-    problema: (c) => 'Agendar hoy depende de gestión manual' + (c.hechos.como_agenda ? ': ' + c.hechos.como_agenda + '.' : '.'),
+    problema: () => PATRONES.agendar.apertura,
+    friccion: (c) => armarFriccion(c, PATRONES.agendar.friccionIds),
     oportunidad: () => 'Hay una oportunidad clara para que el cliente vea disponibilidad y agende sin ida y vuelta contigo.'
   },
   consultar: {
-    problema: (c) => 'Tus clientes preguntan antes de decidir, y ' + (c.hechos.respuesta_depende === 'depende' ? 'cada respuesta depende del caso' : 'muchas veces la respuesta se repite') + '.',
+    problema: () => PATRONES.consultar.apertura,
+    friccion: (c) => armarFriccion(c, PATRONES.consultar.friccionIds),
     oportunidad: (c) => c.hechos.respuesta_depende === 'depende' ? 'Hay una oportunidad de guiar la consulta paso a paso antes de que hable contigo o el profesional.' : 'Hay una oportunidad clara: si la respuesta se repite, se puede resolver sin que la escribas cada vez.'
   },
   cotizar: {
-    problema: (c) => 'Tu precio depende de variables' + (c.hechos.de_que_depende_precio ? ' (' + c.hechos.de_que_depende_precio + ')' : '') + ' y hoy cada cotización se arma manualmente.',
+    problema: () => PATRONES.cotizar.apertura,
+    friccion: (c) => armarFriccion(c, PATRONES.cotizar.friccionIds),
     oportunidad: () => 'Hay una oportunidad de darle una primera estimación al momento, sin que tenga que esperar tu respuesta.'
   },
   volver: {
-    problema: (c) => 'Después de la primera compra, ' + (c.hechos.hace_seguimiento === 'si' ? 'ya haces algo de seguimiento pero es manual' : 'hoy no hay un seguimiento sistemático') + '.',
+    problema: () => PATRONES.volver.apertura,
+    friccion: (c) => {
+      const partes = [];
+      if (c.hechos.hace_seguimiento === 'no') partes.push('Hoy no hay ningún seguimiento después de la compra.');
+      else if (c.hechos.hace_seguimiento === 'si') partes.push('Hoy el seguimiento existe, pero es manual.');
+      if (c.hechos.como_te_encuentran_de_nuevo) partes.push(c.hechos.como_te_encuentran_de_nuevo);
+      return partes.length ? partes.join(' ') : 'Necesitamos conocer esto para recomendarte el recorrido correcto.';
+    },
     oportunidad: () => 'Hay una oportunidad de traer de vuelta a quien ya te compró, en el momento justo.'
   }
 };
@@ -1455,7 +1564,9 @@ function faltaPorConfirmar(c) {
   const faltantes = [];
   const p = PATRONES[c.patron];
   if (p) {
-    if (c.hechos[p.decisivo] === 'sin_confirmar' || c.hechos[p.decisivo] === undefined) faltantes.push(SLOTS[p.decisivo].pregunta(c));
+    p.preguntas.forEach(slotId => {
+      if (c.hechos[slotId] === 'sin_confirmar' || c.hechos[slotId] === undefined) faltantes.push(SLOTS[slotId].pregunta(c));
+    });
   } else {
     faltantes.push('Todavía no identificamos con claridad en qué parte del recorrido está la oportunidad — hace falta que Daniel lo revise directamente.');
   }
@@ -1485,18 +1596,20 @@ function cerrarCaso() {
   // recién vio el diagnóstico y está por decidir si vale la pena escribir.
   const diferenciadorNota = (viab.codigo === '🟢' || viab.codigo === '🟡') ? ('<div style="font-size:11px;color:var(--ink2);text-align:center;margin:0 0 12px;line-height:1.5">Esto no es una respuesta genérica — es el primer paso para que Daniel diseñe y pruebe este recorrido con tus clientes reales.</div>') : '';
 
-  // Estructura pedida por el brief: Problema principal / Oportunidad /
-  // Recorrido recomendado / Lo que podríamos construir — solo cuando hay
-  // un patrón identificado con confianza (🟢/🟡); en 🔴/👤 no se inventa
-  // un recorrido para un caso que el propio diagnóstico no puede sostener.
+  // Estructura pedida por el brief: Problema / Fricción actual / Oportunidad
+  // / Recorrido propuesto / Tecnología posible — solo cuando hay un patrón
+  // identificado con confianza (🟢/🟡); en 🔴/👤 no se inventa un recorrido
+  // para un caso que el propio diagnóstico no puede sostener.
   const bloquesPatron = (p && narr && (viab.codigo === '🟢' || viab.codigo === '🟡')) ?
-    ('<div class="result-item full"><div class="result-l">Problema principal</div><div class="result-v">' + narr.problema(caso) + '</div></div>' +
+    ('<div class="result-item full"><div class="result-l">Problema</div><div class="result-v">' + narr.problema(caso) + '</div></div>' +
+     '<div class="result-item full"><div class="result-l">Fricción actual</div><div class="result-v">' + narr.friccion(caso) + '</div></div>' +
      '<div class="result-item full"><div class="result-l">Oportunidad</div><div class="result-v">' + narr.oportunidad(caso) + '</div></div>' +
-     '<div class="result-item full"><div class="result-l">Recorrido recomendado</div><div class="result-v">' + p.recorrido + '</div></div>' +
-     '<div class="result-item full"><div class="result-l">Lo que podríamos construir</div><div class="result-v">' + p.soluciones.join(' · ') + '</div></div>')
+     '<div class="result-item full"><div class="result-l">Recorrido propuesto</div><div class="result-v">' + p.recorrido + '</div></div>' +
+     '<div class="result-item full"><div class="result-l">Tecnología posible</div><div class="result-v">' + p.soluciones.join(' · ') + '</div></div>')
     : '';
 
-  card.innerHTML = '<div class="result-badge ' + viab.clase + '">' + viab.codigo + ' ' + viab.label + '</div>' +
+  card.innerHTML = '<div style="font-family:\'DM Mono\',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px">Esto es lo que entendimos</div>' +
+    '<div class="result-badge ' + viab.clase + '">' + viab.codigo + ' ' + viab.label + '</div>' +
     '<div class="result-grid">' +
       '<div class="result-item full"><div class="result-l">Lo que entendí</div><div class="result-v">' + textoSeguro + '</div></div>' +
       bloquesPatron +
