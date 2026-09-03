@@ -105,6 +105,22 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
 .caso-placeholder{opacity:.6}
 .caso-placeholder .caso-desc{font-style:italic}
 .casos-subdivider{padding:28px 48px 0;text-align:center}
+/* DEMO — clínica veterinaria (ejemplo ilustrativo, no un motor real ni un cliente real) */
+.demo-entry{padding:26px 48px 6px}
+.demo-entry-card{display:block;width:100%;max-width:620px;margin:0 auto;background:var(--s);border:1px dashed var(--bdr);border-radius:14px;padding:22px 26px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-family:'DM Sans',sans-serif}
+.demo-entry-card:hover{border-color:var(--ink);background:var(--w)}
+.demo-entry-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.5px;text-transform:uppercase;background:#fffbeb;color:#92400e;border:0.5px solid #f3d98b;padding:4px 10px;border-radius:100px;display:inline-block;margin-bottom:10px}
+.modal-tag.demo{background:#fffbeb;color:#92400e;border-color:#f3d98b}
+.demo-warn{background:#fffbeb;border:0.5px solid #f3d98b;color:#92400e;border-radius:10px;padding:12px 14px;font-size:11.5px;line-height:1.6;margin-bottom:18px}
+.demo-steps{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:14px}
+.demo-step{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;padding:7px 11px;border-radius:100px;border:0.5px solid var(--bdr);background:var(--w);color:var(--ink3);cursor:pointer;transition:all .2s}
+.demo-step.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.demo-step-arrow{color:var(--ink3);font-size:10px}
+.demo-panel{background:var(--s);border:0.5px solid var(--bdr);border-radius:10px;padding:14px;min-height:150px;display:flex;flex-direction:column;gap:8px}
+.demo-panel-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
+.demo-cap{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.demo-cap-h{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.demo-cap ul{margin:0;padding-left:16px;font-size:11.5px;color:var(--ink2);line-height:1.75}
 /* recorridos de cliente (acciones, no servicios) */
 .jchip-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:26px}
 .jchip{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink2);background:var(--w);border:0.5px solid var(--bdr);padding:8px 15px;border-radius:100px}
@@ -222,6 +238,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   .casos-grid{grid-template-columns:1fr}
   .recorridos-grid{grid-template-columns:1fr}
   .recorridos-grid .caso-card{border-right:none}
+  .demo-cap{grid-template-columns:1fr}
+  .demo-entry{padding:20px 20px 4px}
   .caso-card:nth-child(odd){border-right:none}
   .ai-body{grid-template-columns:1fr}
   .ai-l{border-right:none}
@@ -612,6 +630,15 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
       <div class="caso-desc">Estamos documentando este caso para mostrar el recorrido completo — problema, solución y resultado. Vuelve pronto.</div>
     </div>
 
+  </div>
+
+  <!-- DEMO — ejemplo ilustrativo, no un caso real -->
+  <div class="demo-entry rev">
+    <button class="demo-entry-card" type="button" onclick="abrirModal('modal-demo-vet')">
+      <span class="demo-entry-badge">🧪 Demo · no es un cliente real</span>
+      <div class="caso-title" style="margin-bottom:4px">Ejemplo: una clínica veterinaria</div>
+      <div class="caso-desc" style="max-width:520px;margin:0 auto">Así diseñaríamos el recorrido digital completo — desde que alguien descubre la clínica hasta el seguimiento después de la cita. Ver demo interactivo →</div>
+    </button>
   </div>
 
   <div class="casos-subdivider rev">
@@ -1906,6 +1933,26 @@ function analizarIdea() {
 const ideaBtn = document.getElementById('ideaBtn');
 if (ideaBtn) ideaBtn.addEventListener('click', analizarIdea);
 
+// ============ DEMO — Ejemplo: clínica veterinaria ============
+// Guion fijo, autocontenido: NO toca `caso`, PATRONES, SLOTS ni ninguna
+// función del motor de diagnóstico real. Es solo una simulación visual
+// para que el visitante entienda qué significa "diseñar un recorrido".
+const DEMO_VET_PASOS = [
+  '<div class="msg msg-b">Hola 👋 Bienvenido a la Clínica Ejemplo. ¿Qué necesitas hoy?</div><div class="msg msg-b">🩺 Mi mascota tiene un síntoma &nbsp;·&nbsp; 📅 Quiero agendar una cita &nbsp;·&nbsp; ❓ Tengo una duda general &nbsp;·&nbsp; 💰 Quiero saber precios</div><div class="msg msg-u">Mi mascota tiene un síntoma</div>',
+  '<div class="msg msg-u">Mi perro no ha comido en 2 días, ¿es grave?</div><div class="msg msg-b">Con la información que el veterinario dejó definida para estos casos: si además está decaído, vomita o tiene fiebre, conviene priorizar la valoración.</div><div class="msg msg-b" style="font-style:italic">Esto es orientación general, no un diagnóstico — el veterinario es quien evalúa a tu mascota.</div>',
+  '<div class="msg msg-b">Por lo que cuentas, esto conviene revisarlo pronto con el veterinario, no solo con información general.</div><div class="msg msg-b">¿Agendamos una valoración general o es una urgencia?</div><div class="msg msg-u">Valoración general</div>',
+  '<div class="msg msg-b">Estas son las opciones disponibles para Valoración general:</div><div class="msg msg-b">🗓️ Mañana 10:00 a.m. &nbsp;·&nbsp; 🗓️ Mañana 3:00 p.m. &nbsp;·&nbsp; 🗓️ Pasado mañana 9:00 a.m.</div><div class="msg msg-u">Mañana 10:00 a.m.</div>',
+  '<div class="msg msg-b">✅ Cita confirmada — Valoración general, mañana 10:00 a.m.</div><div class="msg msg-b">Esto mismo llega por WhatsApp con los datos ya organizados para la clínica: nombre, mascota, motivo y hora — sin que tengas que volver a escribirlos.</div>',
+  '<div class="msg msg-b" style="font-style:italic">2 días después de la cita 👇</div><div class="msg msg-b">Hola 👋 ¿Cómo sigue Toby después de la consulta? Si necesita un control, aquí puedes agendarlo.</div>'
+];
+function demoVetMostrar(i, btn) {
+  const panel = document.getElementById('demoVetPanel');
+  if (panel) panel.innerHTML = DEMO_VET_PASOS[i];
+  document.querySelectorAll('#demoVetSteps .demo-step').forEach(el => el.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  trackEvent('demo_view', { demo: 'veterinaria', paso: i });
+}
+
 function abrirModal(id){
   const m=document.getElementById(id);
   if(!m)return;
@@ -2645,6 +2692,66 @@ window.mTab=function(prefix,tab,btn){
     <div class="mcta">
       <div class="mcta-t"><strong>¿Tienes un proceso de cargue repetitivo?</strong><span>Cuéntame el sistema y el volumen. Lo automatizamos.</span></div>
       <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('icbf','¿Tu proceso también implica cargar muchos registros manualmente en una plataforma o sistema web?')">Tengo un problema parecido</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- DEMO — Ejemplo: clínica veterinaria. Ilustrativo, no un cliente real ni un motor de diagnóstico nuevo (reutiliza casoAbrirDiagnostico, que solo precarga el textarea del hero). -->
+<div class="modal-overlay" id="modal-demo-vet">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag demo">🧪 Demo · ejemplo ilustrativo</div><div class="modal-title">Ejemplo: una clínica<br/><em>veterinaria.</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-demo-vet')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="demo-warn"><strong>Esto es un ejemplo ilustrativo, no un cliente real.</strong> Sirve para mostrar cómo diseñaríamos el recorrido digital de un negocio con clientes que hacen muchas preguntas, necesitan orientación inicial y después piden una cita — hoy todo por WhatsApp. El sistema no da diagnósticos médicos ni reemplaza al veterinario: solo orienta con información que el propio veterinario define de antemano, y sabe cuándo pasarle el caso a una persona.</div>
+
+    <p class="sec-sub" style="margin:0 0 4px;text-align:left;padding:0">Haz clic en cada paso para ver cómo se vería esa parte del recorrido.</p>
+    <div class="demo-steps" id="demoVetSteps">
+      <span class="demo-step on" onclick="demoVetMostrar(0,this)">1 · Descubrir</span><span class="demo-step-arrow">↓</span>
+      <span class="demo-step" onclick="demoVetMostrar(1,this)">2 · Consultar</span><span class="demo-step-arrow">↓</span>
+      <span class="demo-step" onclick="demoVetMostrar(2,this)">3 · Orientarse</span><span class="demo-step-arrow">↓</span>
+      <span class="demo-step" onclick="demoVetMostrar(3,this)">4 · Agendar</span><span class="demo-step-arrow">↓</span>
+      <span class="demo-step" onclick="demoVetMostrar(4,this)">5 · Confirmación</span><span class="demo-step-arrow">↓</span>
+      <span class="demo-step" onclick="demoVetMostrar(5,this)">6 · Seguimiento</span>
+    </div>
+
+    <div class="demo-panel chat-msgs" id="demoVetPanel" style="max-height:none">
+      <div class="msg msg-b">Hola 👋 Bienvenido a la Clínica Ejemplo. ¿Qué necesitas hoy?</div>
+      <div class="msg msg-b">🩺 Mi mascota tiene un síntoma &nbsp;·&nbsp; 📅 Quiero agendar una cita &nbsp;·&nbsp; ❓ Tengo una duda general &nbsp;·&nbsp; 💰 Quiero saber precios</div>
+      <div class="msg msg-u">Mi mascota tiene un síntoma</div>
+    </div>
+
+    <div class="demo-cap">
+      <div>
+        <div class="demo-cap-h">Qué puede hacer este sistema</div>
+        <ul>
+          <li>Recoger información inicial del cliente</li>
+          <li>Orientar con información que el veterinario define de antemano</li>
+          <li>Identificar cuándo debe intervenir el profesional</li>
+          <li>Facilitar la elección del servicio</li>
+          <li>Facilitar la agenda y el horario</li>
+          <li>Enviar la información estructurada por WhatsApp</li>
+          <li>Generar seguimiento después de la cita</li>
+        </ul>
+      </div>
+      <div>
+        <div class="demo-cap-h">Qué NO hace (ni en un caso real)</div>
+        <ul>
+          <li>No da diagnósticos médicos</li>
+          <li>No reemplaza al veterinario</li>
+          <li>No decide tratamientos</li>
+          <li>Los datos de esta demo son ficticios, no de una clínica real</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="font-size:10.5px;color:var(--ink3);margin-top:16px;line-height:1.6">La simulación de arriba usa un guion fijo, solo para este ejemplo. Una implementación real usaría el mismo motor de diagnóstico que ya está arriba en esta página, adaptado con las preguntas y la información específica de tu negocio.</div>
+
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tu negocio también depende demasiado de WhatsApp?</strong><span>Cuéntame tu caso y lo revisamos.</span></div>
+      <button class="btn-dark" style="font-size:11px;padding:8px 14px;white-space:nowrap;border:none" onclick="casoAbrirDiagnostico('demo-vet','Soy veterinario y mis clientes hacen muchas preguntas, necesitan orientación inicial y después quiero que puedan agendar sin depender solo de WhatsApp.')">Quiero algo parecido para mi negocio</button>
     </div>
   </div>
 </div>
