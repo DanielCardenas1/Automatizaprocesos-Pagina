@@ -98,6 +98,17 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
 .caso-card:nth-child(odd){border-right:0.5px solid var(--bdr)}
 .caso-tag{display:inline-flex;align-items:center;gap:5px;background:var(--s);border:0.5px solid var(--bdr);font-family:'DM Mono',monospace;font-size:9px;color:var(--ink3);padding:4px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
 .caso-sector{width:5px;height:5px;border-radius:50%;background:var(--ink3)}
+/* recorridos reales (sub-bloque de Casos) */
+.recorridos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.recorridos-grid .caso-card{border-right:0.5px solid var(--bdr)}
+.recorridos-grid .caso-card:last-child{border-right:none}
+.caso-placeholder{opacity:.6}
+.caso-placeholder .caso-desc{font-style:italic}
+.casos-subdivider{padding:28px 48px 0;text-align:center}
+/* recorridos de cliente (acciones, no servicios) */
+.jchip-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:26px}
+.jchip{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink2);background:var(--w);border:0.5px solid var(--bdr);padding:8px 15px;border-radius:100px}
+.jchip-arrow{color:var(--ink3);font-size:11px}
 .caso-title{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.4px;line-height:1.1;margin-bottom:10px}
 .caso-title em{font-style:italic;font-weight:400;color:var(--ink2)}
 .caso-desc{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:16px}
@@ -209,6 +220,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   .hero-avatar-wrap{display:flex;flex-direction:column;align-items:center}
   .svc-grid{grid-template-columns:1fr}
   .casos-grid{grid-template-columns:1fr}
+  .recorridos-grid{grid-template-columns:1fr}
+  .recorridos-grid .caso-card{border-right:none}
   .caso-card:nth-child(odd){border-right:none}
   .ai-body{grid-template-columns:1fr}
   .ai-l{border-right:none}
@@ -443,13 +456,12 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 <nav>
   <span class="nav-contact" style="font-family:'DM Mono',monospace;font-size:11px">danielkadioz@gmail.com</span>
   <div class="nav-mid">
-    <a href="#casos" class="nav-btn">Casos reales</a>
+    <a href="#diagnostico" class="nav-btn">Qué podemos mejorar</a>
   </div>
   <div class="nav-links">
-    <a href="#diagnostico">Diagnóstico</a>
-    <a href="#catalogo">Catálogo</a>
-    <a href="#servicios">Precios</a>
-    <a href="#perfil">Perfil</a>
+    <a href="#paso">Cómo lo hacemos</a>
+    <a href="#casos">Ejemplos</a>
+    <a href="#perfil">Sobre Daniel</a>
     <a href="https://wa.me/573005333763" target="_blank" class="nav-btn dark">WhatsApp →</a>
   </div>
 </nav>
@@ -478,6 +490,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <a href="#casos" class="btn-ghost">Ver ejemplos</a>
   </div>
 
+  <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 10px;font-size:22px">¿Qué quieres hacer<br/><em>más fácil?</em></h2>
   <p class="sec-eyebrow" style="text-align:center;margin-bottom:14px">Por ejemplo — o cuéntanos el tuyo arriba, con tus palabras</p>
   <div class="doors-grid rev">
     <button class="door-card" id="patronVender" type="button">
@@ -534,6 +547,21 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
+<!-- UN NEGOCIO, MUCHOS RECORRIDOS (reemplaza el antiguo bloque de "servicios") -->
+<section class="paso-section rev" style="padding-bottom:36px">
+  <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">Un negocio,<br/><em>muchos recorridos.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">No todos tus clientes necesitan lo mismo. Diseñamos el recorrido digital que tu negocio necesita según lo que quieres conseguir.</p>
+  <div class="jchip-row">
+    <span class="jchip">Descubrir</span><span class="jchip-arrow">→</span>
+    <span class="jchip">Consultar</span><span class="jchip-arrow">→</span>
+    <span class="jchip">Elegir</span><span class="jchip-arrow">→</span>
+    <span class="jchip">Cotizar</span><span class="jchip-arrow">→</span>
+    <span class="jchip">Comprar</span><span class="jchip-arrow">→</span>
+    <span class="jchip">Agendar</span><span class="jchip-arrow">→</span>
+    <span class="jchip">Volver</span>
+  </div>
+</section>
+
 <!-- PASO -->
 <section class="paso-section rev" id="paso">
   <div class="sec-eyebrow" style="text-align:center">Cómo trabajamos</div>
@@ -547,33 +575,69 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
-<!-- STRIP ENTIDADES -->
-<div class="logo-strip">
-  <span class="logo-item">Sector público</span>
-  <span class="logo-item">·</span>
-  <span class="logo-item">Fuerzas militares</span>
-  <span class="logo-item">·</span>
-  <span class="logo-item">Sector alimentos</span>
-  <span class="logo-item">·</span>
-  <span class="logo-item">PYMES</span>
-  <span class="logo-item">·</span>
-  <span class="logo-item">Remoto · Colombia</span>
-</div>
-
-<!-- STATS -->
-<div class="stats-grid">
-  <div class="stat rev"><div class="stat-n">456</div><div class="stat-l">liquidaciones al mes<br/>procesadas · antes eran 8</div></div>
-  <div class="stat rev d1"><div class="stat-n">5d→1h</div><div class="stat-l">tiempo de conciliación<br/>bancaria reducido</div></div>
-  <div class="stat rev d2"><div class="stat-n">+9%</div><div class="stat-l">incremento en margen<br/>de utilidad · restaurantes</div></div>
-  <div class="stat rev d3"><div class="stat-n">$1.000M</div><div class="stat-l">en ingresos identificados<br/>y conciliados</div></div>
-</div>
-
 <!-- CASOS REALES -->
 <section id="casos">
   <div class="casos-header rev" style="padding-bottom:32px">
     <div class="sec-eyebrow" style="text-align:center">Casos reales · 01</div>
-    <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Resultados concretos<br/><em>en proyectos reales.</em></h2>
-    <p class="sec-sub" style="text-align:center;margin:10px auto 0;max-width:480px">Estos son los casos donde ya hay un resultado medido — la mayoría llegaron por procesos grandes porque ahí es donde he tenido acceso hasta ahora. El mismo análisis aplica sin importar el tamaño del negocio: el diagnóstico de arriba es igual de válido si tu proceso mueve 12 archivos al mes que si mueve 800.</p>
+    <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Así hemos resuelto<br/><em>recorridos reales.</em></h2>
+    <p class="sec-sub" style="text-align:center;margin:10px auto 0;max-width:480px">Casos donde el foco fue directamente la experiencia del cliente: cómo encuentra, entiende y decide. Al Natural y SENA Vitrina todavía se están documentando — vuelven pronto con el recorrido completo.</p>
+  </div>
+
+  <div class="recorridos-grid">
+
+    <!-- CASO reubicado desde el grid técnico: es el único caso actual centrado en la experiencia del cliente (catálogo + calculadora + WhatsApp), no en un proceso interno. -->
+    <div class="caso-card rev">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector privado · alimentos</div>
+      <div class="caso-title">Presencia digital<br/><em>para negocio de hojaldre</em></div>
+      <div class="caso-desc">Un negocio de hojaldre congelado premium dirigido a otros negocios no contaba con ninguna presencia digital. Sus clientes potenciales no podían ver el catálogo, entender el modelo de distribución ni calcular la rentabilidad de revender el producto. Se desarrolló una landing page profesional con catálogo completo, calculadora de márgenes para redistribuidores y contacto directo por WhatsApp, lista en menos de una semana.</div>
+      <div class="caso-metrics">
+        <div class="caso-m"><div class="caso-mn">&lt;1sem</div><div class="caso-ml">tiempo de<br/>entrega</div></div>
+        <div class="caso-m"><div class="caso-mn">$0</div><div class="caso-ml">costo mensual<br/>de operación</div></div>
+        <div class="caso-m"><div class="caso-mn">Next.js</div><div class="caso-ml">tecnología<br/>escalable</div></div>
+      </div>
+      <button class="btn-caso" onclick="abrirModal('modal-hojaldre')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <!-- PLACEHOLDER — Al Natural: caso mencionado por Daniel, aún sin documentar en el código. No se inventan datos ni resultados. -->
+    <div class="caso-card rev caso-placeholder">
+      <div class="cat-badge">Próximamente</div>
+      <div class="caso-title">Al Natural</div>
+      <div class="caso-desc">Estamos documentando este caso para mostrar el recorrido completo — problema, solución y resultado. Vuelve pronto.</div>
+    </div>
+
+    <!-- PLACEHOLDER — SENA Vitrina: caso mencionado por Daniel, aún sin documentar en el código. No se inventan datos ni resultados. -->
+    <div class="caso-card rev caso-placeholder">
+      <div class="cat-badge">Próximamente</div>
+      <div class="caso-title">SENA Vitrina</div>
+      <div class="caso-desc">Estamos documentando este caso para mostrar el recorrido completo — problema, solución y resultado. Vuelve pronto.</div>
+    </div>
+
+  </div>
+
+  <div class="casos-subdivider rev">
+    <div class="sec-eyebrow" style="text-align:center">También resolvemos problemas internos</div>
+    <p class="sec-sub" style="text-align:center;margin:6px auto 0;max-width:480px">Estos casos siguen siendo importantes porque demuestran capacidad técnica real — pero hoy no son el punto de entrada.</p>
+  </div>
+
+  <!-- STRIP ENTIDADES -->
+  <div class="logo-strip">
+    <span class="logo-item">Sector público</span>
+    <span class="logo-item">·</span>
+    <span class="logo-item">Fuerzas militares</span>
+    <span class="logo-item">·</span>
+    <span class="logo-item">Sector alimentos</span>
+    <span class="logo-item">·</span>
+    <span class="logo-item">PYMES</span>
+    <span class="logo-item">·</span>
+    <span class="logo-item">Remoto · Colombia</span>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat rev"><div class="stat-n">456</div><div class="stat-l">liquidaciones al mes<br/>procesadas · antes eran 8</div></div>
+    <div class="stat rev d1"><div class="stat-n">5d→1h</div><div class="stat-l">tiempo de conciliación<br/>bancaria reducido</div></div>
+    <div class="stat rev d2"><div class="stat-n">+9%</div><div class="stat-l">incremento en margen<br/>de utilidad · restaurantes</div></div>
+    <div class="stat rev d3"><div class="stat-n">$1.000M</div><div class="stat-l">en ingresos identificados<br/>y conciliados</div></div>
   </div>
 
   <div class="casos-grid">
@@ -615,19 +679,6 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
         <div class="caso-m"><div class="caso-mn">ZEUS</div><div class="caso-ml">sistema<br/>implementado</div></div>
       </div>
       <button class="btn-caso" onclick="abrirModal('modal-zeus')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-    </div>
-
-    <!-- CASO 4 -->
-    <div class="caso-card rev d1">
-      <div class="caso-tag"><div class="caso-sector"></div>Sector privado · alimentos</div>
-      <div class="caso-title">Presencia digital<br/><em>para negocio de hojaldre</em></div>
-      <div class="caso-desc">Un negocio de hojaldre congelado premium dirigido a otros negocios no contaba con ninguna presencia digital. Sus clientes potenciales no podían ver el catálogo, entender el modelo de distribución ni calcular la rentabilidad de revender el producto. Se desarrolló una landing page profesional con catálogo completo, calculadora de márgenes para redistribuidores y contacto directo por WhatsApp, lista en menos de una semana.</div>
-      <div class="caso-metrics">
-        <div class="caso-m"><div class="caso-mn">&lt;1sem</div><div class="caso-ml">tiempo de<br/>entrega</div></div>
-        <div class="caso-m"><div class="caso-mn">$0</div><div class="caso-ml">costo mensual<br/>de operación</div></div>
-        <div class="caso-m"><div class="caso-mn">Next.js</div><div class="caso-ml">tecnología<br/>escalable</div></div>
-      </div>
-      <button class="btn-caso" onclick="abrirModal('modal-hojaldre')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
 
   </div>
@@ -686,9 +737,9 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- CATÁLOGO -->
 <section class="cat-section rev" id="catalogo">
-  <div class="sec-eyebrow">Catálogo · 02</div>
-  <h2 class="sec-h">Soluciones listas<br/>para <em>usar, en construcción.</em></h2>
-  <p class="sec-sub">Cada solución que construimos para un cliente puede convertirse después en una herramienta lista para otros. Este catálogo se va llenando con cada proyecto.</p>
+  <div class="sec-eyebrow">Capacidad técnica · 02</div>
+  <h2 class="sec-h" style="font-size:22px">Herramientas internas<br/>que también <em>construimos.</em></h2>
+  <p class="sec-sub">No es el punto de entrada, pero sí parte de lo que sabemos hacer: cada solución que construimos para un cliente puede convertirse después en una herramienta lista para otros.</p>
   <div class="cat-grid" id="catGrid">
     <div class="cat-card rev"><div class="cat-ico">📑</div><div class="cat-badge">Próximamente</div><div class="cat-name">Consolidador de Excel</div><button class="cat-cta" onclick="catalogoNecesito('Consolidador de Excel')">Necesito algo parecido</button></div>
     <div class="cat-card rev"><div class="cat-ico">📥</div><div class="cat-badge">Próximamente</div><div class="cat-name">Carga masiva a plataformas</div><button class="cat-cta" onclick="catalogoNecesito('Carga masiva a plataformas')">Necesito algo parecido</button></div>
@@ -720,34 +771,6 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <div class="model-card rev d1"><div class="model-n">02</div><span class="model-tag paid">De pago</span><div class="model-t">Prototipo</div><div class="model-d">Construimos una primera versión para comprobar que funciona. Si sigues a implementación, su valor se descuenta del proyecto final.</div></div>
     <div class="model-card rev d2"><div class="model-n">03</div><div class="model-t">Implementación</div><div class="model-d">Convertimos el prototipo validado en una solución real dentro de tu operación.</div></div>
     <div class="model-card rev d3"><div class="model-n">04</div><div class="model-t">Producto / suscripción</div><div class="model-d">Si la solución es reutilizable, puede convertirse en una herramienta disponible para otros clientes.</div></div>
-  </div>
-</section>
-
-<!-- RANGOS DE REFERENCIA (antes "Servicios") -->
-<section class="svc-section" id="servicios">
-  <div class="sec-eyebrow">Rangos de referencia · 05</div>
-  <h2 class="sec-h">¿Cuánto cuesta<br/><em>resolverlo?</em></h2>
-  <p class="sec-sub">Cada caso es distinto — el diagnóstico de arriba te da el número exacto. Esto es solo para que tengas una idea de la inversión según el tipo de proyecto.</p>
-
-  <div class="svc-grid">
-    <div class="svc-card rev">
-      <div class="svc-ico">⚡</div>
-      <div class="svc-name">Automatizar un proceso manual</div>
-      <div class="svc-desc">Documentos, cruces de información, formularios, reportes que hoy haces a mano.</div>
-      <div class="svc-price">Desde $800.000</div>
-    </div>
-    <div class="svc-card rev d1">
-      <div class="svc-ico">📊</div>
-      <div class="svc-name">Consolidar y ordenar datos</div>
-      <div class="svc-desc">Unificar información dispersa en un reporte claro y actualizado.</div>
-      <div class="svc-price">Desde $500.000</div>
-    </div>
-    <div class="svc-card rev d2">
-      <div class="svc-ico">🌐</div>
-      <div class="svc-name">Presencia digital</div>
-      <div class="svc-desc">Página con catálogo y contacto directo, sin mensualidades de agencia.</div>
-      <div class="svc-price">Desde $1.200.000</div>
-    </div>
   </div>
 </section>
 
@@ -793,9 +816,9 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   </div>
 
   <div class="perfil-r rev d1">
-    <div class="sec-eyebrow">Sobre mí · 06</div>
-    <h2 class="perfil-h">Administración<br/>y tecnología<br/><em>en una sola solución.</em></h2>
-    <p class="perfil-p">La mayoría de quienes automatizan procesos vienen del mundo técnico y aprenden sobre el negocio. Yo vengo del negocio y aprendí la tecnología. Esa diferencia define cómo abordo cada proyecto: primero entiendo qué duele en la operación, luego diseño la solución más simple y efectiva para resolverlo.</p>
+    <div class="sec-eyebrow">Sobre mí · 05</div>
+    <h2 class="perfil-h">Entiendo el negocio.<br/>La tecnología<br/><em>es el medio.</em></h2>
+    <p class="perfil-p">Soy Administrador de Empresas y especialista en Alta Gerencia. Entiendo el negocio primero, y utilizo tecnología para convertir problemas concretos en experiencias y sistemas que funcionen.</p>
     <p class="perfil-p">He trabajado en procesos financieros nacionales con el SENA, en estructuras de costos para operaciones de restaurantes de las Fuerzas Militares, y en automatización documental para cumplimiento regulatorio. Trabajo de forma completamente remota con organizaciones en toda Colombia.</p>
     <p class="perfil-p">La mayoría de los prototipos que construyo se apoyan en asistentes de IA para moverme más rápido sin sacrificar criterio: GitHub Copilot dentro de VS Code y Claude Code para la parte de desarrollo, ChatGPT y Gemini como apoyo general, y Higgsfield cuando el proyecto necesita generación de imágenes.</p>
     <div class="perfil-sep"></div>
@@ -826,7 +849,7 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
   </div>
   <h2 class="cta-h" id="ctaFinalH">¿Dónde se está complicando<br/>la <em>experiencia de tus clientes?</em></h2>
-  <p class="cta-sub" id="ctaFinalSub">Cuéntanos qué quieres que tus clientes puedan hacer más fácilmente y diseñemos el recorrido. Sin compromiso.</p>
+  <p class="cta-sub" id="ctaFinalSub">Cuéntame qué quieres que tus clientes puedan hacer más fácilmente. A partir de ahí diseñamos el recorrido y definimos qué tecnología realmente necesitas.</p>
   <div class="cta-btns">
     <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20dise%C3%B1ar%20el%20recorrido%20de%20mis%20clientes" target="_blank" class="btn-dark" id="ctaFinalWa">
       <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
@@ -841,10 +864,10 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
 <footer>
   <div class="fl">© 2026 Daniel Gerardo Cárdenas · Automatización de Procesos · Colombia</div>
   <div class="fr">
-    <a href="#casos" class="flnk">Casos reales</a>
-    <a href="#catalogo" class="flnk">Catálogo</a>
-    <a href="#diagnostico" class="flnk">Diagnóstico</a>
-    <a href="#perfil" class="flnk">Perfil</a>
+    <a href="#diagnostico" class="flnk">Qué podemos mejorar</a>
+    <a href="#paso" class="flnk">Cómo lo hacemos</a>
+    <a href="#casos" class="flnk">Ejemplos</a>
+    <a href="#perfil" class="flnk">Sobre Daniel</a>
   </div>
 </footer>
 
@@ -1604,8 +1627,8 @@ function cerrarCaso() {
     ('<div class="result-item full"><div class="result-l">Problema</div><div class="result-v">' + narr.problema(caso) + '</div></div>' +
      '<div class="result-item full"><div class="result-l">Fricción actual</div><div class="result-v">' + narr.friccion(caso) + '</div></div>' +
      '<div class="result-item full"><div class="result-l">Oportunidad</div><div class="result-v">' + narr.oportunidad(caso) + '</div></div>' +
-     '<div class="result-item full"><div class="result-l">Recorrido propuesto</div><div class="result-v">' + p.recorrido + '</div></div>' +
-     '<div class="result-item full"><div class="result-l">Tecnología posible</div><div class="result-v">' + p.soluciones.join(' · ') + '</div></div>')
+     '<div class="result-item full"><div class="result-l">Recorrido propuesto</div><div class="result-v">Podríamos diseñar un recorrido como este:<br/><br/>' + p.recorrido + '</div></div>' +
+     '<div class="result-item full"><div class="result-l">Tecnología posible</div><div class="result-v">Para construirlo podemos combinar herramientas como:<br/><br/>' + p.soluciones.join(' · ') + '</div></div>')
     : '';
 
   card.innerHTML = '<div style="font-family:\'DM Mono\',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px">Esto es lo que entendimos</div>' +
