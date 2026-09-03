@@ -98,17 +98,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
 .caso-card:nth-child(odd){border-right:0.5px solid var(--bdr)}
 .caso-tag{display:inline-flex;align-items:center;gap:5px;background:var(--s);border:0.5px solid var(--bdr);font-family:'DM Mono',monospace;font-size:9px;color:var(--ink3);padding:4px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
 .caso-sector{width:5px;height:5px;border-radius:50%;background:var(--ink3)}
-/* recorridos reales (sub-bloque de Casos) */
-.recorridos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.recorridos-grid .caso-card{border-right:0.5px solid var(--bdr)}
-.recorridos-grid .caso-card:last-child{border-right:none}
 .caso-placeholder{opacity:.6}
 .caso-placeholder .caso-desc{font-style:italic}
 .casos-subdivider{padding:28px 48px 0;text-align:center}
 /* DEMO — clínica veterinaria (ejemplo ilustrativo, no un motor real ni un cliente real) */
-.demo-entry{padding:26px 48px 6px}
-.demo-entry-card{display:block;width:100%;max-width:620px;margin:0 auto;background:var(--s);border:1px dashed var(--bdr);border-radius:14px;padding:22px 26px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-family:'DM Sans',sans-serif}
-.demo-entry-card:hover{border-color:var(--ink);background:var(--w)}
+.caso-demo{transition:background .2s}
+.caso-demo:hover{background:var(--s)}
 .demo-entry-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.5px;text-transform:uppercase;background:#fffbeb;color:#92400e;border:0.5px solid #f3d98b;padding:4px 10px;border-radius:100px;display:inline-block;margin-bottom:10px}
 .modal-tag.demo{background:#fffbeb;color:#92400e;border-color:#f3d98b}
 .demo-warn{background:#fffbeb;border:0.5px solid #f3d98b;color:#92400e;border-radius:10px;padding:12px 14px;font-size:11.5px;line-height:1.6;margin-bottom:18px}
@@ -125,6 +120,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
 .jchip-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:26px}
 .jchip{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink2);background:var(--w);border:0.5px solid var(--bdr);padding:8px 15px;border-radius:100px}
 .jchip-arrow{color:var(--ink3);font-size:11px}
+/* de un problema a un recorrido */
+.flow-vert{max-width:480px;margin:28px auto 0;display:flex;flex-direction:column;align-items:stretch}
+.flow-step{background:var(--w);border:0.5px solid var(--bdr);border-radius:12px;padding:14px 18px;text-align:center}
+.flow-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.flow-text{font-size:13px;color:var(--ink);line-height:1.5}
+.flow-arrow{text-align:center;color:var(--ink3);font-size:13px;padding:4px 0}
 .caso-title{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.4px;line-height:1.1;margin-bottom:10px}
 .caso-title em{font-style:italic;font-weight:400;color:var(--ink2)}
 .caso-desc{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:16px}
@@ -236,10 +237,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   .hero-avatar-wrap{display:flex;flex-direction:column;align-items:center}
   .svc-grid{grid-template-columns:1fr}
   .casos-grid{grid-template-columns:1fr}
-  .recorridos-grid{grid-template-columns:1fr}
-  .recorridos-grid .caso-card{border-right:none}
   .demo-cap{grid-template-columns:1fr}
-  .demo-entry{padding:20px 20px 4px}
   .caso-card:nth-child(odd){border-right:none}
   .ai-body{grid-template-columns:1fr}
   .ai-l{border-right:none}
@@ -412,20 +410,8 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 .paso-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
 .paso-desc{font-size:11.5px;color:var(--ink2);line-height:1.55}
 
-/* CATÁLOGO */
-.cat-section{padding:52px 40px;background:var(--w);border-bottom:0.5px solid var(--bdr)}
-.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
-.cat-card{background:var(--s);border:0.5px solid var(--bdr);border-radius:12px;padding:16px;transition:box-shadow .2s}
-.cat-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.cat-ico{font-size:16px;margin-bottom:10px}
-.cat-name{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.3}
+/* Insignia "Próximamente" reutilizada por los casos placeholder (Al Natural, SENA Vitrina) */
 .cat-badge{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--ink3);background:var(--w);border:0.5px solid var(--bdr);padding:3px 8px;border-radius:100px;display:inline-block;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase}
-.cat-cta{font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:500;color:var(--ink);background:none;border:0.5px solid var(--bdr);padding:7px 10px;border-radius:100px;cursor:pointer;width:100%;transition:all .2s}
-.cat-cta:hover,.cat-cta:active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.cat-extra{display:none}
-.cat-grid.expanded .cat-extra{display:block}
-.cat-more-btn{display:block;margin:16px auto 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink2);background:none;border:0.5px solid var(--bdr);padding:8px 16px;border-radius:100px;cursor:pointer;transition:all .2s}
-.cat-more-btn:hover{border-color:var(--ink);color:var(--ink)}
 
 /* IDEA */
 .idea-section{padding:52px 40px;background:var(--s);border-bottom:0.5px solid var(--bdr)}
@@ -455,13 +441,12 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 @media(max-width:640px){
   .paso-grid{grid-template-columns:1fr 1fr;gap:10px}
-  .cat-grid{grid-template-columns:1fr 1fr}
   .model-grid{grid-template-columns:1fr 1fr}
   .result-grid{grid-template-columns:1fr}
   .proto-flow{gap:2px 2px;padding:14px 8px}
   .proto-node{min-width:60px}
   .proto-lbl{font-size:9px}
-  .cat-section,.idea-section,.model-section,.paso-section{padding:40px 20px}
+  .idea-section,.model-section,.paso-section{padding:40px 20px}
 }
 </style>
 </head>
@@ -580,6 +565,24 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
+<!-- DE UN PROBLEMA A UN RECORRIDO -->
+<section class="paso-section rev" id="metodo">
+  <div class="sec-eyebrow" style="text-align:center">Cómo pensamos</div>
+  <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">De un problema,<br/><em>a un recorrido.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto;max-width:480px">No empezamos preguntándote qué tecnología necesitas. Primero entendemos qué está intentando hacer tu cliente y dónde se está complicando.</p>
+  <div class="flow-vert">
+    <div class="flow-step rev"><div class="flow-label">Problema</div><div class="flow-text">"Mis clientes preguntan mucho antes de agendar."</div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step rev"><div class="flow-label">Fricción</div><div class="flow-text">El cliente depende de WhatsApp para resolver dudas.</div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step rev"><div class="flow-label">Recorrido</div><div class="flow-text">Consulta → orientación → selección del servicio → agenda</div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step rev"><div class="flow-label">Solución</div><div class="flow-text">Experiencia digital guiada</div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step rev"><div class="flow-label">Tecnología</div><div class="flow-text">Web + contenido definido por el negocio + agenda + WhatsApp</div></div>
+  </div>
+</section>
+
 <!-- PASO -->
 <section class="paso-section rev" id="paso">
   <div class="sec-eyebrow" style="text-align:center">Cómo trabajamos</div>
@@ -596,14 +599,14 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 <!-- CASOS REALES -->
 <section id="casos">
   <div class="casos-header rev" style="padding-bottom:32px">
-    <div class="sec-eyebrow" style="text-align:center">Casos reales · 01</div>
-    <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Así hemos resuelto<br/><em>recorridos reales.</em></h2>
+    <div class="sec-eyebrow" style="text-align:center">Casos principales · 01</div>
+    <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Así diseñamos<br/><em>recorridos digitales.</em></h2>
     <p class="sec-sub" style="text-align:center;margin:10px auto 0;max-width:480px">Casos donde el foco fue directamente la experiencia del cliente: cómo encuentra, entiende y decide. Al Natural y SENA Vitrina todavía se están documentando — vuelven pronto con el recorrido completo.</p>
   </div>
 
-  <div class="recorridos-grid">
+  <div class="casos-grid">
 
-    <!-- CASO reubicado desde el grid técnico: es el único caso actual centrado en la experiencia del cliente (catálogo + calculadora + WhatsApp), no en un proceso interno. -->
+    <!-- 1. Hojaldito — único caso actual centrado en la experiencia del cliente (catálogo + calculadora + WhatsApp), no en un proceso interno. -->
     <div class="caso-card rev">
       <div class="caso-tag"><div class="caso-sector"></div>Sector privado · alimentos</div>
       <div class="caso-title">Presencia digital<br/><em>para negocio de hojaldre</em></div>
@@ -616,34 +619,33 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
       <button class="btn-caso" onclick="abrirModal('modal-hojaldre')">Ver caso real <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
 
-    <!-- PLACEHOLDER — Al Natural: caso mencionado por Daniel, aún sin documentar en el código. No se inventan datos ni resultados. -->
+    <!-- 2. PLACEHOLDER — Al Natural: caso mencionado por Daniel, aún sin documentar en el código. No se inventan datos ni resultados. -->
     <div class="caso-card rev caso-placeholder">
       <div class="cat-badge">Próximamente</div>
       <div class="caso-title">Al Natural</div>
       <div class="caso-desc">Estamos documentando este caso para mostrar el recorrido completo — problema, solución y resultado. Vuelve pronto.</div>
     </div>
 
-    <!-- PLACEHOLDER — SENA Vitrina: caso mencionado por Daniel, aún sin documentar en el código. No se inventan datos ni resultados. -->
+    <!-- 3. PLACEHOLDER — SENA Vitrina: caso mencionado por Daniel, aún sin documentar en el código. No se inventan datos ni resultados. -->
     <div class="caso-card rev caso-placeholder">
       <div class="cat-badge">Próximamente</div>
       <div class="caso-title">SENA Vitrina</div>
       <div class="caso-desc">Estamos documentando este caso para mostrar el recorrido completo — problema, solución y resultado. Vuelve pronto.</div>
     </div>
 
-  </div>
-
-  <!-- DEMO — ejemplo ilustrativo, no un caso real -->
-  <div class="demo-entry rev">
-    <button class="demo-entry-card" type="button" onclick="abrirModal('modal-demo-vet')">
+    <!-- 4. DEMO — ejemplo ilustrativo, no un caso real. Integrada como cuarta prioridad de la lista, con su propio badge para que nunca se confunda con un caso real. -->
+    <div class="caso-card rev caso-demo" onclick="abrirModal('modal-demo-vet')" style="cursor:pointer">
       <span class="demo-entry-badge">🧪 Demo · no es un cliente real</span>
-      <div class="caso-title" style="margin-bottom:4px">Ejemplo: una clínica veterinaria</div>
-      <div class="caso-desc" style="max-width:520px;margin:0 auto">Así diseñaríamos el recorrido digital completo — desde que alguien descubre la clínica hasta el seguimiento después de la cita. Ver demo interactivo →</div>
-    </button>
+      <div class="caso-title" style="margin-top:6px">Ejemplo: una clínica<br/><em>veterinaria</em></div>
+      <div class="caso-desc">Así diseñaríamos el recorrido completo — desde que alguien descubre la clínica hasta el seguimiento después de la cita.</div>
+      <div style="font-size:11.5px;font-weight:600;color:var(--ink);margin-top:10px">Ver demo interactivo →</div>
+    </div>
+
   </div>
 
   <div class="casos-subdivider rev">
-    <div class="sec-eyebrow" style="text-align:center">También resolvemos problemas internos</div>
-    <p class="sec-sub" style="text-align:center;margin:6px auto 0;max-width:480px">Estos casos siguen siendo importantes porque demuestran capacidad técnica real — pero hoy no son el punto de entrada.</p>
+    <div class="sec-eyebrow" style="text-align:center">También hemos construido sistemas para resolver problemas internos</div>
+    <p class="sec-sub" style="text-align:center;margin:6px auto 0;max-width:480px">Esto demuestra que tenemos capacidad técnica para construir sistemas — no es lo que vendemos principalmente hoy.</p>
   </div>
 
   <!-- STRIP ENTIDADES -->
@@ -762,22 +764,9 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
-<!-- CATÁLOGO -->
-<section class="cat-section rev" id="catalogo">
-  <div class="sec-eyebrow">Capacidad técnica · 02</div>
-  <h2 class="sec-h" style="font-size:22px">Herramientas internas<br/>que también <em>construimos.</em></h2>
-  <p class="sec-sub">No es el punto de entrada, pero sí parte de lo que sabemos hacer: cada solución que construimos para un cliente puede convertirse después en una herramienta lista para otros.</p>
-  <div class="cat-grid" id="catGrid">
-    <div class="cat-card rev"><div class="cat-ico">📑</div><div class="cat-badge">Próximamente</div><div class="cat-name">Consolidador de Excel</div><button class="cat-cta" onclick="catalogoNecesito('Consolidador de Excel')">Necesito algo parecido</button></div>
-    <div class="cat-card rev"><div class="cat-ico">📥</div><div class="cat-badge">Próximamente</div><div class="cat-name">Carga masiva a plataformas</div><button class="cat-cta" onclick="catalogoNecesito('Carga masiva a plataformas')">Necesito algo parecido</button></div>
-    <div class="cat-card rev"><div class="cat-ico">📄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Generador de documentos</div><button class="cat-cta" onclick="catalogoNecesito('Generador de documentos')">Necesito algo parecido</button></div>
-    <div class="cat-card rev"><div class="cat-ico">🔄</div><div class="cat-badge">Próximamente</div><div class="cat-name">Conciliador de movimientos</div><button class="cat-cta" onclick="catalogoNecesito('Conciliador de movimientos')">Necesito algo parecido</button></div>
-  </div>
-</section>
-
 <!-- IDEA -->
 <section class="idea-section rev" id="idea">
-  <div class="sec-eyebrow" style="text-align:center">Tengo una idea · 03</div>
+  <div class="sec-eyebrow" style="text-align:center">Tengo una idea · 02</div>
   <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">¿Tienes una idea?<br/><em>Te ayudo a aterrizarla.</em></h2>
   <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Escribe libremente: qué problema resuelve, para quién, cómo se te ocurre que funcionaría. No hace falta que esté completo.</p>
   <div class="idea-card">
@@ -789,7 +778,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- MODELO / PROTOTIPADO -->
 <section class="model-section rev" id="modelo">
-  <div class="sec-eyebrow" style="text-align:center">Cómo reducimos el riesgo · 04</div>
+  <div class="sec-eyebrow" style="text-align:center">Cómo reducimos el riesgo · 03</div>
   <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">No tienes que construir todo<br/><em>para saber si funciona.</em></h2>
   <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Primero comprobamos que la solución tiene sentido, antes de pedirte una gran inversión.</p>
 
@@ -843,9 +832,15 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   </div>
 
   <div class="perfil-r rev d1">
-    <div class="sec-eyebrow">Sobre mí · 05</div>
+    <div class="sec-eyebrow">Sobre mí · 04</div>
     <h2 class="perfil-h">Entiendo el negocio.<br/>La tecnología<br/><em>es el medio.</em></h2>
     <p class="perfil-p">Soy Administrador de Empresas y especialista en Alta Gerencia. Entiendo el negocio primero, y utilizo tecnología para convertir problemas concretos en experiencias y sistemas que funcionen.</p>
+    <ol style="margin:2px 0 18px;padding-left:18px;font-size:12.5px;color:var(--ink2);line-height:1.9">
+      <li>Entender el problema empresarial</li>
+      <li>Diseñar el recorrido del cliente</li>
+      <li>Decidir qué debe hacer el sistema</li>
+      <li>Construirlo con la tecnología adecuada</li>
+    </ol>
     <p class="perfil-p">He trabajado en procesos financieros nacionales con el SENA, en estructuras de costos para operaciones de restaurantes de las Fuerzas Militares, y en automatización documental para cumplimiento regulatorio. Trabajo de forma completamente remota con organizaciones en toda Colombia.</p>
     <p class="perfil-p">La mayoría de los prototipos que construyo se apoyan en asistentes de IA para moverme más rápido sin sacrificar criterio: GitHub Copilot dentro de VS Code y Claude Code para la parte de desarrollo, ChatGPT y Gemini como apoyo general, y Higgsfield cuando el proyecto necesita generación de imágenes.</p>
     <div class="perfil-sep"></div>
@@ -1637,7 +1632,11 @@ function cerrarCaso() {
   const textoSeguro = caso.textoOriginal.replace(/</g, '&lt;');
   const faltan = faltaPorConfirmar(caso);
   const faltanHtml = faltan.length ? faltan.map(f => '<div>· ' + f + '</div>').join('') : 'Nada crítico — con esto ya se puede avanzar.';
-  const casoRow = caso.casoSugerido ? ('<div class="result-item full"><div class="result-l">Ya resolvimos un patrón parecido</div><div class="result-v">' + caso.casoSugerido.resumen + ' <span class="ver-caso-link" style="text-decoration:underline;cursor:pointer;font-weight:600">Ver caso real →</span></div></div>') : '';
+  // Solo se muestra un "caso parecido" cuando el patrón sí encajó (🟢/🟡) —
+  // si el motor acaba de decir "esto no encaja, escalo a Daniel", sugerir
+  // un caso interno justo ahí lo contradice (regla: no vender automatización
+  // interna, ni siquiera de forma indirecta, dentro del diagnóstico nuevo).
+  const casoRow = (caso.casoSugerido && (viab.codigo === '🟢' || viab.codigo === '🟡')) ? ('<div class="result-item full"><div class="result-l">Ya resolvimos un patrón parecido</div><div class="result-v">' + caso.casoSugerido.resumen + ' <span class="ver-caso-link" style="text-decoration:underline;cursor:pointer;font-weight:600">Ver caso real →</span></div></div>') : '';
   // Regla: no asumir que la solución que el usuario propuso (bot, app...)
   // es la correcta — se analiza el problema primero, y esto se lo dice.
   const solucionPropuestaRow = caso.hechos.solucion_propuesta_usuario ? ('<div class="result-item full"><div class="result-l">Sobre lo que mencionaste</div><div class="result-v">Puede que termine siendo eso — pero primero conviene validar el problema y buscar la forma más simple de resolverlo, antes de asumir la tecnología.</div></div>') : '';
@@ -1883,15 +1882,6 @@ function casoAbrirDiagnostico(id, texto) {
     document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
     heroInput.focus();
   }, 350);
-}
-
-// ============ CATÁLOGO → "Necesito algo parecido" ============
-function catalogoNecesito(nombre) {
-  trackEvent('cta_seleccionado', { cta: 'catalogo_necesito', solucion: nombre });
-  heroInput.placeholder = heroDefaultPlaceholder;
-  heroInput.value = 'Necesito algo parecido a: ' + nombre;
-  document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  heroInput.focus();
 }
 
 // ============ TENGO UNA IDEA ============
