@@ -465,40 +465,52 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
     <div class="hero-name-pill"><div class="pill-dot"></div>Disponible · Colombia</div>
   </div>
 
-  <h1 class="hero-h">¿Qué quieres hacer<br/><em>más fácil?</em></h1>
-  <p class="hero-sub">No necesitas saber de tecnología. Cuéntame qué haces y buscamos juntos una forma más sencilla de resolverlo.</p>
+  <h1 class="hero-h">Tu negocio ya funciona.<br/><em>Hagamos que sea más fácil para tus clientes.</em></h1>
+  <p class="hero-sub">Diseñamos y automatizamos el recorrido digital de tu negocio para que tus clientes puedan encontrar lo que necesitan, consultar, elegir, comprar, agendar o volver sin complicaciones.</p>
 
   <div class="hero-input-card">
-    <textarea class="hero-textarea" id="heroInput" rows="2" placeholder="Ej: todos los lunes consolido 15 archivos Excel a mano..."></textarea>
+    <textarea class="hero-textarea" id="heroInput" rows="2" placeholder="O cuéntame el problema con tus propias palabras..."></textarea>
     <div class="hero-input-bar">
       <span class="hero-input-hint">↵ para analizar</span>
-      <button class="hero-submit" id="heroSubmit" type="button">Analizar mi caso →</button>
+      <button class="hero-submit" id="heroSubmit" type="button">Cuéntame qué quieres mejorar →</button>
     </div>
   </div>
 
-  <div class="hero-examples" id="heroExamples">
-    <span class="ex-chip" data-t="Tengo que cargar 400 registros en una plataforma.">Cargar 400 registros</span>
-    <span class="ex-chip" data-t="Todos los lunes consolido 15 archivos Excel.">Consolidar 15 Excel</span>
-    <span class="ex-chip" data-t="Genero cientos de documentos manualmente.">Generar documentos</span>
-    <span class="ex-chip" data-t="Copio información de un sistema a otro.">Copiar entre sistemas</span>
-    <span class="ex-chip" data-t="Tengo una idea para una plataforma.">Tengo una idea</span>
+  <div class="hero-btns rev" style="margin-bottom:28px">
+    <a href="#casos" class="btn-ghost">Ver ejemplos</a>
   </div>
 
+  <p class="sec-eyebrow" style="text-align:center;margin-bottom:14px">¿Qué quieres hacer más fácil?</p>
   <div class="doors-grid rev">
-    <button class="door-card" id="doorProblema" type="button">
-      <div class="door-ico">🧩</div>
-      <div class="door-title">Tengo un problema</div>
-      <div class="door-desc">Algo manual, lento o repetitivo que te quita tiempo.</div>
+    <button class="door-card" id="patronVender" type="button">
+      <div class="door-ico">🛒</div>
+      <div class="door-title">Quiero vender más</div>
+      <div class="door-desc">Para negocios donde hay visitas, preguntas o interesados pero pocas conversiones.</div>
     </button>
-    <button class="door-card" id="doorIdea" type="button">
-      <div class="door-ico">💡</div>
-      <div class="door-title">Tengo una idea</div>
-      <div class="door-desc">Un producto o plataforma que quieres aterrizar.</div>
+    <button class="door-card" id="patronElegir" type="button">
+      <div class="door-ico">🔎</div>
+      <div class="door-title">Quiero ayudar a mis clientes a elegir</div>
+      <div class="door-desc">Para negocios con muchos productos, servicios, opciones o información.</div>
     </button>
-    <button class="door-card" id="doorSe" type="button">
-      <div class="door-ico">🎯</div>
-      <div class="door-title">Ya sé qué necesito</div>
-      <div class="door-desc">Sabes exactamente qué construir o automatizar.</div>
+    <button class="door-card" id="patronAgendar" type="button">
+      <div class="door-ico">📅</div>
+      <div class="door-title">Quiero facilitar citas o reservas</div>
+      <div class="door-desc">Para clínicas, veterinarias, profesionales, restaurantes, hoteles, etc.</div>
+    </button>
+    <button class="door-card" id="patronConsultar" type="button">
+      <div class="door-ico">💬</div>
+      <div class="door-title">Quiero facilitar las consultas</div>
+      <div class="door-desc">Para negocios donde los clientes hacen muchas preguntas antes de decidir.</div>
+    </button>
+    <button class="door-card" id="patronCotizar" type="button">
+      <div class="door-ico">💰</div>
+      <div class="door-title">Quiero cotizaciones mejor organizadas</div>
+      <div class="door-desc">Para servicios personalizados o precios que dependen de varias variables.</div>
+    </button>
+    <button class="door-card" id="patronVolver" type="button">
+      <div class="door-ico">🔄</div>
+      <div class="door-title">Quiero que mis clientes vuelvan</div>
+      <div class="door-desc">Para recompra, seguimiento, mantenimiento, renovación o fidelización.</div>
     </button>
   </div>
 </section>
@@ -519,7 +531,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
         <div class="chat-badge">● Diagnóstico activo</div>
       </div>
       <div class="chat-msgs" id="chatMsgs">
-        <div class="msg msg-b">Hola 👋 Cuéntame arriba qué haces manualmente cada semana. Te digo si tiene solución, qué tan grande es la oportunidad y cuál sería el siguiente paso.</div>
+        <div class="msg msg-b">Hola 👋 Cuéntame arriba qué quieres que sea más fácil para tus clientes. Te digo qué oportunidad veo y qué recorrido te recomendaría.</div>
       </div>
       <div class="chat-inp" id="chatInpWrap" style="display:none">
         <input class="chat-field" id="chatFieldInput" type="text" placeholder="Escribe tu respuesta..." autocomplete="off">
@@ -821,12 +833,12 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   <div class="cta-icon">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
   </div>
-  <h2 class="cta-h" id="ctaFinalH">¿Hay un proceso<br/>que te está <em>costando tiempo?</em></h2>
-  <p class="cta-sub" id="ctaFinalSub">Cuéntame cómo funciona. En menos de 24 horas te digo si tiene solución, cómo la implementaría y cuánto costaría. Sin compromiso.</p>
+  <h2 class="cta-h" id="ctaFinalH">¿Dónde se está complicando<br/>la <em>experiencia de tus clientes?</em></h2>
+  <p class="cta-sub" id="ctaFinalSub">Cuéntanos qué quieres que tus clientes puedan hacer más fácilmente y diseñemos el recorrido. Sin compromiso.</p>
   <div class="cta-btns">
-    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20automatizar%20un%20proceso" target="_blank" class="btn-dark" id="ctaFinalWa">
+    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20dise%C3%B1ar%20el%20recorrido%20de%20mis%20clientes" target="_blank" class="btn-dark" id="ctaFinalWa">
       <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
-      <span id="ctaFinalWaLabel">Escribir por WhatsApp</span>
+      <span id="ctaFinalWaLabel">Quiero diseñar este recorrido</span>
     </a>
     <a href="mailto:danielkadioz@gmail.com" class="btn-ghost">Enviar correo</a>
   </div>
@@ -871,6 +883,7 @@ function trackEvent(name, data) {
   } catch (e) {}
 }
 trackEvent('visita');
+trackEvent('page_view');
 
 // ============ LEADS ============
 // El localStorage por sí solo no sirve de nada: vive en el navegador del
@@ -930,71 +943,67 @@ const KB = {
   ]
 };
 
-// ============ ARQUETIPOS — la FORMA del proceso, no la profesión ============
-// No hay categorías por sector (odontología, veterinaria, floristería...).
-// Hay categorías por el tipo de fricción operativa. Dos negocios de
-// sectores distintos con el mismo arquetipo reciben la misma lógica de
-// preguntas — eso es lo que hace el motor generalizable en vez de un
-// guion por profesión. "decisivo" = preguntas que cambian la
-// recomendación (siempre vale la pena hacerlas). "dimensionador" =
-// preguntas que solo sirven para calcular tamaño/impacto — nunca se
-// hacen solo porque el dato está vacío (regla 8 del brief de Daniel).
-const ARQUETIPOS = {
-  comunicacion_recurrente: {
-    label: 'Comunicación recurrente con terceros',
-    senales: [/record(ar|arle|atorio)/i, /avis[ae]/i, /notific/i, /confirmaci[oó]n/i, /whatsapp/i, /\bcita/i, /vencimient/i],
-    decisivo: ['fuente_evento'],
-    dimensionador: ['volumen_frecuencia']
+// ============ PATRONES V1-V6 — el tipo de recorrido del CLIENTE, no el ============
+// tipo de tarea interna. Automatiza Procesos ya no clasifica "qué proceso
+// administrativo automatizamos" — clasifica "en qué parte del recorrido de
+// tus clientes hay fricción" (descubrir, elegir, agendar, consultar,
+// cotizar, volver). "decisivo" = LA pregunta cuya respuesta cambia qué
+// recomendamos. "soluciones" = biblioteca controlada — la IA clasifica e
+// interpreta lenguaje natural, pero nunca inventa una solución fuera de
+// esta lista (regla 6 del brief: nada de recomendaciones arbitrarias).
+const PATRONES = {
+  vender: {
+    icono: '🛒', label: 'Quiero vender más',
+    senales: [/vender\s+m[aá]s/i, /visitas?\s+pero\s+no\s+compran/i, /me\s+escriben\s+pero\s+no\s+compran/i, /tengo\s+interesados/i, /conseguir\s+clientes/i, /convertir\s+mejor/i, /no\s+s[eé]\s+c[oó]mo\s+venderlos/i, /mejorar\s+mis\s+ventas/i, /genera\s+preguntas\s+pero\s+no\s+ventas/i, /captar\s+clientes/i, /pocas?\s+conversion/i],
+    decisivo: 'friccion_venta',
+    recorrido: 'Descubre → Consulta → Decide → Compra, sin perder el contacto en el camino',
+    soluciones: ['Landing comercial', 'Recorrido de venta guiado', 'Captura de leads', 'WhatsApp estructurado', 'Seguimiento comercial']
   },
-  carga_masiva: {
-    label: 'Carga de registros uno por uno en un sistema',
-    // "llenar formularios/fichas/matrículas" es el mismo arquetipo que
-    // "cargar registros" — el cuello de botella y la pregunta decisiva
-    // (¿la plataforma permite importar o toca uno por uno?) son iguales.
-    senales: [/uno\s+a\s+uno/i, /uno\s+por\s+uno/i, /cargar/i, /subir/i, /ingresar/i, /digitar/i, /plataforma/i, /\bsistema\b/i, /formulario/i, /diligenc/i, /matricul/i, /\bficha/i, /\bllenar\b/i],
-    decisivo: ['capacidad_plataforma'],
-    dimensionador: ['volumen_frecuencia']
+  elegir: {
+    icono: '🔎', label: 'Quiero ayudar a mis clientes a elegir',
+    senales: [/muchos\s+productos/i, /no\s+saben?\s+cu[aá]l\s+elegir/i, /cu[aá]l\s+les\s+sirve/i, /muchas\s+opciones/i, /recomendar\s+productos/i, /\bcomparar\b/i, /cat[aá]logo/i, /caracter[ií]sticas/i, /necesidades\s+diferentes/i],
+    decisivo: 'sabe_elegir',
+    recorrido: 'Llega → Le preguntamos lo justo → Ve solo las opciones que aplican → Elige → Contacta',
+    soluciones: ['Buscador con filtros', 'Selector guiado (quiz)', 'Catálogo personalizado', 'Comparador']
   },
-  consolidacion: {
-    label: 'Consolidar información de varias fuentes',
-    senales: [/consolid/i, /unific/i, /juntar/i, /varios\s+archiv/i, /\d+\s+archiv/i, /\d+\s+document/i, /excel/i, /reporte/i, /informe/i],
-    decisivo: ['estructura_fuentes'],
-    dimensionador: ['volumen_frecuencia']
+  agendar: {
+    icono: '📅', label: 'Quiero facilitar citas o reservas',
+    senales: [/\bcitas?\b/i, /reservas?/i, /\bagenda\b/i, /disponibilidad/i, /\bhorarios?\b/i, /reservar/i, /agendar/i, /calendario/i],
+    decisivo: 'como_agenda',
+    recorrido: 'Descubre → Elige el servicio → Ve disponibilidad → Agenda → Confirmación → Recordatorio',
+    soluciones: ['Selector de servicio', 'Agenda con disponibilidad', 'Confirmación automática', 'Recordatorios', 'WhatsApp estructurado']
   },
-  traspaso_manual: {
-    label: 'Traspasar información de un canal informal a un registro estructurado',
-    senales: [/copi[ao]/i, /transcrib/i, /anotar/i, /pasar.*a\s+(mano|hoja|excel)/i, /whatsapp.*hoja/i],
-    decisivo: ['formato_entrada'],
-    dimensionador: ['volumen_frecuencia']
+  consultar: {
+    icono: '💬', label: 'Quiero facilitar las consultas',
+    senales: [/me\s+hacen\s+muchas\s+preguntas/i, /siempre\s+preguntan\s+lo\s+mismo/i, /puedan\s+consultar/i, /orientaci[oó]n/i, /asesor[ií]a/i, /\bdudas\b/i, /recomendaciones/i, /instrucciones/i],
+    decisivo: 'respuesta_depende',
+    recorrido: 'Llega con una duda → La resuelve solo o con una guía → Si necesita más, se deriva al profesional',
+    soluciones: ['Centro de información', 'FAQ inteligente', 'Consulta guiada', 'Derivación al profesional']
   },
-  generacion_documentos: {
-    label: 'Generar documentos o reportes a partir de datos',
-    senales: [/generar/i, /redactar/i, /elaborar/i, /\bcarta/i, /\bpdf\b/i, /documento/i],
-    decisivo: ['fuente_datos'],
-    dimensionador: ['volumen_frecuencia']
+  cotizar: {
+    icono: '💰', label: 'Quiero cotizaciones mejor organizadas',
+    senales: [/cotizaci[oó]n(es)?/i, /presupuesto/i, /precio\s+personalizado/i, /depende\s+de\s+(cantidad|medida)/i, /servicios?\s+personalizados?/i, /\bsolicitar\b/i],
+    decisivo: 'de_que_depende_precio',
+    recorrido: 'Describe lo que necesita → Recibe una estimación al momento → Confirma los detalles con Daniel',
+    soluciones: ['Calculadora de precio', 'Configurador', 'Formulario inteligente', 'WhatsApp con info precargada']
   },
-  organizacion_almacenamiento: {
-    label: 'Organizar o clasificar información',
-    senales: [/organiz/i, /clasific/i, /archivar/i, /carpeta/i, /historial/i],
-    decisivo: ['criterio_clasificacion'],
-    dimensionador: ['fuente_datos']
-  },
-  presencia_digital: {
-    label: 'Presencia digital o canal de venta',
-    senales: [/p[aá]gina/i, /\bweb\b/i, /tienda/i, /landing/i, /\bsitio\b/i, /sin\s+p[aá]gina/i],
-    decisivo: ['objetivo_canal'],
-    dimensionador: []
+  volver: {
+    icono: '🔄', label: 'Quiero que mis clientes vuelvan',
+    senales: [/clientes\s+existentes/i, /\brecompra\b/i, /\bseguimiento\b/i, /mantenimiento/i, /renovaci[oó]n/i, /recordatorios/i, /volver\s+a\s+comprar/i, /fidelizaci[oó]n/i],
+    decisivo: 'hace_seguimiento',
+    recorrido: 'Compra → Se le hace seguimiento en el momento correcto → Vuelve o renueva',
+    soluciones: ['Recordatorios automáticos', 'Historial de cliente', 'Campañas segmentadas', 'Seguimiento por WhatsApp']
   }
 };
 
-function clasificarArquetipo(texto) {
+function clasificarPatron(texto) {
   const s = texto.toLowerCase();
   const scores = {};
-  Object.keys(ARQUETIPOS).forEach(k => { scores[k] = ARQUETIPOS[k].senales.filter(rx => rx.test(s)).length; });
+  Object.keys(PATRONES).forEach(k => { scores[k] = PATRONES[k].senales.filter(rx => rx.test(s)).length; });
   const ranked = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
-  const top = ranked[0], segundo = ranked[1];
-  const topScore = scores[top], segundoScore = scores[segundo];
-  return { tipo: topScore > 0 ? top : 'default', score: topScore, segundo: segundoScore > 0 ? segundo : null, segundoScore, ambiguo: topScore > 0 && topScore === segundoScore };
+  const top = ranked[0];
+  const relevantes = ranked.filter(k => scores[k] > 0);
+  return { tipo: scores[top] > 0 ? top : 'default', score: scores[top], relevantes, scores };
 }
 
 // ============ EXTRACCIÓN DE HECHOS ============
@@ -1054,14 +1063,6 @@ function detectarFuente(texto) {
   const s = texto.toLowerCase();
   return AP_FUENTES.find(f => s.includes(f)) || null;
 }
-// Heurística de género para el demostrativo plural — sin esto "Esos
-// facturas"/"Esos nómina" suena mal. No es gramática real, solo mira la
-// terminación (facturas, pólizas, citas → femenino), suficiente para el
-// puñado de sustantivos que puede devolver detectarObjeto.
-function esosOEsas(objeto) {
-  if (!objeto) return 'Esos';
-  return /as$/i.test(objeto.trim()) ? 'Esas' : 'Esos';
-}
 function detectaSolucionPropuesta(texto) {
   return /\b(quiero|necesito|me gustar[ií]a)\s+(un|una)\s+(app|aplicaci[oó]n|bot|sistema|plataforma|software)\b/i.test(texto);
 }
@@ -1076,7 +1077,11 @@ function esRespuestaAmbigua(texto) {
   return new RegExp('no\\s+s[ée]' + finPalabra).test(s)
     || /no\s+tengo\s+idea/.test(s)
     || /m[aá]s\s+o\s+menos/.test(s)
-    || /\bdepende\b/.test(s)
+    // "depende" solo cuenta como respuesta ambigua si NO va seguido de una
+    // explicación ("depende de la cantidad" es información real, no un
+    // esquive — esto importa mucho para el patrón "cotizar", donde
+    // "depende de X" es justo la respuesta buena a la pregunta decisiva).
+    || /\bdepende\b(?!\s+de\b)/.test(s)
     || /no\s+estoy\s+segur/.test(s)
     || /otra\s+persona/.test(s)
     || /^tal\s+vez\b/.test(s)
@@ -1102,9 +1107,8 @@ function fusionarHechos(c, nuevos) {
 }
 
 // ============ CATÁLOGO DE PREGUNTAS DE ALTO VALOR ============
-// Cada slot es genérico: aplica a cualquier profesión que caiga en ese
-// arquetipo. La pregunta se personaliza con hechos ya extraídos (objeto),
-// pero la lógica de CUÁL preguntar no depende del sector del usuario.
+// Una por patrón — la que más cambia qué le recomendamos (regla 4 y 11 del
+// brief: cada pregunta debe tener una razón; máximo 3-4, casi siempre 1).
 // Una respuesta puede no tener marcadores de incertidumbre ("no sé",
 // "depende") y aun así no responder nada concreto — reconoce la EXISTENCIA
 // de un dato sin decir cuál es (ej. "en un formato que tenemos"). Esto
@@ -1117,85 +1121,54 @@ function esRespuestaVaga(texto) {
       || s.length < 4;
 }
 
-// Cada slot es genérico: aplica a cualquier profesión que caiga en ese
-// arquetipo. "guardar" devuelve true si logró interpretar algo concreto y
-// false si la respuesta fue vaga — un false dispara UNA reformulación
-// (ver responderCaso) en vez de aceptar cualquier texto como hecho.
+// "guardar" devuelve true si logró interpretar algo concreto y false si la
+// respuesta fue vaga — un false dispara UNA reformulación (ver
+// responderCaso) en vez de aceptar cualquier texto como hecho.
 const SLOTS = {
-  fuente_evento: {
-    pregunta: (c) => `¿Dónde tienes actualmente registrada ${c.hechos.objeto ? 'la información de ' + c.hechos.objeto : 'la información que dispara esto'}?`,
-    reformular: (c) => `Sin problema — pensando en cómo lo llevas hoy, ¿ese registro está en digital (Excel, un sistema) o lo llevas de otra forma?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.fuente_evento = texto.trim(); return true; }
+  friccion_venta: {
+    pregunta: () => `¿Qué ocurre después de que alguien muestra interés: se pierde el contacto, tarda mucho en responder, o no sabe qué hacer para comprar?`,
+    reformular: () => `Sin problema — pensando en la última vez que alguien preguntó y no compró, ¿qué pasó justo después?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.friccion_venta = texto.trim(); return true; }
   },
-  capacidad_plataforma: {
-    pregunta: (c) => `¿Sabes si esa plataforma permite cargar varios registros a la vez (importar desde Excel o algo así), o solo se puede uno por uno?`,
-    reformular: (c) => `Entiendo que no es claro todavía. ¿Alguna vez has visto ahí una opción de "importar" o "cargar archivo", aunque no la hayas usado?`,
-    // "desconocida" es en sí misma una resolución honesta (dispara 🟡 más
-    // adelante) — nunca hay que insistir dos veces en esta pregunta.
+  sabe_elegir: {
+    pregunta: () => `¿Tu cliente normalmente ya sabe lo que necesita, o llega sin saber cuál opción le sirve?`,
+    reformular: () => `¿Dirías que la mayoría llega con una idea clara, o casi siempre preguntan "¿cuál me recomiendas?"?`,
     guardar: (texto, c) => {
       const s = texto.toLowerCase();
-      if (/no\s+s[ée]|no\s+tengo\s+idea|no\s+estoy\s+segur/.test(s)) { c.hechos.capacidad_plataforma = 'desconocida'; return true; }
-      if (/\bno\b/.test(s) && !/no\s+s[ée]/.test(s)) { c.hechos.capacidad_plataforma = 'no_permite'; return true; }
-      if (/\bs[ií]\b|permite|tiene\s+(importaci|api)/.test(s)) { c.hechos.capacidad_plataforma = 'permite'; return true; }
-      c.hechos.capacidad_plataforma = 'desconocida';
-      return true;
-    }
-  },
-  estructura_fuentes: {
-    pregunta: (c) => `¿${c.hechos.objeto ? esosOEsas(c.hechos.objeto) + ' ' + c.hechos.objeto : 'Los archivos'} mantienen la misma estructura (mismas columnas) cada vez, o cada uno viene diferente?`,
-    reformular: (c) => `Perfecto, ya tienen un formato establecido. ¿Lo llenan directamente en el computador o lo imprimen y llenan a mano?`,
-    // Clasificación por patrones con "false" honesto si no hay match — a
-    // diferencia de capacidad_plataforma (que siempre resuelve a algo, aunque
-    // sea "desconocida"), esto SÍ es seguro de intentar contra el mensaje
-    // original antes de preguntar (ver intentarDesdeTexto en iniciarCaso).
-    intentarDesdeTexto: true,
-    guardar: (texto, c) => {
-      const s = texto.toLowerCase();
-      // "igual" solo? demasiado ambiguo en español coloquial ("toca
-      // hacerlo igual" = de todos modos, no "misma estructura") — exige
-      // que acompañe a un sustantivo de forma/estructura para contar.
-      if (/mism[ao]s?\s+(estructura|formato|columnas?|orden)|estandar|homog[eé]ne|siempre\s+igual/.test(s)) { c.hechos.estructura_fuentes = 'consistente'; return true; }
-      if (/diferent|distint|cambia|var[ií]a|desorden/.test(s)) { c.hechos.estructura_fuentes = 'inconsistente'; return true; }
-      return false;
-    },
-    // La reformulación cambia el espacio de respuesta (digital vs. papel,
-    // no mismo/distinto) — por eso necesita su propia interpretación en
-    // vez de reusar "guardar" contra un patrón que ya no aplica.
-    guardarReformulado: (texto, c) => {
-      const s = texto.toLowerCase();
-      if (/computador|digital|\bpc\b|excel|sistema|correo|whatsapp/.test(s)) { c.hechos.estructura_fuentes = 'consistente_digital'; return true; }
-      if (/imprim|papel|\bmano\b|f[ií]sico/.test(s)) { c.hechos.estructura_fuentes = 'fisico'; return true; }
+      if (/no\s+sabe|no\s+tiene\s+claro|pregunt(a|an)|no\s+s[ée]\s+cu[aá]l/.test(s)) { c.hechos.sabe_elegir = 'no_sabe'; return true; }
+      if (/sabe|clar[oa]|ya\s+sabe|tiene\s+claro/.test(s)) { c.hechos.sabe_elegir = 'sabe'; return true; }
       return false;
     }
   },
-  formato_entrada: {
-    pregunta: (c) => `¿La información te llega siempre con los mismos datos (por ejemplo qué piden, para quién, dirección), o cada mensaje viene distinto?`,
-    reformular: (c) => `Sin problema — ¿alguien más además de ti llega a pasar esos datos, o solo tú lo haces?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.formato_entrada = texto.trim(); return true; }
+  como_agenda: {
+    pregunta: () => `¿Cómo se agenda hoy: coordinando manualmente por WhatsApp o llamada, o ya usas algún calendario o sistema?`,
+    reformular: () => `¿Alguien tiene que estar pendiente de confirmar cada cita a mano, o ya hay algo automático?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.como_agenda = texto.trim(); return true; }
   },
-  fuente_datos: {
-    pregunta: (c) => `¿De dónde salen los datos que necesitas para ${c.hechos.objeto ? 'generar ' + c.hechos.objeto : 'esto'}?`,
-    reformular: (c) => `Sin problema — ¿esa información está en digital o tienes que buscarla en papel?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.fuente_datos = texto.trim(); return true; }
-  },
-  criterio_clasificacion: {
-    pregunta: (c) => `¿Qué decide dónde va cada ${c.hechos.objeto || 'registro'}: el nombre, la fecha, el tipo, u otro criterio?`,
-    reformular: (c) => `Entiendo que no hay una regla fija todavía. ¿Quién decide hoy dónde va cada uno?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.criterio_clasificacion = texto.trim(); return true; }
-  },
-  objetivo_canal: {
-    pregunta: (c) => `¿Qué necesitas que la persona pueda hacer ahí: ver catálogo, comprar, contactarte directo, o varias cosas?`,
-    reformular: (c) => `Sin problema — ¿lo principal es que te encuentren y te escriban, o que puedan ver información antes de escribirte?`,
-    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.objetivo_canal = texto.trim(); return true; }
-  },
-  volumen_frecuencia: {
-    pregunta: (c) => `Para calcular el impacto real — ¿más o menos cuántas veces pasa esto y cada cuánto?`,
-    reformular: (c) => `Sin un número exacto está bien — ¿dirías que es varias veces por semana, o menos seguido que eso?`,
+  respuesta_depende: {
+    pregunta: () => `La respuesta que das, ¿casi siempre es la misma, o depende de cada cliente/producto/caso?`,
+    reformular: () => `¿Podrías escribir la respuesta una sola vez y que sirva para casi todos, o cada caso es realmente distinto?`,
     guardar: (texto, c) => {
-      const f = detectarFrecuenciaEnTexto(texto); if (f) c.hechos.frecuencia = f;
-      const cant = detectarCantidad(texto); if (cant) c.hechos.cantidad = cant;
-      if (!f && !cant) { if (esRespuestaVaga(texto)) return false; c.hechos.volumen_frecuencia = texto.trim(); }
-      return true;
+      const s = texto.toLowerCase();
+      if (/depende|cada\s+(cliente|caso|producto)|var[ií]a/.test(s)) { c.hechos.respuesta_depende = 'depende'; return true; }
+      if (/siempre\s+(la\s+)?misma|igual\s+para\s+todos|no\s+depende|la\s+misma/.test(s)) { c.hechos.respuesta_depende = 'fija'; return true; }
+      return false;
+    }
+  },
+  de_que_depende_precio: {
+    pregunta: () => `¿De qué depende el precio en tu caso: cantidad, medidas, tipo de servicio, otra cosa?`,
+    reformular: () => `Sin problema — dame un ejemplo: ¿qué cambia entre una cotización barata y una cara?`,
+    guardar: (texto, c) => { if (esRespuestaVaga(texto)) return false; c.hechos.de_que_depende_precio = texto.trim(); return true; }
+  },
+  hace_seguimiento: {
+    pregunta: () => `¿Hoy haces algún tipo de seguimiento a quien ya te compró, o queda ahí hasta que vuelve por su cuenta?`,
+    reformular: () => `¿Le escribes tú en algún momento después de la compra, aunque sea de vez en cuando?`,
+    guardar: (texto, c) => {
+      const s = texto.toLowerCase();
+      if (/no\s+s[ée]|no\s+tengo\s+idea/.test(s)) { c.hechos.hace_seguimiento = 'desconocido'; return true; }
+      if (/\bno\b/.test(s) && !/no\s+s[ée]/.test(s)) { c.hechos.hace_seguimiento = 'no'; return true; }
+      if (/\bs[ií]\b|a\s+veces|algo\s+hago|de\s+vez\s+en\s+cuando/.test(s)) { c.hechos.hace_seguimiento = 'si'; return true; }
+      return false;
     }
   }
 };
@@ -1204,7 +1177,7 @@ const SLOTS = {
 const MAX_PREGUNTAS = 4;
 function casoNuevo() {
   return {
-    activo: false, arquetipo: null, arquetipoAmbiguo: false, arquetipoCandidatoB: null,
+    activo: false, patron: null, patronesDetectados: null,
     hechos: {}, textoOriginal: '', casoSugerido: null,
     preguntasHechas: [], slotPendiente: null, reformulado: {},
     investigar: false, origen: 'directo'
@@ -1229,8 +1202,8 @@ function reiniciarSiHabiaCaso() {
   }
 }
 
-// Punto de entrada ÚNICO para arrancar un caso (llamado tanto desde el
-// hero como desde un cambio de tema detectado a mitad de conversación).
+// Punto de entrada ÚNICO para arrancar un caso desde texto libre (hero o
+// cambio de tema a mitad de conversación).
 function iniciarCaso(texto, origen) {
   texto = (texto || '').trim();
   if (!texto) return;
@@ -1238,10 +1211,7 @@ function iniciarCaso(texto, origen) {
   caso.activo = true;
   caso.origen = origen || 'directo';
   caso.textoOriginal = texto;
-  const clasif = clasificarArquetipo(texto);
-  caso.arquetipo = clasif.tipo;
-  caso.arquetipoAmbiguo = clasif.ambiguo;
-  caso.arquetipoCandidatoB = clasif.segundo;
+  const clasif = clasificarPatron(texto);
   fusionarHechos(caso, extraerHechos(texto));
 
   const s = texto.toLowerCase();
@@ -1252,26 +1222,41 @@ function iniciarCaso(texto, origen) {
   });
   caso.casoSugerido = casoSugerido;
 
-  // Si el mensaje inicial ya trae la respuesta a la pregunta decisiva
-  // (ej. "algunos vienen bien y otros vienen todos desordenados"), no hay
-  // que volver a preguntarla — principio de fricción mínima. Solo se
-  // intenta contra slots marcados intentarDesdeTexto: clasificadores por
-  // patrón con un "no sé interpretar esto" honesto, nunca los de texto
-  // libre (esos aceptarían el párrafo entero como respuesta y fabricarían
-  // un hecho que el texto no dijo específicamente).
-  const arqInicial = ARQUETIPOS[caso.arquetipo];
-  if (arqInicial) {
-    arqInicial.decisivo.forEach(slotId => {
-      const slot = SLOTS[slotId];
-      if (slot && slot.intentarDesdeTexto && caso.hechos[slotId] === undefined) slot.guardar(texto, caso);
-    });
-  }
-
   trackEvent('inicio_diagnostico', { origen: caso.origen });
-  trackEvent('problema_enviado', { texto: texto, arquetipo: caso.arquetipo });
+  trackEvent('start_diagnosis', { origen: caso.origen });
+  trackEvent('problema_enviado', { texto: texto, patron: clasif.tipo });
 
   reiniciarSiHabiaCaso();
   addMsg(texto, 'u');
+  scrollToDiag();
+
+  // Regla 13 del brief: si el texto dispara más de un patrón, no forzar
+  // uno solo — mostrar las oportunidades detectadas y dejar que la
+  // persona elija cuál mejorar primero, en vez de adivinar por ella.
+  if (clasif.relevantes.length >= 2) {
+    caso.patronesDetectados = clasif;
+    setTimeout(mostrarOportunidadesMultiples, 550);
+  } else {
+    caso.patron = clasif.tipo;
+    setTimeout(procesarSiguientePaso, 550);
+  }
+}
+
+// Punto de entrada directo desde uno de los 6 botones de patrón: la
+// persona ya nos dio la clasificación, no hay que inferirla del texto.
+function iniciarCasoDesdePatron(key) {
+  const p = PATRONES[key];
+  if (!p) return;
+  trackEvent('click_problem', { patron: key });
+  caso = casoNuevo();
+  caso.activo = true;
+  caso.origen = 'boton_patron';
+  caso.patron = key;
+  caso.textoOriginal = p.label;
+  trackEvent('inicio_diagnostico', { origen: caso.origen });
+  trackEvent('start_diagnosis', { origen: caso.origen, patron: key });
+  reiniciarSiHabiaCaso();
+  addMsg(p.icono + ' ' + p.label, 'u');
   scrollToDiag();
   setTimeout(procesarSiguientePaso, 550);
 }
@@ -1284,16 +1269,14 @@ function responderCaso(texto) {
 
   const slotId = caso.slotPendiente;
 
-  // Reanclaje del arquetipo "default": la respuesta se suma al texto
+  // Reanclaje del patrón "default": la respuesta se suma al texto
   // original y se reclasifica, en vez de tratarse como un slot fijo.
   if (slotId === '__reanclar__') {
     addMsg(texto, 'u');
     scrollToDiag();
     caso.textoOriginal += ' ' + texto;
-    const clasif = clasificarArquetipo(caso.textoOriginal);
-    caso.arquetipo = clasif.tipo;
-    caso.arquetipoAmbiguo = clasif.ambiguo;
-    caso.arquetipoCandidatoB = clasif.segundo;
+    const clasif = clasificarPatron(caso.textoOriginal);
+    caso.patron = clasif.tipo;
     fusionarHechos(caso, extraerHechos(texto));
     caso.slotPendiente = null;
     setTimeout(procesarSiguientePaso, 450);
@@ -1303,9 +1286,9 @@ function responderCaso(texto) {
   // Cambio de tema: si la respuesta trae un disparador de problema nuevo y
   // no encaja con el caso activo, se abre un caso nuevo en vez de forzarla
   // como respuesta al slot pendiente.
-  const disparadorNuevoCaso = /\b(tengo que|necesito|me toca|otra pregunta|otra cosa)\b/i.test(texto);
-  const clasifNueva = clasificarArquetipo(texto);
-  if (slotId && disparadorNuevoCaso && clasifNueva.tipo !== 'default' && clasifNueva.tipo !== caso.arquetipo && clasifNueva.score >= 2 && !esRespuestaAmbigua(texto)) {
+  const disparadorNuevoCaso = /\b(tengo que|necesito|me toca|otra pregunta|otra cosa|quiero mejor)\b/i.test(texto);
+  const clasifNueva = clasificarPatron(texto);
+  if (slotId && disparadorNuevoCaso && clasifNueva.tipo !== 'default' && clasifNueva.tipo !== caso.patron && clasifNueva.score >= 2 && !esRespuestaAmbigua(texto)) {
     addMsg(texto, 'u');
     scrollToDiag();
     setTimeout(() => iniciarCaso(texto, 'chat_nuevo_tema'), 400);
@@ -1337,6 +1320,8 @@ function responderCaso(texto) {
       // de insistir en este slot y lo marca como no confirmable.
       caso.hechos[slotId] = 'sin_confirmar';
       caso.investigar = true;
+    } else if (yaResuelto) {
+      trackEvent('complete_question', { slot: slotId, patron: caso.patron });
     }
     caso.slotPendiente = null;
   }
@@ -1344,34 +1329,26 @@ function responderCaso(texto) {
 }
 
 // ============ MOTOR DE DECISIÓN DE PREGUNTAS ============
-// Elige, entre lo que todavía no se sabe, la ÚNICA pregunta cuya respuesta
-// puede cambiar la recomendación. Nunca pregunta dos veces lo mismo (un
-// slot resuelto deja de estar "undefined") y nunca supera MAX_PREGUNTAS.
+// Elige la ÚNICA pregunta decisiva del patrón activo. Nunca pregunta dos
+// veces lo mismo (un slot resuelto deja de estar "undefined") y nunca
+// supera MAX_PREGUNTAS — en la práctica, casi siempre es solo 1.
 function elegirSiguientePregunta(c) {
   if (c.preguntasHechas.length >= MAX_PREGUNTAS) return null;
-  if (c.arquetipoAmbiguo) return { slot: '__desambiguar__' };
 
-  const arq = ARQUETIPOS[c.arquetipo];
-  if (!arq) {
-    // Arquetipo "default": no hay hipótesis de forma del proceso todavía.
-    // Vale UNA pregunta abierta para reanclar, nunca más que esa.
-    if (!c.preguntasHechas.some(p => p.slot === '__reanclar__')) return { slot: '__reanclar__' };
+  const p = PATRONES[c.patron];
+  if (!p) {
+    // Patrón "default": no hay hipótesis todavía. Vale UNA pregunta
+    // abierta para reanclar, nunca más que esa.
+    if (!c.preguntasHechas.some(x => x.slot === '__reanclar__')) return { slot: '__reanclar__' };
     return null;
   }
-  for (const slotId of arq.decisivo) {
-    if (c.hechos[slotId] === undefined) return { slot: slotId };
-  }
-  // Los slots "dimensionador" (volumen/frecuencia) NUNCA se preguntan solo
-  // porque el dato esté vacío — regla explícita del brief. Si el caso ya
-  // tiene lo decisivo resuelto, se cierra; lo que falte de tamaño queda
-  // listado en "qué falta confirmar" del diagnóstico final, no como turno.
+  if (c.hechos[p.decisivo] === undefined) return { slot: p.decisivo };
   return null;
 }
 
 function procesarSiguientePaso() {
   const decision = elegirSiguientePregunta(caso);
   if (!decision) return mostrarTyping();
-  if (decision.slot === '__desambiguar__') return preguntarDesambiguacion();
   if (decision.slot === '__reanclar__') return preguntarReanclaje();
 
   caso.slotPendiente = decision.slot;
@@ -1380,21 +1357,25 @@ function procesarSiguientePaso() {
   mostrarInputChat(true);
 }
 
-// Evaluación de alternativas: cuando dos arquetipos empatan en señales, se
-// le pregunta al usuario cuál describe mejor su caso en vez de forzar uno.
-function preguntarDesambiguacion() {
-  caso.arquetipoAmbiguo = false;
-  const labelA = ARQUETIPOS[caso.arquetipo] ? ARQUETIPOS[caso.arquetipo].label : null;
-  const labelB = ARQUETIPOS[caso.arquetipoCandidatoB] ? ARQUETIPOS[caso.arquetipoCandidatoB].label : null;
-  if (!labelA || !labelB) return procesarSiguientePaso();
-  mostrarInputChat(false);
-  addMsg('Para entender mejor: ¿tu caso se parece más a esto...', 'b');
-  addChips([labelA, labelB, 'Ninguna de las dos'], (v) => {
-    addMsg(v, 'u');
-    if (v === labelB) caso.arquetipo = caso.arquetipoCandidatoB;
-    else if (v !== labelA) caso.arquetipo = 'default';
-    setTimeout(procesarSiguientePaso, 450);
-  });
+// Regla 13 del brief: cuando el texto libre dispara varios patrones a la
+// vez, se muestran como oportunidades con un ranking relativo (no una
+// probabilidad real — es un orden, no una medición) y la persona elige
+// cuál mejorar primero, en vez de que el motor adivine por ella.
+function mostrarOportunidadesMultiples() {
+  const clasif = caso.patronesDetectados;
+  const top = clasif.relevantes.slice(0, 3);
+  const topScore = clasif.scores[top[0]] || 1;
+  const pct = (k) => Math.min(95, Math.round(60 + 35 * (clasif.scores[k] / topScore)));
+  const lineas = top.map(k => '· ' + PATRONES[k].label + ' — ' + pct(k) + '%').join('<br/>');
+  addMsgHTML('Detectamos varias oportunidades en tu negocio:<br/>' + lineas, 'b');
+  setTimeout(() => {
+    addMsg('¿Cuál quieres mejorar primero?', 'b');
+    addChips(top.map(k => PATRONES[k].label), (v) => {
+      addMsg(v, 'u');
+      caso.patron = top.find(k => PATRONES[k].label === v) || top[0];
+      setTimeout(procesarSiguientePaso, 450);
+    });
+  }, 500);
 }
 
 function preguntarReanclaje() {
@@ -1417,60 +1398,67 @@ function mostrarTyping() {
 }
 
 // ============ SALIDA DEL DIAGNÓSTICO ============
-// Plantillas de flujo por ARQUETIPO (no por profesión) — misma mecánica
-// para un consultorio o una veterinaria si comparten la forma del proceso.
-const FLUJO_TEXTOS = {
-  comunicacion_recurrente: { actual: 'Revisas manualmente cuándo toca avisar → escribes el mensaje uno por uno → lo envías por WhatsApp', propuesto: 'El sistema revisa la fuente automáticamente → arma el mensaje → lo envía o te lo deja listo para confirmar' },
-  carga_masiva: { actual: 'Abres cada registro en tu archivo → lo copias campo por campo → lo pegas en la plataforma', propuesto: 'El sistema lee tu archivo → llena cada campo automáticamente → verifica que quedó correcto' },
-  consolidacion: { actual: 'Abres cada archivo por separado → copias la información en uno solo → revisas que no falte nada', propuesto: 'El sistema junta los archivos automáticamente → valida que la estructura coincida → entrega un archivo consolidado' },
-  traspaso_manual: { actual: 'Recibes la información por un canal informal → la transcribes a mano a tu registro → avisas al siguiente paso', propuesto: 'El sistema toma la información apenas llega → la registra en el formato correcto → avisa automáticamente al siguiente paso' },
-  generacion_documentos: { actual: 'Buscas los datos de cada caso → los copias en la plantilla → generas el documento uno por uno', propuesto: 'El sistema toma los datos de la fuente → llena la plantilla → genera todos los documentos de una vez' },
-  organizacion_almacenamiento: { actual: 'Revisas cada registro → decides dónde va → lo guardas manualmente', propuesto: 'El sistema aplica el criterio de clasificación → organiza cada registro en su lugar → deja trazabilidad de qué se guardó' },
-  presencia_digital: { actual: 'No existe un canal digital propio → todo depende del contacto manual o el voz a voz', propuesto: 'Una página muestra el catálogo/información → el cliente contacta directo por WhatsApp' },
-  default: { actual: 'Lo resuelves manualmente cada vez que se necesita', propuesto: 'Por definir junto con Daniel una vez se entienda mejor el caso' }
-};
-
-// Mapea cada arquetipo a uno de los 3 rangos de referencia ya documentados
-// en la sección de precios (asistente-conocimiento.md) — nunca se inventa
-// una cifra nueva, solo se cita cuál de los 3 rangos existentes aplica.
-const PRECIO_REFERENCIA = {
-  comunicacion_recurrente: 'Desde $800.000 — automatizar un proceso manual',
-  carga_masiva: 'Desde $800.000 — automatizar un proceso manual',
-  generacion_documentos: 'Desde $800.000 — automatizar un proceso manual',
-  consolidacion: 'Desde $500.000 — consolidar y ordenar datos',
-  traspaso_manual: 'Desde $500.000 — consolidar y ordenar datos',
-  organizacion_almacenamiento: 'Desde $500.000 — consolidar y ordenar datos',
-  presencia_digital: 'Desde $1.200.000 — presencia digital'
-};
-
-// Salidas del diagnóstico: 🟢 viable / 🟡 investigar / 🔴 no recomendado /
-// 👤 escalar. Nunca se fuerza una salida positiva para no perder al usuario.
-function calcularViabilidad(c) {
-  if (c.hechos.capacidad_plataforma === 'desconocida' || c.investigar) {
-    return { codigo: '🟡', label: 'Necesita investigación', clase: 'med',
-      motivo: 'Hay una oportunidad real, pero depende de algo que todavía no está confirmado. Prefiero comprobarlo antes de decirte que se puede — no voy a inventar si una plataforma permite algo que no he verificado.' };
+// "Problema principal" y "Oportunidad" por patrón — se construyen con lo
+// que la persona realmente contestó, nunca con un dato que no dio.
+const NARRATIVA = {
+  vender: {
+    problema: (c) => 'Te llegan personas interesadas, pero algo pasa entre que preguntan y que compran' + (c.hechos.friccion_venta ? ': ' + c.hechos.friccion_venta + '.' : '.'),
+    oportunidad: () => 'Hay una oportunidad clara para guiar ese interés hasta la compra, en vez de dejar que la persona insista por su cuenta.'
+  },
+  elegir: {
+    problema: (c) => 'Tienes varias opciones y tus clientes ' + (c.hechos.sabe_elegir === 'sabe' ? 'suelen saber qué quieren' : 'no siempre saben cuál les conviene') + '.',
+    oportunidad: (c) => c.hechos.sabe_elegir === 'sabe' ? 'Como ya suelen saber qué buscan, probablemente el mayor impacto está en otro punto del recorrido.' : 'Hay una oportunidad clara para ayudarles a decidir sin que tengan que preguntarte uno por uno.'
+  },
+  agendar: {
+    problema: (c) => 'Agendar hoy depende de gestión manual' + (c.hechos.como_agenda ? ': ' + c.hechos.como_agenda + '.' : '.'),
+    oportunidad: () => 'Hay una oportunidad clara para que el cliente vea disponibilidad y agende sin ida y vuelta contigo.'
+  },
+  consultar: {
+    problema: (c) => 'Tus clientes preguntan antes de decidir, y ' + (c.hechos.respuesta_depende === 'depende' ? 'cada respuesta depende del caso' : 'muchas veces la respuesta se repite') + '.',
+    oportunidad: (c) => c.hechos.respuesta_depende === 'depende' ? 'Hay una oportunidad de guiar la consulta paso a paso antes de que hable contigo o el profesional.' : 'Hay una oportunidad clara: si la respuesta se repite, se puede resolver sin que la escribas cada vez.'
+  },
+  cotizar: {
+    problema: (c) => 'Tu precio depende de variables' + (c.hechos.de_que_depende_precio ? ' (' + c.hechos.de_que_depende_precio + ')' : '') + ' y hoy cada cotización se arma manualmente.',
+    oportunidad: () => 'Hay una oportunidad de darle una primera estimación al momento, sin que tenga que esperar tu respuesta.'
+  },
+  volver: {
+    problema: (c) => 'Después de la primera compra, ' + (c.hechos.hace_seguimiento === 'si' ? 'ya haces algo de seguimiento pero es manual' : 'hoy no hay un seguimiento sistemático') + '.',
+    oportunidad: () => 'Hay una oportunidad de traer de vuelta a quien ya te compró, en el momento justo.'
   }
-  if (c.arquetipo === 'default') {
+};
+
+// Salidas del diagnóstico: 🟢 oportunidad clara / 🟡 investigar / 🔴 no
+// prioritario / 👤 escalar. Nunca se fuerza una salida positiva por
+// quedar bien — regla 2 del brief: si no hay evidencia, se dice.
+function calcularViabilidad(c) {
+  if (c.investigar) {
+    return { codigo: '🟡', label: 'Necesita investigación', clase: 'med',
+      motivo: 'Hay una oportunidad real, pero depende de algo que todavía no está confirmado. Prefiero comprobarlo antes de decirte que se puede.' };
+  }
+  if (!c.patron || c.patron === 'default') {
     return { codigo: '👤', label: 'Escalar a Daniel', clase: 'low',
       motivo: 'No quiero darte una respuesta improvisada — este caso necesita que Daniel lo revise directamente.' };
   }
-  if (c.hechos.frecuencia === 'Ocasional' && c.hechos.esfuerzo === 'Menos de 1h') {
-    return { codigo: '🔴', label: 'No recomendado por ahora', clase: 'low',
-      motivo: 'Por lo que cuentas, esto pasa poco y toma poco tiempo — probablemente no justifica el costo de automatizarlo todavía.' };
+  if (c.patron === 'elegir' && c.hechos.sabe_elegir === 'sabe') {
+    return { codigo: '🔴', label: 'No es prioritario todavía', clase: 'low',
+      motivo: 'Si tus clientes ya suelen saber qué quieren, un selector o comparador no va a mover mucho la aguja — probablemente hay otra mejora con más impacto.' };
   }
-  return { codigo: '🟢', label: 'Viable', clase: '',
-    motivo: 'Hay información suficiente para proponer una ruta concreta.' };
+  if (c.hechos.frecuencia === 'Ocasional') {
+    return { codigo: '🔴', label: 'No es prioritario todavía', clase: 'low',
+      motivo: 'Por lo que cuentas, esto pasa poco — probablemente hay otras mejoras con más impacto antes que esta.' };
+  }
+  return { codigo: '🟢', label: 'Oportunidad clara', clase: '',
+    motivo: 'Hay información suficiente para proponer un recorrido concreto.' };
 }
 
 function faltaPorConfirmar(c) {
   const faltantes = [];
-  const arq = ARQUETIPOS[c.arquetipo];
-  if (arq) {
-    arq.decisivo.forEach(s => { if (c.hechos[s] === 'sin_confirmar' || c.hechos[s] === undefined) faltantes.push(SLOTS[s] ? SLOTS[s].pregunta(c) : s); });
+  const p = PATRONES[c.patron];
+  if (p) {
+    if (c.hechos[p.decisivo] === 'sin_confirmar' || c.hechos[p.decisivo] === undefined) faltantes.push(SLOTS[p.decisivo].pregunta(c));
   } else {
-    faltantes.push('Todavía no identificamos con claridad qué tipo de proceso es este — hace falta que Daniel lo revise directamente.');
+    faltantes.push('Todavía no identificamos con claridad en qué parte del recorrido está la oportunidad — hace falta que Daniel lo revise directamente.');
   }
-  if (arq && !c.hechos.frecuencia && !c.hechos.cantidad) faltantes.push('El volumen o la frecuencia exacta, para dimensionar el esfuerzo.');
   return faltantes;
 }
 
@@ -1483,7 +1471,8 @@ function cerrarCaso() {
   card.className = 'result-card';
 
   const viab = calcularViabilidad(caso);
-  const flujo = FLUJO_TEXTOS[caso.arquetipo] || FLUJO_TEXTOS.default;
+  const p = PATRONES[caso.patron];
+  const narr = NARRATIVA[caso.patron];
   const textoSeguro = caso.textoOriginal.replace(/</g, '&lt;');
   const faltan = faltaPorConfirmar(caso);
   const faltanHtml = faltan.length ? faltan.map(f => '<div>· ' + f + '</div>').join('') : 'Nada crítico — con esto ya se puede avanzar.';
@@ -1491,22 +1480,26 @@ function cerrarCaso() {
   // Regla: no asumir que la solución que el usuario propuso (bot, app...)
   // es la correcta — se analiza el problema primero, y esto se lo dice.
   const solucionPropuestaRow = caso.hechos.solucion_propuesta_usuario ? ('<div class="result-item full"><div class="result-l">Sobre lo que mencionaste</div><div class="result-v">Puede que termine siendo eso — pero primero conviene validar el problema y buscar la forma más simple de resolverlo, antes de asumir la tecnología.</div></div>') : '';
-  // Cierre real: no dejar que la persona tenga que bajar a buscar el precio
-  // por su cuenta — pero tampoco mezclarlo como si fuera un dato más del
-  // diagnóstico. Va como nota chica antes de los botones, igual de honesto
-  // pero sin competir con "quiero hablar con Daniel" por la atención.
-  const precioRef = (viab.codigo === '🟢' || viab.codigo === '🟡') ? PRECIO_REFERENCIA[caso.arquetipo] : null;
-  const precioNota = precioRef ? ('<div style="font-size:10.5px;color:var(--ink3);font-family:\'DM Mono\',monospace;text-align:center;margin:2px 0 10px">Rango de referencia: ' + precioRef + ' · cada caso es distinto</div>') : '';
   // Responde de frente a la objeción más común ("esto mismo me lo da una
   // IA gratis") justo en el momento en que a alguien se le ocurre pensarlo:
   // recién vio el diagnóstico y está por decidir si vale la pena escribir.
-  const diferenciadorNota = (viab.codigo === '🟢' || viab.codigo === '🟡') ? ('<div style="font-size:11px;color:var(--ink2);text-align:center;margin:0 0 12px;line-height:1.5">Esto no es una respuesta genérica — es el primer paso para que Daniel lo construya y lo pruebe con tus datos reales.</div>') : '';
+  const diferenciadorNota = (viab.codigo === '🟢' || viab.codigo === '🟡') ? ('<div style="font-size:11px;color:var(--ink2);text-align:center;margin:0 0 12px;line-height:1.5">Esto no es una respuesta genérica — es el primer paso para que Daniel diseñe y pruebe este recorrido con tus clientes reales.</div>') : '';
+
+  // Estructura pedida por el brief: Problema principal / Oportunidad /
+  // Recorrido recomendado / Lo que podríamos construir — solo cuando hay
+  // un patrón identificado con confianza (🟢/🟡); en 🔴/👤 no se inventa
+  // un recorrido para un caso que el propio diagnóstico no puede sostener.
+  const bloquesPatron = (p && narr && (viab.codigo === '🟢' || viab.codigo === '🟡')) ?
+    ('<div class="result-item full"><div class="result-l">Problema principal</div><div class="result-v">' + narr.problema(caso) + '</div></div>' +
+     '<div class="result-item full"><div class="result-l">Oportunidad</div><div class="result-v">' + narr.oportunidad(caso) + '</div></div>' +
+     '<div class="result-item full"><div class="result-l">Recorrido recomendado</div><div class="result-v">' + p.recorrido + '</div></div>' +
+     '<div class="result-item full"><div class="result-l">Lo que podríamos construir</div><div class="result-v">' + p.soluciones.join(' · ') + '</div></div>')
+    : '';
 
   card.innerHTML = '<div class="result-badge ' + viab.clase + '">' + viab.codigo + ' ' + viab.label + '</div>' +
     '<div class="result-grid">' +
       '<div class="result-item full"><div class="result-l">Lo que entendí</div><div class="result-v">' + textoSeguro + '</div></div>' +
-      '<div class="result-item full"><div class="result-l">Así funciona hoy</div><div class="result-v">' + flujo.actual + '</div></div>' +
-      ((viab.codigo === '🟢' || viab.codigo === '🟡') ? '<div class="result-item full"><div class="result-l">Una forma posible de hacerlo</div><div class="result-v">' + flujo.propuesto + '</div></div>' : '') +
+      bloquesPatron +
       solucionPropuestaRow +
       casoRow +
       '<div class="result-item full"><div class="result-l">Qué falta confirmar</div><div class="result-v">' + faltanHtml + '</div></div>' +
@@ -1514,7 +1507,6 @@ function cerrarCaso() {
     '</div>' +
     '<div class="result-sep"></div>' +
     diferenciadorNota +
-    precioNota +
     '<div class="result-ctas"></div>' +
     // Captura de contacto opcional — el texto cambia según el resultado:
     // en 🔴 no tiene sentido "prefieres que te escriba" (no hay nada que
@@ -1571,7 +1563,7 @@ function cerrarCaso() {
       if (consentWarn) consentWarn.style.display = 'none';
       trackEvent('cta_seleccionado', { cta: 'contacto_directo' });
       const esFuturo = viab.codigo === '🔴';
-      saveLead({ tipo_solicitud: esFuturo ? 'Avisar si cambia' : 'Quiere que le escriban', contacto: valor, problema_original: caso.textoOriginal, arquetipo: caso.arquetipo, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, email_subject: esFuturo ? '🔔 Avisar más adelante — Automatiza Procesos' : '📞 Alguien quiere que le escribas — Automatiza Procesos' });
+      saveLead({ tipo_solicitud: esFuturo ? 'Avisar si cambia' : 'Quiere que le escriban', contacto: valor, problema_original: caso.textoOriginal, patron: caso.patron, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, email_subject: esFuturo ? '🔔 Avisar más adelante — Automatiza Procesos' : '📞 Alguien quiere que le escribas — Automatiza Procesos' });
       const wrap = contactInput.closest('.result-contact-form');
       if (wrap) wrap.outerHTML = '<div style="font-size:11.5px;color:var(--ink2)">' + (esFuturo ? 'Listo — te avisamos si esto cambia.' : 'Listo — Daniel te escribe pronto.') + '</div>';
     };
@@ -1583,7 +1575,7 @@ function cerrarCaso() {
   // Para 🔴 "Hablar con Daniel" empuja de más — el diagnóstico ya dijo que
   // probablemente no vale la pena todavía. Se deja la puerta abierta, pero
   // con un tono que no contradice el propio resultado que se acaba de dar.
-  const ctaLabel = viab.codigo === '🟢' ? 'Construir prototipo' : (viab.codigo === '🔴' ? 'Igual quiero que Daniel lo revise' : 'Hablar con Daniel');
+  const ctaLabel = viab.codigo === '🔴' ? 'Igual quiero que Daniel lo revise' : (viab.codigo === '👤' ? 'Hablar con Daniel' : 'Quiero diseñar este recorrido');
   const waMsg = 'Hola Daniel, hice el diagnóstico en Automatiza Procesos.\nMi problema: ' + caso.textoOriginal + '\nResultado: ' + viab.codigo + ' ' + viab.label + '\nHechos: ' + JSON.stringify(caso.hechos);
   const waUrl = 'https://wa.me/' + KB.contacto.whatsapp + '?text=' + encodeURIComponent(waMsg);
   const btnPrimary = document.createElement('a');
@@ -1592,7 +1584,8 @@ function cerrarCaso() {
   btnPrimary.addEventListener('click', () => {
     trackEvent('cta_seleccionado', { cta: ctaLabel });
     trackEvent('whatsapp_iniciado', { origen: 'resultado_diagnostico' });
-    saveLead({ tipo_solicitud: ctaLabel, problema_original: caso.textoOriginal, arquetipo: caso.arquetipo, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, caso_sugerido: caso.casoSugerido ? caso.casoSugerido.id : null });
+    trackEvent('whatsapp_click', { origen: 'resultado_diagnostico', patron: caso.patron });
+    saveLead({ tipo_solicitud: ctaLabel, problema_original: caso.textoOriginal, patron: caso.patron, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, caso_sugerido: caso.casoSugerido ? caso.casoSugerido.id : null });
   });
   ctas.appendChild(btnPrimary);
   if (viab.codigo === '🟢') {
@@ -1600,17 +1593,18 @@ function cerrarCaso() {
     const btnSecondary = document.createElement('a');
     btnSecondary.href = waUrl2; btnSecondary.target = '_blank'; btnSecondary.className = 'btn-ghost'; btnSecondary.style.cssText = 'font-size:12px;padding:10px 16px';
     btnSecondary.textContent = 'Quiero hablar con alguien';
-    btnSecondary.addEventListener('click', () => trackEvent('whatsapp_iniciado', { origen: 'hablar_con_alguien' }));
+    btnSecondary.addEventListener('click', () => { trackEvent('whatsapp_iniciado', { origen: 'hablar_con_alguien' }); trackEvent('whatsapp_click', { origen: 'hablar_con_alguien', patron: caso.patron }); });
     ctas.appendChild(btnSecondary);
   }
 
   requestAnimationFrame(() => card.classList.add('show'));
   b.scrollTop = b.scrollHeight;
-  trackEvent('diagnostico_completado', { arquetipo: caso.arquetipo, viabilidad: viab.codigo, preguntas: caso.preguntasHechas.length });
+  trackEvent('diagnostico_completado', { patron: caso.patron, viabilidad: viab.codigo, preguntas: caso.preguntasHechas.length });
+  trackEvent('diagnosis_generated', { patron: caso.patron, viabilidad: viab.codigo });
   // Se manda el lead apenas se muestra el resultado, sin esperar a que la
   // persona toque un botón — si alguien recibe un 🟢 y cierra la pestaña
   // sin escribir por WhatsApp, este es el único registro que sobrevive.
-  saveLead({ tipo_solicitud: 'diagnostico_completado', problema_original: caso.textoOriginal, arquetipo: caso.arquetipo, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, caso_sugerido: caso.casoSugerido ? caso.casoSugerido.id : null });
+  saveLead({ tipo_solicitud: 'diagnostico_completado', problema_original: caso.textoOriginal, patron: caso.patron, hechos: caso.hechos, viabilidad: viab.codigo, origen: caso.origen, caso_sugerido: caso.casoSugerido ? caso.casoSugerido.id : null });
   actualizarCtaFinal({
     heading: 'Ya tienes un diagnóstico<br/>listo. <em>Retómalo cuando quieras.</em>',
     sub: viab.codigo + ' ' + viab.label + ' — ' + caso.textoOriginal,
@@ -1672,59 +1666,11 @@ function esIdea(texto) {
 const heroInput = document.getElementById('heroInput');
 const heroSubmit = document.getElementById('heroSubmit');
 const heroDefaultPlaceholder = heroInput.placeholder;
-let heroDirectMode = false;
-
-function irDirectoAWhatsapp(texto) {
-  trackEvent('inicio_diagnostico', { origen: 'puerta_directa' });
-  trackEvent('problema_enviado', { texto: texto, tipo: 'directo' });
-  const b = document.getElementById('chatMsgs');
-  if (b.dataset.used === '1') {
-    const div = document.createElement('div');
-    div.style.cssText = 'text-align:center;margin:16px 0 6px;font-family:\'DM Mono\',monospace;font-size:9.5px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase';
-    div.textContent = '— nuevo caso —';
-    b.appendChild(div);
-  } else {
-    b.dataset.used = '1';
-  }
-  addMsg(texto, 'u');
-  scrollToDiag();
-  setTimeout(() => {
-    addMsg('Perfecto, vamos directo al grano. Cuéntaselo a Daniel y te responde con los detalles.', 'b');
-    const waUrl = 'https://wa.me/573005333763?text=' + encodeURIComponent('Hola Daniel, ya sé lo que necesito: ' + texto);
-    const wrap = document.createElement('div');
-    wrap.style.cssText = 'opacity:0;transition:opacity .3s;margin-top:6px';
-    const btn = document.createElement('a');
-    btn.href = waUrl; btn.target = '_blank'; btn.className = 'btn-dark'; btn.style.cssText = 'font-size:12px;padding:10px 16px;display:inline-flex';
-    btn.textContent = 'Contarle esto a Daniel →';
-    btn.addEventListener('click', () => {
-      trackEvent('cta_seleccionado', { cta: 'directo' });
-      trackEvent('conversion', { tipo: 'directo' });
-      trackEvent('whatsapp_iniciado', { origen: 'puerta_directa' });
-      saveLead({ tipo_solicitud: 'directo', problema_original: texto, diagnostico: 'Solicitud directa', solucion_propuesta: 'Por definir en conversación', nivel_oportunidad: 'Alto', siguiente_paso: 'Conversación directa', origen: 'puerta_directa' });
-    });
-    wrap.appendChild(btn);
-    b.appendChild(wrap);
-    requestAnimationFrame(() => { wrap.style.opacity = '1'; });
-    b.scrollTop = b.scrollHeight;
-    actualizarCtaFinal({
-      heading: 'Ya le contaste a Daniel<br/>lo que <em>necesitas.</em>',
-      sub: texto,
-      waUrl: waUrl,
-      waLabel: 'Contarle esto a Daniel'
-    });
-  }, 500);
-}
 
 function submitHero() {
   const v = heroInput.value;
   if (!v.trim()) return;
   heroInput.value = '';
-  if (heroDirectMode) {
-    heroDirectMode = false;
-    heroInput.placeholder = heroDefaultPlaceholder;
-    irDirectoAWhatsapp(v);
-    return;
-  }
   if (esIdea(v)) {
     trackEvent('inicio_diagnostico', { origen: 'hero_idea' });
     const el = document.getElementById('idea');
@@ -1737,10 +1683,6 @@ function submitHero() {
 }
 heroSubmit.addEventListener('click', submitHero);
 heroInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitHero(); } });
-document.querySelectorAll('#heroExamples .ex-chip').forEach(c => c.addEventListener('click', () => {
-  heroInput.value = c.dataset.t;
-  heroInput.focus();
-}));
 
 // ============ CHAT — input de respuestas dentro de un caso activo ============
 // Enter y botón llaman a la misma función; ella es la única puerta de
@@ -1757,27 +1699,14 @@ function enviarRespuestaChat() {
 if (chatFieldSend) chatFieldSend.addEventListener('click', enviarRespuestaChat);
 if (chatFieldInput) chatFieldInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); enviarRespuestaChat(); } });
 
-// ============ PUERTAS DE ENTRADA ============
-document.getElementById('doorProblema').addEventListener('click', () => {
-  trackEvent('inicio_diagnostico', { origen: 'puerta_problema' });
-  heroDirectMode = false;
-  heroInput.placeholder = 'Cuéntame qué proceso manual te quita tiempo...';
-  heroInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  heroInput.focus();
-});
-document.getElementById('doorIdea').addEventListener('click', () => {
-  trackEvent('inicio_diagnostico', { origen: 'puerta_idea' });
-  heroDirectMode = false;
-  const el = document.getElementById('idea');
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setTimeout(() => { const ii = document.getElementById('ideaInput'); if (ii) ii.focus(); }, 400);
-});
-document.getElementById('doorSe').addEventListener('click', () => {
-  trackEvent('inicio_diagnostico', { origen: 'puerta_directa_click' });
-  heroDirectMode = true;
-  heroInput.placeholder = 'Cuéntame exactamente qué necesitas construir o automatizar...';
-  heroInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  heroInput.focus();
+// ============ LOS 6 PATRONES — "qué quieres hacer más fácil" ============
+// No son "servicios" que se contratan por separado (regla 5 del brief):
+// son la clasificación directa de un patrón. Al hacer clic ya sabemos el
+// patrón con certeza, así que se salta la clasificación por texto y se va
+// directo a la pregunta decisiva de ese patrón.
+[['patronVender', 'vender'], ['patronElegir', 'elegir'], ['patronAgendar', 'agendar'], ['patronConsultar', 'consultar'], ['patronCotizar', 'cotizar'], ['patronVolver', 'volver']].forEach(([id, key]) => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('click', () => iniciarCasoDesdePatron(key));
 });
 
 // ============ CASOS → "Tengo un problema parecido" ============
@@ -1786,7 +1715,6 @@ function casoAbrirDiagnostico(id, texto) {
   const overlay = document.querySelector('.modal-overlay.open');
   if (overlay) { overlay.classList.remove('open'); document.body.style.overflow = ''; }
   setTimeout(() => {
-    heroDirectMode = false;
     heroInput.placeholder = heroDefaultPlaceholder;
     heroInput.value = texto;
     document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1797,7 +1725,6 @@ function casoAbrirDiagnostico(id, texto) {
 // ============ CATÁLOGO → "Necesito algo parecido" ============
 function catalogoNecesito(nombre) {
   trackEvent('cta_seleccionado', { cta: 'catalogo_necesito', solucion: nombre });
-  heroDirectMode = false;
   heroInput.placeholder = heroDefaultPlaceholder;
   heroInput.value = 'Necesito algo parecido a: ' + nombre;
   document.querySelector('.hero-input-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1846,6 +1773,7 @@ if (ideaBtn) ideaBtn.addEventListener('click', analizarIdea);
 function abrirModal(id){
   const m=document.getElementById(id);
   if(!m)return;
+  trackEvent('case_view', { caso: id });
   m.classList.add('open');
   document.body.style.overflow='hidden';
   if(id==='modal-icbf'){
