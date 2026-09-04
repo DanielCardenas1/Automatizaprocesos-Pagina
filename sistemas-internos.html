@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas internos — Automatiza Procesos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F3F0;--s:#EBE9E4;--w:#FFFFFF;
+  --ink:#161513;--ink2:#5B594F;--ink3:#928F83;--bdr:#DEDBD2;
+  --dark:#131210;--dark-ink:#F4F3EF;--dark-ink2:#A6A399;
+  --f-display:'Playfair Display',serif;--f-sans:'DM Sans',sans-serif;--f-mono:'DM Mono',monospace;
+  --ez:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.page-wrap{max-width:1180px;margin:0 auto;background:var(--bg)}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:0.5px solid var(--bdr);background:var(--s)}
+.back-link{font-family:var(--f-mono);font-size:11px;color:var(--ink2);text-decoration:none}
+.back-link:hover{color:var(--ink)}
+.nav-contact{font-size:11px;color:var(--ink3);font-family:var(--f-mono)}
+
+.intro{padding:52px 48px 32px;text-align:center}
+.sec-eyebrow{font-family:var(--f-mono);font-size:10px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.sec-eyebrow::before{content:'';display:inline-block;width:14px;height:1px;background:var(--ink);margin-right:8px;vertical-align:middle}
+.sec-h{font-family:'DM Sans',sans-serif;font-size:clamp(24px,3.4vw,34px);font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.6px;margin-bottom:10px}
+.sec-h em{font-style:italic;font-weight:400;color:var(--ink2)}
+.sec-sub{font-size:13px;color:var(--ink2);max-width:520px;margin:0 auto;line-height:1.6}
+
+.logo-strip{padding:20px 32px;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:8px;border-top:0.5px solid var(--bdr);border-bottom:0.5px solid var(--bdr);background:var(--w)}
+.logo-item{font-family:var(--f-mono);font-size:10px;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase}
+
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:0.5px solid var(--bdr)}
+.stat{padding:28px 24px;border-right:0.5px solid var(--bdr);text-align:center}
+.stat:last-child{border-right:none}
+.stat-n{font-size:32px;font-weight:700;color:var(--ink);letter-spacing:-1.5px;line-height:1}
+.stat-l{font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.4}
+
+.casos-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--w)}
+.caso-card{padding:36px 40px;border-top:0.5px solid var(--bdr)}
+.caso-card:nth-child(odd){border-right:0.5px solid var(--bdr)}
+.caso-tag{display:inline-flex;align-items:center;gap:5px;background:var(--s);border:0.5px solid var(--bdr);font-family:var(--f-mono);font-size:9px;color:var(--ink3);padding:4px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.caso-sector{width:5px;height:5px;border-radius:50%;background:var(--ink3)}
+.caso-title{font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-.2px;line-height:1.15;margin-bottom:12px}
+.caso-title em{font-style:italic;font-weight:400;color:var(--ink2)}
+.caso-desc{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:16px}
+.caso-metrics{display:flex;gap:16px}
+.caso-m{text-align:left}
+.caso-mn{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1}
+.caso-ml{font-size:10px;color:var(--ink3);margin-top:3px;line-height:1.3;font-family:var(--f-mono)}
+.full-w{padding:36px 40px;border-top:0.5px solid var(--bdr)}
+.full-w-inner{display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap}
+
+.btn-caso{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--ink);background:none;border:0.5px solid var(--bdr);padding:6px 12px;border-radius:100px;cursor:pointer;margin-top:12px;transition:all .2s}
+.btn-caso:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .25s;pointer-events:none}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--w);border-radius:20px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;transform:translateY(16px);transition:transform .3s;box-shadow:0 24px 80px rgba(0,0,0,.2)}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-header{padding:20px 24px 14px;display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:var(--w);z-index:2;border-bottom:0.5px solid var(--bdr)}
+.modal-close{width:30px;height:30px;border-radius:50%;border:0.5px solid var(--bdr);background:var(--s);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--ink2)}
+.modal-close:hover{background:var(--bdr)}
+.modal-body{padding:20px 24px}
+.modal-tag{display:inline-flex;align-items:center;gap:5px;background:var(--s);border:0.5px solid var(--bdr);font-family:var(--f-mono);font-size:9px;color:var(--ink3);padding:3px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.modal-title{font-family:var(--f-display);font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.3px;line-height:1.15}
+.modal-title em{font-style:italic;font-weight:400;color:var(--ink2)}
+.frow{display:grid;grid-template-columns:1fr 30px 1fr;align-items:start;gap:4px;margin-bottom:8px}
+.fbox{border-radius:10px;padding:12px 14px}
+.fp{background:#F6EEE0;border:0.5px solid var(--bdr)}
+.fs{background:#EAF2DE;border:0.5px solid #CFE0B8}
+.fres{background:var(--dark);border:0.5px solid var(--dark)}
+.flb{font-size:9px;font-family:var(--f-mono);letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;font-weight:600}
+.flb-r{color:#8A6A3A}.flb-g{color:#4C7A2E}.flb-b{color:var(--dark-ink)}
+.fres .ft2{color:var(--dark-ink)}
+.fres .fd2{color:var(--dark-ink2)}
+.ft2{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;line-height:1.3}
+.fd2{font-size:11px;color:var(--ink2);line-height:1.55}
+.fa{display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:15px;padding-top:16px}
+.fdv{display:flex;align-items:center;gap:8px;margin:8px 0}
+.fdvl{flex:1;height:0.5px;background:var(--bdr)}
+.fdvt{font-size:9px;font-family:var(--f-mono);color:var(--ink3);letter-spacing:.8px;text-transform:uppercase}
+.mmt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.mmt-m{background:var(--s);border-radius:8px;padding:10px;text-align:center}
+.mmt-n{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-1px}
+.mmt-l{font-size:9px;color:var(--ink3);font-family:var(--f-mono);margin-top:2px;line-height:1.3}
+.mcta{display:flex;align-items:center;gap:12px;background:var(--s);border-radius:10px;padding:12px 14px;border:0.5px solid var(--bdr);margin-top:14px;flex-wrap:wrap}
+.mcta-t{flex:1;min-width:160px}
+.mcta-t strong{font-size:12px;color:var(--ink);display:block;margin-bottom:2px}
+.mcta-t span{font-size:11px;color:var(--ink2)}
+.btn-dark{font-family:var(--f-sans);font-size:11px;font-weight:600;background:var(--ink);color:#fff;border:none;padding:8px 14px;border-radius:100px;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block}
+.btn-dark:hover{background:#000}
+
+footer{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:var(--s);flex-wrap:wrap;gap:8px}
+.fl{font-family:var(--f-mono);font-size:10px;color:var(--ink3)}
+
+.rev{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ez),transform .6s var(--ez)}
+.rev.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:640px){
+  nav{padding:12px 20px}
+  .intro{padding:36px 20px 24px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .casos-grid{grid-template-columns:1fr}
+  .caso-card:nth-child(odd){border-right:none}
+  .full-w{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<nav>
+  <a href="index.html" class="back-link">← Volver a Automatiza Procesos</a>
+  <span class="nav-contact">danielkadioz@gmail.com</span>
+</nav>
+
+<div class="intro rev">
+  <div class="sec-eyebrow">También hemos construido sistemas para resolver problemas internos</div>
+  <h1 class="sec-h">Sistemas y automatización<br/><em>para operaciones internas.</em></h1>
+  <p class="sec-sub">Esto demuestra que tenemos capacidad técnica para construir sistemas — no es lo que vendemos principalmente hoy. La propuesta principal de Automatiza Procesos es diseñar el recorrido digital de tus clientes.</p>
+</div>
+
+<div class="logo-strip">
+  <span class="logo-item">Sector público</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Fuerzas militares</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Sector alimentos</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">PYMES</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Remoto · Colombia</span>
+</div>
+
+<div class="stats-grid">
+  <div class="stat rev"><div class="stat-n">456</div><div class="stat-l">liquidaciones al mes<br/>procesadas · antes eran 8</div></div>
+  <div class="stat rev"><div class="stat-n">5d→1h</div><div class="stat-l">tiempo de conciliación<br/>bancaria reducido</div></div>
+  <div class="stat rev"><div class="stat-n">+9%</div><div class="stat-l">incremento en margen<br/>de utilidad · restaurantes</div></div>
+  <div class="stat rev"><div class="stat-n">$1.000M</div><div class="stat-l">en ingresos identificados<br/>y conciliados</div></div>
+</div>
+
+<div class="casos-grid">
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Sector público · educación</div>
+    <div class="caso-title">Liquidación pensional<br/><em>de 8 a 456 casos/mes</em></div>
+    <div class="caso-desc">Una entidad pública debía cobrarles a otras organizaciones su parte proporcional en el pago de pensiones de exempleados compartidos. El proceso exigía revisar documentos legales, consultar bases de datos, redactar cartas de cobro en Word y generar un PDF por cada caso. El equipo lograba resolver apenas 8 al mes. Se diseñó y automatizó con apoyo de Microsoft Copilot, y el mismo volumen de trabajo pasó a procesarse de forma completa en un solo ciclo.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">456</div><div class="caso-ml">casos/mes<br/>procesados</div></div>
+      <div class="caso-m"><div class="caso-mn">112</div><div class="caso-ml">entidades<br/>gestionadas</div></div>
+      <div class="caso-m"><div class="caso-mn">×57</div><div class="caso-ml">incremento<br/>de capacidad</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-pension')">Ver caso real →</button>
+  </div>
+
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Sector público · financiero</div>
+    <div class="caso-title">Conciliación bancaria<br/><em>de 5 días a 1 hora</em></div>
+    <div class="caso-desc">138 sedes en todo el país generaban pagos que se descargaban del banco en un archivo Excel. Cruzar cada movimiento contra las facturas emitidas por cada sede requería que cuatro personas trabajaran durante cinco días seguidos. Más de 800 movimientos y $1.000 millones que nadie podía asignar con certeza hasta que llegaba ese informe. La automatización eliminó ese ciclo por completo.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">5d→1h</div><div class="caso-ml">tiempo de<br/>procesamiento</div></div>
+      <div class="caso-m"><div class="caso-mn">800+</div><div class="caso-ml">movimientos<br/>analizados</div></div>
+      <div class="caso-m"><div class="caso-mn">$1.000M</div><div class="caso-ml">pesos<br/>conciliados</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-dxcr')">Ver caso real →</button>
+  </div>
+
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Sector privado · restaurantes</div>
+    <div class="caso-title">Control de costos<br/><em>15% → 24% de margen</em></div>
+    <div class="caso-desc">Una operación con varios puntos de venta tenía ventas estables pero sin claridad sobre cuánto ganaba realmente en cada uno. No existía una estructura que midiera el costo por plato, el consumo real de ingredientes ni la rentabilidad por punto de venta. Se diseñó e implementó un sistema de costeo estándar que conectó las recetas con el inventario y las ventas, dando visibilidad total sobre dónde se ganaba y dónde se perdía dinero.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">+9pts</div><div class="caso-ml">de margen<br/>de utilidad</div></div>
+      <div class="caso-m"><div class="caso-mn">100%</div><div class="caso-ml">trazabilidad<br/>por punto</div></div>
+      <div class="caso-m"><div class="caso-mn">ZEUS</div><div class="caso-ml">sistema<br/>implementado</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-zeus')">Ver caso real →</button>
+  </div>
+
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Automatización · RPA</div>
+    <div class="caso-title">Bot de cargue masivo<br/><em>350 beneficiarios en 1h 47min</em></div>
+    <div class="caso-desc">Una organización debía ingresar manualmente los datos de 350 beneficiarios en un sistema web, copiando campo por campo desde un archivo Excel. Con una persona dedicada exclusivamente a esta tarea, el proceso tomaba entre 4 y 5 días hábiles con errores de digitación frecuentes. Se desarrolló un bot en Python con Selenium que abre el navegador, inicia sesión, navega al formulario correcto y llena cada registro automáticamente.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">350</div><div class="caso-ml">beneficiarios<br/>procesados</div></div>
+      <div class="caso-m"><div class="caso-mn">5d→1h47</div><div class="caso-ml">reducción de<br/>tiempo</div></div>
+      <div class="caso-m"><div class="caso-mn">0</div><div class="caso-ml">errores de<br/>digitación</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-icbf')">Ver caso real →</button>
+  </div>
+</div>
+
+<div class="full-w rev" style="background:var(--s)">
+  <div class="full-w-inner">
+    <div style="flex:1;min-width:260px">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector público · regulatorio</div>
+      <div class="caso-title" style="margin-bottom:10px">Registro INVIMA<br/><em>600 fichas automatizadas</em></div>
+      <div class="caso-desc">Para comercializar un producto alimenticio en Colombia es obligatorio registrarlo ante el INVIMA mediante una ficha técnica detallada por producto. Una entidad tenía 63 registros pendientes, cada uno con múltiples fichas que debían llenarse manualmente copiando datos desde diferentes bases de datos. Se automatizó la extracción y el llenado de fichas, reduciendo semanas de trabajo a horas.</div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:flex-start;padding-top:32px">
+      <div class="caso-m"><div class="caso-mn">600+</div><div class="caso-ml">fichas técnicas<br/>generadas</div></div>
+      <div class="caso-m"><div class="caso-mn">63</div><div class="caso-ml">registros<br/>completados</div></div>
+      <div class="caso-m"><div class="caso-mn">0</div><div class="caso-ml">errores por<br/>copia manual</div></div>
+    </div>
+  </div>
+  <button class="btn-caso" onclick="abrirModal('modal-invima')">Ver caso real →</button>
+</div>
+
+<div class="full-w rev" style="background:var(--w)">
+  <div class="full-w-inner">
+    <div style="flex:1;min-width:260px">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector público · planeación</div>
+      <div class="caso-title" style="margin-bottom:10px">Evaluación de proyectos<br/><em>100 proyectos automatizados</em></div>
+      <div class="caso-desc">Una entidad pública debía evaluar y calificar los proyectos productivos de decenas de centros de formación en todo el país. Consolidar esa información, aplicar los criterios de evaluación y generar los reportes por centro tomaba semanas de trabajo manual. Se desarrolló un sistema automatizado que lee los archivos, aplica los criterios de calificación y genera reportes consolidados, reduciendo el proceso de semanas a horas.</div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:flex-start;padding-top:32px">
+      <div class="caso-m"><div class="caso-mn">100+</div><div class="caso-ml">proyectos<br/>evaluados</div></div>
+      <div class="caso-m"><div class="caso-mn">33</div><div class="caso-ml">regionales<br/>procesadas</div></div>
+      <div class="caso-m"><div class="caso-mn">sem→h</div><div class="caso-ml">reducción de<br/>tiempo</div></div>
+    </div>
+  </div>
+  <button class="btn-caso" onclick="abrirModal('modal-evaluador')">Ver caso real →</button>
+</div>
+
+<div style="text-align:center;padding:40px 20px">
+  <a href="index.html#diagnostico" class="btn-dark" style="padding:12px 22px;font-size:12px">Contar mi problema →</a>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">© 2026 Daniel Gerardo Cárdenas · Automatización de Procesos · Colombia</div>
+  <a href="index.html" class="back-link">← Volver al recorrido principal</a>
+</footer>
+
+<!-- MODALES — copia simplificada (solo flujo del proyecto, sin tabs de demo)
+     de los mismos 6 casos que index.html mantiene íntegros para el link
+     "Ver caso real" dentro del resultado del diagnóstico. No se inventan
+     datos: mismo texto real que en index.html. -->
+<div class="modal-overlay" id="modal-pension">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · educación</div><div class="modal-title">Liquidación pensional<br/><em>de 8 a 456 casos/mes</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-pension')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">8 liquidaciones manuales al mes</div><div class="fd2">Cada caso exigía revisar resoluciones, cruzar bases de datos, redactar cartas en Word y generar PDFs. El techo era 8 casos al mes.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema automatizado de liquidación masiva, con apoyo de Microsoft Copilot</div><div class="fd2">Se automatizó la lectura de bases de datos, el cálculo de cuotas proporcionales, la generación de cartas y la conversión a PDF en un solo proceso.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">456 casos por mes — mismo equipo — sin contratar más personal</div><div class="fd2">El proceso que tardaba un mes ahora se ejecuta en horas. La capacidad aumentó 45 veces.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">456</div><div class="mmt-l">casos/mes<br/>procesados</div></div><div class="mmt-m"><div class="mmt-n">112</div><div class="mmt-l">entidades<br/>gestionadas</div></div><div class="mmt-m"><div class="mmt-n">×57</div><div class="mmt-l">incremento<br/>de capacidad</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes procesos de liquidación o cobro repetitivos?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#diagnostico">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-dxcr">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · financiero</div><div class="modal-title">Conciliación bancaria<br/><em>de 5 días a 1 hora</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-dxcr')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">$1.000 millones en movimientos sin cruzar cada mes</div><div class="fd2">138 sedes generaban pagos que se descargaban del banco como un Excel. Cruzar cada movimiento contra las facturas emitidas por cada sede requería 4 personas durante 5 días seguidos.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Conciliación automatizada con Python y Power Query</div><div class="fd2">Un proceso que toma el Excel del banco, aplica reglas de cruce por valor, fecha y referencia contra las facturas de cada sede, y genera el reporte consolidado.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">De 5 días a 1 hora — 800 movimientos procesados por ciclo</div><div class="fd2">$1.000 millones cruzados automáticamente por ciclo.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">5d→1h</div><div class="mmt-l">tiempo de<br/>procesamiento</div></div><div class="mmt-m"><div class="mmt-n">800+</div><div class="mmt-l">movimientos<br/>analizados</div></div><div class="mmt-m"><div class="mmt-n">$1.000M</div><div class="mmt-l">pesos<br/>conciliados</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes datos bancarios o procesos de conciliación manual?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#diagnostico">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-zeus">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector privado · restaurantes</div><div class="modal-title">Control de costos<br/><em>15% → 24% de margen</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-zeus')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Ventas estables pero rentabilidad desconocida</div><div class="fd2">Varios puntos de venta sin estructura de costos por plato. Era imposible saber qué ítems generaban pérdidas o qué punto era rentable.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema de costeo estándar implementado en ZEUS</div><div class="fd2">Recetas estándar conectadas con costos reales de ingredientes, consumo por preparación y ventas por punto.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">El margen subió del 15% al 24% sin aumentar precios</div><div class="fd2">Con información real sobre costos la operación eliminó ítems no rentables y optimizó compras.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">+9pts</div><div class="mmt-l">margen<br/>ganado</div></div><div class="mmt-m"><div class="mmt-n">100%</div><div class="mmt-l">trazabilidad<br/>por punto</div></div><div class="mmt-m"><div class="mmt-n">ZEUS</div><div class="mmt-l">sistema<br/>implementado</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿No sabes cuánto ganas por producto o punto de venta?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#diagnostico">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-invima">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · regulatorio</div><div class="modal-title">Registro sanitario<br/><em>600 fichas automatizadas</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-invima')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">63 registros pendientes, cientos de fichas por llenar</div><div class="fd2">Cada producto requiere una ficha técnica detallada. El llenado manual tomaba semanas con errores frecuentes.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Extracción y llenado automático de fichas</div><div class="fd2">Se automatizó la lectura de bases de datos, la extracción de campos y el llenado secuencial de fichas.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">600 fichas generadas — 0 errores de transcripción</div><div class="fd2">Lo que tomaba semanas se redujo a horas con información exacta.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">600+</div><div class="mmt-l">fichas<br/>generadas</div></div><div class="mmt-m"><div class="mmt-n">63</div><div class="mmt-l">registros<br/>completados</div></div><div class="mmt-m"><div class="mmt-n">0</div><div class="mmt-l">errores por<br/>transcripción</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes formularios o fichas que llenar masivamente?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#diagnostico">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-evaluador">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · planeación</div><div class="modal-title">Evaluación de proyectos<br/><em>100 proyectos automatizados</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-evaluador')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Semanas evaluando archivos manualmente</div><div class="fd2">Decenas de centros enviaban proyectos en Excel y Word. Consolidar y calificar era un proceso de semanas con riesgo de inconsistencias.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema automatizado de evaluación y calificación</div><div class="fd2">Un proceso que lee los archivos, extrae datos financieros, aplica criterios de calificación y genera reportes por proyecto, centro y regional.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">100 proyectos evaluados — semanas reducidas a horas</div><div class="fd2">Reportes con criterios uniformes, eliminando inconsistencias entre evaluadores.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">100+</div><div class="mmt-l">proyectos<br/>evaluados</div></div><div class="mmt-m"><div class="mmt-n">33</div><div class="mmt-l">regionales<br/>procesadas</div></div><div class="mmt-m"><div class="mmt-n">sem→h</div><div class="mmt-l">reducción<br/>de tiempo</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Evalúas o calificas información de múltiples fuentes?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#diagnostico">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-icbf">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Automatización · RPA</div><div class="modal-title">Bot de cargue masivo<br/><em>350 beneficiarios automatizados</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-icbf')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">350 registros ingresados a mano</div><div class="fd2">Un operador copiaba datos desde un Excel campo por campo en un formulario web. El proceso tomaba más de 5 días hábiles con errores de digitación frecuentes.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Bot RPA que automatiza el flujo completo</div><div class="fd2">Bot en Python con Selenium que inicia sesión, navega al formulario y llena cada campo leyendo los datos del Excel. Al finalizar verifica y genera un reporte.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">350 beneficiarios en 1h 47min</div><div class="fd2">Los más de 5 días de trabajo manual quedaron reducidos a una ejecución desatendida de 1h 47min con verificación automática incluida.</div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes cargue masivo de datos en un sistema web?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#diagnostico">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function abrirModal(id){
+  const m=document.getElementById(id);
+  if(!m) return;
+  m.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function cerrarModal(id){
+  const m=document.getElementById(id);
+  if(!m) return;
+  m.classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.modal-overlay').forEach(ov=>{
+  ov.addEventListener('click', e=>{ if(e.target===ov) cerrarModal(ov.id); });
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
