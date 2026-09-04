@@ -140,14 +140,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
   .journey-rail::before{left:12px}
   .rail-dot{left:12px;top:32px}
 }
-/* recorridos de cliente — lenguaje visual: puntos + línea, no chips */
-.journey-path{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0;margin-top:40px}
-.journey-step{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);padding:6px 4px}
-.journey-dot{width:6px;height:6px;border-radius:50%;background:var(--ink);flex-shrink:0}
-.journey-sep{width:26px;height:1px;background:var(--bdr);margin:0 6px}
-@media(max-width:640px){.journey-sep{width:14px}}
+/* revelación progresiva suave — de fondo, nunca "bloqueada": conserva su
+   alto real (nav/anchors no se rompen), solo se atenúa hasta que se
+   revela sola por scroll, por fin de diagnóstico o por el link de escape */
+.jrny-collapsed{opacity:.45;transition:opacity .8s var(--ez)}
 
-/* de un problema a un recorrido — camino vertical con línea y puntos */
+/* de un problema a un recorrido — camino vertical con línea y puntos.
+   Reutilizado también por "El recorrido" (interactivo) y "La revelación". */
 .flow-path{max-width:560px;margin:40px auto 0}
 .flow-row{display:grid;grid-template-columns:16px 1fr;column-gap:22px;position:relative}
 .flow-row:not(:last-child){padding-bottom:38px}
@@ -158,6 +157,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
 .flow-content{text-align:left}
 .flow-label{font-family:var(--f-mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
 .flow-text{font-family:var(--f-display);font-size:clamp(17px,2.4vw,21px);color:var(--ink);line-height:1.35}
+.flow-row.interactive .flow-content{cursor:pointer}
+.flow-hint{font-family:var(--f-mono);font-size:9.5px;color:var(--ink3);margin-top:5px;letter-spacing:.3px}
+.flow-blurb{display:none;font-size:12.5px;color:var(--ink2);line-height:1.6;margin-top:8px;max-width:420px}
+.flow-row.open .flow-blurb{display:block}
+.flow-row.open .flow-hint{display:none}
 .caso-title{font-family:var(--f-display);font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.2px;line-height:1.15;margin-bottom:12px}
 .caso-index{font-family:var(--f-mono);font-size:11px;color:var(--ink3);letter-spacing:1px;margin-bottom:14px}
 .caso-tech{font-family:var(--f-mono);font-size:10.5px;color:var(--ink3);letter-spacing:.3px;margin-top:14px}
@@ -506,18 +510,15 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   <div class="hero-grid">
     <div class="hero-copy">
       <h1 class="hero-h">Tu negocio<br/>ya funciona.<br/><em>Hagamos que sea más fácil<br/>para tus clientes.</em></h1>
-      <p class="hero-sub">Diseñamos y construimos el recorrido digital de tu negocio para que tus clientes puedan encontrar lo que necesitan, consultar, elegir, comprar, agendar o volver sin complicaciones.</p>
+      <p class="hero-sub" style="margin-bottom:8px">Dime qué quieres que sea más fácil.</p>
+      <div style="font-size:11.5px;color:var(--ink3);max-width:420px;line-height:1.5;margin-bottom:26px">No necesitas saber qué tecnología necesitas. Solo cuéntame qué está siendo difícil.</div>
 
       <div class="hero-input-card">
-        <textarea class="hero-textarea" id="heroInput" rows="2" placeholder="O cuéntame el problema con tus propias palabras..."></textarea>
+        <textarea class="hero-textarea" id="heroInput" rows="2" placeholder="Ej: Mis clientes me escriben todo el día para preguntar lo mismo antes de comprar..."></textarea>
         <div class="hero-input-bar">
           <span class="hero-input-hint">↵ para analizar</span>
-          <button class="hero-submit" id="heroSubmit" type="button">Cuéntame qué quieres mejorar →</button>
+          <button class="hero-submit" id="heroSubmit" type="button">Cuéntame →</button>
         </div>
-      </div>
-
-      <div class="hero-btns rev">
-        <a href="#casos" class="btn-ghost">Ver ejemplos</a>
       </div>
     </div>
 
@@ -564,6 +565,9 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
       <span class="door-title">Quiero que mis clientes vuelvan</span>
     </button>
   </div>
+  <div style="text-align:center;margin-top:22px">
+    <a href="#casos" id="skipExplore" style="font-family:'DM Mono',monospace;font-size:10.5px;color:var(--ink3);text-decoration:underline;cursor:pointer">Prefiero explorar la página directamente →</a>
+  </div>
 </section>
 
 <!-- DIAGNÓSTICO -->
@@ -594,39 +598,57 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
-<!-- UN NEGOCIO, MUCHOS RECORRIDOS (reemplaza el antiguo bloque de "servicios") -->
-<section class="paso-section rev" style="padding-bottom:36px">
+<!-- EL RECORRIDO — interactivo. Antes del diagnóstico muestra una secuencia
+     genérica con blurbs al tocar cada paso; tras un diagnóstico se
+     reemplaza por el recorrido real del patrón detectado (renderRecorridoPersonalizado). -->
+<section class="paso-section rev" id="recorrido">
   <span class="rail-dot"></span>
-  <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">Un negocio,<br/><em>muchos recorridos.</em></h2>
-  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">No todos tus clientes necesitan lo mismo. Diseñamos el recorrido digital que tu negocio necesita según lo que quieres conseguir.</p>
-  <div class="journey-path rev">
-    <span class="journey-step"><i class="journey-dot"></i>Descubrir</span><span class="journey-sep"></span>
-    <span class="journey-step"><i class="journey-dot"></i>Consultar</span><span class="journey-sep"></span>
-    <span class="journey-step"><i class="journey-dot"></i>Elegir</span><span class="journey-sep"></span>
-    <span class="journey-step"><i class="journey-dot"></i>Cotizar</span><span class="journey-sep"></span>
-    <span class="journey-step"><i class="journey-dot"></i>Comprar</span><span class="journey-sep"></span>
-    <span class="journey-step"><i class="journey-dot"></i>Agendar</span><span class="journey-sep"></span>
-    <span class="journey-step"><i class="journey-dot"></i>Volver</span>
+  <div class="sec-eyebrow" style="text-align:center" id="recorridoEyebrow">Así pensamos un recorrido</div>
+  <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">El <em>recorrido.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto;max-width:480px">Toca cada paso para ver qué podría vivir tu cliente ahí.</p>
+  <div class="flow-path" id="recorridoFlow">
+    <div class="flow-row interactive"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">01 · Descubre</div><div class="flow-text">Encuentra tu negocio</div><div class="flow-hint">toca para ver →</div><div class="flow-blurb">Entiende en segundos si esto es para ella, sin tener que preguntarte primero.</div></div></div>
+    <div class="flow-row interactive"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">02 · Entiende</div><div class="flow-text">Resuelve sus dudas</div><div class="flow-hint">toca para ver →</div><div class="flow-blurb">Obtiene respuesta a lo que más se pregunta, sin esperar a que tú estés disponible.</div></div></div>
+    <div class="flow-row interactive"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">03 · Elige</div><div class="flow-text">Sabe qué le conviene</div><div class="flow-hint">toca para ver →</div><div class="flow-blurb">La experiencia la ayuda a identificar qué necesita, en vez de adivinar sola.</div></div></div>
+    <div class="flow-row interactive"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">04 · Actúa</div><div class="flow-text">Compra, agenda o solicita</div><div class="flow-hint">toca para ver →</div><div class="flow-blurb">Cuando está lista, puede avanzar directo — sin ida y vuelta contigo.</div></div></div>
+    <div class="flow-row interactive"><div class="flow-marker"><i class="flow-dot"></i></div><div class="flow-content"><div class="flow-label">05 · Vuelve</div><div class="flow-text">Te vuelve a encontrar</div><div class="flow-hint">toca para ver →</div><div class="flow-blurb">Cuando lo necesita de nuevo, el camino de regreso es igual de fácil.</div></div></div>
   </div>
+  <p class="sec-sub" id="recorridoOportunidad" style="text-align:center;margin:26px auto 0;max-width:480px;display:none"></p>
 </section>
 
-<!-- DE UN PROBLEMA A UN RECORRIDO -->
-<section class="paso-section rev" id="metodo">
+<!-- ¿Y QUÉ CONSTRUIMOS? -->
+<section class="paso-section rev" id="construimos" style="background:var(--w)">
   <span class="rail-dot"></span>
-  <div class="sec-eyebrow" style="text-align:center">Cómo pensamos</div>
-  <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">De un problema,<br/><em>a un recorrido.</em></h2>
-  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto;max-width:480px">No empezamos preguntándote qué tecnología necesitas. Primero entendemos qué está intentando hacer tu cliente y dónde se está complicando.</p>
-  <div class="flow-path">
-    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">01 · Problema</div><div class="flow-text">"Mis clientes preguntan mucho antes de agendar."</div></div></div>
-    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">02 · Fricción</div><div class="flow-text">El cliente depende de WhatsApp para resolver dudas.</div></div></div>
-    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">03 · Recorrido</div><div class="flow-text">Consulta → orientación → selección del servicio → agenda</div></div></div>
-    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">04 · Solución</div><div class="flow-text">Experiencia digital guiada</div></div></div>
-    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i></div><div class="flow-content"><div class="flow-label">05 · Tecnología</div><div class="flow-text">Web + contenido definido por el negocio + agenda + WhatsApp</div></div></div>
+  <div class="sec-eyebrow" style="text-align:center">Cómo lo resolvemos</div>
+  <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">¿Y qué <em>construimos?</em></h2>
+  <p class="sec-sub" style="text-align:center;margin:0 auto 28px;max-width:480px">No partimos de una herramienta para buscarle un problema al negocio. Partimos del problema y construimos lo que el recorrido necesita.</p>
+  <div class="ptools" style="max-width:560px;margin:0 auto">
+    <div class="ptool"><div class="ptool-ico">🌐</div><div><div class="ptool-name">Una experiencia web</div></div></div>
+    <div class="ptool"><div class="ptool-ico">💬</div><div><div class="ptool-name">Un sistema de consulta</div></div></div>
+    <div class="ptool"><div class="ptool-ico">🧭</div><div><div class="ptool-name">Un flujo comercial</div></div></div>
+    <div class="ptool"><div class="ptool-ico">📅</div><div><div class="ptool-name">Un sistema de reservas</div></div></div>
+    <div class="ptool"><div class="ptool-ico">🗂️</div><div><div class="ptool-name">Una herramienta interna</div></div></div>
+    <div class="ptool"><div class="ptool-ico">🔗</div><div><div class="ptool-name">Una integración o automatización</div></div></div>
+    <div class="ptool"><div class="ptool-ico">📱</div><div><div class="ptool-name">WhatsApp estructurado</div></div></div>
+    <div class="ptool"><div class="ptool-ico">➕</div><div><div class="ptool-name">O una combinación de todo esto</div></div></div>
+  </div>
+  <p class="sec-sub" id="construimosPersonalizado" style="text-align:center;margin:22px auto 0;max-width:480px;display:none"></p>
+</section>
+
+<!-- PROBEMOS ALGO — mini simulación interactiva, autocontenida (no toca caso/PATRONES/SLOTS). -->
+<section class="paso-section rev" id="probemos">
+  <span class="rail-dot"></span>
+  <div class="sec-eyebrow" style="text-align:center">Una simulación rápida</div>
+  <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">Probemos <em>algo.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin:0 auto 24px;max-width:480px">Así se podría sentir para uno de tus clientes.</p>
+  <div class="idea-card" style="max-width:520px" id="miniDemoCard">
+    <div style="font-size:12.5px;color:var(--ink2);margin-bottom:12px">¿Cuál se parece más a lo que quieres mejorar?</div>
+    <div class="diag-quick" id="miniDemoPicker"></div>
   </div>
 </section>
 
 <!-- CASOS REALES -->
-<section id="casos">
+<section id="casos" class="jrny-collapsed">
   <span class="rail-dot"></span>
   <div class="casos-header rev" style="padding-bottom:32px">
     <div class="sec-eyebrow" style="text-align:center">Casos principales · 01</div>
@@ -790,6 +812,35 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
+<!-- LA REVELACIÓN — el momento narrativo principal. Por defecto (sin
+     diagnóstico corrido) muestra una versión honesta y breve que NO
+     afirma que el visitante "vivió" nada. Se reemplaza dinámicamente
+     (renderRevelacion, llamada al final de cerrarCaso) cuando sí hubo un
+     diagnóstico, reconstruyendo el recorrido real de esa persona. -->
+<section class="model-section rev" id="revelacion">
+  <span class="rail-dot"></span>
+  <div id="revelacionContent">
+    <div class="sec-eyebrow" style="text-align:center">Antes de seguir</div>
+    <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">Así diseñamos <em>un recorrido.</em></h2>
+    <p class="sec-sub" style="text-align:center;margin:0 auto;max-width:480px">Problema → preguntas → recorrido → solución. Si quieres verlo con tu propio caso, todavía puedes escribirlo arriba.</p>
+  </div>
+</section>
+
+<!-- DE UN PROBLEMA A UN RECORRIDO -->
+<section class="paso-section jrny-collapsed" id="metodo">
+  <span class="rail-dot"></span>
+  <div class="sec-eyebrow" style="text-align:center">Cómo pensamos</div>
+  <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">De un problema,<br/><em>a un recorrido.</em></h2>
+  <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto;max-width:480px">No empezamos preguntándote qué tecnología necesitas. Primero entendemos qué está intentando hacer tu cliente y dónde se está complicando.</p>
+  <div class="flow-path">
+    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">01 · Problema</div><div class="flow-text">"Mis clientes preguntan mucho antes de agendar."</div></div></div>
+    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">02 · Fricción</div><div class="flow-text">El cliente depende de WhatsApp para resolver dudas.</div></div></div>
+    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">03 · Recorrido</div><div class="flow-text">Consulta → orientación → selección del servicio → agenda</div></div></div>
+    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i><span class="flow-line"></span></div><div class="flow-content"><div class="flow-label">04 · Solución</div><div class="flow-text">Experiencia digital guiada</div></div></div>
+    <div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i></div><div class="flow-content"><div class="flow-label">05 · Tecnología</div><div class="flow-text">Web + contenido definido por el negocio + agenda + WhatsApp</div></div></div>
+  </div>
+</section>
+
 <!-- IDEA -->
 <section class="idea-section rev" id="idea">
   <span class="rail-dot"></span>
@@ -804,7 +855,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 </section>
 
 <!-- MODELO / PROTOTIPADO -->
-<section class="model-section rev" id="modelo">
+<section class="model-section jrny-collapsed" id="modelo">
   <span class="rail-dot"></span>
   <div class="sec-eyebrow" style="text-align:center">Cómo reducimos el riesgo · 03</div>
   <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">No tienes que construir todo<br/><em>para saber si funciona.</em></h2>
@@ -819,10 +870,10 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 </section>
 
 <!-- PERFIL -->
-<section class="perfil-section" id="perfil">
+<section class="perfil-section jrny-collapsed" id="perfil">
   <span class="rail-dot"></span>
   <div class="perfil-statement rev">
-    <div class="sec-eyebrow">Sobre mí · 04</div>
+    <div class="sec-eyebrow">¿Quién diseña estos recorridos? · 04</div>
     <h2 class="perfil-h">Entiendo el negocio.<br/>La tecnología <em>es el medio.</em></h2>
   </div>
   <div class="perfil-grid">
@@ -904,14 +955,14 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   <div class="cta-icon">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
   </div>
-  <h2 class="cta-h" id="ctaFinalH">¿Dónde se está complicando<br/>la <em>experiencia de tus clientes?</em></h2>
-  <p class="cta-sub" id="ctaFinalSub">Cuéntame qué quieres que tus clientes puedan hacer más fácilmente. A partir de ahí diseñamos el recorrido y definimos qué tecnología realmente necesitas.</p>
+  <h2 class="cta-h" id="ctaFinalH">¿Recuerdas cómo<br/><em>empezó esto?</em></h2>
+  <p class="cta-sub" id="ctaFinalSub">Entraste queriendo saber qué hacemos. Terminaste recorriendo exactamente el tipo de experiencia que diseñamos. Ahora hagámoslo con tu negocio.</p>
   <div class="cta-btns">
     <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20dise%C3%B1ar%20el%20recorrido%20de%20mis%20clientes" target="_blank" class="btn-dark" id="ctaFinalWa">
       <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
-      <span id="ctaFinalWaLabel">Quiero diseñar este recorrido</span>
+      <span id="ctaFinalWaLabel">Comenzar mi recorrido</span>
     </a>
-    <a href="mailto:danielkadioz@gmail.com" class="btn-ghost">Enviar correo</a>
+    <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20tengo%20una%20pregunta" target="_blank" class="btn-ghost">Tengo una pregunta</a>
   </div>
   <div class="cta-note">Sin costo · Sin compromiso · Respuesta en menos de 24h</div>
 </section>
@@ -1336,6 +1387,41 @@ const SLOTS = {
     '¿Te busca en WhatsApp, en redes, o tiene que preguntar de nuevo cómo contactarte?')
 };
 
+// ============ CHIPS DE RESPUESTA RÁPIDA (capa visual, no lógica) ============
+// Viven fuera de SLOTS a propósito: no tocan pregunta()/guardar()/
+// reformular() de ningún slot. Al hacer clic, el chip solo llama a
+// responderCaso(texto) con ese texto — se comporta EXACTAMENTE como si el
+// usuario lo hubiera escrito y enviado. El campo de texto libre sigue
+// siempre visible debajo; esto es un atajo, no un formulario cerrado.
+const SLOT_CHIPS = {
+  friccion_venta: ['Deja de responder', 'Tarda en decidir', 'No sabe cómo comprar'],
+  canal_contacto: ['WhatsApp', 'Instagram', 'Llamada', 'Otro canal'],
+  que_preguntan_antes_comprar: ['El precio', 'Si funciona para su caso', 'Los tiempos de entrega'],
+  que_pasa_si_no_respondes_rapido: ['Se va con otro', 'Deja de escribir', 'Vuelve a preguntar después'],
+  que_debe_elegir: ['Entre productos', 'Entre servicios', 'Entre paquetes o planes'],
+  cuantas_opciones: ['Menos de 10', 'Entre 10 y 30', 'Más de 30'],
+  que_pregunta_antes_elegir: ['Precio', 'Cuál le sirve mejor', 'Diferencias entre opciones'],
+  como_ayudas_elegir: ['Le explico yo directamente', 'Le mando un catálogo', 'Queda por su cuenta'],
+  que_pasa_sin_encontrar: ['Se va sin decidir', 'Me escribe con más preguntas', 'Elige algo sin estar seguro'],
+  que_agenda: ['Citas de servicio', 'Turnos o reservas', 'Sesiones o consultas'],
+  como_agenda_hoy: ['Coordinamos por WhatsApp', 'Coordinamos por llamada', 'Ya uso un calendario'],
+  info_antes_confirmar: ['Fecha y hora disponible', 'Datos del cliente', 'Tipo de servicio que necesita'],
+  quien_administra_agenda: ['Yo directamente', 'Alguien de mi equipo', 'Nadie fijo'],
+  que_pasa_despues_reservar: ['Mando confirmación manual', 'Mando recordatorio', 'Queda agendado sin más'],
+  que_preguntan_repetido: ['Precios y planes', 'Cómo funciona el servicio', 'Disponibilidad'],
+  respuesta_depende: ['Depende de cada cliente', 'Siempre la misma'],
+  que_podria_autoconsultar: ['Precios', 'Cómo funciona el proceso', 'Requisitos o condiciones'],
+  cuando_interviene_persona: ['Cuando es un caso particular', 'Cuando hay que decidir algo', 'Casi siempre interviene alguien'],
+  de_que_depende_precio: ['Cantidad', 'Medidas', 'Tipo de servicio'],
+  que_necesitas_para_cotizar: ['Cantidad o medidas', 'Tipo de producto o servicio', 'Ubicación o fecha'],
+  cuanto_tardas_cotizar: ['Minutos', 'Un par de horas', 'Uno o varios días'],
+  que_pasa_mientras_espera: ['Sigue buscando en otro lado', 'Espera sin más', 'Deja de responder'],
+  hace_seguimiento: ['Sí, a veces', 'No, nada'],
+  cada_cuanto_podria_volver: ['Cada semana', 'Cada mes', 'Es esporádico'],
+  que_le_haria_volver: ['Un recordatorio a tiempo', 'Una oferta puntual', 'Que se acuerde de mí'],
+  como_te_encuentran_de_nuevo: ['Me buscan en WhatsApp', 'Me buscan en redes', 'Tienen que volver a preguntar']
+};
+
 // ============ ESTADO ÚNICO DE CONVERSACIÓN + MEMORIA DEL CASO ============
 const MAX_PREGUNTAS = 5;
 function casoNuevo() {
@@ -1521,6 +1607,11 @@ function procesarSiguientePaso() {
   caso.preguntasHechas.push({ slot: decision.slot });
   addMsg(SLOTS[decision.slot].pregunta(caso), 'b');
   mostrarInputChat(true);
+  // Capa visual opcional: accesos rápidos por si no sabe cómo empezar a
+  // responder. Al hacer clic llaman a responderCaso() con ese texto,
+  // exactamente igual que si el usuario lo hubiera escrito — no cambia
+  // pregunta(), guardar() ni la clasificación en absoluto.
+  if (SLOT_CHIPS[decision.slot]) addChips(SLOT_CHIPS[decision.slot], (v) => responderCaso(v));
 }
 
 // Regla 13 del brief: cuando el texto libre dispara varios patrones a la
@@ -1807,6 +1898,10 @@ function cerrarCaso() {
     waUrl: waUrl,
     waLabel: ctaLabel
   });
+  // Único punto donde el diagnóstico avisa al resto de la narrativa que
+  // terminó — no toca clasificación ni resultado, solo orquesta la UI
+  // que viene después (revelación, recorrido personalizado, etc).
+  avanzarNarrativaPostDiagnostico();
 }
 
 function addMsg(txt, type) {
@@ -1904,6 +1999,158 @@ if (chatFieldInput) chatFieldInput.addEventListener('keydown', e => { if (e.key 
   const el = document.getElementById(id);
   if (el) el.addEventListener('click', () => iniciarCasoDesdePatron(key));
 });
+
+// ============ REVELACIÓN PROGRESIVA (suave, nunca un bloqueo) ============
+// Casos / Método / Modelo / Perfil nacen con .jrny-collapsed (atenuados,
+// sin blur — conservan su alto real, nav y footer siguen funcionando
+// siempre). Se revelan solas al acercarse por scroll, de una sola vez si
+// se toca "explorar directamente", o al terminar un diagnóstico.
+function desbloquearTodo() {
+  document.querySelectorAll('.jrny-collapsed').forEach(el => el.classList.remove('jrny-collapsed'));
+}
+const ioCollapse = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.remove('jrny-collapsed');
+      ioCollapse.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+document.querySelectorAll('.jrny-collapsed').forEach(el => ioCollapse.observe(el));
+
+const skipExplore = document.getElementById('skipExplore');
+if (skipExplore) skipExplore.addEventListener('click', () => { trackEvent('cta_seleccionado', { cta: 'explorar_directo' }); desbloquearTodo(); });
+document.querySelectorAll('nav a[href^="#"], footer a[href^="#"]').forEach(a => a.addEventListener('click', desbloquearTodo));
+
+// ============ "EL RECORRIDO" — interactivo ============
+const recorridoFlowEl = document.getElementById('recorridoFlow');
+if (recorridoFlowEl) {
+  recorridoFlowEl.addEventListener('click', (e) => {
+    const row = e.target.closest('.flow-row.interactive');
+    if (row) row.classList.toggle('open');
+  });
+}
+// Reemplaza la secuencia genérica por el recorrido real del patrón
+// detectado — reutiliza PATRONES[patron].recorrido tal cual existe hoy,
+// no se inventa contenido nuevo por paso.
+function renderRecorridoPersonalizado(patron) {
+  const p = PATRONES[patron];
+  const flow = document.getElementById('recorridoFlow');
+  if (!p || !flow) return;
+  const pasos = p.recorrido.split('→').map(s => s.trim()).filter(Boolean);
+  flow.innerHTML = pasos.map((texto, i) => {
+    const isLast = i === pasos.length - 1;
+    return '<div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i>' + (isLast ? '' : '<span class="flow-line"></span>') + '</div><div class="flow-content"><div class="flow-label">' + String(i + 1).padStart(2, '0') + '</div><div class="flow-text" style="font-size:16px">' + texto + '</div></div></div>';
+  }).join('');
+  const eyebrow = document.getElementById('recorridoEyebrow');
+  if (eyebrow) eyebrow.textContent = 'Tu recorrido, según lo que nos contaste';
+  const narr = NARRATIVA[patron];
+  const oportunidad = document.getElementById('recorridoOportunidad');
+  if (oportunidad && narr) { oportunidad.textContent = narr.oportunidad(caso); oportunidad.style.display = 'block'; }
+}
+
+// ============ "PROBEMOS ALGO" — mini simulación autocontenida ============
+// Mismo principio que DEMO_VET_PASOS: NO toca caso/PATRONES/SLOTS ni el
+// motor real. Solo lee PATRONES[key].icono/label para poblar el selector.
+const MINI_DEMO = {
+  vender: { titulo: 'Alguien que quiere comprarte', q1: { pregunta: '¿Qué le frena más para comprar?', opciones: ['El precio no está claro', 'Tiene dudas antes de decidir', 'No está seguro de que sea lo que necesita'] }, q2: { pregunta: '¿Qué lo ayudaría a decidirse más rápido?', opciones: ['Ver el precio de una vez', 'Resolver sus dudas sin esperar', 'Que le confirmen que es la opción correcta'] } },
+  elegir: { titulo: 'Alguien que no sabe cuál elegir', q1: { pregunta: '¿Qué busca principalmente?', opciones: ['Rapidez', 'Precio', 'Mayor acompañamiento'] }, q2: { pregunta: '¿Qué es más importante al recomendarle algo?', opciones: ['Que decida rápido', 'Que no se equivoque', 'Que se sienta acompañado'] } },
+  agendar: { titulo: 'Alguien que quiere agendar', q1: { pregunta: '¿Qué necesita saber antes de reservar?', opciones: ['Disponibilidad real', 'Cuánto cuesta', 'Cuánto dura'] }, q2: { pregunta: '¿Qué haría que reserve ahora y no después?', opciones: ['Ver un horario disponible ya', 'Confirmar el precio de una vez', 'Recibir confirmación al instante'] } },
+  consultar: { titulo: 'Alguien con una duda', q1: { pregunta: '¿Qué tipo de duda tiene?', opciones: ['Algo que ya explicaste muchas veces', 'Algo específico de su caso', 'No sabe ni por dónde empezar'] }, q2: { pregunta: '¿Qué necesita para resolverla sin escribirte?', opciones: ['Una respuesta clara y directa', 'Una guía paso a paso', 'Hablar con alguien del equipo'] } },
+  cotizar: { titulo: 'Alguien que necesita una cotización', q1: { pregunta: '¿Qué tiene claro sobre lo que necesita?', opciones: ['Ya sabe exactamente qué quiere', 'Tiene una idea aproximada', 'Todavía no sabe qué pedir'] }, q2: { pregunta: '¿Qué esperaría recibir primero?', opciones: ['Un estimado inmediato', 'Que le pidan los datos clave', 'Hablar directo contigo'] } },
+  volver: { titulo: 'Alguien que ya te compró antes', q1: { pregunta: '¿Por qué no ha vuelto todavía?', opciones: ['Se le olvidó', 'No sabe si ya es momento', 'No encontró un motivo para volver'] }, q2: { pregunta: '¿Qué lo haría volver?', opciones: ['Un recordatorio a tiempo', 'Una razón concreta para volver', 'Que sea fácil encontrarte de nuevo'] } }
+};
+function iniciarMiniDemo(patron) {
+  const cfg = MINI_DEMO[patron];
+  const card = document.getElementById('miniDemoCard');
+  if (!cfg || !card) return;
+  card.innerHTML = '<div class="demo-entry-badge">🧪 Simulación · así se sentiría para tu cliente</div>' +
+    '<div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:14px">' + cfg.titulo + '</div>' +
+    '<div style="font-size:12.5px;color:var(--ink2);margin-bottom:10px">' + cfg.q1.pregunta + '</div>' +
+    '<div class="diag-quick" id="miniDemoQ1"></div>';
+  const wrap = card.querySelector('#miniDemoQ1');
+  cfg.q1.opciones.forEach(op => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'qchip'; b.textContent = op;
+    b.addEventListener('click', () => mostrarMiniDemoQ2(patron, op));
+    wrap.appendChild(b);
+  });
+}
+function mostrarMiniDemoQ2(patron, a1) {
+  const cfg = MINI_DEMO[patron];
+  const card = document.getElementById('miniDemoCard');
+  card.innerHTML = '<div class="demo-entry-badge">🧪 Simulación · así se sentiría para tu cliente</div>' +
+    '<div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:14px">' + cfg.titulo + '</div>' +
+    '<div style="font-size:11px;color:var(--ink3);margin-bottom:14px">✓ ' + a1 + '</div>' +
+    '<div style="font-size:12.5px;color:var(--ink2);margin-bottom:10px">' + cfg.q2.pregunta + '</div>' +
+    '<div class="diag-quick" id="miniDemoQ2"></div>';
+  const wrap = card.querySelector('#miniDemoQ2');
+  cfg.q2.opciones.forEach(op => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'qchip'; b.textContent = op;
+    b.addEventListener('click', () => mostrarMiniDemoResultado(patron, a1, op));
+    wrap.appendChild(b);
+  });
+}
+function mostrarMiniDemoResultado(patron, a1, a2) {
+  const card = document.getElementById('miniDemoCard');
+  card.innerHTML = '<div class="result-badge">● Así se sentiría</div>' +
+    '<div class="result-v" style="margin:10px 0 18px">Por lo que elegiste — <strong>' + a1 + '</strong> y <strong>' + a2 + '</strong> — probablemente lo primero es resolver justo eso, en vez de hacer que tu cliente lo repita cada vez que pregunta.</div>' +
+    '<button class="btn-dark" id="miniDemoCta" style="font-size:12px;padding:10px 16px">Quiero esto para mi negocio →</button>';
+  const cta = document.getElementById('miniDemoCta');
+  if (cta) cta.addEventListener('click', () => { trackEvent('cta_seleccionado', { cta: 'mini_demo', patron: patron }); iniciarCasoDesdePatron(patron); });
+}
+const miniDemoPicker = document.getElementById('miniDemoPicker');
+if (miniDemoPicker) {
+  Object.keys(MINI_DEMO).forEach(key => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'qchip';
+    b.textContent = PATRONES[key].icono + ' ' + PATRONES[key].label;
+    b.addEventListener('click', () => iniciarMiniDemo(key));
+    miniDemoPicker.appendChild(b);
+  });
+}
+
+// ============ LA REVELACIÓN ============
+// Solo se arma cuando sí hubo un diagnóstico real (caso.textoOriginal
+// existe) — si el visitante saltó directo a explorar, la sección se queda
+// con su versión honesta por defecto (ver HTML), sin fingir una
+// experiencia que no ocurrió.
+function flowRowHtml(texto, isLast) {
+  return '<div class="flow-row"><div class="flow-marker"><i class="flow-dot"></i>' + (isLast ? '' : '<span class="flow-line"></span>') + '</div><div class="flow-content"><div class="flow-text" style="font-size:15px">' + texto + '</div></div></div>';
+}
+function renderRevelacion() {
+  const el = document.getElementById('revelacionContent');
+  if (!el || !caso.textoOriginal) return;
+  const textoSeguro = caso.textoOriginal.replace(/</g, '&lt;');
+  el.innerHTML =
+    '<div class="sec-eyebrow" style="text-align:center">Espera</div>' +
+    '<h2 class="sec-h" style="text-align:center;max-width:560px;margin:0 auto 18px">¿Te diste cuenta de lo que<br/><em>acabas de hacer?</em></h2>' +
+    '<div class="flow-path" style="max-width:480px">' +
+      flowRowHtml('Entraste con una pregunta.') +
+      flowRowHtml('Nos contaste: "' + textoSeguro + '"') +
+      flowRowHtml('Te hicimos algunas preguntas.') +
+      flowRowHtml('Entendimos dónde estaba la fricción.') +
+      flowRowHtml('Te mostramos un recorrido posible.') +
+      flowRowHtml('Probaste una parte de la solución.', true) +
+    '</div>' +
+    '<p class="sec-sub" style="text-align:center;margin:26px auto 6px;max-width:520px">Acabas de vivir exactamente el tipo de recorrido que diseñamos para los negocios. Y no es el único — cada negocio tiene el suyo.</p>' +
+    '<h3 class="cta-h" style="font-size:clamp(22px,3vw,32px);text-align:center;margin:14px auto 10px;max-width:560px">No te contamos cómo funciona<br/>un recorrido. <em>Te hicimos vivir uno.</em></h3>' +
+    '<p class="sec-sub" style="text-align:center;margin:0 auto;max-width:480px">Ahora imagina hacer lo mismo con tus clientes.</p>';
+}
+
+// Único orquestador llamado al final de cerrarCaso() — no decide nada del
+// diagnóstico, solo avisa al resto de la página que ya terminó.
+function avanzarNarrativaPostDiagnostico() {
+  desbloquearTodo();
+  renderRevelacion();
+  if (caso.patron && PATRONES[caso.patron]) {
+    renderRecorridoPersonalizado(caso.patron);
+    const constr = document.getElementById('construimosPersonalizado');
+    if (constr) {
+      constr.textContent = 'Para tu caso, probablemente combinemos: ' + PATRONES[caso.patron].soluciones.join(' · ') + '.';
+      constr.style.display = 'block';
+    }
+    if (MINI_DEMO[caso.patron]) iniciarMiniDemo(caso.patron);
+  }
+}
 
 // ============ CASOS → "Tengo un problema parecido" ============
 function casoAbrirDiagnostico(id, texto) {
