@@ -955,8 +955,8 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   <div class="cta-icon">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
   </div>
-  <h2 class="cta-h" id="ctaFinalH">¿Recuerdas cómo<br/><em>empezó esto?</em></h2>
-  <p class="cta-sub" id="ctaFinalSub">Entraste queriendo saber qué hacemos. Terminaste recorriendo exactamente el tipo de experiencia que diseñamos. Ahora hagámoslo con tu negocio.</p>
+  <h2 class="cta-h" id="ctaFinalH">¿Dónde se está complicando<br/>la <em>experiencia de tus clientes?</em></h2>
+  <p class="cta-sub" id="ctaFinalSub">Cuéntame qué quieres que tus clientes puedan hacer más fácilmente. A partir de ahí diseñamos el recorrido y definimos qué tecnología realmente necesitas.</p>
   <div class="cta-btns">
     <a href="https://wa.me/573005333763?text=Hola%20Daniel%2C%20quiero%20dise%C3%B1ar%20el%20recorrido%20de%20mis%20clientes" target="_blank" class="btn-dark" id="ctaFinalWa">
       <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 1.77.47 3.5 1.35 5.03L0 20l5.1-1.33A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0zm5.18 14.17c-.24.67-1.2 1.23-1.94 1.38-.5.11-1.16.2-3.37-.73-2.84-1.13-4.67-4.02-4.82-4.2-.13-.2-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25.2-.24.47-.3.63-.3h.58c.2 0 .45.07.7.53.26.48.87 2.15.95 2.3.08.16.13.35.03.55-.1.2-.15.33-.3.5-.15.18-.3.4-.43.53-.15.15-.3.32-.13.62.17.3 1.06 1.75 2.28 2.83.98.87 1.82 1.14 2.14 1.27.32.13.5.1.68-.08.2-.2.85-1 1.07-1.34.22-.34.43-.28.72-.17l2.28 1.08c.26.12.43.18.5.28.05.37-.1 1.04-.3 1.37z"/></svg>
@@ -2150,6 +2150,14 @@ function avanzarNarrativaPostDiagnostico() {
     }
     if (MINI_DEMO[caso.patron]) iniciarMiniDemo(caso.patron);
   }
+  // Cierra el círculo narrativo — solo tiene sentido decir esto DESPUÉS
+  // de un diagnóstico real (cerrarCaso ya dejó su propio heading/sub vía
+  // actualizarCtaFinal; aquí solo se sobreescribe el texto, no el link de
+  // WhatsApp ni su label, que ya quedaron bien armados con los datos del caso).
+  const ctaH = document.getElementById('ctaFinalH');
+  const ctaSub = document.getElementById('ctaFinalSub');
+  if (ctaH) ctaH.innerHTML = '¿Recuerdas cómo<br/><em>empezó esto?</em>';
+  if (ctaSub) ctaSub.textContent = 'Entraste queriendo saber qué hacemos. Terminaste recorriendo exactamente el tipo de experiencia que diseñamos. Ahora hagámoslo con tu negocio.';
 }
 
 // ============ CASOS → "Tengo un problema parecido" ============
