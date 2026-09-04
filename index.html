@@ -130,6 +130,16 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 3
 .demo-cap{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .demo-cap-h{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:6px}
 .demo-cap ul{margin:0;padding-left:16px;font-size:11.5px;color:var(--ink2);line-height:1.75}
+/* hilo visual de la página — conecta las secciones entre el hero y el
+   CTA final como un recorrido continuo, no bloques apilados sueltos */
+.journey-rail{position:relative}
+.journey-rail::before{content:'';position:absolute;top:0;bottom:0;left:28px;width:1px;background:var(--ink3);pointer-events:none}
+.journey-rail>section{position:relative}
+.rail-dot{position:absolute;top:46px;left:28px;width:7px;height:7px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%);z-index:1}
+@media(max-width:640px){
+  .journey-rail::before{left:12px}
+  .rail-dot{left:12px;top:32px}
+}
 /* recorridos de cliente — lenguaje visual: puntos + línea, no chips */
 .journey-path{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0;margin-top:40px}
 .journey-step{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);padding:6px 4px}
@@ -520,8 +530,12 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
   </div>
 </section>
 
+<!-- HILO VISUAL: conecta las secciones entre el hero y el CTA final como
+     un recorrido continuo, en vez de bloques apilados sin relación. -->
+<div class="journey-rail">
 <!-- ENTRADA AL DIAGNÓSTICO -->
 <section class="entry-section">
+  <span class="rail-dot"></span>
   <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 10px;font-size:22px">¿Qué quieres hacer<br/><em>más fácil?</em></h2>
   <p class="sec-eyebrow" style="text-align:center;margin-bottom:14px">Por ejemplo — o cuéntanos el tuyo arriba, con tus palabras</p>
   <div class="doors-grid rev">
@@ -554,6 +568,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- DIAGNÓSTICO -->
 <section class="diag-section" id="diagnostico">
+  <span class="rail-dot"></span>
   <div class="diag-inner">
     <div class="ai-header-tag" style="margin-bottom:16px"><div class="ai-header-dot"></div>Diagnóstico gratuito · respuesta inmediata</div>
     <div class="chat-card" style="box-shadow:none;border:0.5px solid var(--bdr)">
@@ -581,6 +596,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- UN NEGOCIO, MUCHOS RECORRIDOS (reemplaza el antiguo bloque de "servicios") -->
 <section class="paso-section rev" style="padding-bottom:36px">
+  <span class="rail-dot"></span>
   <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">Un negocio,<br/><em>muchos recorridos.</em></h2>
   <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">No todos tus clientes necesitan lo mismo. Diseñamos el recorrido digital que tu negocio necesita según lo que quieres conseguir.</p>
   <div class="journey-path rev">
@@ -596,6 +612,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- DE UN PROBLEMA A UN RECORRIDO -->
 <section class="paso-section rev" id="metodo">
+  <span class="rail-dot"></span>
   <div class="sec-eyebrow" style="text-align:center">Cómo pensamos</div>
   <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">De un problema,<br/><em>a un recorrido.</em></h2>
   <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto;max-width:480px">No empezamos preguntándote qué tecnología necesitas. Primero entendemos qué está intentando hacer tu cliente y dónde se está complicando.</p>
@@ -610,6 +627,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- CASOS REALES -->
 <section id="casos">
+  <span class="rail-dot"></span>
   <div class="casos-header rev" style="padding-bottom:32px">
     <div class="sec-eyebrow" style="text-align:center">Casos principales · 01</div>
     <h2 class="sec-h" style="text-align:center;max-width:500px;margin:0 auto">Así diseñamos<br/><em>recorridos digitales.</em></h2>
@@ -774,6 +792,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- IDEA -->
 <section class="idea-section rev" id="idea">
+  <span class="rail-dot"></span>
   <div class="sec-eyebrow" style="text-align:center">Tengo una idea · 02</div>
   <h2 class="sec-h" style="text-align:center;max-width:480px;margin:0 auto 8px">¿Tienes una idea?<br/><em>Te ayudo a aterrizarla.</em></h2>
   <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Escribe libremente: qué problema resuelve, para quién, cómo se te ocurre que funcionaría. No hace falta que esté completo.</p>
@@ -786,6 +805,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- MODELO / PROTOTIPADO -->
 <section class="model-section rev" id="modelo">
+  <span class="rail-dot"></span>
   <div class="sec-eyebrow" style="text-align:center">Cómo reducimos el riesgo · 03</div>
   <h2 class="sec-h" style="text-align:center;max-width:520px;margin:0 auto 8px">No tienes que construir todo<br/><em>para saber si funciona.</em></h2>
   <p class="sec-sub" style="text-align:center;margin-left:auto;margin-right:auto">Primero comprobamos que la solución tiene sentido, antes de pedirte una gran inversión.</p>
@@ -800,6 +820,7 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:16p
 
 <!-- PERFIL -->
 <section class="perfil-section" id="perfil">
+  <span class="rail-dot"></span>
   <div class="perfil-statement rev">
     <div class="sec-eyebrow">Sobre mí · 04</div>
     <h2 class="perfil-h">Entiendo el negocio.<br/>La tecnología <em>es el medio.</em></h2>
@@ -876,6 +897,7 @@ Esa capacidad la desarrollé trabajando en el SENA, en las Fuerzas Militares y e
   </div>
   </div>
 </section>
+</div>
 
 <!-- CTA FINAL -->
 <section class="cta-section rev">
