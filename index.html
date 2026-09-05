@@ -81,89 +81,123 @@ a{color:inherit}
 .w-link--light{color:#fff;border-bottom-color:rgba(255,255,255,.5)}
 .w-link--light:hover{border-color:#fff}
 
-/* ===================== HERO — masthead editorial ===================== */
-.w-hero{max-width:1400px;margin:0 auto;padding:10px 48px 0}
-.w-hero-mast{border-top:2px solid var(--ink);border-bottom:1px solid var(--bdr);padding:14px 0;display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-mono);font-size:10.5px;color:var(--ink3);letter-spacing:.3px}
-.w-hero-h{font-family:var(--f-display);font-weight:500;font-size:clamp(42px,7vw,100px);line-height:.99;letter-spacing:-2.4px;max-width:920px;margin:44px 0 46px}
-.w-hero-h i{font-style:italic;color:var(--accent);font-weight:400}
-.w-hero-foot{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;padding-bottom:60px}
-.w-hero-p{font-size:16px;color:var(--ink2);line-height:1.65;max-width:400px;margin-bottom:30px}
-.w-hero-cta{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
-.w-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
-.w-strip-item{padding:16px 14px 0 0;border-right:1px solid var(--bdr)}
-.w-strip-item:last-child{border-right:none}
-.w-strip-item i{display:block;font-family:var(--f-display);font-style:italic;font-size:20px;color:var(--accent);margin-bottom:10px}
-.w-strip-item span{display:block;font-size:12px;color:var(--ink2);line-height:1.4}
+/* ===================== HERO — composición fotográfica editorial ===================== */
+.w-hero{max-width:1400px;margin:0 auto;padding:52px 48px 90px}
+.w-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.w-hero-eyebrow{font-family:var(--f-mono);font-size:10.5px;color:var(--ink2);letter-spacing:.8px;text-transform:uppercase;margin-bottom:18px}
+.w-hero-h{font-family:var(--f-display);font-weight:600;font-size:clamp(34px,4.4vw,52px);line-height:1.1;letter-spacing:-1px;color:var(--ink);margin-bottom:20px}
+.w-hero-h i{font-style:italic;color:var(--accent);font-weight:500}
+.w-hero-p{font-size:15.5px;color:var(--ink2);line-height:1.65;max-width:440px;margin-bottom:30px}
+.w-hero-cta{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:40px}
+.w-hero-stats{display:flex;gap:38px;flex-wrap:wrap}
+.w-hero-stat-n{font-family:var(--f-display);font-size:23px;font-weight:600;color:var(--ink)}
+.w-hero-stat-l{font-size:10px;color:var(--ink3);margin-top:3px;max-width:110px;line-height:1.3}
+
+.w-hero-scene{position:relative;min-height:420px}
+.w-scene-annot{position:absolute;font-family:var(--f-display);font-style:italic;font-size:12px;color:var(--ink2);line-height:1.4;max-width:130px;z-index:4}
+.w-scene-a1{top:-18px;left:6px}
+.w-scene-a2{top:14px;right:0;text-align:right}
+.w-scene-a3{bottom:-24px;left:10px}
+.w-laptop{position:relative;width:90%;margin:36px auto 0;z-index:1}
+.w-laptop-screen{background:var(--ink);border-radius:10px 10px 0 0;padding:8px 8px 0}
+.w-laptop-bar{display:flex;gap:5px;padding:6px 8px}
+.w-laptop-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3)}
+.w-laptop-content{background:linear-gradient(160deg,#EFE9DC,#DCE8CF);border-radius:4px 4px 0 0;padding:22px;min-height:160px;position:relative;overflow:hidden}
+.w-laptop-eyebrow{font-family:var(--f-mono);font-size:8px;text-transform:uppercase;letter-spacing:.4px;color:var(--accent);margin-bottom:8px}
+.w-laptop-title{font-family:var(--f-display);font-size:17px;font-weight:600;color:var(--ink);max-width:220px;line-height:1.25;margin-bottom:10px}
+.w-laptop-cta{display:inline-block;background:var(--ink);color:#fff;font-size:9px;padding:6px 12px;border-radius:100px}
+.w-laptop-base{height:13px;background:var(--ink3);border-radius:0 0 8px 8px;position:relative}
+.w-laptop-base::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:64px;height:4px;background:var(--ink2);border-radius:0 0 4px 4px}
+.w-phone{position:absolute;right:-2%;bottom:-34px;width:124px;background:var(--ink);border-radius:19px;padding:6px;box-shadow:0 26px 50px rgba(27,23,18,.28);z-index:2}
+.w-phone-screen{background:var(--w);border-radius:13px;padding:11px 9px;min-height:206px;display:flex;flex-direction:column;gap:6px}
+.w-phone-top{font-size:8px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.w-phone-msg{font-size:7.5px;line-height:1.35;padding:6px 8px;border-radius:3px 8px 8px 8px;max-width:85%}
+.w-phone-msg--in{background:var(--s);color:var(--ink)}
+.w-phone-msg--out{background:var(--ink);color:#fff;align-self:flex-end;border-radius:8px 3px 8px 8px}
+.w-qr{position:absolute;top:-6%;right:0;width:86px;background:var(--w);border:1px solid var(--bdr);box-shadow:0 18px 36px rgba(27,23,18,.14);padding:10px;z-index:3;text-align:center}
+.w-qr-code{width:100%;aspect-ratio:1;background:repeating-conic-gradient(var(--ink) 0% 25%,transparent 0% 50%) 0 0/10px 10px;margin-bottom:8px}
+.w-qr-cap{font-family:var(--f-mono);font-size:6.5px;line-height:1.3;color:var(--ink2)}
 @media(max-width:900px){
-  .w-hero{padding:6px 22px 0}
-  .w-hero-h{font-size:clamp(32px,10vw,48px);letter-spacing:-1px;margin:32px 0 36px}
-  .w-hero-foot{grid-template-columns:1fr;gap:34px;padding-bottom:44px}
-  .w-strip{grid-template-columns:1fr 1fr;row-gap:22px}
-  .w-strip-item{border-right:none}
+  .w-hero{padding:36px 22px 56px}
+  .w-hero-grid{grid-template-columns:1fr;gap:40px}
+  .w-hero-scene{min-height:auto;padding-top:40px}
+  .w-scene-annot{display:none}
+  .w-qr{width:60px;padding:7px}
+  .w-hero-stats{gap:26px}
 }
 
-/* ===================== TRABAJO — casos con identidad propia ===================== */
-.w-work{background:var(--dark);padding:96px 48px}
-.w-work-in{max-width:1240px;margin:0 auto}
-.w-case{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;padding:60px 0;border-top:1px solid var(--dark-bdr)}
-.w-case:first-child{border-top:none;padding-top:0}
-.w-case:last-child{padding-bottom:0}
-.w-case--rev{grid-template-columns:.9fr 1.1fr}
-.w-case--rev .w-case-visual{order:2}
-.w-case--rev .w-case-copy{order:1}
-.w-case--wide{grid-template-columns:1fr;gap:32px}
-.w-case-visual{position:relative}
-.w-cover{position:relative;aspect-ratio:16/11;overflow:hidden}
-.w-cover-n{position:absolute;top:-.08em;left:-.02em;font-family:var(--f-display);font-style:italic;font-size:clamp(80px,12vw,160px);line-height:.8;color:rgba(255,255,255,.12)}
-.w-cover-name{position:absolute;left:26px;right:26px;bottom:26px;font-family:var(--f-display);font-size:clamp(24px,2.4vw,36px);font-weight:500;color:#fff;letter-spacing:-.6px;line-height:1.06}
-.w-cover-tag{position:absolute;top:22px;right:26px;font-family:var(--f-mono);font-size:9px;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.65)}
-.w-cover-flag{position:absolute;top:22px;left:26px;font-family:var(--f-mono);font-size:8.5px;letter-spacing:.4px;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.4);padding:5px 10px}
+/* ===================== QUÉ HACEMOS — ecosistema ===================== */
+.w-eco{max-width:1240px;margin:0 auto;padding:86px 48px}
+.w-eco-flow{display:flex;align-items:flex-start;justify-content:center;gap:2px;flex-wrap:wrap;max-width:1080px;margin:0 auto}
+.w-eco-node{display:flex;flex-direction:column;align-items:center;text-align:center;width:150px;padding:0 4px}
+.w-eco-ico{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.w-eco-ico--1{background:#EFE6F6}.w-eco-ico--2{background:#E4EEF9}.w-eco-ico--3{background:#E1F1E6}.w-eco-ico--4{background:#F8E9E9}.w-eco-ico--5{background:var(--s)}.w-eco-ico--6{background:#FBEADF}
+.w-eco-t{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.w-eco-d{font-size:10.5px;color:var(--ink2);line-height:1.5}
+.w-eco-arrow{color:var(--ink3);font-size:16px;padding:17px 2px 0}
+@media(max-width:900px){.w-eco{padding:56px 22px}.w-eco-flow{flex-direction:column;align-items:center;gap:14px}.w-eco-arrow{transform:rotate(90deg);padding:0}}
+
+/* ===================== EJEMPLOS DE RECORRIDOS ===================== */
+.w-ex{padding:80px 48px;background:var(--s)}
+.w-ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1240px;margin:40px auto 0}
+.w-ex-card{background:var(--w);border:1px solid var(--bdr);padding:26px}
+.w-ex-tag{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.w-ex-t{font-family:var(--f-display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:16px}
+.w-ex-path{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.w-ex-step{font-size:10.5px;font-weight:600;background:var(--s);padding:5px 10px;color:var(--ink)}
+.w-ex-arrow{color:var(--ink3);font-size:10px}
+.w-ex-use{font-size:11px;color:var(--ink2);margin-top:16px;line-height:1.55;border-top:1px solid var(--bdr);padding-top:12px}
+@media(max-width:900px){.w-ex{padding:52px 22px}.w-ex-grid{grid-template-columns:1fr}}
+
+/* ===================== CASOS DESTACADOS ===================== */
+.w-work{background:var(--dark);padding:90px 48px;position:relative;overflow:hidden}
+.w-work::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 85% 0%,rgba(143,187,147,.13),transparent 60%)}
+.w-work-in{max-width:1280px;margin:0 auto;position:relative}
+.w-work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:48px;flex-wrap:wrap}
+.w-case-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.w-case{background:var(--w);display:flex;flex-direction:column}
+.w-cover{position:relative;aspect-ratio:4/3;overflow:hidden}
+.w-cover-n{position:absolute;top:-.1em;left:-.02em;font-family:var(--f-display);font-style:italic;font-weight:400;line-height:.8;color:rgba(255,255,255,.16);font-size:64px}
+.w-cover-tag{position:absolute;top:14px;left:14px;font-family:var(--f-mono);font-size:8px;letter-spacing:.3px;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.w-cover-flag{position:absolute;top:14px;right:14px;font-family:var(--f-mono);font-size:7.5px;letter-spacing:.3px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.3);padding:4px 8px}
 .w-cover--a{background:linear-gradient(150deg,#4A2E17,#8A5A2C 62%,#D3A455)}
 .w-cover--b{background:linear-gradient(150deg,#1B2C1C,#3A5B3A 58%,#95B679)}
 .w-cover--c{background:linear-gradient(150deg,#241F3D,#48456E 58%,#918BC0)}
-.w-cover--d{background:linear-gradient(150deg,#331C1F,#6B3A3F 58%,#BC8478);min-height:320px}
-.w-band{border-top:1px solid var(--dark-bdr);border-bottom:1px solid var(--dark-bdr);padding:52px 0;text-align:center}
-.w-band-name{font-family:var(--f-display);font-style:italic;font-size:clamp(28px,3.8vw,50px);color:#fff}
-.w-band-tag{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--dark-ink2);margin-top:12px}
-.w-convo{position:relative;z-index:2;max-width:220px;margin-left:auto;position:absolute;right:22px;bottom:22px;background:var(--w);padding:15px 15px 17px}
-.w-convo-top{display:flex;align-items:center;gap:8px;padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid var(--bdr)}
-.w-convo-dot{width:14px;height:14px;background:var(--ink)}
-.w-convo-name{font-size:10px;font-weight:700;color:var(--ink)}
-.w-convo-msg{font-size:11px;line-height:1.4;padding:7px 9px;max-width:88%;margin-bottom:6px}
+.w-cover--d{background:linear-gradient(150deg,#331C1F,#6B3A3F 58%,#BC8478)}
+.w-convo{position:absolute;right:10px;bottom:10px;z-index:2;width:64%;background:var(--w);padding:8px}
+.w-convo-top{display:flex;align-items:center;gap:6px;padding-bottom:6px;margin-bottom:6px;border-bottom:1px solid var(--bdr)}
+.w-convo-dot{width:10px;height:10px;background:var(--ink)}
+.w-convo-name{font-size:8px;font-weight:700;color:var(--ink)}
+.w-convo-msg{font-size:8px;line-height:1.35;padding:5px 7px;max-width:90%;margin-bottom:5px}
 .w-convo-msg--in{background:var(--s);color:var(--ink)}
 .w-convo-msg--out{background:var(--ink);color:#fff;margin-left:auto;text-align:right}
-.w-convo-ghost{position:absolute;left:24px;top:20px;font-family:var(--f-display);font-style:italic;font-size:clamp(40px,5.4vw,72px);color:rgba(255,255,255,.09);line-height:.92}
-.w-case-copy{max-width:440px;align-self:center}
-.w-case--wide .w-case-copy{max-width:none;display:grid;grid-template-columns:.55fr 1fr;gap:40px}
-.w-case-cat{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--accent-light);margin-bottom:10px}
-.w-case-title{font-family:var(--f-display);font-size:29px;font-weight:500;color:#fff;letter-spacing:-.6px;margin-bottom:14px}
-.w-case-desc{font-size:13.5px;color:var(--dark-ink2);line-height:1.65;margin-bottom:20px}
-.w-case-path{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;font-family:var(--f-mono);font-size:10px;color:var(--dark-ink2)}
-.w-case-actions{display:flex;gap:20px;flex-wrap:wrap}
-.w-case-link{font-size:12.5px;font-weight:600;color:#fff;text-decoration:none;border-bottom:1.5px solid var(--accent-light);padding-bottom:2px;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer;font-family:var(--f-sans)}
-.w-case-link--ghost{color:var(--dark-ink2);border-bottom-color:var(--dark-bdr)}
-.w-case-link:hover{color:var(--accent-light)}
+.w-case-copy{padding:22px 20px 24px;flex:1;display:flex;flex-direction:column}
+.w-case-cat{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.3px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.w-case-title{font-family:var(--f-display);font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.3px;margin-bottom:9px}
+.w-case-desc{font-size:11.5px;color:var(--ink2);line-height:1.55;margin-bottom:16px;flex:1}
+.w-case-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:auto}
+.w-case-link{font-size:11.5px;font-weight:600;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-family:var(--f-sans);padding:0}
+.w-case-link--ghost{color:var(--ink2)}
+.w-case-link:hover{color:var(--accent)}
 @media(max-width:900px){
   .w-work{padding:56px 22px}
-  .w-case,.w-case--rev{grid-template-columns:1fr;gap:26px;padding:44px 0}
-  .w-case--rev .w-case-visual{order:1}.w-case--rev .w-case-copy{order:2}
-  .w-case-copy{max-width:none}
-  .w-case--wide .w-case-copy{grid-template-columns:1fr;gap:16px}
-  .w-case-title{font-size:23px}
-  .w-convo{max-width:190px}
+  .w-case-grid{grid-template-columns:1fr;gap:18px}
 }
 
 /* ===================== LABORATORIO / PROTOTIPOS ===================== */
-.w-lab{max-width:1200px;margin:0 auto;padding:96px 48px}
-.w-lab-item{display:grid;grid-template-columns:60px 1fr;gap:22px;padding:42px 0;border-top:1px solid var(--bdr)}
-.w-lab-item:first-child{border-top:none;padding-top:0}
-.w-lab-item:last-child{padding-bottom:0}
-.w-lab-n{font-family:var(--f-mono);font-size:13px;color:var(--accent);font-weight:700}
-.w-lab-t{font-family:var(--f-display);font-size:22px;font-weight:600;letter-spacing:-.3px;margin-bottom:10px}
-.w-lab-d{font-size:13px;color:var(--ink2);line-height:1.6;max-width:580px;margin-bottom:18px}
+.w-lab{max-width:1240px;margin:0 auto;padding:92px 48px}
+.w-lab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:56px}
+.w-lab-card{background:var(--w);border:1px solid var(--bdr);padding:26px;display:flex;flex-direction:column;gap:10px}
+.w-lab-card-ico{width:34px;height:34px;border-radius:9px;background:var(--s);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--accent)}
+.w-lab-card-t{font-size:15px;font-weight:700;color:var(--ink)}
+.w-lab-card-d{font-size:11.5px;color:var(--ink2);line-height:1.55;flex:1}
+.w-track{display:flex;flex-wrap:wrap;align-items:center;gap:5px;font-family:var(--f-mono);font-size:9.5px;color:var(--ink3)}
+.w-try{align-self:flex-start;font-size:12px;font-weight:600;color:var(--accent);cursor:pointer;background:none;border:none;padding:0;display:inline-flex;align-items:center;gap:5px;font-family:var(--f-sans)}
+.w-try:hover{text-decoration:underline}
 .w-tool{border-top:2px solid var(--ink);padding-top:30px}
+.w-tool-head{margin-bottom:24px;max-width:640px}
 .w-tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
-@media(max-width:900px){.w-lab{padding:56px 22px}.w-lab-item{grid-template-columns:1fr;gap:8px;padding:30px 0}.w-tool-grid{grid-template-columns:1fr;gap:22px}}
+@media(max-width:900px){.w-lab{padding:56px 22px}.w-lab-grid{grid-template-columns:1fr}.w-tool-grid{grid-template-columns:1fr;gap:22px}}
 
 .w-field{display:flex;align-items:center;gap:10px;border:1px solid var(--ink);padding:6px 6px 6px 18px}
 .w-field textarea{flex:1;border:none;background:transparent;resize:none;font-family:var(--f-sans);font-size:14px;color:var(--ink);outline:none;line-height:1.4;cursor:auto;padding:8px 0;max-height:24px}
@@ -205,43 +239,42 @@ a{color:inherit}
 .diag-quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .qchip{font-family:var(--f-sans);font-size:11.5px;font-weight:500;background:none;border:1px solid var(--bdr);color:var(--ink);padding:8px 13px;cursor:pointer;transition:all .2s}
 .qchip:hover{border-color:var(--ink);background:var(--s)}
-.w-try{align-self:flex-start;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;background:none;border:none;border-bottom:1.5px solid var(--ink);padding:0 0 2px;display:inline-flex;align-items:center;gap:5px;font-family:var(--f-sans)}
-.w-try:hover{color:var(--accent);border-color:var(--accent)}
-.w-track{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:18px;font-family:var(--f-mono);font-size:10.5px;color:var(--ink2)}
 
 /* ===================== SISTEMAS INTERNOS ===================== */
 .w-systems{background:var(--dark2);padding:92px 48px}
-.w-systems-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.w-sys-list{display:flex;flex-direction:column}
-.w-sys-row{display:grid;grid-template-columns:28px 1fr auto;gap:16px;align-items:baseline;padding:15px 0;border-top:1px solid var(--dark-bdr)}
-.w-sys-row:first-child{border-top:none;padding-top:0}
-.w-sys-n{font-family:var(--f-mono);font-size:10px;color:var(--dark-ink2);opacity:.6}
-.w-sys-name{font-family:var(--f-display);font-size:16px;color:#fff;font-weight:500}
-.w-sys-tag{font-family:var(--f-mono);font-size:9px;letter-spacing:.3px;color:var(--accent-light);text-align:right;white-space:nowrap}
+.w-systems-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.68fr 1.32fr;gap:70px;align-items:start}
+.w-sys-side{display:flex;flex-direction:column;gap:13px;margin-top:26px}
+.w-sys-side-item{font-family:var(--f-mono);font-size:11.5px;color:var(--dark-ink2);display:flex;align-items:center;gap:9px}
+.w-sys-side-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent-light);flex-shrink:0}
+.w-sys-table{border:1px solid var(--dark-bdr)}
+.w-sys-table-head{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.4px;text-transform:uppercase;color:#fff;padding:15px 20px;border-bottom:1px solid var(--dark-bdr)}
+.w-sys-row{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid var(--dark-bdr);font-size:12px;color:var(--dark-ink2)}
+.w-sys-row:last-child{border-bottom:none}
+.w-sys-row.head{font-family:var(--f-mono);font-size:9px;letter-spacing:.3px;text-transform:uppercase;opacity:.55}
+.w-sys-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.2px;color:var(--accent-light);font-weight:600}
 @media(max-width:900px){.w-systems{padding:56px 22px}.w-systems-grid{grid-template-columns:1fr;gap:30px}}
 
 /* ===================== METODOLOGÍA (secundaria) ===================== */
-.w-method{max-width:1180px;margin:0 auto;padding:86px 48px;border-top:1px solid var(--bdr)}
-.w-method-head{max-width:520px;margin-bottom:40px}
-.w-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
-.w-step{border-left:1px solid var(--bdr);padding:0 16px 0 18px}
-.w-step:first-child{border-left:none;padding-left:0}
-.w-step-n{font-family:var(--f-mono);font-size:10px;color:var(--ink3);margin-bottom:8px}
+.w-method{max-width:1200px;margin:0 auto;padding:86px 48px;border-top:1px solid var(--bdr)}
+.w-method-head{max-width:520px;margin-bottom:44px}
+.w-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.w-step-n{width:30px;height:30px;border-radius:50%;background:var(--s);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:11.5px;margin-bottom:14px}
 .w-step-t{font-family:var(--f-display);font-size:16px;font-weight:600;margin-bottom:6px}
 .w-step-d{font-size:11.5px;color:var(--ink2);line-height:1.5}
-@media(max-width:900px){.w-method{padding:52px 22px}.w-steps{grid-template-columns:1fr 1fr;row-gap:26px}.w-step{border-left:none;padding-left:0}}
+@media(max-width:900px){.w-method{padding:52px 22px}.w-steps{grid-template-columns:1fr 1fr;row-gap:26px}}
 
 /* ===================== SOBRE DANIEL ===================== */
-.w-about{max-width:1200px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:.7fr 1.3fr;gap:64px}
+.w-about{max-width:1240px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:.62fr 1fr .55fr;gap:48px;align-items:start}
 .w-about-photo{position:relative;aspect-ratio:3/4}
 .w-about-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;filter:grayscale(.15)}
 .w-about-photo-tag{position:absolute;bottom:0;left:0;right:0;background:var(--ink);color:#fff;font-family:var(--f-mono);font-size:10px;padding:9px 14px;letter-spacing:.2px}
-.w-about-lead{font-family:var(--f-display);font-size:24px;font-weight:500;color:var(--ink);margin-bottom:18px;letter-spacing:-.3px;max-width:520px}
-.w-about-p{font-size:14px;color:var(--ink2);line-height:1.75;margin-top:16px;max-width:520px}
-.w-about-list{display:flex;gap:0;margin-top:28px;border-top:1px solid var(--bdr)}
-.w-about-item{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--accent);padding:14px 20px 0 0;margin-right:20px;border-right:1px solid var(--bdr)}
+.w-about-lead{font-family:var(--f-display);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:16px;letter-spacing:-.3px}
+.w-about-p{font-size:13.5px;color:var(--ink2);line-height:1.7;margin-top:14px}
+.w-about-list{display:flex;flex-wrap:wrap;gap:0;margin-top:26px;border-top:1px solid var(--bdr)}
+.w-about-item{font-family:var(--f-mono);font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--accent);padding:14px 18px 0 0;margin-right:18px;border-right:1px solid var(--bdr)}
 .w-about-item:last-child{border-right:none}
-@media(max-width:900px){.w-about{padding:56px 22px;grid-template-columns:1fr;gap:30px}.w-about-photo{max-width:260px}.w-about-list{flex-direction:column;gap:10px}.w-about-item{border-right:none;padding:0}}
+.w-about-quote{font-family:var(--f-display);font-style:italic;font-size:17px;color:var(--ink);line-height:1.5;border-left:2px solid var(--accent);padding-left:20px;align-self:start;margin-top:8px}
+@media(max-width:900px){.w-about{padding:56px 22px;grid-template-columns:1fr;gap:28px}.w-about-photo{max-width:260px}.w-about-list{flex-direction:column;gap:10px}.w-about-item{border-right:none;padding:0}.w-about-quote{border-left:none;padding-left:0;border-top:2px solid var(--accent);padding-top:16px}}
 
 /* ===================== CONTACTO ===================== */
 .w-contact{background:var(--dark);padding:110px 48px;text-align:center}
@@ -405,211 +438,291 @@ a{color:inherit}
   </a>
   <div class="w-navlinks">
     <a href="#">Inicio</a>
-    <a href="#trabajo">Trabajo</a>
+    <a href="#trabajo">Casos</a>
     <a href="#prototipos">Prototipos</a>
     <a href="#sistemas">Sistemas internos</a>
     <a href="#sobre-mi">Sobre mí</a>
+    <a href="#contacto">Contacto</a>
   </div>
   <a href="https://wa.me/573005333763" target="_blank" class="w-navcta">Hablemos →</a>
 </nav>
 
 <!-- HERO -->
 <section class="w-hero">
-  <div class="w-hero-mast">
-    <span>Daniel Cárdenas</span>
-    <span>Portfolio — 2026</span>
-  </div>
-  <h1 class="w-hero-h">Diseño lo que pasa<br/>entre tu negocio<br/>y tus <i>clientes</i>.</h1>
-  <div class="w-hero-foot">
+  <div class="w-hero-grid">
     <div>
-      <p class="w-hero-p">Construyo experiencias y sistemas que conectan personas, canales y procesos, desde el primer contacto hasta el resultado.</p>
+      <p class="w-hero-eyebrow">Estrategia, experiencia, tecnología, resultados</p>
+      <h1 class="w-hero-h">Conecto las piezas para que tu <i>negocio</i> funcione mejor.</h1>
+      <p class="w-hero-p">Diseño y construyo experiencias y sistemas que unen el mundo físico y el digital, desde el primer contacto hasta el resultado.</p>
       <div class="w-hero-cta">
         <a href="#prototipos" class="w-btn" onclick="setTimeout(function(){var i=document.getElementById('heroInput'); if(i) i.focus();},500)">Cuéntame tu proyecto →</a>
-        <a href="#trabajo" class="w-link">Ver mi trabajo ↓</a>
+        <a href="#trabajo" class="w-link">Ver casos ↓</a>
+      </div>
+      <div class="w-hero-stats">
+        <div><div class="w-hero-stat-n">4</div><div class="w-hero-stat-l">Proyectos reales</div></div>
+        <div><div class="w-hero-stat-n">3</div><div class="w-hero-stat-l">Prototipos para probar</div></div>
+        <div><div class="w-hero-stat-n">6</div><div class="w-hero-stat-l">Sistemas internos construidos</div></div>
       </div>
     </div>
-    <div class="w-strip">
-      <div class="w-strip-item"><i>01</i><span>Un punto de partida físico o digital — QR, Instagram, Google, un pendón.</span></div>
-      <div class="w-strip-item"><i>02</i><span>Una experiencia que guía — página, catálogo, WhatsApp.</span></div>
-      <div class="w-strip-item"><i>03</i><span>Un sistema que lo sostiene — base de datos, asesor, proceso interno.</span></div>
-      <div class="w-strip-item"><i>04</i><span>Un resultado real — venta, reserva, solicitud, seguimiento.</span></div>
+    <div class="w-hero-scene">
+      <p class="w-scene-annot w-scene-a1">ideas, procesos,<br/>personas, resultados</p>
+      <p class="w-scene-annot w-scene-a2">un punto de partida<br/>puede ser un QR</p>
+      <div class="w-qr">
+        <div class="w-qr-code"></div>
+        <div class="w-qr-cap">TU NEGOCIO TAMBIÉN PUEDE ESTAR AQUÍ</div>
+      </div>
+      <div class="w-laptop">
+        <div class="w-laptop-screen">
+          <div class="w-laptop-bar"><span class="w-laptop-dot"></span><span class="w-laptop-dot"></span><span class="w-laptop-dot"></span></div>
+          <div class="w-laptop-content">
+            <div class="w-laptop-eyebrow">Experiencia digital</div>
+            <div class="w-laptop-title">Productos naturales para una vida más consciente</div>
+            <span class="w-laptop-cta">Explorar productos →</span>
+          </div>
+        </div>
+        <div class="w-laptop-base"></div>
+      </div>
+      <p class="w-scene-annot w-scene-a3">tu negocio también<br/>puede estar aquí</p>
+      <div class="w-phone">
+        <div class="w-phone-screen">
+          <div class="w-phone-top">Hojaldito</div>
+          <div class="w-phone-msg w-phone-msg--in">Del buen sabor a grandes oportunidades</div>
+          <div class="w-phone-msg w-phone-msg--out">Quiero saber si me conviene</div>
+          <div class="w-phone-msg w-phone-msg--in">Calculemos tu margen →</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TRABAJO SELECCIONADO -->
+<!-- QUÉ HACEMOS -->
+<section class="w-eco" id="que-hacemos">
+  <div class="w-head" style="margin:0 auto 48px;text-align:center;max-width:620px">
+    <p class="w-kicker" style="justify-content:center;display:flex">Qué hacemos</p>
+    <h2 class="w-h2">Diseñamos cómo las personas interactúan con tu negocio.</h2>
+    <p class="w-p" style="margin:0 auto">Analizo tus objetivos, diseño el recorrido que necesitas y construyo las piezas digitales y físicas que lo hacen posible — desde un QR o una conversación hasta una base de datos.</p>
+  </div>
+  <div class="w-eco-flow">
+    <div class="w-eco-node"><div class="w-eco-ico w-eco-ico--1">◍</div><div class="w-eco-t">Personas</div><div class="w-eco-d">Cliente, paciente, usuario, ciudadano.</div></div>
+    <div class="w-eco-arrow">→</div>
+    <div class="w-eco-node"><div class="w-eco-ico w-eco-ico--2">▢</div><div class="w-eco-t">Puntos de entrada</div><div class="w-eco-d">QR, redes, Google, tarjeta, punto físico.</div></div>
+    <div class="w-eco-arrow">→</div>
+    <div class="w-eco-node"><div class="w-eco-ico w-eco-ico--3">▤</div><div class="w-eco-t">Experiencias</div><div class="w-eco-d">Páginas, catálogos, formularios, agendas.</div></div>
+    <div class="w-eco-arrow">→</div>
+    <div class="w-eco-node"><div class="w-eco-ico w-eco-ico--4">◇</div><div class="w-eco-t">Conexiones</div><div class="w-eco-d">WhatsApp, llamadas, asesores, notificaciones.</div></div>
+    <div class="w-eco-arrow">→</div>
+    <div class="w-eco-node"><div class="w-eco-ico w-eco-ico--5">▦</div><div class="w-eco-t">Sistemas</div><div class="w-eco-d">Bases de datos, CRM, automatizaciones.</div></div>
+    <div class="w-eco-arrow">→</div>
+    <div class="w-eco-node"><div class="w-eco-ico w-eco-ico--6">◈</div><div class="w-eco-t">Resultados</div><div class="w-eco-d">Venta, reserva, solicitud, seguimiento.</div></div>
+  </div>
+</section>
+
+<!-- EJEMPLOS DE RECORRIDOS -->
+<section class="w-ex">
+  <div class="w-head" style="margin:0 auto;text-align:center;max-width:620px">
+    <p class="w-kicker" style="justify-content:center;display:flex">Ejemplos de recorridos</p>
+    <h2 class="w-h2">Cada negocio tiene un camino diferente.</h2>
+    <p class="w-p" style="margin:0 auto">No existe una única solución. El recorrido cambia según lo que el negocio necesita conseguir — estos son ejemplos, no una fórmula fija.</p>
+  </div>
+  <div class="w-ex-grid">
+    <div class="w-ex-card">
+      <div class="w-ex-tag">Captación de clientes</div>
+      <div class="w-ex-t">Negocio físico</div>
+      <div class="w-ex-path">
+        <span class="w-ex-step">Pendón</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">QR</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Landing</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Formulario</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">WhatsApp</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Asesor</span>
+      </div>
+      <div class="w-ex-use">Útil para negocios físicos que necesitan que alguien que pasa por al lado se convierta en un contacto real.</div>
+    </div>
+    <div class="w-ex-card">
+      <div class="w-ex-tag">Venta online</div>
+      <div class="w-ex-t">E-commerce</div>
+      <div class="w-ex-path">
+        <span class="w-ex-step">Instagram</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Página</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Catálogo</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Selección</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Compra</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Base de datos</span>
+      </div>
+      <div class="w-ex-use">Útil para productos o catálogos donde la persona necesita comparar y decidir antes de comprar.</div>
+    </div>
+    <div class="w-ex-card">
+      <div class="w-ex-tag">Atención y agenda</div>
+      <div class="w-ex-t">Servicios</div>
+      <div class="w-ex-path">
+        <span class="w-ex-step">Google</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Página</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Consulta</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Orientación</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Agenda</span><span class="w-ex-arrow">→</span>
+        <span class="w-ex-step">Seguimiento</span>
+      </div>
+      <div class="w-ex-use">Útil para clínicas, consultorios y asesorías donde la persona necesita orientarse antes de reservar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASOS DESTACADOS -->
 <section class="w-work w-dark" id="trabajo">
   <div class="w-work-in">
-    <div class="w-head">
-      <p class="w-kicker">Trabajo destacado</p>
-      <h2 class="w-h2">Este es el trabajo que he construido.</h2>
-      <p class="w-p">Proyectos donde una necesidad de negocio se convirtió en una experiencia, un sistema o un recorrido concreto.</p>
+    <div class="w-work-head">
+      <div class="w-head" style="margin-bottom:0">
+        <p class="w-kicker">Casos destacados</p>
+        <h2 class="w-h2">Soluciones reales para negocios reales.</h2>
+        <p class="w-p">Cada proyecto nace de un problema real. Aquí algunos ejemplos de cómo las ideas se convierten en experiencias que generan valor.</p>
+      </div>
     </div>
 
-    <div class="w-case">
-      <div class="w-case-visual">
+    <div class="w-case-grid">
+      <div class="w-case">
         <div class="w-cover w-cover--a">
           <div class="w-cover-n">01</div>
           <div class="w-cover-tag">hojaldito.co</div>
-          <div class="w-cover-name">Del buen sabor a<br/>grandes oportunidades</div>
+        </div>
+        <div class="w-case-copy">
+          <div class="w-case-cat">Comercial · Captación de clientes</div>
+          <div class="w-case-title">Hojaldito</div>
+          <div class="w-case-desc">Un recorrido que inicia en el punto de venta y lleva al cliente desde el descubrimiento hasta el contacto.</div>
+          <div class="w-case-actions">
+            <a href="trabajo/hojaldito/" class="w-case-link">Ver caso →</a>
+          </div>
         </div>
       </div>
-      <div class="w-case-copy">
-        <div class="w-case-cat">Sector privado · alimentos</div>
-        <div class="w-case-title">Hojaldito</div>
-        <div class="w-case-desc">Producto premium sin recorrido para llegar al redistribuidor: dependía por completo del voz a voz. Se diseñó el camino completo para que lo descubra, lo entienda y decida solo.</div>
-        <div class="w-case-path">Descubrir / Entender / Calcular / Probar / Contactar</div>
-        <div class="w-case-actions">
-          <a href="trabajo/hojaldito/" class="w-case-link">Ver caso →</a>
-        </div>
-      </div>
-    </div>
 
-    <div class="w-case w-case--rev">
-      <div class="w-case-visual">
+      <div class="w-case">
         <div class="w-cover w-cover--b">
           <div class="w-cover-flag">En desarrollo</div>
           <div class="w-cover-n">02</div>
           <div class="w-cover-tag">al natural</div>
-          <div class="w-cover-name">Productos naturales,<br/>recorrido de compra claro</div>
+        </div>
+        <div class="w-case-copy">
+          <div class="w-case-cat">E-commerce · Experiencia de compra</div>
+          <div class="w-case-title">Al Natural</div>
+          <div class="w-case-desc">Un recorrido simple para que tus clientes encuentren, elijan y compren fácilmente.</div>
+          <div class="w-case-actions">
+            <a href="trabajo/al-natural/" class="w-case-link">Ver caso →</a>
+          </div>
         </div>
       </div>
-      <div class="w-case-copy">
-        <div class="w-case-cat">E-commerce · experiencia de compra</div>
-        <div class="w-case-title">Al Natural</div>
-        <div class="w-case-desc">Un recorrido pensado para que el cliente descubra el producto, entienda el valor y decida sin fricciones.</div>
-        <div class="w-case-path">Descubrir / Elegir / Comprar</div>
-        <div class="w-case-actions">
-          <a href="trabajo/al-natural/" class="w-case-link">Ver caso →</a>
-        </div>
-      </div>
-    </div>
 
-    <div class="w-case w-case--wide">
-      <div class="w-case-visual">
-        <div class="w-band" style="background:var(--dark2)">
-          <div class="w-band-name">SENA · Vitrina</div>
-          <div class="w-band-tag">03 — sector público · educación · en desarrollo</div>
+      <div class="w-case">
+        <div class="w-cover w-cover--c">
+          <div class="w-cover-flag">En desarrollo</div>
+          <div class="w-cover-n">03</div>
+          <div class="w-cover-tag">sena · vitrina</div>
         </div>
-      </div>
-      <div class="w-case-copy">
-        <div>
-          <div class="w-case-cat">Sector público · educación</div>
-          <div class="w-case-title" style="font-size:22px">SENA Vitrina</div>
-        </div>
-        <div>
-          <div class="w-case-desc">Una vitrina digital para dar visibilidad a proyectos, pensada para que cualquier visitante entienda de un vistazo qué está viendo.</div>
-          <div class="w-case-path">Descubrir / Explorar / Entender</div>
+        <div class="w-case-copy">
+          <div class="w-case-cat">Información · Consulta</div>
+          <div class="w-case-title">SENA Vitrina</div>
+          <div class="w-case-desc">Información clara y accesible para que las personas encuentren lo que necesitan sin depender de una conversación.</div>
           <div class="w-case-actions">
             <a href="trabajo/sena-vitrina/" class="w-case-link">Ver caso →</a>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="w-case">
-      <div class="w-case-visual">
+      <div class="w-case">
         <div class="w-cover w-cover--d">
-          <div class="w-cover-tag">04 — demo conceptual</div>
-          <div class="w-convo-ghost">Clínica<br/>Ejemplo</div>
+          <div class="w-cover-tag">demo conceptual</div>
           <div class="w-convo">
             <div class="w-convo-top"><span class="w-convo-dot"></span><span class="w-convo-name">Clínica Ejemplo</span></div>
-            <div class="w-convo-msg w-convo-msg--in">Hola — ¿qué necesitas hoy?</div>
+            <div class="w-convo-msg w-convo-msg--in">¿Qué necesitas hoy?</div>
             <div class="w-convo-msg w-convo-msg--out">Mi mascota tiene un síntoma</div>
-            <div class="w-convo-msg w-convo-msg--in">Cuéntame qué está pasando →</div>
+          </div>
+        </div>
+        <div class="w-case-copy">
+          <div class="w-case-cat">Atención · Agenda</div>
+          <div class="w-case-title">Demo veterinaria</div>
+          <div class="w-case-desc">Un sistema de atención completa, desde la consulta hasta el seguimiento. Ejemplo conceptual, no un cliente real.</div>
+          <div class="w-case-actions">
+            <a href="trabajo/veterinaria/" class="w-case-link">Ver caso →</a>
+            <a href="javascript:void(0)" class="w-case-link w-case-link--ghost" onclick="abrirModal('modal-demo-vet')">Probar demo ↗</a>
           </div>
         </div>
       </div>
-      <div class="w-case-copy">
-        <div class="w-case-cat">Atención y agenda · demo conceptual</div>
-        <div class="w-case-title">Demo veterinaria</div>
-        <div class="w-case-desc">Ejemplo conceptual — no un cliente real — pensado para mostrar cómo diseño una experiencia completa, de la primera pregunta hasta el seguimiento después de la cita.</div>
-        <div class="w-case-path">Descubrir / Consultar / Orientarse / Agendar / Confirmar / Seguimiento</div>
-        <div class="w-case-actions">
-          <a href="trabajo/veterinaria/" class="w-case-link">Ver caso →</a>
-          <a href="javascript:void(0)" class="w-case-link w-case-link--ghost" onclick="abrirModal('modal-demo-vet')">Probar demo ↗</a>
-        </div>
-      </div>
     </div>
-
   </div>
 </section>
 <!-- PROTOTIPOS Y EXPERIENCIAS -->
 <section class="w-lab" id="prototipos">
   <div class="w-head" style="margin:0 auto 44px;text-align:center;max-width:600px">
-    <p class="w-kicker" style="justify-content:center;display:flex">Prototipos y experiencias</p>
-    <h2 class="w-h2">Un laboratorio de experiencias.</h2>
-    <p class="w-p" style="margin:0 auto">Experiencias que construí para explorar recorridos, probar ideas y convertir conceptos en algo que se puede tocar.</p>
+    <p class="w-kicker" style="justify-content:center;display:flex">Prototipos interactivos</p>
+    <h2 class="w-h2">Explora ideas en acción.</h2>
+    <p class="w-p" style="margin:0 auto">Pequeñas experiencias que muestran cómo pienso un problema. Explora, prueba y descubre lo que es posible.</p>
   </div>
 
-  <div class="w-lab-item">
-    <div class="w-lab-n">01</div>
-    <div>
-      <div class="w-lab-t">Diagnóstico de negocio</div>
-      <div class="w-lab-d">Una experiencia interactiva para identificar problemas, patrones y oportunidades. Cuéntame tu caso y te muestro, ahí mismo, dónde está el problema y cómo se vería resuelto.</div>
+  <div class="w-lab-grid">
+    <div class="w-lab-card">
+      <div class="w-lab-card-ico">01</div>
+      <div class="w-lab-card-t">Diagnóstico de negocio</div>
+      <div class="w-lab-card-d">Cuéntame tu problema y te muestro, ahí mismo, dónde está la fricción y cómo se vería resuelto.</div>
+      <button class="w-try" type="button" onclick="document.getElementById('stageInputWrap').scrollIntoView({behavior:'smooth',block:'center'})">Probar ↓</button>
+    </div>
+    <div class="w-lab-card">
+      <div class="w-lab-card-ico">02</div>
+      <div class="w-lab-card-t">Estructura tu idea</div>
+      <div class="w-lab-card-d">¿Tienes una idea en vez de un problema? Te ayudo a verla como un recorrido: problema, solución y primer paso.</div>
+      <button class="w-try" type="button" onclick="document.getElementById('toggleIdea').click(); document.getElementById('stageInputWrap').scrollIntoView({behavior:'smooth',block:'center'})">Probar ↓</button>
+    </div>
+    <div class="w-lab-card">
+      <div class="w-lab-card-ico">03</div>
+      <div class="w-lab-card-t">Demo veterinaria</div>
+      <div class="w-lab-card-d">Un ejemplo conceptual de atención y agenda completa, de punta a punta.</div>
+      <div class="w-track">Descubrir → Consultar → Agendar → Seguimiento</div>
+      <button class="w-try" type="button" onclick="abrirModal('modal-demo-vet')">Probar demo ↗</button>
+    </div>
+  </div>
 
-      <div class="w-tool" id="stageInputWrap">
-        <div class="w-tool-grid">
-          <div>
-            <div class="w-field">
-              <textarea id="heroInput" rows="1" placeholder="Ej: Mis clientes me escriben todo el día para preguntar lo mismo..."></textarea>
-              <button id="heroSubmit" type="button" aria-label="Enviar">→</button>
-            </div>
+  <div class="w-tool" id="stageInputWrap">
+    <div class="w-tool-head">
+      <p class="w-kicker" style="margin-bottom:10px">01 · Diagnóstico de negocio</p>
+      <p class="w-p" style="margin:0">Una experiencia interactiva para identificar problemas, patrones y oportunidades.</p>
+    </div>
+    <div class="w-tool-grid">
+      <div>
+        <div class="w-field">
+          <textarea id="heroInput" rows="1" placeholder="Ej: Mis clientes me escriben todo el día para preguntar lo mismo..."></textarea>
+          <button id="heroSubmit" type="button" aria-label="Enviar">→</button>
+        </div>
 
-            <div class="examples">
-              <span class="ex-label">Prueba con:</span>
-              <button class="ex-chip" type="button" data-ej="Mis clientes siempre me preguntan lo mismo.">Mis clientes siempre me preguntan lo mismo.</button>
-              <button class="ex-chip" type="button" data-ej="La gente llega pero no sabe qué elegir.">La gente llega pero no sabe qué elegir.</button>
-              <button class="ex-chip" type="button" data-ej="Quiero que puedan pedir una cotización sin escribirme.">Quiero que puedan pedir una cotización sin escribirme.</button>
-            </div>
+        <div class="examples">
+          <span class="ex-label">Prueba con:</span>
+          <button class="ex-chip" type="button" data-ej="Mis clientes siempre me preguntan lo mismo.">Mis clientes siempre me preguntan lo mismo.</button>
+          <button class="ex-chip" type="button" data-ej="La gente llega pero no sabe qué elegir.">La gente llega pero no sabe qué elegir.</button>
+          <button class="ex-chip" type="button" data-ej="Quiero que puedan pedir una cotización sin escribirme.">Quiero que puedan pedir una cotización sin escribirme.</button>
+        </div>
 
-            <div class="w-asides">
-              <a href="javascript:void(0)" id="toggleIdea">¿Tienes una idea en vez de un problema? →</a>
-              <a href="javascript:void(0)" id="skipExplore">Prefiero ver el trabajo directamente →</a>
-            </div>
+        <div class="w-asides">
+          <a href="javascript:void(0)" id="toggleIdea">¿Tienes una idea en vez de un problema? →</a>
+          <a href="javascript:void(0)" id="skipExplore">Prefiero ver el trabajo directamente →</a>
+        </div>
 
-            <div id="ideaBox">
-              <textarea id="ideaInput" placeholder="Ej: tengo la idea de una app que ayude a restaurantes pequeños a controlar sus costos sin necesitar un contador..."></textarea>
-              <button id="ideaBtn" type="button">Estructurar mi idea →</button>
-              <div id="ideaResult"></div>
-            </div>
-          </div>
-
-          <div class="w-diag">
-            <div class="w-diag-top">
-              <div class="w-diag-dot"></div>
-              <div>
-                <div class="w-diag-name">Diagnóstico</div>
-                <div class="w-diag-sub">Responde y sigue la conversación</div>
-              </div>
-            </div>
-            <div id="chatMsgs"></div>
-            <div id="chatInpWrap" style="display:none">
-              <input id="chatFieldInput" type="text" placeholder="Escribe tu respuesta..." autocomplete="off">
-              <button id="chatFieldSend" type="button" aria-label="Enviar">→</button>
-            </div>
-          </div>
+        <div id="ideaBox">
+          <textarea id="ideaInput" placeholder="Ej: tengo la idea de una app que ayude a restaurantes pequeños a controlar sus costos sin necesitar un contador..."></textarea>
+          <button id="ideaBtn" type="button">Estructurar mi idea →</button>
+          <div id="ideaResult"></div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w-lab-item">
-    <div class="w-lab-n">02</div>
-    <div>
-      <div class="w-lab-t">Estructura tu idea</div>
-      <div class="w-lab-d">¿Tienes una idea en vez de un problema? Cuéntamela arriba y te ayudo a verla como un recorrido: problema, solución y primer paso.</div>
-      <button class="w-try" type="button" onclick="document.getElementById('toggleIdea').click(); document.getElementById('stageInputWrap').scrollIntoView({behavior:'smooth',block:'center'})">Probar ↗</button>
-    </div>
-  </div>
-
-  <div class="w-lab-item">
-    <div class="w-lab-n">03</div>
-    <div>
-      <div class="w-lab-t">Demo veterinaria</div>
-      <div class="w-lab-d">Un ejemplo conceptual de atención y agenda completa, de punta a punta.</div>
-      <div class="w-track">Descubrir → Consultar → Orientarse → Agendar → Confirmar → Seguimiento</div>
-      <button class="w-try" type="button" onclick="abrirModal('modal-demo-vet')">Probar demo ↗</button>
+      <div class="w-diag">
+        <div class="w-diag-top">
+          <div class="w-diag-dot"></div>
+          <div>
+            <div class="w-diag-name">Diagnóstico</div>
+            <div class="w-diag-sub">Responde y sigue la conversación</div>
+          </div>
+        </div>
+        <div id="chatMsgs"></div>
+        <div id="chatInpWrap" style="display:none">
+          <input id="chatFieldInput" type="text" placeholder="Escribe tu respuesta..." autocomplete="off">
+          <button id="chatFieldSend" type="button" aria-label="Enviar">→</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -618,17 +731,27 @@ a{color:inherit}
   <div class="w-systems-grid">
     <div>
       <p class="w-kicker">También construyo lo que no se ve</p>
-      <h2 class="w-h2">No todos los recorridos ocurren frente al cliente.</h2>
-      <p class="w-p">Sistemas que resuelven problemas que ocurren detrás de la experiencia del cliente: información, procesos y personas conectadas para que la operación funcione mejor.</p>
-      <a href="sistemas-internos.html" class="w-link w-link--light" style="margin-top:24px;display:inline-block">Ver sistemas →</a>
+      <h2 class="w-h2">Sistemas internos para un mejor negocio.</h2>
+      <p class="w-p">Soluciones para procesos internos que hacen que la operación sea más eficiente, segura y controlable.</p>
+      <a href="sistemas-internos.html" class="w-link w-link--light" style="margin-top:24px;display:inline-block">Ver más soluciones →</a>
+      <div class="w-sys-side">
+        <div class="w-sys-side-item">Liquidación</div>
+        <div class="w-sys-side-item">Conciliación</div>
+        <div class="w-sys-side-item">Control de costos</div>
+        <div class="w-sys-side-item">Registros</div>
+        <div class="w-sys-side-item">Proyectos</div>
+        <div class="w-sys-side-item">Reportes</div>
+      </div>
     </div>
-    <div class="w-sys-list">
-      <div class="w-sys-row"><span class="w-sys-n">01</span><span class="w-sys-name">Liquidación pensional</span><span class="w-sys-tag">Automatizado</span></div>
-      <div class="w-sys-row"><span class="w-sys-n">02</span><span class="w-sys-name">Conciliación bancaria</span><span class="w-sys-tag">Automatizado</span></div>
-      <div class="w-sys-row"><span class="w-sys-n">03</span><span class="w-sys-name">Control de costos</span><span class="w-sys-tag">Automatizado</span></div>
-      <div class="w-sys-row"><span class="w-sys-n">04</span><span class="w-sys-name">Registro sanitario · INVIMA</span><span class="w-sys-tag">Automatizado</span></div>
-      <div class="w-sys-row"><span class="w-sys-n">05</span><span class="w-sys-name">Evaluación de proyectos</span><span class="w-sys-tag">Automatizado</span></div>
-      <div class="w-sys-row"><span class="w-sys-n">06</span><span class="w-sys-name">Bot de cargue masivo (RPA)</span><span class="w-sys-tag">Automatizado</span></div>
+    <div class="w-sys-table">
+      <div class="w-sys-table-head">Procesos</div>
+      <div class="w-sys-row head"><span>Proceso</span><span>Estado</span></div>
+      <div class="w-sys-row"><span>Liquidación pensional</span><span class="w-sys-tag">Automatizado</span></div>
+      <div class="w-sys-row"><span>Conciliación bancaria</span><span class="w-sys-tag">Automatizado</span></div>
+      <div class="w-sys-row"><span>Control de costos</span><span class="w-sys-tag">Automatizado</span></div>
+      <div class="w-sys-row"><span>Registro sanitario · INVIMA</span><span class="w-sys-tag">Automatizado</span></div>
+      <div class="w-sys-row"><span>Evaluación de proyectos</span><span class="w-sys-tag">Automatizado</span></div>
+      <div class="w-sys-row"><span>Bot de cargue masivo (RPA)</span><span class="w-sys-tag">Automatizado</span></div>
     </div>
   </div>
 </section>
@@ -667,10 +790,11 @@ a{color:inherit}
       <div class="w-about-item">Construyo la solución</div>
     </div>
   </div>
+  <p class="w-about-quote">La tecnología es el medio.<br/>El problema del negocio<br/>es el punto de partida.</p>
 </section>
 
 <!-- CTA FINAL -->
-<section class="w-contact w-dark">
+<section class="w-contact w-dark" id="contacto">
   <div class="w-contact-in">
     <p class="w-kicker">Hablemos</p>
     <p class="w-h2" id="ctaFinalH">¿Qué quieres hacer<br/>más fácil en tu negocio?</p>
