@@ -59,54 +59,48 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 4
 @media(max-width:820px){.nav-links{display:none}nav{padding:18px 22px}}
 
 /* ===================== SHARED TYPE ===================== */
-.eyebrow{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--accent);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:16px}
-.on-dark .eyebrow{color:var(--accent-light)}
-.h2{font-family:var(--f-display);font-size:clamp(27px,3.4vw,42px);font-weight:600;color:var(--ink);line-height:1.14;letter-spacing:-.6px;margin-bottom:16px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--ink2);letter-spacing:.3px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--accent)}
+.on-dark .eyebrow{color:var(--dark-ink2)}
+.on-dark .eyebrow::before{background:var(--accent-light)}
+.h2{font-family:var(--f-display);font-size:clamp(34px,5vw,60px);font-weight:500;color:var(--ink);line-height:1.02;letter-spacing:-1.4px;margin-bottom:20px}
 .on-dark .h2{color:#fff}
-.h2 em{font-style:italic;color:var(--accent);font-weight:500}
+.h2 em{font-style:italic;color:var(--accent);font-weight:400}
 .on-dark .h2 em{color:var(--accent-light)}
-.sub{font-size:15px;color:var(--ink2);line-height:1.65;max-width:480px}
+.sub{font-size:16px;color:var(--ink2);line-height:1.6;max-width:480px}
 .on-dark .sub{color:var(--dark-ink2)}
-.section-head{max-width:640px;margin-bottom:48px}
+.section-head{max-width:680px;margin-bottom:56px}
 
 /* ===================== HERO ===================== */
-.hero{padding:56px 44px 100px;max-width:1360px;margin:0 auto;position:relative}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
-.hero-h1{font-family:var(--f-display);font-weight:600;font-size:clamp(36px,4.6vw,58px);line-height:1.08;letter-spacing:-1.2px;margin-bottom:24px}
-.hero-h1 em{font-style:italic;color:var(--accent);font-weight:500}
-.hero-sub{font-size:16.5px;color:var(--ink2);line-height:1.65;max-width:460px;margin-bottom:34px}
-.hero-ctas{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.hero{padding:64px 44px 0;max-width:1360px;margin:0 auto;position:relative}
+.hero-top{max-width:1180px;position:relative}
+.hero-eyebrow-row{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.hero-eyebrow-row::before{content:'';width:26px;height:1px;background:var(--accent)}
+.hero-eyebrow-row span{font-family:var(--f-mono);font-size:11px;color:var(--ink2);letter-spacing:.3px}
+.hero-h1{font-family:var(--f-display);font-weight:500;font-size:clamp(46px,7.4vw,108px);line-height:.98;letter-spacing:-2.6px;margin-bottom:0}
+.hero-h1 em{font-style:italic;color:var(--accent);font-weight:400}
+.hero-lower{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start;margin-top:52px;padding-top:38px;border-top:1px solid var(--bdr);padding-bottom:70px}
+.hero-sub{font-size:16.5px;color:var(--ink2);line-height:1.65;max-width:400px;margin-bottom:32px}
+.hero-ctas{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-bottom:44px}
 .btn-primary{background:var(--ink);color:var(--bg);padding:14px 26px;border-radius:100px;font-size:13.5px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;border:none;cursor:pointer}
 .btn-primary:hover{background:var(--accent);transform:translateY(-1px)}
 .btn-line{color:var(--ink);font-size:13.5px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:7px;border-bottom:1.5px solid var(--ink);padding-bottom:3px;background:none;border-left:none;border-top:none;border-right:none;cursor:pointer;font-family:var(--f-sans)}
 .btn-line:hover{color:var(--accent);border-color:var(--accent)}
-.hero-cats{display:flex;gap:20px;flex-wrap:wrap;margin-top:40px}
-.hero-cat{font-family:var(--f-mono);font-size:10.5px;color:var(--ink3);letter-spacing:.3px}
+.hero-cats{display:flex;gap:18px;flex-wrap:wrap}
+.hero-cat{font-family:var(--f-mono);font-size:10px;color:var(--ink3);letter-spacing:.3px;padding-bottom:2px;border-bottom:1px solid var(--bdr)}
 
-.hero-visual{position:relative;min-height:400px}
-.h-annot{position:absolute;font-family:var(--f-display);font-style:italic;font-size:12.5px;color:var(--ink2);line-height:1.45;max-width:135px;z-index:3}
-.h-a1{top:-30px;left:6px}
-.h-a2{top:20px;right:-6px;text-align:right}
-.h-a3{bottom:-26px;right:14px;text-align:right}
-.device-browser{background:var(--w);border-radius:14px;box-shadow:0 34px 70px rgba(27,23,18,.16);border:1px solid var(--bdr);overflow:hidden;position:relative;width:88%;z-index:1;margin-top:34px}
-.device-bar{background:var(--s);padding:9px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--bdr)}
-.device-dot{width:7px;height:7px;border-radius:50%;background:var(--bdr)}
-.device-url{margin-left:8px;font-family:var(--f-mono);font-size:9px;color:var(--ink3)}
-.device-body{padding:0}
-.device-hero-block{padding:22px 22px 26px;background:linear-gradient(160deg,#EFE9DC,#E4DCC6)}
-.device-eyebrow{font-family:var(--f-mono);font-size:8px;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-.device-title{font-family:var(--f-display);font-size:16px;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:8px;max-width:220px}
-.device-cta{display:inline-block;background:var(--ink);color:var(--bg);font-size:9px;padding:6px 12px;border-radius:100px;margin-top:4px}
-.device-phone{position:absolute;bottom:-32px;right:-6px;width:132px;background:var(--dark);border-radius:24px;padding:8px;box-shadow:0 26px 54px rgba(27,23,18,.24);z-index:2}
-.device-phone-screen{background:var(--w);border-radius:17px;padding:12px 10px;min-height:220px;display:flex;flex-direction:column;gap:7px}
-.device-phone-bar{display:flex;align-items:center;gap:5px;margin-bottom:2px}
-.device-phone-av{width:16px;height:16px;border-radius:50%;background:var(--accent)}
-.device-phone-name{font-size:7.5px;font-weight:700;color:var(--ink)}
-.device-msg{font-size:8px;line-height:1.4;padding:6px 8px;border-radius:3px 9px 9px 9px;max-width:85%}
-.device-msg.b{background:var(--s);color:var(--ink)}
-.device-msg.u{background:var(--dark);color:#fff;align-self:flex-end;border-radius:9px 3px 9px 9px}
-.device-qr{position:absolute;top:-26px;left:-24px;width:66px;height:66px;background:var(--w);border:1px solid var(--bdr);border-radius:10px;box-shadow:0 14px 30px rgba(27,23,18,.14);display:flex;align-items:center;justify-content:center;font-size:26px;z-index:2}
-@media(max-width:900px){.hero{padding:40px 22px 60px}.hero-grid{grid-template-columns:1fr;gap:44px}.hero-visual{min-height:auto;padding-top:40px}.h-annot{display:none}.device-qr{top:-18px;left:-10px;width:52px;height:52px;font-size:20px}}
+.hero-map{display:flex;flex-direction:column}
+.hm-row{display:grid;grid-template-columns:34px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--bdr);align-items:baseline}
+.hm-row:first-child{padding-top:0}
+.hm-row:last-child{border-bottom:none}
+.hm-num{font-family:var(--f-display);font-style:italic;font-size:15px;color:var(--accent)}
+.hm-t{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.hm-d{font-size:12.5px;color:var(--ink2);line-height:1.55;max-width:360px}
+@media(max-width:900px){
+  .hero{padding:40px 22px 0}
+  .hero-h1{font-size:clamp(34px,10vw,52px);letter-spacing:-1.2px}
+  .hero-lower{grid-template-columns:1fr;gap:36px;margin-top:36px;padding-top:28px;padding-bottom:48px}
+}
 
 /* ===================== QUÉ HAGO — cadena conceptual ===================== */
 .chain-section{padding:90px 44px;max-width:1240px;margin:0 auto}
@@ -144,35 +138,43 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 4
 .proyecto-feature.reverse .proyecto-copy{order:1}
 .proyecto-feature.panoramic{grid-template-columns:1fr;gap:36px}
 
+.proyecto-feature{position:relative}
 .proyecto-visual-big{position:relative}
-.pv-frame{background:var(--w);border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.35)}
-.pv-bar{background:var(--s);padding:10px 16px;display:flex;align-items:center;gap:6px}
-.pv-dot{width:8px;height:8px;border-radius:50%;background:var(--bdr)}
-.pv-url{margin-left:10px;font-family:var(--f-mono);font-size:10px;color:var(--ink3)}
-.pv-body{min-height:250px;display:flex;align-items:center;padding:34px;position:relative}
-.pv-body.short{min-height:150px;justify-content:center}
-.pv-emoji-lg{font-size:56px;position:absolute;top:26px;right:28px;opacity:.95}
-.pv-hero-block{max-width:280px}
-.pv-hero-eyebrow{font-family:var(--f-mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.pv-hero-title{font-family:var(--f-display);font-size:21px;font-weight:600;color:var(--ink);line-height:1.28;margin-bottom:16px}
-.pv-hero-cta{display:inline-block;background:var(--ink);color:var(--bg);font-size:10.5px;padding:8px 15px;border-radius:100px}
-.pv-badge-dev{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.4px;text-transform:uppercase;background:var(--w);color:var(--ink2);padding:5px 11px;border-radius:100px;border:1px solid var(--bdr);position:absolute;top:16px;left:16px;z-index:2}
-.pv-phone{position:absolute;bottom:-28px;right:-16px;width:126px;background:var(--dark);border-radius:20px;padding:7px;box-shadow:0 22px 46px rgba(0,0,0,.4);z-index:3}
-.pv-phone-screen{background:var(--w);border-radius:14px;padding:11px 10px;min-height:196px;display:flex;flex-direction:column;gap:6px}
-.pv-phone-bar{display:flex;align-items:center;gap:5px;margin-bottom:1px}
-.pv-phone-av{width:15px;height:15px;border-radius:50%;background:var(--accent)}
-.pv-phone-name{font-size:7.5px;font-weight:700;color:var(--ink)}
-.pv-msg{font-size:7.8px;line-height:1.4;padding:6px 8px;border-radius:3px 8px 8px 8px;max-width:88%}
+
+/* cover tipográfico — cada proyecto usa un tratamiento distinto */
+.pv-cover{position:relative;aspect-ratio:5/4;overflow:hidden;background:var(--dark2)}
+.pv-cover-num{position:absolute;font-family:var(--f-display);font-style:italic;font-weight:400;line-height:.8;color:rgba(255,255,255,.1);font-size:clamp(90px,13vw,170px);top:-.06em;left:-.02em;user-select:none}
+.pv-cover-mark{position:absolute;left:28px;bottom:28px;right:28px;font-family:var(--f-display);font-size:clamp(26px,2.6vw,38px);font-weight:500;color:#fff;letter-spacing:-.7px;line-height:1.05}
+.pv-cover-cap{position:absolute;top:24px;right:28px;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.pv-cover.c-hojaldito{background:linear-gradient(155deg,#5B3A1E,#8A5A2C 60%,#C99A4E)}
+.pv-cover.c-alnatural{background:linear-gradient(155deg,#1F3320,#3A5B3A 55%,#8FAE72)}
+.pv-cover.c-sena{background:linear-gradient(155deg,#2B2A45,#4B4A73 55%,#8C87B8)}
+.pv-cover.c-vet{background:linear-gradient(155deg,#3A1F22,#6B3A3F 55%,#B37B72)}
+.pv-cover-dev{position:absolute;top:24px;left:28px;font-family:var(--f-mono);font-size:9px;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.35);padding:5px 11px}
+
+/* panel horizontal (panorámico) */
+.pv-band{position:relative;padding:56px 40px;text-align:center;border-top:1px solid var(--dark-bdr);border-bottom:1px solid var(--dark-bdr)}
+.pv-band-mark{font-family:var(--f-display);font-style:italic;font-size:clamp(30px,4vw,52px);color:#fff;letter-spacing:-1px}
+.pv-band-cap{font-family:var(--f-mono);font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--dark-ink2);margin-top:10px}
+
+/* chat flotante superpuesto — veterinaria */
+.pv-chat-wrap{position:relative}
+.pv-chat{position:relative;z-index:2;max-width:230px;margin-left:auto;background:var(--w);padding:16px 16px 18px;border:1px solid var(--dark-bdr)}
+.pv-chat-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.pv-chat-av{width:16px;height:16px;background:var(--ink)}
+.pv-chat-name{font-size:10.5px;font-weight:700;color:var(--ink)}
+.pv-msg{font-size:11.5px;line-height:1.4;padding:8px 10px;max-width:90%;margin-bottom:7px}
 .pv-msg.b{background:var(--s);color:var(--ink)}
-.pv-msg.u{background:var(--dark);color:#fff;align-self:flex-end;border-radius:8px 3px 8px 8px}
+.pv-msg.u{background:var(--ink);color:#fff;margin-left:auto;text-align:right}
+.pv-chat-behind{position:absolute;left:0;top:12%;font-family:var(--f-display);font-style:italic;font-size:clamp(48px,6vw,84px);color:rgba(255,255,255,.08);line-height:.9;z-index:1;pointer-events:none}
 
 .proyecto-copy{max-width:460px}
 .proyecto-copy-grid{display:grid;grid-template-columns:.6fr 1fr;gap:44px;align-items:start}
 .proyecto-cat{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--accent-light);margin-bottom:10px}
-.proyecto-t{font-family:var(--f-display);font-size:27px;font-weight:600;color:#fff;margin-bottom:14px;letter-spacing:-.4px}
+.proyecto-t{font-family:var(--f-display);font-size:30px;font-weight:500;color:#fff;margin-bottom:14px;letter-spacing:-.7px}
 .proyecto-d{font-size:13px;color:var(--dark-ink2);line-height:1.65;margin-bottom:20px}
-.proyecto-steps{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:22px}
-.proyecto-step{font-family:var(--f-mono);font-size:9.5px;font-weight:600;background:rgba(255,255,255,.06);padding:5px 10px;border-radius:100px;color:var(--dark-ink2)}
+.proyecto-steps{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:22px}
+.proyecto-step{font-family:var(--f-mono);font-size:10px;color:var(--dark-ink2)}
 .proyecto-step-arrow{color:var(--dark-bdr);font-size:9px}
 .proyecto-actions{display:flex;gap:18px;flex-wrap:wrap}
 .proyecto-link{font-size:12.5px;font-weight:600;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-bottom:1.5px solid var(--accent-light);padding-bottom:2px;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer;font-family:var(--f-sans)}
@@ -185,10 +187,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 4
   .proyecto-feature.reverse .proyecto-copy{order:2}
   .proyecto-copy{max-width:none}
   .proyecto-copy-grid{grid-template-columns:1fr;gap:18px}
-  .pv-body{min-height:200px}
-  .proyecto-t{font-size:23px}
-  .pv-hero-block{max-width:180px}
-  .pv-emoji-lg{font-size:40px;top:20px;right:20px}
+  .proyecto-t{font-size:24px}
+  .pv-chat{max-width:200px}
 }
 
 /* ===================== PROTOTIPOS Y EXPERIENCIAS ===================== */
@@ -199,7 +199,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 4
 .proto-group-num{font-family:var(--f-mono);font-size:14px;color:var(--accent);font-weight:700;padding-top:5px}
 .proto-group-t{font-family:var(--f-display);font-size:23px;font-weight:600;margin-bottom:12px;letter-spacing:-.3px}
 .proto-group-d{font-size:13.5px;color:var(--ink2);line-height:1.65;max-width:600px;margin-bottom:20px}
-.proto-tool{background:var(--w);border:1px solid var(--bdr);border-radius:24px;padding:34px;box-shadow:0 24px 60px rgba(27,23,18,.07)}
+.proto-tool{background:var(--w);border-top:1px solid var(--ink);padding:34px 0 0}
 .proto-tool-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:40px;align-items:start}
 @media(max-width:900px){.proto-group{grid-template-columns:1fr;gap:10px;padding:32px 0}}
 
@@ -250,13 +250,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 4
 
 /* ===================== SISTEMAS INTERNOS (dark, secundario) ===================== */
 .sysint-section{padding:86px 44px;background:var(--dark2);position:relative}
-.sysint-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.sysint-mock{background:var(--dark);border:1px solid var(--dark-bdr);border-radius:16px;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.3)}
-.sysint-mock-head{font-family:var(--f-mono);font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:#fff;padding:16px 18px;border-bottom:1px solid var(--dark-bdr)}
-.sysint-mock-row{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--dark-bdr);font-size:12px;color:var(--dark-ink2)}
-.sysint-mock-row:last-child{border-bottom:none}
-.sysint-mock-row.head{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--dark-ink2);opacity:.6}
-.sysint-mock-ok{font-family:var(--f-mono);font-size:10px;color:var(--accent-light);font-weight:600}
+.sysint-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.sysint-list{display:flex;flex-direction:column}
+.sysint-row{display:grid;grid-template-columns:30px 1fr auto;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--dark-bdr)}
+.sysint-row:first-child{padding-top:0}
+.sysint-row:last-child{border-bottom:none}
+.sysint-row-n{font-family:var(--f-mono);font-size:10.5px;color:var(--dark-ink2);opacity:.6}
+.sysint-row-t{font-family:var(--f-display);font-size:16.5px;color:#fff;font-weight:500;letter-spacing:-.2px}
+.sysint-row-s{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.3px;color:var(--accent-light);text-align:right;white-space:nowrap}
 @media(max-width:900px){.sysint-section{padding:56px 22px}.sysint-inner{grid-template-columns:1fr;gap:32px}}
 
 /* ===================== METODOLOGÍA ===================== */
@@ -465,9 +466,12 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid">
+  <div class="hero-top">
+    <div class="hero-eyebrow-row"><span>Diseño de soluciones digitales para negocios reales</span></div>
+    <h1 class="hero-h1">Diseño lo que pasa<br/>entre tu negocio<br/>y tus <em>clientes</em>.</h1>
+  </div>
+  <div class="hero-lower">
     <div>
-      <h1 class="hero-h1">Diseño lo que pasa<br/>entre tu negocio<br/>y tus <em>clientes</em>.</h1>
       <p class="hero-sub">Construyo experiencias y sistemas que conectan personas, canales y procesos, desde el primer contacto hasta el resultado.</p>
       <div class="hero-ctas">
         <a href="#prototipos" class="btn-primary" onclick="setTimeout(function(){var i=document.getElementById('heroInput'); if(i) i.focus();},500)">Cuéntame tu proyecto →</a>
@@ -481,31 +485,22 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
         <span class="hero-cat">SISTEMAS</span>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="device-qr">▦</div>
-      <p class="h-annot h-a1">ideas, procesos,<br/>personas, resultados</p>
-      <p class="h-annot h-a2">un punto de partida<br/>puede ser un QR</p>
-      <div class="device-browser">
-        <div class="device-bar">
-          <span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span>
-          <span class="device-url">tu-negocio.com</span>
-        </div>
-        <div class="device-body">
-          <div class="device-hero-block">
-            <div class="device-eyebrow">Experiencia digital</div>
-            <div class="device-title">Productos naturales para una vida más consciente</div>
-            <span class="device-cta">Explorar productos →</span>
-          </div>
-        </div>
+    <div class="hero-map">
+      <div class="hm-row">
+        <span class="hm-num">01</span>
+        <div><div class="hm-t">Un punto de partida físico o digital</div><div class="hm-d">Un pendón, un QR, Instagram, Google o una recomendación — el recorrido puede empezar en cualquier lado.</div></div>
       </div>
-      <p class="h-annot h-a3">tu negocio también<br/>puede estar aquí</p>
-      <div class="device-phone">
-        <div class="device-phone-screen">
-          <div class="device-phone-bar"><span class="device-phone-av"></span><span class="device-phone-name">Hojaldito</span></div>
-          <div class="device-msg b">Del buen sabor a grandes oportunidades 🥐</div>
-          <div class="device-msg u">Quiero saber si me conviene</div>
-          <div class="device-msg b">Calculemos tu margen →</div>
-        </div>
+      <div class="hm-row">
+        <span class="hm-num">02</span>
+        <div><div class="hm-t">Una experiencia que guía</div><div class="hm-d">Una página, un catálogo, un formulario o una conversación por WhatsApp que ayuda a decidir.</div></div>
+      </div>
+      <div class="hm-row">
+        <span class="hm-num">03</span>
+        <div><div class="hm-t">Un sistema que lo sostiene</div><div class="hm-d">Detrás, una base de datos, un asesor o un proceso interno que hace que todo funcione.</div></div>
+      </div>
+      <div class="hm-row">
+        <span class="hm-num">04</span>
+        <div><div class="hm-t">Un resultado real</div><div class="hm-d">Una venta, una reserva, una solicitud o un negocio que opera con menos fricción.</div></div>
       </div>
     </div>
   </div>
@@ -522,16 +517,10 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
 
     <div class="proyecto-feature">
       <div class="proyecto-visual-big">
-        <div class="pv-frame">
-          <div class="pv-bar"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-url">hojaldito</span></div>
-          <div class="pv-body" style="background:linear-gradient(160deg,#F6EEE0,#EAF2DE)">
-            <div class="pv-hero-block">
-              <div class="pv-hero-eyebrow">Recorrido comercial</div>
-              <div class="pv-hero-title">Del buen sabor a grandes oportunidades</div>
-              <span class="pv-hero-cta">Calcular mi margen →</span>
-            </div>
-            <span class="pv-emoji-lg">🥐</span>
-          </div>
+        <div class="pv-cover c-hojaldito">
+          <div class="pv-cover-num">01</div>
+          <div class="pv-cover-cap">hojaldito.co</div>
+          <div class="pv-cover-mark">Del buen sabor a<br/>grandes oportunidades</div>
         </div>
       </div>
       <div class="proyecto-copy">
@@ -539,10 +528,10 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
         <div class="proyecto-t">Hojaldito</div>
         <div class="proyecto-d">Producto premium sin recorrido para llegar al redistribuidor: dependía por completo del voz a voz. Se diseñó el camino completo para que lo descubra, lo entienda y decida solo.</div>
         <div class="proyecto-steps">
-          <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Entender</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Calcular</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Probar</span><span class="proyecto-step-arrow">→</span>
+          <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Entender</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Calcular</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Probar</span><span class="proyecto-step-arrow">/</span>
           <span class="proyecto-step">Contactar</span>
         </div>
         <div class="proyecto-actions">
@@ -553,12 +542,11 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
 
     <div class="proyecto-feature reverse">
       <div class="proyecto-visual-big">
-        <div class="pv-frame">
-          <div class="pv-bar"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-url">al-natural</span></div>
-          <div class="pv-body" style="background:linear-gradient(160deg,#E7EFE2,#CFE0C6)">
-            <span class="pv-badge-dev">En desarrollo</span>
-            <span class="pv-emoji-lg" style="position:static;margin:0 auto">🌿</span>
-          </div>
+        <div class="pv-cover c-alnatural">
+          <div class="pv-cover-dev">En desarrollo</div>
+          <div class="pv-cover-num">02</div>
+          <div class="pv-cover-cap">al natural</div>
+          <div class="pv-cover-mark">Productos naturales,<br/>recorrido de compra claro</div>
         </div>
       </div>
       <div class="proyecto-copy">
@@ -566,8 +554,8 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
         <div class="proyecto-t">Al Natural</div>
         <div class="proyecto-d">Un recorrido pensado para que el cliente descubra el producto, entienda el valor y decida sin fricciones.</div>
         <div class="proyecto-steps">
-          <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Elegir</span><span class="proyecto-step-arrow">→</span>
+          <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Elegir</span><span class="proyecto-step-arrow">/</span>
           <span class="proyecto-step">Comprar</span>
         </div>
         <div class="proyecto-actions">
@@ -578,12 +566,9 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
 
     <div class="proyecto-feature panoramic">
       <div class="proyecto-visual-big">
-        <div class="pv-frame">
-          <div class="pv-bar"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-url">sena-vitrina</span></div>
-          <div class="pv-body short">
-            <span class="pv-badge-dev">En desarrollo</span>
-            <span class="pv-emoji-lg" style="position:static;margin:0 auto;font-size:48px">🏛️</span>
-          </div>
+        <div class="pv-band" style="background:var(--dark2)">
+          <div class="pv-band-mark">SENA · Vitrina</div>
+          <div class="pv-band-cap">03 — sector público · educación · en desarrollo</div>
         </div>
       </div>
       <div class="proyecto-copy-grid">
@@ -594,8 +579,8 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
         <div>
           <div class="proyecto-d">Una vitrina digital para dar visibilidad a proyectos, pensada para que cualquier visitante entienda de un vistazo qué está viendo.</div>
           <div class="proyecto-steps">
-            <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">→</span>
-            <span class="proyecto-step">Explorar</span><span class="proyecto-step-arrow">→</span>
+            <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">/</span>
+            <span class="proyecto-step">Explorar</span><span class="proyecto-step-arrow">/</span>
             <span class="proyecto-step">Entender</span>
           </div>
           <div class="proyecto-actions">
@@ -606,17 +591,13 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
     </div>
 
     <div class="proyecto-feature">
-      <div class="proyecto-visual-big">
-        <div class="pv-frame">
-          <div class="pv-bar"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-url">demo · clínica ejemplo</span></div>
-          <div class="pv-body" style="background:linear-gradient(160deg,#F6EEE0,#EAF2DE);justify-content:flex-start">
-            <span class="pv-badge-dev">🧪 Demo conceptual</span>
-          </div>
-        </div>
-        <div class="pv-phone">
-          <div class="pv-phone-screen">
-            <div class="pv-phone-bar"><span class="pv-phone-av"></span><span class="pv-phone-name">Clínica Ejemplo</span></div>
-            <div class="pv-msg b">Hola 👋 ¿Qué necesitas hoy?</div>
+      <div class="proyecto-visual-big pv-chat-wrap">
+        <div class="pv-cover c-vet" style="aspect-ratio:auto;min-height:340px">
+          <div class="pv-cover-cap">04 — demo conceptual</div>
+          <div class="pv-chat-behind">Clínica<br/>Ejemplo</div>
+          <div class="pv-chat" style="position:absolute;right:24px;bottom:24px;left:auto;top:auto">
+            <div class="pv-chat-top"><span class="pv-chat-av"></span><span class="pv-chat-name">Clínica Ejemplo</span></div>
+            <div class="pv-msg b">Hola — ¿qué necesitas hoy?</div>
             <div class="pv-msg u">Mi mascota tiene un síntoma</div>
             <div class="pv-msg b">Cuéntame qué está pasando →</div>
           </div>
@@ -627,11 +608,11 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
         <div class="proyecto-t">Demo veterinaria</div>
         <div class="proyecto-d">Ejemplo conceptual — no un cliente real — pensado para mostrar cómo diseño una experiencia completa, de la primera pregunta hasta el seguimiento después de la cita.</div>
         <div class="proyecto-steps">
-          <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Consultar</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Orientarse</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Agendar</span><span class="proyecto-step-arrow">→</span>
-          <span class="proyecto-step">Confirmar</span><span class="proyecto-step-arrow">→</span>
+          <span class="proyecto-step">Descubrir</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Consultar</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Orientarse</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Agendar</span><span class="proyecto-step-arrow">/</span>
+          <span class="proyecto-step">Confirmar</span><span class="proyecto-step-arrow">/</span>
           <span class="proyecto-step">Seguimiento</span>
         </div>
         <div class="proyecto-actions">
@@ -738,15 +719,13 @@ footer{background:var(--dark);padding:34px 44px;display:flex;align-items:center;
       <p class="sub">Sistemas que resuelven problemas que ocurren detrás de la experiencia del cliente: información, procesos y personas conectadas para que la operación funcione mejor.</p>
       <a href="sistemas-internos.html" class="btn-line-light" style="margin-top:24px;display:inline-flex">Ver sistemas →</a>
     </div>
-    <div class="sysint-mock">
-      <div class="sysint-mock-head">Procesos</div>
-      <div class="sysint-mock-row head"><span>Proceso</span><span>Estado</span></div>
-      <div class="sysint-mock-row"><span>Liquidación pensional</span><span class="sysint-mock-ok">Automatizado</span></div>
-      <div class="sysint-mock-row"><span>Conciliación bancaria</span><span class="sysint-mock-ok">Automatizado</span></div>
-      <div class="sysint-mock-row"><span>Control de costos</span><span class="sysint-mock-ok">Automatizado</span></div>
-      <div class="sysint-mock-row"><span>Registro sanitario · INVIMA</span><span class="sysint-mock-ok">Automatizado</span></div>
-      <div class="sysint-mock-row"><span>Evaluación de proyectos</span><span class="sysint-mock-ok">Automatizado</span></div>
-      <div class="sysint-mock-row"><span>Bot de cargue masivo (RPA)</span><span class="sysint-mock-ok">Automatizado</span></div>
+    <div class="sysint-list">
+      <div class="sysint-row"><span class="sysint-row-n">01</span><span class="sysint-row-t">Liquidación pensional</span><span class="sysint-row-s">Automatizado</span></div>
+      <div class="sysint-row"><span class="sysint-row-n">02</span><span class="sysint-row-t">Conciliación bancaria</span><span class="sysint-row-s">Automatizado</span></div>
+      <div class="sysint-row"><span class="sysint-row-n">03</span><span class="sysint-row-t">Control de costos</span><span class="sysint-row-s">Automatizado</span></div>
+      <div class="sysint-row"><span class="sysint-row-n">04</span><span class="sysint-row-t">Registro sanitario · INVIMA</span><span class="sysint-row-s">Automatizado</span></div>
+      <div class="sysint-row"><span class="sysint-row-n">05</span><span class="sysint-row-t">Evaluación de proyectos</span><span class="sysint-row-s">Automatizado</span></div>
+      <div class="sysint-row"><span class="sysint-row-n">06</span><span class="sysint-row-t">Bot de cargue masivo (RPA)</span><span class="sysint-row-s">Automatizado</span></div>
     </div>
   </div>
 </section>
