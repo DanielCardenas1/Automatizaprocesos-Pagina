@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas internos — Daniel Cárdenas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/sistemas-internos.css">
+</head>
+<body>
+<div class="page-wrap">
+
+<nav>
+  <a href="index.html" class="back-link">← Volver al trabajo de Daniel Cárdenas</a>
+  <span class="nav-contact">danielkadioz@gmail.com</span>
+</nav>
+
+<div class="intro rev">
+  <div class="sec-eyebrow">También hemos construido sistemas para resolver problemas internos</div>
+  <h1 class="sec-h">Sistemas y automatización<br/><em>para operaciones internas.</em></h1>
+  <p class="sec-sub">Esto demuestra que tengo capacidad técnica para construir sistemas — no es lo que vendo principalmente hoy. La propuesta principal es diseñar el recorrido digital entre tu negocio y tus clientes.</p>
+</div>
+
+<div class="logo-strip">
+  <span class="logo-item">Sector público</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Fuerzas militares</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Sector alimentos</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">PYMES</span>
+  <span class="logo-item">·</span>
+  <span class="logo-item">Remoto · Colombia</span>
+</div>
+
+<div class="stats-grid">
+  <div class="stat rev"><div class="stat-n">456</div><div class="stat-l">liquidaciones al mes<br/>procesadas · antes eran 8</div></div>
+  <div class="stat rev"><div class="stat-n">5d→1h</div><div class="stat-l">tiempo de conciliación<br/>bancaria reducido</div></div>
+  <div class="stat rev"><div class="stat-n">+9%</div><div class="stat-l">incremento en margen<br/>de utilidad · restaurantes</div></div>
+  <div class="stat rev"><div class="stat-n">$1.000M</div><div class="stat-l">en ingresos identificados<br/>y conciliados</div></div>
+</div>
+
+<div class="casos-grid">
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Sector público · educación</div>
+    <div class="caso-title">Liquidación pensional<br/><em>de 8 a 456 casos/mes</em></div>
+    <div class="caso-desc">Una entidad pública debía cobrarles a otras organizaciones su parte proporcional en el pago de pensiones de exempleados compartidos. El proceso exigía revisar documentos legales, consultar bases de datos, redactar cartas de cobro en Word y generar un PDF por cada caso. El equipo lograba resolver apenas 8 al mes. Se diseñó y automatizó con apoyo de Microsoft Copilot, y el mismo volumen de trabajo pasó a procesarse de forma completa en un solo ciclo.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">456</div><div class="caso-ml">casos/mes<br/>procesados</div></div>
+      <div class="caso-m"><div class="caso-mn">112</div><div class="caso-ml">entidades<br/>gestionadas</div></div>
+      <div class="caso-m"><div class="caso-mn">×57</div><div class="caso-ml">incremento<br/>de capacidad</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-pension')">Ver caso real →</button>
+  </div>
+
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Sector público · financiero</div>
+    <div class="caso-title">Conciliación bancaria<br/><em>de 5 días a 1 hora</em></div>
+    <div class="caso-desc">138 sedes en todo el país generaban pagos que se descargaban del banco en un archivo Excel. Cruzar cada movimiento contra las facturas emitidas por cada sede requería que cuatro personas trabajaran durante cinco días seguidos. Más de 800 movimientos y $1.000 millones que nadie podía asignar con certeza hasta que llegaba ese informe. La automatización eliminó ese ciclo por completo.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">5d→1h</div><div class="caso-ml">tiempo de<br/>procesamiento</div></div>
+      <div class="caso-m"><div class="caso-mn">800+</div><div class="caso-ml">movimientos<br/>analizados</div></div>
+      <div class="caso-m"><div class="caso-mn">$1.000M</div><div class="caso-ml">pesos<br/>conciliados</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-dxcr')">Ver caso real →</button>
+  </div>
+
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Sector privado · restaurantes</div>
+    <div class="caso-title">Control de costos<br/><em>15% → 24% de margen</em></div>
+    <div class="caso-desc">Una operación con varios puntos de venta tenía ventas estables pero sin claridad sobre cuánto ganaba realmente en cada uno. No existía una estructura que midiera el costo por plato, el consumo real de ingredientes ni la rentabilidad por punto de venta. Se diseñó e implementó un sistema de costeo estándar que conectó las recetas con el inventario y las ventas, dando visibilidad total sobre dónde se ganaba y dónde se perdía dinero.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">+9pts</div><div class="caso-ml">de margen<br/>de utilidad</div></div>
+      <div class="caso-m"><div class="caso-mn">100%</div><div class="caso-ml">trazabilidad<br/>por punto</div></div>
+      <div class="caso-m"><div class="caso-mn">ZEUS</div><div class="caso-ml">sistema<br/>implementado</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-zeus')">Ver caso real →</button>
+  </div>
+
+  <div class="caso-card rev">
+    <div class="caso-tag"><div class="caso-sector"></div>Automatización · RPA</div>
+    <div class="caso-title">Bot de cargue masivo<br/><em>350 beneficiarios en 1h 47min</em></div>
+    <div class="caso-desc">Una organización debía ingresar manualmente los datos de 350 beneficiarios en un sistema web, copiando campo por campo desde un archivo Excel. Con una persona dedicada exclusivamente a esta tarea, el proceso tomaba entre 4 y 5 días hábiles con errores de digitación frecuentes. Se desarrolló un bot en Python con Selenium que abre el navegador, inicia sesión, navega al formulario correcto y llena cada registro automáticamente.</div>
+    <div class="caso-metrics">
+      <div class="caso-m"><div class="caso-mn">350</div><div class="caso-ml">beneficiarios<br/>procesados</div></div>
+      <div class="caso-m"><div class="caso-mn">5d→1h47</div><div class="caso-ml">reducción de<br/>tiempo</div></div>
+      <div class="caso-m"><div class="caso-mn">0</div><div class="caso-ml">errores de<br/>digitación</div></div>
+    </div>
+    <button class="btn-caso" onclick="abrirModal('modal-icbf')">Ver caso real →</button>
+  </div>
+</div>
+
+<div class="full-w rev" style="background:var(--s)">
+  <div class="full-w-inner">
+    <div style="flex:1;min-width:260px">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector público · regulatorio</div>
+      <div class="caso-title" style="margin-bottom:10px">Registro INVIMA<br/><em>600 fichas automatizadas</em></div>
+      <div class="caso-desc">Para comercializar un producto alimenticio en Colombia es obligatorio registrarlo ante el INVIMA mediante una ficha técnica detallada por producto. Una entidad tenía 63 registros pendientes, cada uno con múltiples fichas que debían llenarse manualmente copiando datos desde diferentes bases de datos. Se automatizó la extracción y el llenado de fichas, reduciendo semanas de trabajo a horas.</div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:flex-start;padding-top:32px">
+      <div class="caso-m"><div class="caso-mn">600+</div><div class="caso-ml">fichas técnicas<br/>generadas</div></div>
+      <div class="caso-m"><div class="caso-mn">63</div><div class="caso-ml">registros<br/>completados</div></div>
+      <div class="caso-m"><div class="caso-mn">0</div><div class="caso-ml">errores por<br/>copia manual</div></div>
+    </div>
+  </div>
+  <button class="btn-caso" onclick="abrirModal('modal-invima')">Ver caso real →</button>
+</div>
+
+<div class="full-w rev" style="background:var(--w)">
+  <div class="full-w-inner">
+    <div style="flex:1;min-width:260px">
+      <div class="caso-tag"><div class="caso-sector"></div>Sector público · planeación</div>
+      <div class="caso-title" style="margin-bottom:10px">Evaluación de proyectos<br/><em>100 proyectos automatizados</em></div>
+      <div class="caso-desc">Una entidad pública debía evaluar y calificar los proyectos productivos de decenas de centros de formación en todo el país. Consolidar esa información, aplicar los criterios de evaluación y generar los reportes por centro tomaba semanas de trabajo manual. Se desarrolló un sistema automatizado que lee los archivos, aplica los criterios de calificación y genera reportes consolidados, reduciendo el proceso de semanas a horas.</div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:flex-start;padding-top:32px">
+      <div class="caso-m"><div class="caso-mn">100+</div><div class="caso-ml">proyectos<br/>evaluados</div></div>
+      <div class="caso-m"><div class="caso-mn">33</div><div class="caso-ml">regionales<br/>procesadas</div></div>
+      <div class="caso-m"><div class="caso-mn">sem→h</div><div class="caso-ml">reducción de<br/>tiempo</div></div>
+    </div>
+  </div>
+  <button class="btn-caso" onclick="abrirModal('modal-evaluador')">Ver caso real →</button>
+</div>
+
+<div style="text-align:center;padding:40px 20px">
+  <a href="index.html#stageInputWrap" class="btn-dark" style="padding:12px 22px;font-size:12px">Contar mi problema →</a>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">© 2026 Daniel Gerardo Cárdenas · Soluciones digitales para negocios reales · Colombia</div>
+  <a href="index.html" class="back-link">← Volver al trabajo de Daniel Cárdenas</a>
+</footer>
+
+<!-- MODALES — copia simplificada (solo flujo del proyecto, sin tabs de demo)
+     de los mismos 6 casos que index.html mantiene íntegros para el link
+     "Ver caso real" dentro del resultado del diagnóstico. No se inventan
+     datos: mismo texto real que en index.html. -->
+<div class="modal-overlay" id="modal-pension">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · educación</div><div class="modal-title">Liquidación pensional<br/><em>de 8 a 456 casos/mes</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-pension')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">8 liquidaciones manuales al mes</div><div class="fd2">Cada caso exigía revisar resoluciones, cruzar bases de datos, redactar cartas en Word y generar PDFs. El techo era 8 casos al mes.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema automatizado de liquidación masiva, con apoyo de Microsoft Copilot</div><div class="fd2">Se automatizó la lectura de bases de datos, el cálculo de cuotas proporcionales, la generación de cartas y la conversión a PDF en un solo proceso.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">456 casos por mes — mismo equipo — sin contratar más personal</div><div class="fd2">El proceso que tardaba un mes ahora se ejecuta en horas. La capacidad aumentó 57 veces.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">456</div><div class="mmt-l">casos/mes<br/>procesados</div></div><div class="mmt-m"><div class="mmt-n">112</div><div class="mmt-l">entidades<br/>gestionadas</div></div><div class="mmt-m"><div class="mmt-n">×57</div><div class="mmt-l">incremento<br/>de capacidad</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes procesos de liquidación o cobro repetitivos?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#stageInputWrap">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-dxcr">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · financiero</div><div class="modal-title">Conciliación bancaria<br/><em>de 5 días a 1 hora</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-dxcr')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">$1.000 millones en movimientos sin cruzar cada mes</div><div class="fd2">138 sedes generaban pagos que se descargaban del banco como un Excel. Cruzar cada movimiento contra las facturas emitidas por cada sede requería 4 personas durante 5 días seguidos.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Conciliación automatizada con Python y Power Query</div><div class="fd2">Un proceso que toma el Excel del banco, aplica reglas de cruce por valor, fecha y referencia contra las facturas de cada sede, y genera el reporte consolidado.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">De 5 días a 1 hora — 800 movimientos procesados por ciclo</div><div class="fd2">$1.000 millones cruzados automáticamente por ciclo.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">5d→1h</div><div class="mmt-l">tiempo de<br/>procesamiento</div></div><div class="mmt-m"><div class="mmt-n">800+</div><div class="mmt-l">movimientos<br/>analizados</div></div><div class="mmt-m"><div class="mmt-n">$1.000M</div><div class="mmt-l">pesos<br/>conciliados</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes datos bancarios o procesos de conciliación manual?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#stageInputWrap">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-zeus">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector privado · restaurantes</div><div class="modal-title">Control de costos<br/><em>15% → 24% de margen</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-zeus')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Ventas estables pero rentabilidad desconocida</div><div class="fd2">Varios puntos de venta sin estructura de costos por plato. Era imposible saber qué ítems generaban pérdidas o qué punto era rentable.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema de costeo estándar implementado en ZEUS</div><div class="fd2">Recetas estándar conectadas con costos reales de ingredientes, consumo por preparación y ventas por punto.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">El margen subió del 15% al 24% sin aumentar precios</div><div class="fd2">Con información real sobre costos la operación eliminó ítems no rentables y optimizó compras.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">+9pts</div><div class="mmt-l">margen<br/>ganado</div></div><div class="mmt-m"><div class="mmt-n">100%</div><div class="mmt-l">trazabilidad<br/>por punto</div></div><div class="mmt-m"><div class="mmt-n">ZEUS</div><div class="mmt-l">sistema<br/>implementado</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿No sabes cuánto ganas por producto o punto de venta?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#stageInputWrap">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-invima">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · regulatorio</div><div class="modal-title">Registro sanitario<br/><em>600 fichas automatizadas</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-invima')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">63 registros pendientes, cientos de fichas por llenar</div><div class="fd2">Cada producto requiere una ficha técnica detallada. El llenado manual tomaba semanas con errores frecuentes.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Extracción y llenado automático de fichas</div><div class="fd2">Se automatizó la lectura de bases de datos, la extracción de campos y el llenado secuencial de fichas.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">600 fichas generadas — 0 errores de transcripción</div><div class="fd2">Lo que tomaba semanas se redujo a horas con información exacta.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">600+</div><div class="mmt-l">fichas<br/>generadas</div></div><div class="mmt-m"><div class="mmt-n">63</div><div class="mmt-l">registros<br/>completados</div></div><div class="mmt-m"><div class="mmt-n">0</div><div class="mmt-l">errores por<br/>transcripción</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes formularios o fichas que llenar masivamente?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#stageInputWrap">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-evaluador">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Sector público · planeación</div><div class="modal-title">Evaluación de proyectos<br/><em>100 proyectos automatizados</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-evaluador')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">Semanas evaluando archivos manualmente</div><div class="fd2">Decenas de centros enviaban proyectos en Excel y Word. Consolidar y calificar era un proceso de semanas con riesgo de inconsistencias.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Sistema automatizado de evaluación y calificación</div><div class="fd2">Un proceso que lee los archivos, extrae datos financieros, aplica criterios de calificación y genera reportes por proyecto, centro y regional.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">100 proyectos evaluados — semanas reducidas a horas</div><div class="fd2">Reportes con criterios uniformes, eliminando inconsistencias entre evaluadores.</div></div>
+    <div class="mmt"><div class="mmt-m"><div class="mmt-n">100+</div><div class="mmt-l">proyectos<br/>evaluados</div></div><div class="mmt-m"><div class="mmt-n">33</div><div class="mmt-l">regionales<br/>procesadas</div></div><div class="mmt-m"><div class="mmt-n">sem→h</div><div class="mmt-l">reducción<br/>de tiempo</div></div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Evalúas o calificas información de múltiples fuentes?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#stageInputWrap">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal-icbf">
+<div class="modal-box">
+  <div class="modal-header">
+    <div><div class="modal-tag">Automatización · RPA</div><div class="modal-title">Bot de cargue masivo<br/><em>350 beneficiarios automatizados</em></div></div>
+    <div class="modal-close" onclick="cerrarModal('modal-icbf')">&#x2715;</div>
+  </div>
+  <div class="modal-body">
+    <div class="frow">
+      <div class="fbox fp"><div class="flb flb-r">El problema</div><div class="ft2">350 registros ingresados a mano</div><div class="fd2">Un operador copiaba datos desde un Excel campo por campo en un formulario web. El proceso tomaba más de 5 días hábiles con errores de digitación frecuentes.</div></div>
+      <div class="fa">&#8594;</div>
+      <div class="fbox fs"><div class="flb flb-g">La solución</div><div class="ft2">Bot RPA que automatiza el flujo completo</div><div class="fd2">Bot en Python con Selenium que inicia sesión, navega al formulario y llena cada campo leyendo los datos del Excel. Al finalizar verifica y genera un reporte.</div></div>
+    </div>
+    <div class="fdv"><div class="fdvl"></div><div class="fdvt">resultado</div><div class="fdvl"></div></div>
+    <div class="fbox fres" style="margin-bottom:14px"><div class="flb flb-b">El resultado</div><div class="ft2">350 beneficiarios en 1h 47min</div><div class="fd2">Los más de 5 días de trabajo manual quedaron reducidos a una ejecución desatendida de 1h 47min con verificación automática incluida.</div></div>
+    <div class="mcta">
+      <div class="mcta-t"><strong>¿Tienes cargue masivo de datos en un sistema web?</strong><span>Cuéntame el proceso. En 24h tienes una propuesta.</span></div>
+      <a class="btn-dark" href="index.html#stageInputWrap">Tengo un problema parecido</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="assets/js/sistemas-internos.js"></script>
+</body>
+</html>
