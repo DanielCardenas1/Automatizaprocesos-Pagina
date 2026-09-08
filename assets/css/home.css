@@ -1190,3 +1190,26 @@ body,.site-shell{background:#fff}
   .case-visual{margin-top:26px!important}
   .device-main,.device-back{top:8%!important}
 }
+
+/* ============================================================
+   ACORTAR "MÍRALO ANTES DE QUE TE LO EXPLIQUE" EN MÓVIL
+   La mini-experiencia interactiva (selector de sector + sitio
+   simulado + recorrido + registro del negocio) se mantiene intacta
+   en escritorio. En móvil se recorta el texto de apoyo redundante y
+   se reduce el selector de 4 a 2 ejemplos para llegar más rápido a
+   los casos reales, sin tocar la interacción ni el JS.
+   ============================================================ */
+@media(max-width:620px){
+  /* "Primero lo ves" ya está dicho en el párrafo de arriba. */
+  .v16-promise{display:none}
+  /* Los subtítulos de apoyo se ocultan; la instrucción en negrita basta. */
+  .v16-step-label small,.v16-guidance small{display:none}
+  .v16-step-label,.v16-guidance{margin-top:28px;padding-top:14px}
+  /* Solo 2 de los 4 ejemplos, para no obligar a decidir entre 4 en una pantalla chica. */
+  #v13Selector .v13-sector:nth-of-type(3),
+  #v13Selector .v13-sector:nth-of-type(4){display:none}
+  #v13Selector{grid-template-columns:1fr 1fr}
+  /* El párrafo explicativo de "la otra mitad" se recorta a la frase clave. */
+  .v18-bridge-copy p{display:none}
+  .v16-final-cta p{display:none}
+}
