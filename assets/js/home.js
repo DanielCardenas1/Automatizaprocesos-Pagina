@@ -1,3 +1,160 @@
+/* ============================================================
+   EXPERIENCIA CENTRAL — la página demuestra el concepto
+   ============================================================ */
+const JOURNEYS = {
+  vet:{
+    brand:'VETCARE', title:'Atención de una mascota',
+    intro:'Tu cliente acaba de llegar. Elige qué necesita resolver.',
+    steps:[
+      {kind:'choice',stage:1,title:'Hola. ¿Cómo podemos ayudarte?',text:'Imagina que esta es la experiencia que encuentra el cliente de una veterinaria.',choices:[
+        ['Consultar información de mi mascota','Necesito consultar el historial de mi mascota.'],['Agendar una cita','Quiero encontrar un horario disponible.'],['Consultar medicamentos','Necesito revisar un medicamento.'],['Hablar con el veterinario','Quiero comunicarme con el doctor.']]},
+      {kind:'input',stage:2,title:'¿Cómo se llama tu mascota?',text:'Para encontrar la información correcta, el sistema necesita identificar al paciente.',label:'Nombre de la mascota',placeholder:'Ej. Tobby'},
+      {kind:'choice',stage:2,title:'Encontramos a Tobby.',text:'Paciente canino · Labrador · #00482. Antes de mostrar información clínica, confirmemos al propietario.',choices:[['Sí, soy el propietario','Confirmar identidad'],['No soy el propietario','Necesito otro responsable']]},
+      {kind:'choice',stage:3,title:'Información encontrada.',text:'La consulta recuperó los datos que la clínica ya tenía registrados. Ahora el cliente puede decidir qué necesita.',choices:[['Ver medicamentos','Mostrar tratamiento registrado'],['Ver último examen','Mostrar última consulta'],['Agendar control','Continuar a agenda']]},
+      {kind:'choice',stage:3,title:'Tobby tiene un control pendiente.',text:'Último control: 14/08/2026. El sistema muestra la información disponible sin sustituir la valoración del veterinario.',choices:[['Agendar cita','Elegir horario'],['Hablar con el veterinario','Derivar a profesional']]},
+      {kind:'choice',stage:4,title:'Elige un horario.',text:'La agenda ya conoce la disponibilidad que la clínica definió.',choices:[['Mañana · 10:30 a. m.','Agendar 10:30'],['Jueves · 3:00 p. m.','Agendar 3:00']]},
+      {kind:'done',stage:4,title:'Cita confirmada.',text:'18 de septiembre · 10:30 a. m. · Control general. El cliente recibe la confirmación y la clínica recibe la información estructurada.'}
+    ]
+  },
+  food:{
+    brand:'LA ESQUINA',title:'Pedido de comida',intro:'Tu cliente llega con hambre. ¿Qué debería poder hacer?',
+    steps:[
+      {kind:'choice',stage:1,title:'Hola. ¿Qué quieres hacer?',text:'Una experiencia sencilla puede quitar varias preguntas del camino.',choices:[['Ver el menú','Quiero revisar las opciones.'],['Hacer un pedido','Quiero pedir ahora.'],['Reservar una mesa','Quiero reservar.']]},
+      {kind:'choice',stage:2,title:'¿Para qué momento?',text:'La experiencia puede usar el contexto para mostrar solo lo que importa.',choices:[['Almuerzo','Quiero pedir para almuerzo.'],['Cena','Quiero pedir para cena.']]},
+      {kind:'choice',stage:3,title:'¿Qué quieres pedir?',text:'El sistema puede organizar la selección y preparar el pedido.',choices:[['Combo del día','Agregar combo'],['Plato principal','Agregar plato']]},
+      {kind:'choice',stage:4,title:'¿Cómo lo recibes?',text:'El cliente decide el siguiente paso.',choices:[['Domicilio','Enviar a domicilio'],['Recoger en tienda','Preparar para recoger']]},
+      {kind:'done',stage:4,title:'Pedido listo para operar.',text:'El cliente terminó una compra. Detrás quedan producto, modalidad y datos listos para el equipo.'}
+    ]
+  },
+  realestate:{
+    brand:'NODO INMOBILIARIO',title:'Búsqueda de vivienda',intro:'Tu cliente no quiere ver todo. Quiere encontrar lo que le sirve.',
+    steps:[
+      {kind:'choice',stage:1,title:'¿Qué estás buscando?',text:'La experiencia empieza filtrando la necesidad, no mostrando cien propiedades.',choices:[['Comprar','Estoy buscando para comprar.'],['Arrendar','Estoy buscando para arrendar.']]},
+      {kind:'choice',stage:2,title:'¿En qué ciudad?',text:'El sistema empieza a construir el perfil de búsqueda.',choices:[['Tunja','Buscar en Tunja'],['Bogotá','Buscar en Bogotá']]},
+      {kind:'choice',stage:3,title:'¿Qué rango te sirve?',text:'La información se convierte en criterios que el negocio puede utilizar.',choices:[['$250–350 M','Rango 250–350'],['$350–500 M','Rango 350–500']]},
+      {kind:'choice',stage:4,title:'Encontramos opciones.',text:'Ahora el cliente puede dar un siguiente paso con contexto.',choices:[['Ver propiedades','Mostrar coincidencias'],['Agendar una visita','Agendar visita']]},
+      {kind:'done',stage:4,title:'Perfil de búsqueda creado.',text:'El equipo recibe ciudad, operación, presupuesto y acción solicitada. Ya no recibe un mensaje sin contexto.'}
+    ]
+  },
+  commerce:{
+    brand:'TIENDA',title:'Elegir un producto',intro:'Tu cliente no debería necesitar preguntarte todo para saber qué comprar.',
+    steps:[
+      {kind:'choice',stage:1,title:'¿Qué estás buscando?',text:'La tienda puede guiar la elección antes de llevar al cliente a WhatsApp.',choices:[['Para mí','Quiero elegir para mí.'],['Para regalar','Necesito un regalo.'],['Para mi negocio','Busco una solución para mi negocio.']]},
+      {kind:'choice',stage:2,title:'¿Qué necesitas priorizar?',text:'La experiencia puede hacer las preguntas mínimas necesarias.',choices:[['Precio','Quiero cuidar presupuesto.'],['Calidad','Quiero priorizar calidad.']]},
+      {kind:'choice',stage:3,title:'Encontramos opciones que encajan.',text:'El sistema reduce la oferta y facilita una decisión.',choices:[['Ver recomendación','Mostrar recomendación'],['Comparar opciones','Comparar']]},
+      {kind:'choice',stage:4,title:'¿Qué quieres hacer ahora?',text:'El recorrido llega a una acción concreta.',choices:[['Comprar','Iniciar compra'],['Hablar con asesor','Enviar contexto al asesor']]},
+      {kind:'done',stage:4,title:'La elección quedó estructurada.',text:'La persona llega a la compra o al asesor con el contexto que necesita el negocio.'}
+    ]
+  }
+};
+
+let journeyState={sector:'vet',step:0,data:{}};
+const $=id=>document.getElementById(id);
+function escapeHTML(v){return String(v).replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[m]));}
+function currentJourney(){return JOURNEYS[journeyState.sector]||JOURNEYS.vet}
+function stageName(n){return ['','Entrada','Experiencia','Conexión','Sistema'][n]||'Resultado'}
+function setProgress(stage,done=false){document.querySelectorAll('[data-cp]').forEach(el=>{const n=+el.dataset.cp;el.classList.toggle('is-on',n===stage);el.classList.toggle('is-done',n<stage||(done&&n<=stage));});}
+function logSystem(title,detail){const box=$('systemLog');if(!box)return;const row=document.createElement('div');row.className='log-item';row.innerHTML=`<i></i><div><strong>${escapeHTML(title)}</strong><small>${escapeHTML(detail)}</small></div>`;box.appendChild(row);box.scrollTop=box.scrollHeight;}
+function renderSystemForm(final=false){const d=journeyState.data;const sector=currentJourney();const rows=Object.entries(d);let html=`<div class="form-head"><span>registro interno</span><span>${escapeHTML(sector.brand)}</span></div>`;if(!rows.length){html+=`<div class="form-row"><span>Estado</span><b>Esperando interacción</b></div><div class="form-row"><span>Origen</span><b>Experiencia digital</b></div>`;}else{for(const [k,v] of rows){html+=`<div class="form-row"><span>${escapeHTML(k)}</span><b>${escapeHTML(v)}</b></div>`}}if(final)html+=`<div class="form-row"><span>Resultado</span><b>✓ listo para operar</b></div>`;$('systemForm').innerHTML=html;}
+function explain(stage,title,text){
+ $('explainerTitle').textContent=title;
+ $('explainerText').textContent=text;
+ const st=$('liveExplainer').querySelector('.explainer-stage');
+ st.innerHTML=`<span>0${stage}</span><b>${stageName(stage)}</b>`;
+ const guide=$('liveGuideText');
+ if(guide){
+   const guides={
+    1:'Primero definimos el punto de entrada: qué necesita resolver la persona y cómo la invitamos a dar el siguiente paso.',
+    2:'Ahora la experiencia pregunta solo lo necesario. Cada respuesta puede alimentar lo que ocurre detrás.',
+    3:'Aquí aparece la conexión: una decisión del cliente se convierte en contexto que el negocio puede consultar y utilizar.',
+    4:'El recorrido termina cuando el resultado queda listo para operar: una cita, un pedido, una solicitud o un registro.',
+    5:'Ya ocurrió el recorrido completo. Ahora puedes ver cómo la experiencia y la operación quedaron conectadas.'
+   };
+   guide.textContent=guides[stage]||guides[4];
+ }
+ const lesson=document.querySelector('.lesson-difference');
+ if(lesson){
+   const differences={
+    1:['Una página puede mostrar dónde empezar.','Un recorrido puede llevarte al siguiente paso.'],
+    2:['Una página puede dejarte buscar.','Un recorrido puede hacer las preguntas correctas.'],
+    3:['Una página puede recibir un mensaje.','Un recorrido puede entregar contexto.'],
+    4:['Una página puede terminar en un clic.','Un recorrido puede terminar en un resultado.']
+   };
+   const d=differences[stage]||differences[4];
+   lesson.innerHTML=`<span>${d[0]}</span><strong>${d[1]}</strong>`;
+ }
+}
+function renderJourney(){const j=currentJourney(),s=j.steps[journeyState.step];$('clientBrand').textContent=j.brand;$('systemTitle').textContent=s.stage>=4?'Lo que el negocio recibe':'Lo que empieza a ocurrir detrás';$('systemStep').textContent=`${Math.min(journeyState.step+1,j.steps.length)} / ${j.steps.length}`;setProgress(Math.min(s.stage,4),s.kind==='done');const screen=$('clientScreen');
+ let html=`<span class="screen-kicker">${escapeHTML(j.title)}</span><h3>${escapeHTML(s.title)}</h3><p>${escapeHTML(s.text)}</p>`;
+ if(s.kind==='choice') html+=`<div class="choice-grid">${s.choices.map((c,i)=>`<button class="choice" data-choice="${i}">${escapeHTML(c[0])}<small>${escapeHTML(c[1])}</small></button>`).join('')}</div>`;
+ if(s.kind==='input') html+=`<label class="field-label">${escapeHTML(s.label)}</label><div class="field-row"><input id="journeyInput" placeholder="${escapeHTML(s.placeholder)}" value="${escapeHTML(journeyState.data['Mascota']||'')}"/><button id="journeyInputBtn">Continuar</button></div>`;
+ if(s.kind==='done') html+=`<div class="success-card"><strong>✓ Recorrido completado</strong><p>${escapeHTML(s.text)}</p></div><button class="back-link" id="journeyReset">↺ Volver a empezar</button>`;
+ screen.innerHTML=html;
+ document.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>selectChoice(+btn.dataset.choice)));
+ if($('journeyInputBtn')) $('journeyInputBtn').addEventListener('click',submitJourneyInput);
+ if($('journeyInput')) $('journeyInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitJourneyInput()});
+ if($('journeyReset')) $('journeyReset').addEventListener('click',()=>resetJourney(journeyState.sector));
+ renderSystemForm(s.kind==='done');
+ explain(s.stage,stageCopy(s.stage,j),stageDetail(s.stage));
+}
+function stageCopy(stage,j){const a=['','La persona acaba de entrar.','Ahora estamos diseñando lo que puede hacer.','La decisión empieza a convertirse en información.','El negocio recibe algo que puede usar.'];return a[stage]||j.title}
+function stageDetail(stage){const a=['','Una página puede mostrar información. Un recorrido empieza por la necesidad y orienta a la persona hacia una acción posible.','La interfaz no pregunta por preguntar: pide lo mínimo necesario para que el siguiente paso tenga sentido.','La elección del cliente deja de ser solo una interacción y se convierte en contexto para el negocio.','El recorrido no termina cuando la persona hace clic. Termina cuando el resultado queda listo para operar.'];return a[stage]||''}
+function pushData(label,value){journeyState.data[label]=value;renderSystemForm();}
+function selectChoice(i){const j=currentJourney(),s=j.steps[journeyState.step],c=s.choices[i];pushData(labelForStep(journeyState.step,s),c[0]);logSystem(logTitle(journeyState.step,s,c[0]),logDetail(journeyState.step,s,c[0]));
+ if(journeyState.sector==='vet'&&journeyState.step===0){journeyState.data['Necesidad']=c[0];}
+ if(journeyState.sector==='vet'&&journeyState.step===2&&i===1){journeyState.step=0;renderJourney();return;}
+ journeyState.step=Math.min(journeyState.step+1,j.steps.length-1);setTimeout(renderJourney,180);trackEvent&&trackEvent('journey_demo_choice',{sector:journeyState.sector,step:journeyState.step,choice:c[0]});}
+function submitJourneyInput(){const input=$('journeyInput');if(!input)return;const value=input.value.trim();if(!value)return;journeyState.data['Mascota']=value;logSystem('Paciente identificado',`${value} · buscando información registrada`);logSystem('Consultando base de datos','Historial, exámenes, tratamientos y citas');journeyState.step++;setTimeout(()=>{if(journeyState.sector==='vet'){journeyState.data['Propietario']='Pendiente de confirmación';}renderJourney()},450);}
+function labelForStep(i,s){if(s.kind==='choice'){const labels=['Necesidad','Contexto','Preferencia','Acción','Acción final'];return labels[i]||'Decisión'}return 'Decisión'}
+function logTitle(i,s,v){if(i===0)return 'Solicitud recibida';if(i===1)return 'Dato capturado';if(i===2)return 'Identidad / criterio verificado';if(i===3)return 'Información recuperada';return 'Acción preparada'}
+function logDetail(i,s,v){if(i===0)return `${v} · origen: experiencia digital`;if(i===1)return `${v} · dato disponible para el sistema`;if(i===2)return `${v} · validación antes de continuar`;if(i===3)return `${v} · consulta de información registrada`;return `${v} · preparando resultado para el negocio`}
+function resetJourney(sector){journeyState={sector:sector||'vet',step:0,data:{}};$('systemLog').innerHTML='';logSystem('Esperando interacción','El negocio aún no ha recibido datos');renderJourney();}
+
+
+/* V5 — laboratorio pedagógico: comparar una página con un recorrido */
+function initTeachingLab(){
+ const tabs=document.querySelectorAll('.lab-tab');
+ const screen=document.getElementById('labScreen');
+ const q=document.getElementById('labQuestion');
+ const ql=document.getElementById('labQuestionLabel');
+ const resultLabel=document.querySelector('.result-label');
+ const resultTitle=document.getElementById('labResultTitle');
+ const resultText=document.getElementById('labResultText');
+ const flow=document.getElementById('labFlow');
+ const insightTitle=document.getElementById('teachInsightTitle');
+ const insightText=document.getElementById('teachInsightText');
+ const title=document.getElementById('labTitle');
+ const text=document.getElementById('labText');
+ const buttons=document.getElementById('labButtons');
+ if(!tabs.length)return;
+ const modes={
+  page:{
+   ql:'¿Qué encuentra?',q:'Información.',label:'PÁGINA',title:'Cuidamos a tu mascota.',text:'Conoce nuestros servicios, horarios y formas de contacto.',buttons:['Servicios','Nosotros','Contacto'],resultTitle:'El cliente recibe información.',resultText:'La página cumple su función: presenta el negocio y deja abierta la decisión de qué hacer después.',flow:['Contenido','Información','Contacto'],insight:'Una página puede ser una pieza.',copy:'El recorrido aparece cuando conectamos las piezas alrededor de una necesidad concreta y diseñamos qué debe ocurrir después de cada decisión.'
+  },
+  journey:{
+   ql:'¿Qué necesita conseguir?',q:'Resolver algo.',label:'RECORRIDO',title:'Hola. ¿Cómo podemos ayudarte?',text:'La experiencia parte de una necesidad y ofrece caminos concretos para que la persona pueda avanzar.',buttons:['Consultar información','Agendar una cita','Consultar tratamiento','Hablar con el veterinario'],resultTitle:'El cliente entra en una acción concreta.',resultText:'La experiencia guía la siguiente decisión y cada respuesta puede convertirse en contexto para el negocio.',flow:['Necesidad','Pregunta','Información','Acción','Resultado'],insight:'Un recorrido diseña lo que pasa después.',copy:'No reemplaza la página: la conecta con preguntas, datos, personas y sistemas para que una interacción termine en algo útil para el cliente y para el negocio.'
+  }
+ };
+ function setMode(mode){
+  const m=modes[mode];
+  tabs.forEach(t=>t.classList.toggle('is-active',t.dataset.mode===mode));
+  screen.classList.toggle('journey-mode',mode==='journey');
+  ql.textContent=m.ql;q.textContent=m.q;resultLabel.textContent=m.label;resultTitle.textContent=m.resultTitle;resultText.textContent=m.resultText;title.textContent=m.title;text.textContent=m.text;buttons.innerHTML=m.buttons.map(x=>`<span>${escapeHTML(x)}</span>`).join('');flow.innerHTML=m.flow.map((x,i)=>`${i?'<i>→</i>':''}<span>${escapeHTML(x)}</span>`).join('');insightTitle.textContent=m.insight;insightText.textContent=m.copy;
+  trackEvent&&trackEvent('teaching_lab_mode',{mode});
+ }
+ tabs.forEach(t=>t.addEventListener('click',()=>setMode(t.dataset.mode)));
+ setMode('page');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+ document.querySelectorAll('.sector-card').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.sector-card').forEach(x=>x.classList.remove('is-selected'));btn.classList.add('is-selected');resetJourney(btn.dataset.sector);document.getElementById('live-journey')?.scrollIntoView({behavior:'smooth',block:'start'});}));
+ if($('clientScreen')) resetJourney('vet');
+ initTeachingLab();
+});
+
+/* ============================================================
+   Motor existente de diagnóstico y casos — se conserva completo.
+   ============================================================ */
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
 }),{threshold:.08});
@@ -890,9 +1047,10 @@ function esIdea(texto) {
 // ============ HERO — input principal ============
 const heroInput = document.getElementById('heroInput');
 const heroSubmit = document.getElementById('heroSubmit');
-const heroDefaultPlaceholder = heroInput.placeholder;
+const heroDefaultPlaceholder = heroInput ? heroInput.placeholder : '';
 
 function submitHero() {
+  if (!heroInput) return;
   const v = heroInput.value;
   if (!v.trim()) return;
   heroInput.value = '';
@@ -906,8 +1064,8 @@ function submitHero() {
   }
   iniciarCaso(v, 'hero');
 }
-heroSubmit.addEventListener('click', submitHero);
-heroInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitHero(); } });
+if (heroSubmit) heroSubmit.addEventListener('click', submitHero);
+if (heroInput) heroInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitHero(); } });
 
 // ============ CHAT — input de respuestas dentro de un caso activo ============
 // Enter y botón llaman a la misma función; ella es la única puerta de
@@ -931,6 +1089,7 @@ if (chatFieldInput) chatFieldInput.addEventListener('keydown', e => { if (e.key 
 document.querySelectorAll('.examples .ex-chip[data-ej]').forEach(btn => {
   btn.addEventListener('click', () => {
     const texto = btn.dataset.ej;
+    if (!heroInput) return;
     heroInput.value = texto;
     iniciarCaso(texto, 'hero_ejemplo');
   });
@@ -1055,12 +1214,14 @@ function casoAbrirDiagnostico(id, texto) {
   trackEvent('cta_seleccionado', { cta: 'caso_parecido', caso: id });
   const overlay = document.querySelector('.modal-overlay.open');
   if (overlay) { overlay.classList.remove('open'); document.body.style.overflow = ''; }
-  setTimeout(() => {
-    heroInput.placeholder = heroDefaultPlaceholder;
-    heroInput.value = texto;
-    document.getElementById('stageInputWrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    heroInput.focus();
-  }, 350);
+  const diag=document.getElementById('diagnostico');
+  if(diag) diag.scrollIntoView({behavior:'smooth',block:'start'});
+  // El nuevo formulario no arrastra respuestas ni inventa un diagnóstico.
+  // Solo deja la referencia como contexto opcional para la persona.
+  setTimeout(()=>{
+    const extra=document.getElementById('intakeText');
+    if(extra && !extra.value) extra.value='Vi un caso parecido al mío: '+(texto||'');
+  },500);
 }
 
 // ============ TENGO UNA IDEA ============
@@ -1439,3 +1600,389 @@ window.mTab=function(prefix,tab,btn){
   if(_origMTab)_origMTab(prefix,tab,btn);
   if(prefix==='icbf'&&tab==='demo'){setTimeout(function(){dBuildXl();},300);}
 };
+
+// Animación de entrada para la nueva portada: no toca el motor de diagnóstico.
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  if(!els.length)return;
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}}),{threshold:.12});
+  els.forEach(e=>obs.observe(e));
+})();
+(function(){const els=document.querySelectorAll('.reveal');if(!els.length)return;if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'));return}const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}}),{threshold:.12});els.forEach(e=>obs.observe(e))})();
+// Los ejemplos del bloque de diagnóstico mantienen el mismo lenguaje natural
+// del motor original, aunque ahora viven al final del recorrido.
+document.querySelectorAll('.diagnostic-prompts .ex-chip[data-ej]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const texto=btn.dataset.ej;
+    if(heroInput){heroInput.value=texto; iniciarCaso(texto,'diagnostico_ejemplo');}
+  });
+});
+
+// ============ RECORRIDO INTERACTIVO — historia + tablero vivo ============
+(function initJourneyBuilder(){
+  const root = document.querySelector('.journey-builder-section');
+  if(!root) return;
+  const state = { entrada:null, accion:null, conexion:null, sistema:null };
+  const steps = [...root.querySelectorAll('.builder-step')];
+  const dots = [...root.querySelectorAll('.progress-dot')];
+  const boardCount = root.querySelector('#boardCount');
+  const boardResult = root.querySelector('#boardResult');
+  const finish = root.querySelector('#builderFinish');
+  const labels = {entrada:'Entrada',accion:'Experiencia',conexion:'Conexión',sistema:'Sistema'};
+
+  function renderBoard(){
+    let count=0;
+    Object.keys(state).forEach((key)=>{
+      const row=root.querySelector(`[data-board="${key}"]`);
+      if(!row) return;
+      const value=row.querySelector('.board-value');
+      if(state[key]){
+        count++;
+        value.textContent=state[key];
+        value.classList.remove('is-empty');
+        row.classList.add('is-filled');
+      }else{
+        value.textContent='Esperando…';
+        value.classList.add('is-empty');
+        row.classList.remove('is-filled');
+      }
+    });
+    boardCount.textContent=`${count} / 4`;
+    boardResult.textContent=count===0?'Sin decisiones todavía':count===4?'Recorrido completo':'Recorrido tomando forma';
+    dots.forEach((dot,i)=>dot.classList.toggle('is-done', i<count));
+  }
+
+  function showStep(n){
+    steps.forEach(step=>step.classList.toggle('is-visible', Number(step.dataset.step)===n));
+    dots.forEach((dot,i)=>dot.classList.toggle('is-active', i===n-1));
+    if(n>4){ finish.classList.add('is-visible'); }
+  }
+
+  root.querySelectorAll('.builder-options button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const group=btn.closest('.builder-options').dataset.group;
+      root.querySelectorAll(`[data-group="${group}"] button`).forEach(b=>b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      state[group]=btn.dataset.value;
+      renderBoard();
+      const next=Number(btn.closest('.builder-step').dataset.step)+1;
+      if(next<=4){
+        setTimeout(()=>showStep(next),260);
+      }else{
+        setTimeout(()=>{ showStep(5); finish.scrollIntoView({behavior:'smooth',block:'center'}); },260);
+      }
+      trackEvent('journey_builder_choice',{step:group,value:state[group]});
+    });
+  });
+
+  renderBoard();
+})();
+
+/* ============================================================
+   V7 — COMPARACIÓN + RECORRIDOS VIVOS
+   La sección enseña la diferencia y permite vivir ejemplos completos.
+   ============================================================ */
+/* ============================================================
+   V14 — DEMOS EXPERIENCIALES
+   El demo se comporta como un sitio del negocio, no como un formulario.
+   Cada ejemplo lleva a una acción realista y termina con una confirmación.
+   ============================================================ */
+const V14_EXAMPLES={
+  vet:{
+    key:'vet',name:'Veterinaria',brand:'PATITAS FELICES',url:'patitasfelices.example',kicker:'CLÍNICA VETERINARIA',headline:'Cuidamos a quienes más quieres.',sub:'Atención, seguimiento y citas para tu mascota.',nav:['Mi mascota','Servicios','Ayuda'],cards:[['Consulta general','Agenda una valoración.'],['Seguimiento','Continúa un control.'],['Resultados','Consulta información registrada.']],channels:[['Google','Llegaste buscando ayuda para tu mascota.'],['Instagram','Viste una publicación y quieres resolver algo.'],['QR','Escaneaste un código en la clínica.'],['WhatsApp','Ya conoces la clínica y quieres avanzar.']],reasons:[['Necesito consultar información','Quiero saber qué aparece registrado de mi mascota.'],['Quiero agendar una cita','Necesito encontrar un horario.'],['Tengo una duda sobre un tratamiento','Quiero saber cómo continuar.']],moreReasons:[['Quiero consultar un examen','Necesito revisar un resultado registrado.'],['Necesito hablar con el veterinario','Prefiero que el equipo revise mi caso.']],questions:[
+      {label:'¿Cómo se llama tu mascota?',type:'input',default:'Tobby',help:'Solo necesitamos identificar al paciente.'},
+      {label:'¿Eres el propietario de Tobby?',options:[['Sí, soy el propietario','Podemos mostrar la información registrada.'],['Soy responsable autorizado','Validaremos que estés autorizado.']],more:[['No estoy seguro','Podemos ayudarte a contactar a la clínica.']]},
+      {label:'Encontramos a Tobby. ¿Qué quieres consultar?',options:[['Último examen','Ver la información disponible del último examen.'],['Medicamentos registrados','Ver el tratamiento registrado.'],['Próximo control','Continuar con la atención.']],more:[['Vacunas','Ver el registro de vacunación.'],['Historial','Ver un resumen de las últimas atenciones.']]},
+      {label:'El último control fue el 14 de agosto. ¿Qué quieres hacer?',options:[['Agendar control','Buscar horarios disponibles.'],['Hablar con el veterinario','Enviar la consulta con el contexto de Tobby.']],more:[['Recibir el resumen','Solicitar que se envíe la información disponible.']]},
+      {label:'Elige un horario',options:[['Miércoles · 9:00 a. m.','Disponible.'],['Miércoles · 3:30 p. m.','Disponible.']],more:[['Jueves · 10:30 a. m.','Disponible.'],['Viernes · 11:00 a. m.','Disponible.']]}
+    ],finalQuestion:'¿Confirmamos la cita de Tobby?',finalOptions:[['Confirmar cita','La clínica registrará el horario y enviará la confirmación.']],outcome:'La cita de Tobby quedó confirmada.',outcomeDetail:'Control veterinario · Miércoles 9 de septiembre · 9:00 a. m.',confirmation:'📲 Recibirás la confirmación por WhatsApp y correo. ¡Nos vemos pronto! 🐾',businessCopy:'La clínica recibe al paciente, al propietario, el motivo, el historial consultado y la cita ya confirmada.'
+  },
+  food:{
+    key:'food',name:'Comidas',brand:'LA ESQUINA',url:'laesquina.example',kicker:'RESTAURANTE · DOMICILIOS',headline:'Lo que quieres comer, sin recorrer todo el menú.',sub:'Cuéntanos qué buscas y te mostramos opciones que encajan.',nav:['Menú','Pedir','Seguimiento'],cards:[['Para compartir','Opciones según personas.'],['Pedido','Arma tu carrito.'],['Domicilio','Confirma y sigue tu pedido.']],channels:[['Instagram','Viste un plato y quieres pedirlo.'],['Google','Buscas algo para comer ahora.'],['QR','Estás en la mesa y quieres elegir.'],['WhatsApp','Quieres hacer un pedido directo.']],reasons:[['Quiero pedir algo','Quiero resolver mi comida ahora.'],['No sé qué pedir','Quiero que me ayuden a elegir.'],['Quiero pedir para compartir','Somos varias personas.']],moreReasons:[['Tengo un presupuesto','Quiero mantenerme dentro de un rango.'],['Quiero algo rápido','Necesito que llegue pronto.']],questions:[
+      {label:'¿Para cuántas personas?',options:[['1 persona','Una opción individual.'],['2 personas','Algo para compartir.'],['3–4 personas','Buscamos un pedido para varias personas.']],more:[['5–8 personas','Prepararemos una opción más grande.']]},
+      {label:'¿Qué te gustaría?',options:[['Algo para compartir','Buscamos una combinación completa.'],['Algo rápido','Priorizamos opciones de preparación ágil.'],['Cuidar el presupuesto','Mostramos opciones dentro de un rango.']],more:[['Hamburguesa','Mostramos opciones de hamburguesa.'],['Pollo','Mostramos opciones de pollo.']]},
+      {label:'Estas opciones encajan contigo. ¿Cuál agregamos?',options:[['Combo para compartir · $48.000','2 principales + papas + bebidas.'],['Combo familiar · $58.000','3 principales + acompañamiento + bebidas.']],more:[['2 hamburguesas + papas · $42.000','Opción para compartir.'],['Pollo + acompañamiento · $46.000','Opción completa.']]},
+      {label:'¿Quieres agregar algo más?',options:[['Bebidas','Agregar 2 bebidas.'],['Postre','Agregar postre para compartir.'],['No, continuar','Ir al domicilio.']],more:[['Papas adicionales','Agregar una porción.'],['Salsa de la casa','Agregar salsa.']]},
+      {label:'¿Cómo quieres recibirlo?',options:[['Domicilio','Lo llevamos hasta tu dirección.'],['Recoger en el local','Lo dejamos listo para recoger.']],more:[['Comer aquí','Preparamos la mesa.']]},
+      {label:'¿Dónde lo entregamos?',type:'input',default:'Calle 20 # 8-40, Tunja',help:'Necesitamos la dirección para completar el pedido.'}
+    ],finalQuestion:'¿Confirmamos tu pedido?',finalOptions:[['Confirmar pedido','La cocina recibirá el pedido completo.']],outcome:'Tu pedido quedó confirmado.',outcomeDetail:'Combo para compartir · Domicilio · Tiempo estimado 35–45 minutos.',confirmation:'🍽️ La cocina ya recibió tu pedido. Te avisaremos cuando salga a domicilio. ¡Que lo disfrutes! 🚗',businessCopy:'La cocina recibe productos, cantidades, modalidad, dirección y estado del pedido sin tener que reconstruir la conversación.'
+  },
+  realestate:{
+    key:'realestate',name:'Inmobiliaria',brand:'NODO INMOBILIARIO',url:'nodo.example',kicker:'INMOBILIARIA',headline:'Encuentra un lugar que encaje contigo.',sub:'Primero entendemos qué buscas. Después te mostramos opciones.',nav:['Comprar','Arrendar','Mis opciones'],cards:[['Propiedades','Encuentra opciones.'],['Visitas','Agenda cuando encaje.'],['Asesoría','Avanza con contexto.']],channels:[['Google','Llegaste buscando vivienda.'],['Portal inmobiliario','Llegaste desde una propiedad que viste.'],['Instagram','Viste un inmueble y quieres conocerlo.'],['WhatsApp','Ya tienes una opción en mente.']],reasons:[['Quiero comprar','Busco vivienda para comprar.'],['Quiero arrendar','Busco vivienda para vivir.'],['Todavía estoy explorando','Quiero entender mis opciones.']],moreReasons:[['Quiero invertir','Busco una oportunidad inmobiliaria.'],['Quiero vender','Necesito conocer el siguiente paso.']],questions:[
+      {label:'¿En qué ciudad buscas?',options:[['Tunja','Buscaremos opciones en Tunja.'],['Bogotá','Buscaremos opciones en Bogotá.'],['Paipa','Buscaremos opciones en Paipa.']],more:[['Duitama','Buscaremos opciones en Duitama.'],['Otra ciudad','Definimos otra ubicación.']]},
+      {label:'¿Qué tipo de inmueble buscas?',options:[['Apartamento','Busco apartamento.'],['Casa','Busco casa.'],['Apartaestudio','Busco apartaestudio.']],more:[['Finca','Busco propiedad rural.']]},
+      {label:'¿Qué quieres priorizar?',options:[['3 habitaciones','Necesito espacio.'],['Buena ubicación','La zona es prioritaria.'],['Parqueadero','Necesito estacionamiento.']],more:[['Entrega inmediata','Quiero mudarme pronto.'],['Inversión','Me interesa la rentabilidad.']]},
+      {label:'¿Qué presupuesto tienes?',options:[['$250–350 M','Rango objetivo.'],['$350–500 M','Rango objetivo.']],more:[['Menos de $250 M','Rango objetivo.'],['Más de $500 M','Rango objetivo.']]},
+      {label:'Encontramos opciones que encajan. ¿Cuál quieres conocer?',options:[['Apartamento Nogal · $320 M','3 habitaciones · parqueadero · Tunja.'],['Apartamento Centro · $285 M','3 habitaciones · cerca al centro.']],more:[['Apartamento Norte · $345 M','3 habitaciones · parqueadero.'],['Apartamento La Esmeralda · $305 M','3 habitaciones · buena ubicación.']]},
+      {label:'¿Qué quieres hacer?',options:[['Ver ficha completa','Te mostramos los detalles.'],['Agendar una visita','Elegimos un horario.']],more:[['Comparar opciones','Las ponemos lado a lado.'],['Hablar con un asesor','Enviamos el contexto reunido.']]},
+      {label:'Elige un horario para visitar el inmueble',options:[['Sábado · 11:00 a. m.','Disponible.'],['Sábado · 3:00 p. m.','Disponible.']],more:[['Domingo · 10:00 a. m.','Disponible.'],['Lunes · 4:00 p. m.','Disponible.']]}
+    ],finalQuestion:'¿Confirmamos tu visita?',finalOptions:[['Confirmar visita','Registraremos la visita y avisaremos al asesor.']],outcome:'Tu visita quedó confirmada.',outcomeDetail:'Apartamento Nogal · Sábado 12 de septiembre · 11:00 a. m.',confirmation:'🏠 Visita confirmada. Recibirás la información de la propiedad y la confirmación por WhatsApp. ¡Nos vemos! 📲',businessCopy:'El asesor recibe la intención, ciudad, tipo de inmueble, presupuesto, preferencias, propiedad elegida y horario de visita.'
+  },
+  professional:{
+    key:'professional',name:'Asesoría profesional',brand:'CONTABILIDAD CLARA',url:'contabilidadclara.example',kicker:'ASESORÍA CONTABLE',headline:'Resuelve tu trámite sin empezar de cero.',sub:'Te guiamos para saber qué necesitas y dejamos listo el siguiente paso.',nav:['Necesidades','Documentos','Mi caso'],cards:[['Declaración de renta','Identifica lo necesario.'],['Documentos','Prepara tu caso.'],['Mi caso','Continúa con contexto.']],channels:[['Google','Llegaste buscando cómo resolver un tema contable.'],['Instagram','Viste contenido y quieres saber qué hacer.'],['WhatsApp','Ya tienes una duda concreta.'],['Recomendación','Llegaste porque alguien te indicó dónde resolverlo.']],reasons:[['Declaración de renta','Necesito presentar o revisar mi declaración.'],['Impuestos','Tengo una obligación o duda tributaria.'],['Contabilidad de mi negocio','Necesito ordenar un asunto contable.']],moreReasons:[['Facturación','Necesito resolver un tema de facturación.'],['No sé qué necesito','Quiero orientación para identificarlo.']],questions:[
+      {label:'Para orientarte: ¿tu caso es como persona natural o negocio?',options:[['Persona natural','La ruta será para una persona.'],['Negocio','La ruta será para una empresa.']],more:[['No estoy seguro','Te hacemos una pregunta adicional.']]},
+      {label:'¿Qué información tienes disponible?',options:[['Ingresos y certificados','Tengo certificados de ingresos.'],['Ingresos + bancos + patrimonio','Tengo varias fuentes de información.'],['Me faltan documentos','Necesito identificar qué falta.']],more:[['Inversiones','También tengo certificados de inversiones.'],['Propiedades','Tengo información de inmuebles.']]},
+      {label:'Para iniciar, ¿qué documentos tienes listos?',options:[['Ingresos','Certificado de ingresos.'],['Bancos','Certificados bancarios.'],['Patrimonio','Información de propiedades.']],more:[['Inversiones','Certificados de inversiones.'],['Todavía me falta uno','Quiero saber cuál me falta.']]},
+      {label:'Ya sabemos qué necesitas. ¿Cómo quieres continuar?',options:[['Enviar los documentos','Dejar el caso listo para revisión.'],['Tengo una duda','Resolver una pregunta antes de continuar.']],more:[['Hablar con el contador','Enviar el contexto y pasar a una persona.']]},
+      {label:'¿Cómo prefieres continuar?',options:[['Agendar una llamada','Elegir un horario.'],['Agendar una reunión','Elegir un espacio para revisar el caso.']],more:[['Enviar primero los documentos','Dejar la información lista antes de hablar.']]},
+      {label:'Elige un horario',options:[['Jueves · 3:00 p. m.','Disponible.'],['Viernes · 10:00 a. m.','Disponible.']],more:[['Viernes · 3:30 p. m.','Disponible.'],['Lunes · 9:00 a. m.','Disponible.']]}
+    ],finalQuestion:'¿Confirmamos este espacio con el contador?',finalOptions:[['Confirmar llamada','El contador recibirá el contexto antes de comunicarse.']],outcome:'Tu llamada quedó confirmada.',outcomeDetail:'Declaración de renta · Jueves 10 de septiembre · 3:00 p. m.',confirmation:'📅 Llamada confirmada para el jueves 10 de septiembre a las 3:00 p. m. Recibirás la confirmación por WhatsApp y correo. 📲',businessCopy:'El contador recibe el trámite, perfil, información disponible, documentos, dudas y horario elegido antes de la conversación.'
+  }
+};
+
+let v14={sector:'vet',step:0,data:{},channel:null,reason:null,more:false,complete:false};
+const v13el=id=>document.getElementById(id);
+const v13esc=v=>escapeHTML(String(v??''));
+function v14reset(){v14.step=0;v14.data={};v14.channel=null;v14.reason=null;v14.more=false;v14.complete=false;}
+function v14setSector(key){if(!V14_EXAMPLES[key])return;v14.sector=key;v14reset();document.querySelectorAll('.v13-sector').forEach(b=>b.classList.toggle('is-active',b.dataset.v13Sector===key));v14renderAll();}
+function v14siteChrome(d,inner,stepLabel='EXPERIENCIA'){return `<div class="v14-site-top"><strong>${v13esc(d.brand)}</strong><nav>${d.nav.map(n=>`<span>${v13esc(n)}</span>`).join('')}</nav><span class="v14-live">● EN LÍNEA</span></div><div class="v14-progress"><span class="v14-progress-label">${v13esc(stepLabel)}</span><div><i class="on"></i><i class="${v14.step>0?'on':''}"></i><i class="${v14.step>2?'on':''}"></i><i class="${v14.complete?'on':''}"></i></div></div>${inner}<div class="v14-site-footer"><span>${v13esc(d.brand)}</span><span>Una experiencia diseñada para ayudarte a llegar al siguiente paso.</span></div>`;}
+function v14choices(arr,action){return (arr||[]).map((o,i)=>`<button type="button" class="v14-choice" data-v13-action="${action}" data-v13-index="${i}"><span class="v14-choice-arrow">→</span><div><strong>${v13esc(o[0])}</strong><small>${v13esc(o[1])}</small></div></button>`).join('');}
+function v14more(){return `<button type="button" class="v14-more" data-v13-action="more">＋ Ver más opciones</button>`;}
+function v14journeyHTML(d){
+ let body='';
+ if(v14.complete){
+   const icon={vet:'🐾',food:'🍽️',realestate:'🏠',professional:'📋'}[v14.sector];
+   body=`<section class="v14-success"><div class="v14-success-badge">${icon}</div><small>TODO LISTO</small><h3>${v13esc(d.outcome)}</h3><p>${v13esc(d.outcomeDetail)}</p><div class="v14-message"><span>${icon}</span><div><strong>${v13esc(d.outcome)}</strong><p>${v13esc(d.confirmation)}</p></div></div><div class="v14-success-note">Esto es lo que recibe la persona al terminar: una respuesta clara, con fecha, hora o siguiente paso.</div><div class="v13-final-buttons"><button type="button" class="v13-final secondary" data-v13-action="restart">Probar otro ejemplo</button></div></section>`;
+ } else if(v14.step===0){
+   body=`<section class="v14-welcome"><div class="v14-brand-mark">${v13esc(d.brand.charAt(0))}</div><small>${v13esc(d.kicker)}</small><h3>${v13esc(d.headline)}</h3><p>${v13esc(d.sub)}</p><div class="v14-question">¿Cómo llegaste hasta aquí?</div><div class="v14-choice-grid">${v14choices(d.channels,'channel')}</div></section>`;
+ } else if(v14.step===1){
+   const reasons=v14.more?[...d.reasons,...d.moreReasons]:d.reasons;
+   body=`<section class="v14-flow"><div class="v14-breadcrumb">${v13esc(v14.channel)} <span>·</span> ${v13esc(d.name)}</div><small>PRIMERA DECISIÓN</small><h3>¿Qué quieres resolver hoy?</h3><p>No necesitas recorrer todo el sitio. Te mostramos las opciones que tienen sentido para lo que acabas de buscar.</p><div class="v14-choice-grid">${v14choices(reasons,'reason')}</div>${v14more()}</section>`;
+ } else if(v14.step>=2 && v14.step<2+d.questions.length){
+   const q=d.questions[v14.step-2]; const arr=v14.more?[...(q.options||[]),...(q.more||[])]:q.options||[];
+   const context=`${v14.channel} · ${v14.reason}`;
+   const controls=q.type==='input'?`<div class="v14-input-wrap"><label>${v13esc(q.label)}</label><div class="v14-input-row"><input id="v13Input" value="${v13esc(q.default||'')}" placeholder="${v13esc(q.default||'Escribe aquí')}"><button type="button" data-v13-action="input">Continuar →</button></div><small>${v13esc(q.help||'Solo pedimos lo necesario para continuar.')}</small></div>`:`<div class="v14-choice-grid">${v14choices(arr,'question')}</div>${v14more()}`;
+   body=`<section class="v14-flow"><div class="v14-breadcrumb">${v13esc(context)}</div><small>PASO ${v14.step-1} · ${v13esc(d.name.toUpperCase())}</small><h3>${v13esc(q.label)}</h3><p>${v13esc(q.help||'La experiencia usa lo que acabas de elegir para mostrarte el siguiente paso.')}</p>${controls}</section>`;
+ } else {
+   body=`<section class="v14-flow"><div class="v14-breadcrumb">${v13esc(v14.reason)} <span>·</span> Ya tenemos lo necesario</div><small>ÚLTIMO PASO</small><h3>${v13esc(d.finalQuestion)}</h3><p>Una última decisión y llegas al resultado.</p><div class="v14-choice-grid">${v14choices(d.finalOptions,'final')}</div></section>`;
+ }
+ return v14siteChrome(d,body,v14.complete?'RESULTADO':'EXPERIENCIA DEL CLIENTE');
+}
+function v14pageVisual(d){
+ const key=d.key;
+ if(key==='vet') return `<div class="v17-visual vet-visual"><div class="v17-visual-top"><span>HOY · 9:00 AM</span><b>Disponible</b></div><div class="v17-pet-card"><div class="v17-avatar">🐾</div><div><small>PACIENTE</small><strong>Tobby</strong><span>Control veterinario</span></div></div><div class="v17-mini-grid"><div><small>Próximo control</small><b>09 SEP</b></div><div><small>Último examen</small><b>Disponible</b></div></div><div class="v17-visual-action">Agendar cita <span>→</span></div></div>`;
+ if(key==='food') return `<div class="v17-visual food-visual"><div class="v17-visual-top"><span>PARA COMPARTIR</span><b>2–4 personas</b></div><div class="v17-food-item"><div class="v17-food-thumb">🍽️</div><div><strong>Combo para compartir</strong><span>2 principales · papas · bebidas</span></div><b>$48.000</b></div><div class="v17-food-item muted"><div class="v17-food-thumb">🥤</div><div><strong>Bebidas</strong><span>Elige las que prefieras</span></div><b>+ agregar</b></div><div class="v17-visual-action">Armar pedido <span>→</span></div></div>`;
+ if(key==='realestate') return `<div class="v17-visual realestate-visual"><div class="v17-property-image"><span>EN TUNJA</span><b>★ 4.9</b></div><div class="v17-property-info"><div><strong>Apartamento Nogal</strong><span>3 habitaciones · parqueadero</span></div><b>$320 M</b></div><div class="v17-mini-grid"><div><small>Ubicación</small><b>Centro</b></div><div><small>Entrega</small><b>Inmediata</b></div></div><div class="v17-visual-action">Ver opciones <span>→</span></div></div>`;
+ return `<div class="v17-visual professional-visual"><div class="v17-visual-top"><span>MI CASO</span><b>En preparación</b></div><div class="v17-case-title"><div class="v17-case-icon">✓</div><div><small>TRÁMITE</small><strong>Declaración de renta</strong><span>Persona natural</span></div></div><div class="v17-checks"><span>✓ Información básica</span><span>✓ Documentos</span><span>○ Agendar llamada</span></div><div class="v17-visual-action">Continuar mi caso <span>→</span></div></div>`;
+}
+function v14pageHTML(d){
+ return `<div class="v17-site-nav"><strong>${v13esc(d.brand)}</strong><nav>${d.nav.map(n=>`<span>${v13esc(n)}</span>`).join('')}</nav><b>☰</b></div><div class="v17-site-hero"><div class="v17-copy"><small>${v13esc(d.kicker)}</small><h3>${v13esc(d.headline)}</h3><p>${v13esc(d.sub)}</p><button type="button">${v13esc(d.reasons[0][0])} <span>→</span></button><div class="v17-trust"><span>✓ Sin vueltas</span><span>✓ Paso a paso</span><span>✓ Atención con contexto</span></div></div>${v14pageVisual(d)}</div><div class="v17-site-cards">${(d.cards||[]).map((c,i)=>`<div><span>0${i+1}</span><b>${v13esc(c[0])}</b><small>${v13esc(c[1])}</small><em>→</em></div>`).join('')}</div><div class="v13-site-footer"><span>${v13esc(d.brand)}</span><span>Información · Servicios · Contacto</span></div>`;
+}
+function v14renderPage(d){v13el('v13PageBrand').textContent=d.brand;v13el('v13PageUrl').textContent=d.url;v13el('v13PageView').innerHTML=v14pageHTML(d);}
+function v14renderJourney(d){v13el('v13BusinessBrand').textContent=d.brand;v13el('v13JourneyUrl').textContent=d.url+'/experiencia';v13el('v13JourneyView').innerHTML=v14journeyHTML(d);v14renderBusiness(d);}
+function v14summary(d){
+  const s=v14.sector, x=v14.data;
+  const pick=(k, fallback='—')=>x[k]||fallback;
+  if(s==='vet') return {
+    title:'Cita veterinaria confirmada',
+    sub:`${pick('Mascota','Tobby')} · ${pick('Necesidad','Atención veterinaria')}`,
+    rows:[['Cliente', 'Daniel Cárdenas'],['Mascota', pick('Mascota','Tobby')],['Motivo', pick('Necesidad','Consulta')],['Horario', pick('Elige un horario','Miércoles · 9:00 a. m.')],['Estado','Confirmada']],
+    action:'La clínica puede ver el caso y continuar con la atención.'
+  };
+  if(s==='food') return {
+    title:'Pedido listo para cocina',
+    sub:`${pick('Necesidad','Pedido')} · ${pick('¿Qué quieres pedir?','Combo para compartir')}`,
+    rows:[['Cliente','Daniel Cárdenas'],['Pedido',pick('¿Qué quieres pedir?','Combo para compartir')],['Personas',pick('¿Para cuántas personas?','2 personas')],['Entrega',pick('¿Cómo quieres recibirlo?','Domicilio')],['Dirección',pick('¿Dónde lo entregamos?','Calle 20 # 8-40, Tunja')],['Estado','Confirmado']],
+    action:'La cocina recibe el pedido completo y puede confirmarlo sin reconstruir la conversación.'
+  };
+  if(s==='realestate') return {
+    title:'Visita lista para el asesor',
+    sub:`${pick('Necesidad','Comprar')} · ${pick('Encontramos opciones que encajan. ¿Cuál quieres conocer?','Apartamento Nogal · $320 M')}`,
+    rows:[['Cliente','Daniel Cárdenas'],['Operación',pick('Necesidad','Comprar')],['Ciudad',pick('¿En qué ciudad buscas?','Tunja')],['Tipo',pick('¿Qué tipo de inmueble buscas?','Apartamento')],['Presupuesto',pick('¿Qué presupuesto tienes?','$250–350 M')],['Propiedad',pick('Encontramos opciones que encajan. ¿Cuál quieres conocer?','Apartamento Nogal · $320 M')],['Visita',pick('Elige un horario para visitar el inmueble','Sábado · 11:00 a. m.')],['Estado','Confirmada']],
+    action:'El asesor recibe el perfil y la visita ya contextualizados.'
+  };
+  return {
+    title:'Caso listo para el contador',
+    sub:`${pick('Necesidad','Declaración de renta')} · llamada confirmada`,
+    rows:[['Cliente','Daniel Cárdenas'],['Trámite',pick('Necesidad','Declaración de renta')],['Perfil',pick('¿Es persona natural?','Persona natural')],['Información',pick('¿Qué información tienes disponible?','Información básica disponible')],['Documentos',pick('¿Qué documentos tienes?','Documentos listos')],['Siguiente paso',pick('¿Cómo prefieres continuar?','Agendar una llamada')],['Horario',pick('Elige un horario','Jueves · 3:00 p. m.')],['Estado','Confirmada']],
+    action:'El contador recibe el contexto antes de comunicarse con el cliente.'
+  };
+}
+function v14renderBusiness(d){
+ const box=v13el('v13BusinessRows');
+ const card=v13el('v13BusinessCard');
+ const has=Object.keys(v14.data).length>0;
+ if(!has){
+   box.innerHTML='<div class="v13-empty-row">Cuando termine el recorrido, aquí aparecerá una vista resumida y lista para operar.</div>';
+ }else{
+   const summary=v14summary(d);
+   let html=`<div class="v15-summary-head"><div><span>REGISTRO / SOLICITUD</span><strong>${v13esc(summary.title)}</strong><small>${v13esc(summary.sub)}</small></div><b class="v15-status">${v14.complete?'CONFIRMADO':'EN CONSTRUCCIÓN'}</b></div>`;
+   html+=`<div class="v15-sheet">${summary.rows.map(([k,val])=>`<div class="v15-sheet-row"><span>${v13esc(k)}</span><b>${v13esc(val)}</b></div>`).join('')}</div>`;
+   html+=`<div class="v15-next"><span>PRÓXIMO PASO</span><strong>${v13esc(summary.action)}</strong></div>`;
+   box.innerHTML=html;
+ }
+ const copy=v13el('v14BusinessCopy'); if(copy)copy.textContent=d.businessCopy;
+ const actions=v13el('v13ResultActions');
+ if(actions){
+   if(v14.complete){
+     const summary=v14summary(d);
+     const msg=`Quiero diseñar un recorrido como el ejemplo de ${d.name}. ${summary.title}. ${summary.sub}.`;
+     actions.innerHTML=`<a class="v13-final primary" href="https://wa.me/573005333763?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Quiero diseñar algo así →</a><button type="button" class="v13-final secondary" data-v13-action="restart">Vivir otro ejemplo</button>`;
+   } else actions.innerHTML='';
+ }
+}
+function v14renderAll(){const d=V14_EXAMPLES[v14.sector];v14renderPage(d);v14renderJourney(d);}
+function v14handle(el){const action=el?.dataset?.v13Action;if(!action)return;const d=V14_EXAMPLES[v14.sector];const i=Number(el.dataset.v13Index);
+ if(action==='channel'){v14.channel=d.channels[i]?.[0]||'';v14.data['Canal de llegada']=v14.channel;v14.step=1;v14.more=false;}
+ else if(action==='reason'){const arr=v14.more?[...d.reasons,...d.moreReasons]:d.reasons;v14.reason=arr[i]?.[0]||'';v14.data['Necesidad']=v14.reason;v14.step=2;v14.more=false;}
+ else if(action==='question'){const q=d.questions[v14.step-2];const arr=v14.more?[...(q.options||[]),...(q.more||[])]:q.options||[];v14.data[q.label]=arr[i]?.[0]||'';v14.step++;v14.more=false;}
+ else if(action==='input'){const q=d.questions[v14.step-2],input=v13el('v13Input'),val=(input?.value||'').trim();if(!val){input?.focus();return;}v14.data[q.label]=val;v14.step++;v14.more=false;}
+ else if(action==='more'){v14.more=true;}
+ else if(action==='final'){const o=d.finalOptions[i]||d.finalOptions[0];v14.data['Acción final']=o[0];v14.data['Resultado']=d.outcome;v14.complete=true;}
+ else if(action==='restart'){v14reset();}
+ v14renderAll();
+}
+function v14bind(){
+  const selector=v13el('v13Selector');
+
+  // Los controles del recorrido se redibujan después de cada elección.
+  // Por eso usamos delegación de eventos en document: los botones siguen
+  // funcionando aunque el contenido de #v13JourneyView cambie.
+  if(document.documentElement.dataset.v14Delegated!=='1'){
+    document.documentElement.dataset.v14Delegated='1';
+    document.addEventListener('click',e=>{
+      const action=e.target.closest('[data-v13-action]');
+      if(action){
+        const journey=action.closest('#v13JourneyView');
+        if(journey){ v14handle(action); return; }
+      }
+      const sector=e.target.closest('[data-v13-sector]');
+      if(sector && selector && selector.contains(sector)){
+        v14setSector(sector.dataset.v13Sector);
+      }
+    });
+  }
+
+  v14setSector('vet');
+}
+document.addEventListener('DOMContentLoaded',v14bind);
+
+/* ============================================================
+   V16 — demostración secuencial: página primero, recorrido después
+   ============================================================ */
+let v16mode='page';
+function v16renderMode(){
+  const page=document.getElementById('v16PageStage');
+  const journey=document.getElementById('v16JourneyStage');
+  if(!page||!journey)return;
+  const isPage=v16mode==='page';
+  page.classList.toggle('is-active',isPage); page.setAttribute('aria-hidden',String(!isPage));
+  journey.classList.toggle('is-active',!isPage); journey.setAttribute('aria-hidden',String(isPage));
+}
+function v16startJourney(){v16mode='journey';v16renderMode();document.getElementById('v16Experience')?.scrollIntoView({behavior:'smooth',block:'start'});}
+function v16backToPage(){v16mode='page';v16renderMode();}
+function v16resetOnSector(){v16mode='page';v16renderMode();}
+document.addEventListener('DOMContentLoaded',()=>{
+  const start=document.getElementById('v16StartJourney');
+  const back=document.getElementById('v16BackToPage');
+  start?.addEventListener('click',v16startJourney);
+  back?.addEventListener('click',v16backToPage);
+  const selector=document.getElementById('v13Selector');
+  selector?.addEventListener('click',e=>{if(e.target.closest('[data-v13-sector]'))setTimeout(v16resetOnSector,0);});
+  v16renderMode();
+});
+
+/* V24 — CTAs comerciales: antes de WhatsApp, recogen contexto en el diagnóstico. */
+(function initDiagnosticCTAs(){
+  function goToDiagnostic(link){
+    const diag=document.getElementById('diagnostico');
+    if(!diag) return;
+    trackEvent('cta_pre_diagnostico',{cta:(link.textContent||'').trim()});
+    diag.scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>{
+      const input=document.getElementById('heroInput');
+      if(input){input.focus();}
+    },650);
+  }
+  document.addEventListener('click',function(e){
+    const link=e.target.closest('[data-pre-diagnostic="1"]');
+    if(!link) return;
+    e.preventDefault();
+    goToDiagnostic(link);
+  });
+})();
+
+/* Cuando el diagnóstico termina, el CTA final deja de volver a abrir el
+   diagnóstico y conserva el enlace contextual a WhatsApp generado por el motor. */
+const _actualizarCtaFinalV24 = actualizarCtaFinal;
+actualizarCtaFinal = function(opts){
+  _actualizarCtaFinalV24(opts);
+  const wa=document.getElementById('ctaFinalWa');
+  if(wa) wa.removeAttribute('data-pre-diagnostic');
+};
+
+/* V26 — continuación real después del recorrido: contexto breve + solicitud de conversación. */
+(function(){
+  const $=id=>document.getElementById(id);
+  const screens={start:$('contactScreenStart'),similar:$('contactScreenSimilar'),question:$('contactScreenQuestion'),data:$('contactScreenData'),success:$('contactScreenSuccess')};
+  if(!screens.start)return;
+  const state={mode:null,businessType:'',goal:'',question:''};
+  const step=$('contactStepLabel'),hint=$('contactStepHint');
+  function show(name){Object.values(screens).forEach(el=>{if(el)el.hidden=true;}); screens[name].hidden=false;
+    const map={start:['01','¿Te gustaría algo parecido para tu negocio?'],similar:['02','Cuéntame qué quieres hacer más fácil.'],question:['02','Cuéntame qué quieres preguntarme.'],data:['03','Solo necesito tus datos y, si quieres, un horario.'],success:['✓','Solicitud enviada']};
+    step.textContent=map[name][0]; hint.textContent=map[name][1];
+    screens[name].scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function goData(){
+    if(state.mode==='similar'){
+      state.businessType=($('contactBusinessType').value||'').trim(); state.goal=($('contactGoal').value||'').trim();
+      if(!state.businessType||!state.goal){$('contactFeedback').textContent='Cuéntame a qué se dedica tu negocio y qué quieres hacer más fácil para tus clientes.';return;}
+    } else {
+      state.question=($('contactQuestion').value||'').trim();
+      if(!state.question){return;}
+    }
+    show('data'); $('contactName')?.focus();
+  }
+  document.addEventListener('click',e=>{
+    const start=e.target.closest('[data-contact-start]');
+    if(start){state.mode=start.dataset.contactStart; show(state.mode==='similar'?'similar':'question'); return;}
+    if(e.target.closest('#contactToData')){goData();return;}
+    if(e.target.closest('#questionToData')){goData();return;}
+    if(e.target.closest('#contactSend')){send();return;}
+  });
+  function send(){
+    const name=($('contactName').value||'').trim(), wa=($('contactWhatsApp').value||'').trim(), email=($('contactEmail').value||'').trim();
+    const consent=!!$('contactConsent')?.checked;
+    const date=($('contactDate').value||'').trim(), time=($('contactTime').value||'').trim();
+    const fb=$('contactFeedback');
+    if(!name||!wa){fb.textContent='Solo necesito tu nombre y WhatsApp para poder contactarte.';return;}
+    if(!consent){fb.textContent='Para enviar tu solicitud, debes aceptar el aviso de privacidad.';return;}
+    if(!date||!time){fb.textContent='Si quieres que revisemos una hora, selecciona el día y la hora que prefieres.';return;}
+    const type=state.mode==='similar'?'QUIERO ALGO PARECIDO':'TENGO UNA PREGUNTA';
+    const details=state.mode==='similar'?['A qué se dedica: '+state.businessType,'Qué quiere hacer más fácil: '+state.goal].join('\n'):['Pregunta: '+state.question].join('\n');
+    const msg=['Hola Daniel, acabo de recorrer tu página y quiero hablar contigo.','',type,details,'','Nombre: '+name,'WhatsApp: '+wa,'Correo: '+(email||'No indicó'),'Fecha solicitada: '+date,'Hora solicitada: '+time,'','La hora queda pendiente de tu confirmación.'].join('\n');
+    try{saveLead({tipo_solicitud:'solicitud_conversacion',modalidad:type,nombre:name,whatsapp:wa,email,negocio_tipo:state.businessType,objetivo:state.goal,pregunta:state.question,fecha_solicitada:date,hora_solicitada:time,consentimiento_datos:true,mensaje_whatsapp:msg,origen:'recorrido_experiencial'});}catch(e){}
+    show('success');
+    setTimeout(()=>window.open('https://wa.me/573005333763?text='+encodeURIComponent(msg),'_blank'),350);
+  }
+  const date=$('contactDate'); if(date){const d=new Date(); d.setDate(d.getDate()+1); date.min=d.toISOString().slice(0,10);}
+})();
+
+/* V26 — los CTA comerciales siguen llevando primero a esta experiencia. */
+(function(){
+  document.addEventListener('click',e=>{
+    const link=e.target.closest('[data-pre-diagnostic="1"]'); if(!link)return;
+    e.preventDefault(); const diag=document.getElementById('diagnostico');
+    if(diag){trackEvent('cta_pre_diagnostic',{cta:(link.textContent||'').trim()});diag.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+})();
+
+/* V28.4 — Carrusel de casos reales */
+(function(){
+  const root=document.querySelector('[data-case-carousel]');
+  if(!root) return;
+  const slides=[...root.querySelectorAll('.case-slide')];
+  const tabs=[...document.querySelectorAll('.case-tab')];
+  const prev=root.querySelector('.case-prev');
+  const next=root.querySelector('.case-next');
+  let current=0;
+  function show(i){
+    current=(i+slides.length)%slides.length;
+    slides.forEach((s,n)=>{s.classList.toggle('is-active',n===current);s.setAttribute('aria-hidden',n===current?'false':'true')});
+    tabs.forEach((t,n)=>{t.classList.toggle('is-active',n===current);t.setAttribute('aria-selected',n===current?'true':'false')});
+  }
+  prev?.addEventListener('click',()=>show(current-1));
+  next?.addEventListener('click',()=>show(current+1));
+  tabs.forEach((tab,n)=>tab.addEventListener('click',()=>show(n)));
+})();

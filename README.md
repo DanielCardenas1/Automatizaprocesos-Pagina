@@ -1,31 +1,23 @@
-# Daniel Cárdenas — Automatiza Procesos
+# Daniel Cárdenas — Web V28
 
-Sitio web estático de portafolio y diagnóstico interactivo.
+V28 mantiene la estructura, contenido y experiencia aprobados de V27 y se limita a los ajustes solicitados:
 
-## Estructura
+- La imagen de montañas suministrada se incorpora como fondo visual del hero superior, sin modificar la información, botones ni recorrido existente.
+- La imagen suministrada para el cierre se utiliza como fondo de alta resolución del banner final.
+- El texto del cierre cambia a: “Tu recorrido empieza aquí”.
+- El enlace del formulario de contacto identifica claramente la Política de Tratamiento de Datos y Aviso de Privacidad.
+- Se amplía `aviso-privacidad.html` con una política de tratamiento de datos personales completa, procedimientos de consultas y reclamos, derechos, finalidades, seguridad, conservación, terceros, transferencias y aviso de privacidad.
+- No se rehace el flujo interactivo ni se modifica el contenido comercial aprobado.
 
-- `index.html` — página principal y experiencia de diagnóstico.
-- `sistemas-internos.html` — página independiente de sistemas internos.
-- `trabajo/` — páginas individuales de casos.
-- `styles.css` — estilos compartidos de las páginas de casos.
-- `assets/css/home.css` — estilos de la página principal.
-- `assets/css/sistemas-internos.css` — estilos de sistemas internos.
-- `assets/js/home.js` — lógica de la página principal/diagnóstico.
-- `assets/js/sistemas-internos.js` — interacciones de sistemas internos.
-- `assets/images/` — imágenes locales.
-- `docs/` — documentación y fuentes de referencia del proyecto.
-- `.claude/` — configuración de previsualización usada por Claude.
+## Nota legal
 
-## Regla de mantenimiento
+La política está estructurada con base en el marco colombiano de protección de datos personales (Ley 1581 de 2012, Decreto 1377 de 2013 y normas complementarias). Antes de publicación definitiva, deben mantenerse actualizados los datos reales de identificación y contacto del Responsable, y revisarse los proveedores tecnológicos que efectivamente procesen datos.
 
-No volver a insertar CSS o JavaScript masivo dentro de los HTML. Los estilos y scripts de cada página deben permanecer en sus archivos externos correspondientes.
 
-## Previsualización local
+## V28.2 — ajuste visual final
+Se ajustó únicamente la capa de color del último banner para eliminar el matiz azul y llevarlo a un tono carbón cálido/neutral coherente con la sección de casos y el lenguaje editorial de la página. Se conserva la imagen de fondo y todo el contenido, texto y botones.
 
-Desde la raíz del proyecto:
 
-```bash
-python -m http.server 8934
-```
-
-Luego abrir `http://localhost:8934`.
+## V28.3
+- Casos reales: las tres vistas de Hojaldito, Al Natural y SENA Vitrina ahora se cargan como pantallazos vivos desde sus URLs publicadas.
+- Hero: se redujo el sobrepuesto blanco para que la fotografía de montañas tenga más presencia sin perder legibilidad.
