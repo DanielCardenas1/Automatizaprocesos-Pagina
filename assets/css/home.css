@@ -1182,6 +1182,14 @@ body,.site-shell{background:#fff}
   .hero-stage{height:auto!important;min-height:0!important}
   .journey-map{height:auto!important;min-height:0!important;padding-bottom:14px!important}
   .journey-business{position:static!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;margin-top:14px!important;width:100%!important}
+  /* Las 2 columnas de 160px partían el texto del telefono y de las
+     tarjetas en una palabra por línea. Se apila todo en una sola
+     columna a ancho completo: Canales → Experiencia → Proceso →
+     Resultado → Nuevo ingreso, en el mismo orden que ya tenía el DOM. */
+  .journey-map{display:flex!important;flex-direction:column!important;gap:22px!important}
+  .journey-channels,.journey-experience,.journey-process,.journey-result{width:100%!important}
+  .journey-phone{max-width:280px;margin:0 auto}
+  .journey-arrow{display:none!important}
 }
 @media(max-width:640px){
   /* El telefono mockup de case-showcase se dibuja por encima del
