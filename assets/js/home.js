@@ -1920,7 +1920,7 @@ actualizarCtaFinal = function(opts){
   const state={mode:null,businessType:'',goal:'',question:''};
   const step=$('contactStepLabel'),hint=$('contactStepHint');
   function show(name){Object.values(screens).forEach(el=>{if(el)el.hidden=true;}); screens[name].hidden=false;
-    const map={start:['01','¿Te gustaría algo parecido para tu negocio?'],similar:['02','Cuéntame qué quieres hacer más fácil.'],question:['02','Cuéntame qué quieres preguntarme.'],data:['03','Solo necesito tus datos y, si quieres, un horario.'],success:['✓','Solicitud enviada']};
+    const map={start:['01','Elige la opción que más se ajuste.'],similar:['02','Cuéntame qué quieres hacer más fácil.'],question:['02','Cuéntame qué quieres preguntarme.'],data:['03','Solo necesito tus datos y, si quieres, un horario.'],success:['✓','Solicitud enviada']};
     step.textContent=map[name][0]; hint.textContent=map[name][1];
     screens[name].scrollIntoView({behavior:'smooth',block:'nearest'});
   }
