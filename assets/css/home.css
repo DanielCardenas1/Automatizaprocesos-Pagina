@@ -1200,24 +1200,53 @@ body,.site-shell{background:#fff}
 }
 
 /* ============================================================
-   ACORTAR "MÍRALO ANTES DE QUE TE LO EXPLIQUE" EN MÓVIL
-   La mini-experiencia interactiva (selector de sector + sitio
-   simulado + recorrido + registro del negocio) se mantiene intacta
-   en escritorio. En móvil se recorta el texto de apoyo redundante y
-   se reduce el selector de 4 a 2 ejemplos para llegar más rápido a
-   los casos reales, sin tocar la interacción ni el JS.
+   "MÍRALO ANTES DE QUE TE LO EXPLIQUE" — VERSIÓN MÓVIL
+   Único cambio: en desktop la experiencia sigue integrada en el
+   scroll de la página, exactamente igual que siempre (nada de esta
+   sección afecta a #experiencia por encima de 700px). En móvil,
+   #experiencia se reemplaza visualmente por una tarjeta compacta
+   con un CTA; al pulsarlo, la MISMA sección (mismo HTML, mismo JS,
+   sin duplicar nada) pasa a ocupar toda la pantalla. Se reutiliza
+   el motor existente (selector de sector, sitio simulado, recorrido,
+   registro del negocio) tal cual está, sin recortar pasos ni copys.
    ============================================================ */
-@media(max-width:620px){
-  /* "Primero lo ves" ya está dicho en el párrafo de arriba. */
-  .v16-promise{display:none}
-  /* Los subtítulos de apoyo se ocultan; la instrucción en negrita basta. */
-  .v16-step-label small,.v16-guidance small{display:none}
-  .v16-step-label,.v16-guidance{margin-top:28px;padding-top:14px}
-  /* Solo 2 de los 4 ejemplos, para no obligar a decidir entre 4 en una pantalla chica. */
-  #v13Selector .v13-sector:nth-of-type(3),
-  #v13Selector .v13-sector:nth-of-type(4){display:none}
-  #v13Selector{grid-template-columns:1fr 1fr}
-  /* El párrafo explicativo de "la otra mitad" se recorta a la frase clave. */
-  .v18-bridge-copy p{display:none}
-  .v16-final-cta p{display:none}
+.exp-mobile-teaser,.exp-mobile-close{display:none}
+
+@media(max-width:700px){
+  .exp-mobile-teaser{
+    display:block;background:var(--dark);color:#ffffff;
+    border-radius:18px;padding:34px 26px;text-align:left
+  }
+  .exp-mobile-teaser .eyebrow{color:#f1ede5}
+  .exp-mobile-teaser h2{
+    font-family:var(--serif);font-weight:500;letter-spacing:-1.2px;
+    line-height:1.05;font-size:clamp(28px,7.5vw,36px);color:#ffffff;margin:0 0 14px
+  }
+  .exp-mobile-teaser h2 em{font-style:italic;color:#c9b896}
+  .exp-mobile-teaser p{font-size:13px;line-height:1.6;color:#d8ded9;margin:0 0 24px;max-width:420px}
+  .exp-mobile-teaser .button.dark{
+    display:inline-flex;width:100%;justify-content:center;background:#ffffff;color:#1b1a18
+  }
+
+  #experiencia{padding:52px 20px 60px}
+  #experiencia > .section-inner{display:none}
+
+  /* Estado abierto: la sección pasa a ocupar toda la pantalla. */
+  #experiencia.is-open{
+    position:fixed;inset:0;z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    background:#ffffff;padding:0;border:0;margin:0
+  }
+  #experiencia.is-open .exp-mobile-teaser{display:none}
+  #experiencia.is-open > .section-inner{display:block;padding:82px 20px 60px}
+
+  #experiencia.is-open .exp-mobile-close{
+    display:flex;align-items:center;justify-content:center;
+    position:fixed;top:14px;right:14px;width:40px;height:40px;border-radius:50%;
+    background:var(--dark);color:#ffffff;border:0;font-size:15px;line-height:1;
+    z-index:10000;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.22)
+  }
+
+  /* Dentro de la vista de pantalla completa, el contenido debe verse
+     de inmediato: no depende de que el observer de scroll lo detecte. */
+  #experiencia.is-open .rev{opacity:1!important;transform:none!important;transition:none!important}
 }

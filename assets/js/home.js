@@ -1986,3 +1986,31 @@ actualizarCtaFinal = function(opts){
   next?.addEventListener('click',()=>show(current+1));
   tabs.forEach((tab,n)=>tab.addEventListener('click',()=>show(n)));
 })();
+
+/* ============================================================
+   Experiencia interactiva a pantalla completa (solo móvil).
+   No duplica nada: abre/cierra la MISMA sección #experiencia con
+   su mismo HTML y JS existentes (sector picker, sitio simulado,
+   recorrido, registro del negocio). En desktop estos botones no
+   son visibles (ver CSS) y esta sección sigue integrada como
+   siempre en el scroll de la página.
+   ============================================================ */
+(function(){
+  const exp=document.getElementById('experiencia');
+  const openBtn=document.getElementById('expMobileOpen');
+  const closeBtn=document.getElementById('expMobileClose');
+  if(!exp||!openBtn||!closeBtn) return;
+  function openExperience(){
+    exp.classList.add('is-open');
+    document.body.style.overflow='hidden';
+    exp.scrollTop=0;
+    try{trackEvent('experiencia_mobile_abrir',{});}catch(e){}
+  }
+  function closeExperience(){
+    exp.classList.remove('is-open');
+    document.body.style.overflow='';
+    try{trackEvent('experiencia_mobile_cerrar',{});}catch(e){}
+  }
+  openBtn.addEventListener('click',openExperience);
+  closeBtn.addEventListener('click',closeExperience);
+})();
