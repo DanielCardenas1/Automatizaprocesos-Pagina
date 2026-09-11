@@ -1252,3 +1252,42 @@ body,.site-shell{background:#fff}
      de inmediato: no depende de que el observer de scroll lo detecte. */
   #experiencia.is-open .rev{opacity:1!important;transform:none!important;transition:none!important}
 }
+
+/* ============================================================
+   Diagrama del hero — titulos mas grandes y en negrilla para que
+   se entiendan de un vistazo, con subtitulo de "paso a paso".
+   Se usa !important porque .hero-stage-label y .journey-label
+   tienen varias reglas heredadas en breakpoints distintos a lo
+   largo del archivo; asi se garantiza el mismo tamano en todos.
+   ============================================================ */
+.hero-stage-label{
+  font-size:clamp(11px,1.7vw,14px)!important;
+  font-weight:700!important;
+  line-height:1.4!important;
+  max-width:230px!important;
+  white-space:normal!important;
+}
+.hero-stage-label small{
+  display:block;
+  font:400 10px/1.5 var(--sans);
+  letter-spacing:0;
+  text-transform:none;
+  color:#9a938a;
+  margin-top:7px;
+}
+.journey-label{
+  font-size:clamp(10px,1.3vw,13px)!important;
+  font-weight:700!important;
+  letter-spacing:.6px!important;
+}
+@media(max-width:700px){
+  .hero-stage-label{max-width:190px!important;right:0!important}
+  .hero-stage-label small{font-size:9px}
+  .journey-map{padding-top:78px!important}
+}
+@media(min-width:701px) and (max-width:980px){
+  .journey-map{padding-top:66px!important}
+}
+@media(min-width:981px){
+  .journey-map{padding-top:64px!important}
+}
