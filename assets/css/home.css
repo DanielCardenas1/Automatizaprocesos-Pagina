@@ -1280,14 +1280,25 @@ body,.site-shell{background:#fff}
   font-weight:700!important;
   letter-spacing:.6px!important;
 }
+@media(max-width:1100px){
+  /* En una sola columna, la etiqueta flotaba pegada al lado derecho
+     con un hueco enorme a la izquierda: se alinea con el resto del
+     contenido (izquierda) en vez de mantenerse en la posicion absoluta
+     pensada para el layout de dos columnas de escritorio. */
+  .hero-stage-label{
+    position:static!important;
+    right:auto!important;
+    top:auto!important;
+    left:auto!important;
+    text-align:left!important;
+    max-width:none!important;
+    display:block!important;
+    width:100%!important;
+    justify-self:stretch!important;
+    margin:0 0 18px!important;
+  }
+  .journey-map{padding-top:0!important}
+}
 @media(max-width:700px){
-  .hero-stage-label{max-width:190px!important;right:0!important}
   .hero-stage-label small{font-size:9px}
-  .journey-map{padding-top:78px!important}
-}
-@media(min-width:701px) and (max-width:980px){
-  .journey-map{padding-top:66px!important}
-}
-@media(min-width:981px){
-  .journey-map{padding-top:64px!important}
 }
