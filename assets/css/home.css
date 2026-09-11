@@ -1261,22 +1261,19 @@ body,.site-shell{background:#fff}
    largo del archivo; asi se garantiza el mismo tamano en todos.
    ============================================================ */
 .hero-stage-label{
-  font-family:var(--sans)!important;
-  font-size:clamp(20px,2.4vw,26px)!important;
+  font-size:clamp(11px,1.7vw,14px)!important;
   font-weight:700!important;
-  line-height:1.2!important;
-  letter-spacing:-.3px!important;
-  color:#151515!important;
-  max-width:300px!important;
+  line-height:1.4!important;
+  max-width:230px!important;
   white-space:normal!important;
 }
 .hero-stage-label small{
   display:block;
-  font:400 12px/1.55 var(--sans);
+  font:400 10px/1.5 var(--sans);
   letter-spacing:0;
   text-transform:none;
-  color:#6f6b64;
-  margin-top:10px;
+  color:#9a938a;
+  margin-top:7px;
 }
 .journey-label{
   font-size:clamp(10px,1.3vw,13px)!important;
