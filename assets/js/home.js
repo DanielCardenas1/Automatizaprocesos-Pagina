@@ -160,6 +160,49 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 }),{threshold:.08});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 
+// Red de seguridad: si el observer no dispara algo que ya está a la vista, lo revela igual.
+setTimeout(()=>{
+  document.querySelectorAll('.rev:not(.in)').forEach(el=>{
+    if(el.getBoundingClientRect().top<innerHeight) el.classList.add('in');
+  });
+},6000);
+
+/* ============================================================
+   Efectos de estudio (Arquetipo 01 — Editorial Light Cream)
+   ============================================================ */
+(function initTopbarScroll(){
+  const topbar=document.querySelector('.topbar');
+  if(!topbar) return;
+  const onScroll=()=>topbar.classList.toggle('is-scrolled', scrollY>40);
+  onScroll();
+  addEventListener('scroll', onScroll, {passive:true});
+})();
+
+(function initMagnetic(){
+  if(!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('[data-magnetic]').forEach(el=>{
+    const strength=parseFloat(el.dataset.magneticStrength || '0.3');
+    const inner=document.createElement('span');
+    inner.className='magnetic-inner';
+    while(el.firstChild) inner.appendChild(el.firstChild);
+    el.appendChild(inner);
+    el.classList.add('has-magnetic');
+    let tx=0,ty=0,cx=0,cy=0,raf=null;
+    el.addEventListener('mousemove', e=>{
+      const r=el.getBoundingClientRect();
+      tx=((e.clientX-r.left)-r.width/2)*strength;
+      ty=((e.clientY-r.top)-r.height/2)*strength;
+      if(!raf) raf=requestAnimationFrame(loop);
+    });
+    el.addEventListener('mouseleave', ()=>{ tx=0; ty=0; if(!raf) raf=requestAnimationFrame(loop); });
+    function loop(){
+      cx+=(tx-cx)*0.2; cy+=(ty-cy)*0.2;
+      inner.style.transform=`translate3d(${cx}px, ${cy}px, 0)`;
+      raf=(Math.abs(tx-cx)>0.1||Math.abs(ty-cy)>0.1)?requestAnimationFrame(loop):null;
+    }
+  });
+})();
+
 // ============ ANALÍTICA (MVP, sin backend) ============
 function trackEvent(name, data) {
   data = data || {};
@@ -1302,6 +1345,40 @@ function cerrarModal(id){
   const m=document.getElementById(id);
   if(m){m.classList.remove('open');document.body.style.overflow='';}
 }
+
+// "Ver caso" abre el modal del caso en vez de navegar a la página completa
+// (el href se conserva: clic derecho / abrir en pestaña nueva sigue funcionando).
+document.querySelectorAll('.case-cta[data-open-modal]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    abrirModal(a.dataset.openModal);
+  });
+});
+
+// Demo interactivo de cada caso (Hojaldito / Al Natural / SENA): elegir un
+// camino revela su resultado; "elegir otro camino" vuelve al punto de partida.
+document.addEventListener('click', function(e){
+  const choice = e.target.closest('[data-demo-path]');
+  if (choice) {
+    const demo = choice.closest('[data-case-demo]');
+    if (!demo) return;
+    const path = choice.dataset.demoPath;
+    const picker = demo.querySelector('[data-demo-step="pick"]');
+    if (picker) picker.hidden = true;
+    demo.querySelectorAll('[data-demo-path-result]').forEach(function(r){
+      r.hidden = r.dataset.demoPathResult !== path;
+    });
+    return;
+  }
+  const back = e.target.closest('[data-demo-back]');
+  if (back) {
+    const demo = back.closest('[data-case-demo]');
+    if (!demo) return;
+    const picker = demo.querySelector('[data-demo-step="pick"]');
+    if (picker) picker.hidden = false;
+    demo.querySelectorAll('[data-demo-path-result]').forEach(function(r){ r.hidden = true; });
+  }
+});
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){
     document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});
@@ -1888,6 +1965,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   function goToDiagnostic(link){
     const diag=document.getElementById('diagnostico');
     if(!diag) return;
+    document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});
+    document.body.style.overflow='';
     trackEvent('cta_pre_diagnostico',{cta:(link.textContent||'').trim()});
     diag.scrollIntoView({behavior:'smooth',block:'start'});
     setTimeout(()=>{
@@ -1999,6 +2078,7 @@ actualizarCtaFinal = function(opts){
   const exp=document.getElementById('experiencia');
   const openBtn=document.getElementById('expMobileOpen');
   const closeBtn=document.getElementById('expMobileClose');
+  const finishBtn=document.getElementById('expFinishJourney');
   if(!exp||!openBtn||!closeBtn) return;
   function openExperience(){
     exp.classList.add('is-open');
@@ -2013,4 +2093,6 @@ actualizarCtaFinal = function(opts){
   }
   openBtn.addEventListener('click',openExperience);
   closeBtn.addEventListener('click',closeExperience);
+  // "Finalizar recorrido": misma salida que la ✕, pero como CTA explícito al terminar el recorrido.
+  if(finishBtn) finishBtn.addEventListener('click',closeExperience);
 })();

@@ -1251,6 +1251,24 @@ body,.site-shell{background:#fff}
   /* Dentro de la vista de pantalla completa, el contenido debe verse
      de inmediato: no depende de que el observer de scroll lo detecte. */
   #experiencia.is-open .rev{opacity:1!important;transform:none!important;transition:none!important}
+
+}
+
+/* "Finalizar recorrido" — únicamente en móvil (misma sección .v16-final-cta,
+   pero en escritorio no existe: display:none deja intacto el layout de 2
+   columnas original de .v16-final-cta en escritorio). Al terminar el
+   recorrido en móvil queda debajo de "Solicitar conversación": sale de la
+   vista de pantalla completa y devuelve exactamente a donde estabas. */
+.v16-finish-cta{display:none}
+@media(max-width:700px){
+  /* Vive dentro de la tarjeta oscura .v16-final-cta: texto/borde claros, no oscuros. */
+  .v16-finish-cta{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;margin-top:12px;background:transparent;color:#f1ede5;
+    border:1px solid rgba(241,237,229,.35);border-radius:999px;padding:14px 22px;
+    font:600 12px var(--sans);cursor:pointer;transition:background .2s,border-color .2s
+  }
+  .v16-finish-cta:hover{background:rgba(241,237,229,.1);border-color:rgba(241,237,229,.55)}
 }
 
 /* ============================================================
@@ -1292,3 +1310,80 @@ body,.site-shell{background:#fff}
 @media(min-width:981px){
   .journey-map{padding-top:64px!important}
 }
+
+/* ============================================================
+   Efectos de estudio (Arquetipo 01 — Editorial Light Cream)
+   ============================================================ */
+
+/* 1. Nav que se solidifica al hacer scroll */
+.topbar{transition:background-color .4s ease,box-shadow .4s ease}
+.topbar.is-scrolled{background:rgba(255,255,255,.98);box-shadow:0 8px 24px rgba(20,33,43,.07)}
+
+/* 2. Subrayado animado en los links del nav */
+.main-nav a{position:relative}
+.main-nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)
+}
+.main-nav a:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* 3. Botones magnéticos (solo CTAs, nunca submits) */
+.has-magnetic{display:inline-flex;position:relative;isolation:isolate}
+.magnetic-inner{
+  display:inline-flex;align-items:center;justify-content:center;gap:inherit;
+  will-change:transform;transition:transform .8s var(--ease)
+}
+
+/* 4. Luz que respira en los botones más importantes (indica que se puede pulsar).
+   Sin gate de prefers-reduced-motion a propósito: es un pulso lento y suave
+   (no parpadeo ni movimiento brusco), y necesita notarse siempre. */
+.glow-cta{position:relative;isolation:isolate}
+.glow-cta::before{
+  content:"";position:absolute;inset:-12px;z-index:-1;border-radius:inherit;
+  background:radial-gradient(circle, rgba(184,146,90,.75), transparent 70%);
+  filter:blur(12px);opacity:.25;pointer-events:none;
+  animation:ctaGlowPulse 2.4s ease-in-out infinite;
+}
+@keyframes ctaGlowPulse{
+  0%,100%{opacity:.25;transform:scale(.92)}
+  50%{opacity:1;transform:scale(1.16)}
+}
+
+/* 5. Los <button> reales (a diferencia de los <a>) no traen cursor de mano
+   por defecto — sin esto, "Ver la experiencia" y cualquier .button que sea
+   <button> se quedan con la flecha normal aunque sí sean clicables. */
+.button{cursor:pointer}
+
+/* 6. Bug real encontrado al auditar cursores: los tabs del modal de
+   Hojaldito (.mtabs/.mtab, "Flujo del proyecto" / "Demo interactivo") y sus
+   paneles (.mtc) no tenían NINGÚN estilo en este archivo — solo existían en
+   el styles.css huérfano de la raíz, que la página no carga. Sin esto, los
+   dos paneles se mostraban a la vez (sin display:none/block) y los tabs no
+   se veían ni se sentían clicables. Restaurado con las variables de este
+   archivo (var(--line)/var(--muted)/var(--ink), no las del archivo viejo). */
+.mtabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:16px}
+.mtab{font-size:12px;color:var(--muted);padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.mtab.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:500}
+.mtc{display:none}
+.mtc.on{display:block}
+
+/* 7. Demo interactivo real dentro de cada modal de caso (Hojaldito, Al
+   Natural, SENA) + link a la página completa. Reutiliza .success-card y
+   .back-link que ya existen. Los botones de elección usan una clase propia
+   (.case-demo-choice, NO .choice) a propósito: .choice ya lo usa
+   globalmente el motor de demo del hero (renderJourney() en home.js hace
+   document.querySelectorAll('.choice') sin acotar el alcance) — reutilizar
+   ese nombre le pegaba un listener roto (selectChoice(NaN)) a estos botones. */
+.modal-fulllink{display:inline-block;margin-top:18px;font-size:11px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.modal-fulllink:hover{color:var(--ink)}
+.case-demo-intro{font-size:12px;color:#68736f;margin:0 0 14px}
+.case-demo-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.case-demo-choices[hidden]{display:none}
+.case-demo-choice{appearance:none;text-align:left;border:1px solid #cfd6d2;background:#ffffff;padding:16px;border-radius:13px;cursor:pointer;transition:.2s;font:600 12px var(--sans);color:var(--ink)}
+.case-demo-choice:hover{border-color:#8f7b5d;transform:translateY(-2px)}
+.case-demo-choice small{display:block;font-weight:400;color:#7d8782;font-size:9px;margin-top:5px}
+.case-demo-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.case-demo-flow span{background:var(--soft);padding:8px 12px;border-radius:100px;font-size:11px;font-weight:600;color:var(--ink)}
+.case-demo-flow b{font-weight:400;color:var(--muted)}
+.case-demo-back{margin-top:14px}
+@media(max-width:480px){.case-demo-choices{grid-template-columns:1fr}}
