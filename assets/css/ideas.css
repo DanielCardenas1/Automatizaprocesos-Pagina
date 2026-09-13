@@ -58,6 +58,9 @@ p+p{margin-top:-4px}
 .layer strong{display:block;font-family:var(--serif);font-size:19px;margin-bottom:6px}
 .layer p{margin:0;font-size:14px;color:#5f5b54;max-width:none}
 
+.article ul{margin:0 0 18px;padding-left:22px;max-width:640px}
+.article ul li{font-size:16px;line-height:1.75;color:#3a3733;margin:0 0 8px}
+
 /* Enlace inline hacia otra pieza de Ideas */
 .inline-link{color:var(--muted);text-decoration:underline;text-underline-offset:2px;font-weight:600}
 .inline-link:hover{color:var(--ink)}
