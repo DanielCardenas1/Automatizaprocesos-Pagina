@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://danielcardenas.co/sitemap.xml
+Sitemap: https://www.danielcardenas.co/sitemap.xml
