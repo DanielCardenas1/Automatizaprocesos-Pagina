@@ -65,6 +65,21 @@ p+p{margin-top:-4px}
 .inline-link{color:var(--muted);text-decoration:underline;text-underline-offset:2px;font-weight:600}
 .inline-link:hover{color:var(--ink)}
 
+/* Hub de Ideas (/ideas/) */
+.hub-intro{margin:0 0 56px}
+.hub-group{margin:0 0 48px}
+.hub-group-label{font:600 10px var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+.hub-grid{display:grid;gap:14px}
+.hub-card{display:block;padding:22px 24px;border:1px solid var(--line);border-radius:14px;text-decoration:none;background:#fff;transition:.2s}
+.hub-card:hover{border-color:var(--muted);transform:translateY(-2px)}
+.hub-card strong{display:block;font-family:var(--serif);font-weight:500;font-size:21px;color:var(--ink);margin-bottom:8px;letter-spacing:-.3px}
+.hub-card p{margin:0;font-size:14px;color:#5f5b54;max-width:none}
+
+.top-crumbs{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.top-crumbs a{text-decoration:none;font:500 12px var(--sans);color:var(--muted);display:inline-flex;align-items:center;gap:7px}
+.top-crumbs a:hover{color:var(--ink)}
+.top-crumbs span{color:var(--line)}
+
 @media(max-width:640px){
   .top{padding:22px 24px}
   .article{padding:10px 24px 80px}
