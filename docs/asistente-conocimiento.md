@@ -14,7 +14,7 @@
 | Rol | Administrador de Empresas · Especialización en Alta Gerencia |
 | Ubicación | Colombia (trabajo 100% remoto con organizaciones en todo el país) |
 | WhatsApp | +57 300 533 3763 |
-| Email | danielkadioz@gmail.com |
+| Email | daniel@danielcardenas.co |
 | Disponibilidad mostrada en el sitio | "Disponible · Colombia" |
 | Tiempo de respuesta comprometido | Menos de 24 horas |
 

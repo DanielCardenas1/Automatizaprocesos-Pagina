@@ -220,7 +220,7 @@ trackEvent('page_view');
 // ============ LEADS ============
 // El localStorage por sí solo no sirve de nada: vive en el navegador del
 // visitante, Daniel nunca lo ve si esa persona no toca un CTA. Web3Forms
-// manda cada lead a danielkadioz@gmail.com sin necesitar backend propio.
+// manda cada lead a daniel@danielcardenas.co sin necesitar backend propio.
 const WEB3FORMS_ACCESS_KEY = '9b941d91-076c-4b07-bbac-3d8ec2abb159';
 function saveLead(lead) {
   const conFecha = Object.assign({ fecha: new Date().toISOString() }, lead);
@@ -259,7 +259,7 @@ function actualizarCtaFinal(opts) {
 // reales, precios y contacto. Si el .md cambia, refleja el cambio aquí
 // también — no hay backend que lo cargue en vivo desde un archivo estático.
 const KB = {
-  contacto: { whatsapp: '573005333763', email: 'danielkadioz@gmail.com' },
+  contacto: { whatsapp: '573005333763', email: 'daniel@danielcardenas.co' },
   // Señales = patrones que delatan que el problema descrito se parece a un
   // caso YA resuelto. Sirven para "detección de soluciones reutilizables":
   // si el usuario describe algo con ese patrón, se le cita el caso real y
