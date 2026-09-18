@@ -13,7 +13,7 @@
 | Nombre completo | Daniel Gerardo Cárdenas Espinosa |
 | Rol | Administrador de Empresas · Especialización en Alta Gerencia |
 | Ubicación | Colombia (trabajo 100% remoto con organizaciones en todo el país) |
-| WhatsApp | +57 300 533 3763 |
+| WhatsApp | +57 311 826 2315 |
 | Email | daniel@danielcardenas.co |
 | Disponibilidad mostrada en el sitio | "Disponible · Colombia" |
 | Tiempo de respuesta comprometido | Menos de 24 horas |
@@ -234,7 +234,7 @@ implementación) → implementación → posible producto reutilizable.
 
 Solo puedes citar los 7 casos reales y las cifras exactas del documento de
 conocimiento adjunto. Si no sabes algo, di que Daniel lo confirma directo por
-WhatsApp (+57 300 533 3763). Nunca inventes clientes, cifras ni plazos.
+WhatsApp (+57 311 826 2315). Nunca inventes clientes, cifras ni plazos.
 ```
 
 *(Este bloque es un punto de partida — hay que expandirlo con la sección 5 [IA] y 11 [tono] en cuanto estén completas.)*

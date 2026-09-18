@@ -259,7 +259,7 @@ function actualizarCtaFinal(opts) {
 // reales, precios y contacto. Si el .md cambia, refleja el cambio aquí
 // también — no hay backend que lo cargue en vivo desde un archivo estático.
 const KB = {
-  contacto: { whatsapp: '573005333763', email: 'daniel@danielcardenas.co' },
+  contacto: { whatsapp: '573118262315', email: 'daniel@danielcardenas.co' },
   // Señales = patrones que delatan que el problema descrito se parece a un
   // caso YA resuelto. Sirven para "detección de soluciones reutilizables":
   // si el usuario describe algo con ese patrón, se le cita el caso real y
@@ -1277,7 +1277,7 @@ function analizarIdea() {
   out.innerHTML = '<div style="font-size:11px;color:var(--ink3);font-style:italic;padding-top:6px">Estructurando tu idea...</div>';
   setTimeout(() => {
     const waMsg = 'Hola Daniel, quiero aterrizar esta idea en Automatiza Procesos:\n' + v;
-    const waUrl = 'https://wa.me/573005333763?text=' + encodeURIComponent(waMsg);
+    const waUrl = 'https://wa.me/573118262315?text=' + encodeURIComponent(waMsg);
     const safe = v.replace(/</g, '&lt;');
     out.innerHTML = '<p style="font-size:12.5px;color:var(--ink2);line-height:1.65;margin-bottom:10px">Antes de construir la versión completa, habría que validar si existe un cliente dispuesto a usar esto y pagar por ello.</p>' +
       '<p style="font-size:12.5px;color:var(--ink2);line-height:1.65;margin-bottom:16px">El primer prototipo recomendado sería una versión mínima que resuelva el paso más doloroso de lo que describes — no la plataforma completa.</p>' +
@@ -1874,7 +1874,7 @@ function v14renderBusiness(d){
    if(v14.complete){
      const summary=v14summary(d);
      const msg=`Quiero diseñar un recorrido como el ejemplo de ${d.name}. ${summary.title}. ${summary.sub}.`;
-     actions.innerHTML=`<a class="v13-final primary" href="https://wa.me/573005333763?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Quiero diseñar algo así →</a><button type="button" class="v13-final secondary" data-v13-action="restart">Vivir otro ejemplo</button>`;
+     actions.innerHTML=`<a class="v13-final primary" href="https://wa.me/573118262315?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Quiero diseñar algo así →</a><button type="button" class="v13-final secondary" data-v13-action="restart">Vivir otro ejemplo</button>`;
    } else actions.innerHTML='';
  }
 }
@@ -2012,7 +2012,7 @@ actualizarCtaFinal = function(opts){
     const msg=['Hola Daniel, acabo de recorrer tu página y quiero hablar contigo.','',type,details,'','Nombre: '+name,'WhatsApp: '+wa,'Correo: '+(email||'No indicó'),'Fecha solicitada: '+date,'Hora solicitada: '+time,'','La hora queda pendiente de tu confirmación.'].join('\n');
     try{saveLead({tipo_solicitud:'solicitud_conversacion',modalidad:type,nombre:name,whatsapp:wa,email,negocio_tipo:state.businessType,objetivo:state.goal,pregunta:state.question,fecha_solicitada:date,hora_solicitada:time,consentimiento_datos:true,mensaje_whatsapp:msg,origen:'recorrido_experiencial'});}catch(e){}
     show('success');
-    setTimeout(()=>window.open('https://wa.me/573005333763?text='+encodeURIComponent(msg),'_blank'),350);
+    setTimeout(()=>window.open('https://wa.me/573118262315?text='+encodeURIComponent(msg),'_blank'),350);
   }
   const date=$('contactDate'); if(date){const d=new Date(); d.setDate(d.getDate()+1); date.min=d.toISOString().slice(0,10);}
 })();
