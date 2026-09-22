@@ -161,7 +161,7 @@
         {href:'trabajo/hojaldito/', name:'Hojaldito', line:'Del interés a una oportunidad comercial.'},
         {href:'trabajo/al-natural/', name:'Al Natural', line:'Del descubrimiento a la compra.'},
         {href:'trabajo/sena-vitrina/', name:'SENA Vitrina', line:'De la oferta a la solicitud.'},
-        {href:'#casos', name:'Brice', line:'De una necesidad a una reserva.'}
+        {href:'index.html#casos', name:'Brice', line:'De una necesidad a una reserva.'}
       ];
       var list = '<div class="exp-cases">' + cases.map(function(c){
         return '<a class="exp-case" href="' + c.href + '" target="_blank" rel="noopener"><span><strong>' + c.name + '</strong><span>' + c.line + '</span></span><b>→</b></a>';
@@ -390,7 +390,7 @@
 
   /* ---------------- acciones especificas (no son solo navegacion) ---------------- */
   var ACTIONS = {
-    dismiss: function(){ closeExperience(); },
+    dismiss: function(){ leaveTo('index.html'); },
 
     selectCategoryFromComing: function(){},
 
@@ -418,22 +418,21 @@
 
   function showResult(title, sub){ state.ctx.result = {title:title, sub:sub}; goto('result'); }
 
-  /* ---------------- handoff al formulario de contacto real ---------------- */
+  /* ---------------- handoff al formulario de contacto real ----------------
+     experiencia.html es una pagina aparte de index.html, asi que el traspaso
+     de contexto (categoria + lo que escribio) viaja por sessionStorage; el
+     receptor vive en home.js (busca "exp_handoff" al cargar index.html). */
   function handoffToContact(){
     var ta = document.getElementById('expClientsWant');
     if(ta) state.ctx.clientsWant = ta.value;
-    closeExperience(function(){
-      var section = document.getElementById('diagnostico');
-      if(section) section.scrollIntoView({behavior:'auto', block:'start'});
-      var cat = catById(state.category);
-      var businessType = document.getElementById('contactBusinessType');
-      var goal = document.getElementById('contactGoal');
-      if(businessType && cat) businessType.value = cat.label;
-      if(goal && state.ctx.clientsWant) goal.value = state.ctx.clientsWant;
-      var starter = document.querySelector('[data-contact-start="similar"]');
-      if(starter) starter.click();
-      section && section.scrollIntoView({behavior:'smooth', block:'start'});
-    });
+    var cat = catById(state.category);
+    try{
+      sessionStorage.setItem('exp_handoff', JSON.stringify({
+        businessType: cat ? cat.label : '',
+        goal: state.ctx.clientsWant || ''
+      }));
+    }catch(e){}
+    leaveTo('index.html#diagnostico');
   }
 
   /* ---------------- router ---------------- */
@@ -469,35 +468,23 @@
     }
   });
 
-  /* ---------------- apertura / cierre ---------------- */
+  /* ---------------- apertura / salida ----------------
+     experiencia.html vive sola: "salir" siempre significa volver al
+     sitio principal, no solo ocultar el overlay. */
   function openExperience(){
     state = { screen:'gate', category:null, ctx:{} };
-    overlay.hidden = false;
-    overlay.classList.remove('exp-leaving');
     document.body.classList.add('exp-open');
     render();
   }
-  function closeExperience(after){
+  function leaveTo(url){
     overlay.classList.add('exp-leaving');
-    document.body.classList.remove('exp-open');
-    try{ sessionStorage.setItem('exp_seen','1'); }catch(e){}
-    setTimeout(function(){
-      overlay.hidden = true;
-      overlay.innerHTML = '';
-      if(typeof after==='function') after();
-    }, 320);
+    setTimeout(function(){ window.location.href = url; }, 260);
   }
 
   /* ---------------- arranque ---------------- */
-  var already = false;
-  try{ already = sessionStorage.getItem('exp_seen')==='1'; }catch(e){}
-  if(already){
-    overlay.hidden = true;
-  } else {
-    openExperience();
-  }
+  openExperience();
 
   window.addEventListener('keydown', function(e){
-    if(e.key==='Escape' && !overlay.hidden) closeExperience();
+    if(e.key==='Escape') leaveTo('index.html');
   });
 })();

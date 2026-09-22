@@ -2026,6 +2026,25 @@ actualizarCtaFinal = function(opts){
   });
 })();
 
+/* V29 — recibe el contexto de experiencia.html (categoria + lo que el
+   visitante quiere que sus clientes puedan hacer) y precarga el
+   formulario de contacto, como si nunca hubiera salido del recorrido. */
+(function(){
+  let raw;
+  try{ raw = sessionStorage.getItem('exp_handoff'); }catch(e){ return; }
+  if(!raw) return;
+  try{ sessionStorage.removeItem('exp_handoff'); }catch(e){}
+  let data; try{ data = JSON.parse(raw); }catch(e){ return; }
+  const businessType=document.getElementById('contactBusinessType');
+  const goal=document.getElementById('contactGoal');
+  if(businessType && data.businessType) businessType.value = data.businessType;
+  if(goal && data.goal) goal.value = data.goal;
+  const starter=document.querySelector('[data-contact-start="similar"]');
+  if(starter) starter.click();
+  const section=document.getElementById('diagnostico');
+  if(section) setTimeout(()=>section.scrollIntoView({behavior:'smooth',block:'start'}), 60);
+})();
+
 /* V28.4 — Carrusel de casos reales */
 (function(){
   const root=document.querySelector('[data-case-carousel]');
