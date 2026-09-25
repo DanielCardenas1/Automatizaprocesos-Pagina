@@ -20,7 +20,7 @@
 <meta name="robots" content="noindex,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/experiencia.css?v=14">
+<link rel="stylesheet" href="assets/css/experiencia.css?v=18">
 </head>
 <body>
 <div id="exp">
@@ -126,7 +126,7 @@
       <p class="lead">Elige el negocio que más se parece al tuyo.</p>
       <div class="d-choices four">
         <button class="d-choice cat" data-cat="veterinaria"><em>01</em><strong>Veterinaria</strong><small>Salud, información, citas y seguimiento.</small></button>
-        <button class="d-choice cat soon" data-cat="comidas"><em>02</em><strong>Comidas</strong><small>Descubrir, elegir, pedir o reservar.</small><b>Próximamente</b></button>
+        <button class="d-choice cat" data-cat="comidas"><em>02</em><strong>Comidas</strong><small>Descubrir, elegir, pedir o reservar.</small></button>
         <button class="d-choice cat soon" data-cat="inmobiliaria"><em>03</em><strong>Inmobiliaria</strong><small>Encontrar, comparar y avanzar.</small><b>Próximamente</b></button>
         <button class="d-choice cat soon" data-cat="servicios"><em>04</em><strong>Servicios / asesoría</strong><small>Orientar, solicitar y continuar.</small><b>Próximamente</b></button>
       </div>
@@ -140,14 +140,14 @@
   <div class="d-wrap center">
     <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
     <div class="d-main narrow">
-      <p class="eyebrow">Veterinaria</p>
+      <p class="eyebrow" id="bridgeEyebrow">Veterinaria</p>
       <h2>Perfecto.<br><em>Ahora vas a vivirlo.</em></h2>
       <div class="bridge">
         <div class="bridge-box before"><b>Antes</b><div class="old-nav sm"><span>Inicio</span><span>Servicios</span><span>Nosotros</span><span>Contacto</span></div><div class="old-lines"><i style="width:82%"></i><i style="width:63%"></i><i style="width:91%"></i></div></div>
         <div class="bridge-arrow">→</div>
         <div class="bridge-box"><b>Ahora</b><h3>¿Cómo podemos ayudarte?</h3><p>La persona llega con una necesidad. El recorrido la guía.</p></div>
       </div>
-      <button class="btn dark" data-go="c-welcome" data-track="entra_clinica">Entrar como cliente <span>→</span></button>
+      <button class="btn dark" id="bridgeGo" data-go="c-welcome" data-track="entra_clinica">Entrar como cliente <span>→</span></button>
     </div>
   </div>
 </section>
@@ -443,6 +443,278 @@
 </section>
 
 <!-- ============================================================
+     AL NATURAL (Comidas) — identidad propia del café
+     ============================================================ -->
+
+<!-- N1 · Bienvenida -->
+<section class="scr nscr" id="n-welcome">
+  <div class="n-frame">
+    <div class="n-hero">
+      <img class="n-hero-img" src="assets/experiencia/al-natural/hero.jpg" alt="">
+      <div class="n-hero-copy">
+        <div class="n-brand lt"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural<small>Café · Comida · Buenos momentos</small></span></div>
+        <div class="n-hero-text">
+          <h1>Bienvenido</h1>
+          <p>Un café, buena comida<br>y un lugar para disfrutar.</p>
+        </div>
+        <div class="n-feats">
+          <div><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Ingredientes<br>locales</span></div>
+          <div><i class="ic" style="--i:url(../experiencia/icons/utensils.svg)"></i><span>Cocina<br>real</span></div>
+          <div><i class="ic" style="--i:url(../experiencia/icons/cup.svg)"></i><span>Ambiente<br>acogedor</span></div>
+        </div>
+        <button class="n-btn copper" data-go="n-home">Comenzar la experiencia <span>→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- N2 · ¿En qué podemos ayudarte? -->
+<section class="scr nscr" id="n-home">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div></header>
+    <div class="n-card n-home-card">
+      <div class="n-greet"><h2>Hola <span class="wave">👋</span></h2><h3>¿En qué podemos<br>ayudarte hoy?</h3></div>
+      <div class="n-tiles">
+        <button class="n-tile" data-go="n-menu" data-track="n_menu"><i class="ic" style="--i:url(../experiencia/icons/utensils.svg)"></i><b>Ver el menú<br>y hacer un pedido</b></button>
+        <button class="n-tile" data-act="nStartBook" data-track="n_reservar"><i class="ic" style="--i:url(../experiencia/icons/calendar.svg)"></i><b>Reservar<br>una mesa</b></button>
+        <button class="n-tile" data-go="n-event" data-track="n_evento"><i class="ic" style="--i:url(../experiencia/icons/users.svg)"></i><b>Pedir para<br>un evento</b></button>
+        <button class="n-tile" data-go="n-question" data-track="n_pregunta"><i class="ic" style="--i:url(../experiencia/icons/chat.svg)"></i><b>Tengo una<br>pregunta</b></button>
+        <button class="n-tile" data-go="n-id" data-track="n_cliente"><i class="ic" style="--i:url(../experiencia/icons/user.svg)"></i><b>Ya soy<br>cliente</b></button>
+        <button class="n-tile" data-go="n-about" data-track="n_conocernos"><i class="ic" style="--i:url(../experiencia/icons/info.svg)"></i><b>Quiero<br>conocernos</b></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- N3 · Explora el menú -->
+<section class="scr nscr" id="n-menu">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-home">← Inicio</button></header>
+    <div class="n-card n-menu-card">
+      <h2>Explora el menú</h2>
+      <input id="nSearch" class="n-input" placeholder="Buscar un plato, bebida…" autocomplete="off">
+      <div class="n-tabs" id="nTabs">
+        <button class="on" data-ntab="todos">Todos</button><button data-ntab="cafes">Cafés</button><button data-ntab="comer">Para comer</button><button data-ntab="dulce">Dulces</button><button data-ntab="bebidas">Bebidas</button>
+      </div>
+      <div class="n-grid" id="nGrid"></div>
+      <p class="n-empty" id="nEmpty" hidden>No encontramos eso en el menú. Prueba con otra palabra.</p>
+    </div>
+    <button class="n-cartbar" id="nCartBar" data-go="n-cart" hidden><span id="nCartCount">0</span><b>Ver mi pedido</b><em id="nCartTotal">$0</em></button>
+  </div>
+</section>
+
+<!-- N4 · Detalle del producto -->
+<section class="scr nscr" id="n-item">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-menu">← Menú</button></header>
+    <div class="n-card n-item">
+      <div class="n-item-img"><img id="itImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></div>
+      <div class="n-item-body">
+        <div class="n-item-head"><h2 id="itName"></h2><b id="itPrice"></b></div>
+        <p class="n-mut" id="itDesc"></p>
+        <div class="n-tags"><span><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i>Ingredientes locales</span><span><i class="ic" style="--i:url(../experiencia/icons/utensils.svg)"></i>Receta de la casa</span></div>
+        <div class="n-buy">
+          <div class="n-step"><button data-act="nQtyMinus" aria-label="Menos">−</button><b id="itQty">1</b><button data-act="nQtyPlus" aria-label="Más">+</button></div>
+          <button class="n-btn copper" data-act="nAddItem">Agregar al pedido <span>→</span></button>
+        </div>
+        <h4 class="n-sub">También te puede interesar</h4>
+        <div class="n-also" id="itAlso"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- N5 · Mi pedido -->
+<section class="scr nscr" id="n-cart">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-menu">← Seguir pidiendo</button></header>
+    <div class="n-card n-cart">
+      <div class="n-cart-head"><h2>Mi pedido</h2><button class="n-clear" data-act="nClear">Vaciar</button></div>
+      <div id="cartLines"></div>
+      <p class="n-empty" id="cartEmpty" hidden>Tu pedido está vacío. Elige algo del menú.</p>
+      <h3 class="n-q">¿Cómo prefieres recibirlo?</h3>
+      <div class="n-modes" id="nModes">
+        <button class="on" data-mode="En el café"><i class="ic" style="--i:url(../experiencia/icons/cup.svg)"></i><b>En el café</b><small>Consumir en el lugar</small></button>
+        <button data-mode="Para llevar"><i class="ic" style="--i:url(../experiencia/icons/bag.svg)"></i><b>Para llevar</b><small>Te lo preparamos</small></button>
+        <button data-mode="Programado"><i class="ic" style="--i:url(../experiencia/icons/calendar.svg)"></i><b>Programar pedido</b><small>Elige fecha y hora</small></button>
+      </div>
+      <div class="n-sum"><span>Subtotal</span><b id="cartSubtotal">$0</b></div>
+      <button class="n-btn dkbrown" id="cartGo" data-act="nConfirmOrder">Continuar <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- N6 · Pedido confirmado -->
+<section class="scr nscr" id="n-order-done">
+  <div class="n-frame">
+    <div class="n-card n-confirm">
+      <div class="n-check"><i class="ic" style="--i:url(../experiencia/icons/check.svg)"></i></div>
+      <h2>¡Pedido recibido!</h2>
+      <p class="n-mut big" id="odSub"></p>
+      <div class="n-track"><div class="on"><i></i><span>Recibido</span></div><div class="on"><i></i><span>Preparando</span></div><div><i></i><span>Listo</span></div></div>
+      <div class="n-detail" id="odDetail"></div>
+      <button class="n-btn line" data-go="n-home">Volver al inicio</button>
+      <button class="n-finish" data-act="finish">Terminar →</button>
+    </div>
+  </div>
+</section>
+
+<!-- N7 · Reserva de mesa -->
+<section class="scr nscr" id="n-book">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-home">← Volver</button></header>
+    <div class="n-split">
+      <div class="n-split-img"><img src="assets/experiencia/al-natural/mesa.jpg" alt=""><p>Un buen momento<br>también se planea.</p></div>
+      <div class="n-card">
+        <p class="n-kicker">Reservar una mesa</p>
+        <h2>Reserva tu mesa.</h2>
+        <h3 class="n-q">¿Qué día te viene bien?</h3>
+        <div class="c-month"><button data-act="nMonthPrev" aria-label="Mes anterior">‹</button><b id="nMonthLabel"></b><button data-act="nMonthNext" aria-label="Mes siguiente">›</button></div>
+        <div class="c-dow"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+        <div class="c-days n-days" id="nDays"></div>
+        <h3 class="n-q">¿Qué horario prefieres?</h3>
+        <div class="n-slots" id="nSlots"></div>
+        <h3 class="n-q">¿Cuántas personas?</h3>
+        <div class="n-step big"><button data-act="nPeopleMinus" aria-label="Menos">−</button><b id="nPeople">2</b><button data-act="nPeoplePlus" aria-label="Más">+</button></div>
+        <button class="n-btn dkbrown" id="nBookGo" data-act="nConfirmBook" disabled>Continuar <span>→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- N8 · Reserva confirmada -->
+<section class="scr nscr" id="n-book-done">
+  <div class="n-frame">
+    <div class="n-split rev">
+      <div class="n-card n-confirm">
+        <div class="n-check"><i class="ic" style="--i:url(../experiencia/icons/check.svg)"></i></div>
+        <h2>¡Listo!</h2>
+        <p class="n-mut big">Tu mesa está reservada.</p>
+        <div class="n-detail">
+          <div><span>Fecha</span><b id="bdDate"></b></div>
+          <div><span>Hora</span><b id="bdTime"></b></div>
+          <div><span>Personas</span><b id="bdPeople"></b></div>
+          <div><span>Lugar</span><b>Al Natural Café · Tunja</b></div>
+        </div>
+        <button class="n-btn dkbrown" data-act="nIcs">Ver en mi calendario</button>
+        <button class="n-btn line" data-go="n-home">Volver al inicio</button>
+        <button class="n-finish" data-act="finish">Terminar →</button>
+      </div>
+      <div class="n-split-img"><img src="assets/experiencia/al-natural/mesa.jpg" alt=""><p>Nos vemos<br><em>pronto.</em></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- N9 · Pedido para evento -->
+<section class="scr nscr" id="n-event">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-home">← Volver</button></header>
+    <div class="n-card n-event">
+      <p class="n-kicker">Pedido para evento</p>
+      <h2>Cuéntanos sobre tu evento</h2>
+      <h3 class="n-q">¿Qué tipo de evento es?</h3>
+      <div class="n-modes four" id="nEventTypes">
+        <button class="on" data-etype="Reunión empresarial"><i class="ic" style="--i:url(../experiencia/icons/users.svg)"></i><b>Reunión empresarial</b></button>
+        <button data-etype="Cumpleaños"><i class="ic" style="--i:url(../experiencia/icons/gift.svg)"></i><b>Cumpleaños</b></button>
+        <button data-etype="Evento familiar"><i class="ic" style="--i:url(../experiencia/icons/user.svg)"></i><b>Evento familiar</b></button>
+        <button data-etype="Otro"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><b>Otro</b></button>
+      </div>
+      <div class="n-row"><h3 class="n-q">¿Para cuántas personas?</h3><div class="n-step"><button data-act="nEvMinus" aria-label="Menos">−</button><b id="nEvPeople">20</b><button data-act="nEvPlus" aria-label="Más">+</button></div></div>
+      <div class="n-row"><h3 class="n-q">Fecha del evento</h3><input id="nEvDate" type="date" class="n-input date"></div>
+      <h3 class="n-q">Cuéntanos qué necesitas</h3>
+      <textarea id="nEvNote" class="n-input area" placeholder="Ej. tipo de comida, horario, lugar, etc."></textarea>
+      <button class="n-btn dkbrown" data-act="nSendEvent">Solicitar cotización <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- N10 · Ya soy cliente -->
+<section class="scr nscr" id="n-id">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-home">← Volver</button></header>
+    <div class="n-card n-id">
+      <div class="n-badge"><i class="ic" style="--i:url(../experiencia/icons/bag.svg)"></i></div>
+      <h2>¡Qué bueno verte de nuevo!</h2>
+      <p class="n-mut">Ingresa tu código de cliente y accede más rápido.</p>
+      <input id="nCode" class="n-input" value="ANA001" placeholder="Ej. ANA001" autocomplete="off">
+      <button class="n-btn copper full" data-act="nCodeGo">Continuar <span>→</span></button>
+      <p class="n-hint" id="nCodeHint" hidden>Para esta demostración usa <b>ANA001</b>.</p>
+      <div class="n-or"><span>o continúa sin iniciar sesión</span></div>
+      <button class="n-btn line full" data-go="n-menu">Continuar como invitado</button>
+    </div>
+  </div>
+</section>
+
+<!-- N11 · Hola, Ana (cliente recurrente) -->
+<section class="scr nscr" id="n-client">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-home">← Inicio</button></header>
+    <div class="n-card n-client">
+      <div class="n-client-head"><h2>Hola, Ana <span class="wave">👋</span></h2><p class="n-mut">Qué gusto verte otra vez.</p></div>
+      <div class="n-usual">
+        <img src="assets/experiencia/al-natural/pastel-pollo.jpg" alt="">
+        <div><small>Lo de siempre</small><b>Pastel de pollo + Jugo natural en agua</b><span>$7.000 · Para llevar</span></div>
+        <button class="n-btn copper" data-act="nUsual">Pedir lo de siempre <span>→</span></button>
+      </div>
+      <div class="n-actions">
+        <button class="n-act" data-go="n-menu"><i class="ic" style="--i:url(../experiencia/icons/utensils.svg)"></i><b>Ver el<br>menú</b></button>
+        <button class="n-act" data-act="nStartBook"><i class="ic" style="--i:url(../experiencia/icons/calendar.svg)"></i><b>Reservar<br>una mesa</b></button>
+        <button class="n-act" data-go="n-event"><i class="ic" style="--i:url(../experiencia/icons/users.svg)"></i><b>Pedir para<br>un evento</b></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- N12 · Pregunta -->
+<section class="scr nscr" id="n-question">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-home">← Volver</button></header>
+    <div class="n-card n-id">
+      <p class="n-kicker">Tengo una pregunta</p>
+      <h2>¿Sobre qué es tu pregunta?</h2>
+      <div class="n-chips" id="nqChips"><button data-nq="Alergias o ingredientes">Alergias o ingredientes</button><button data-nq="Horarios">Horarios</button><button data-nq="Domicilios">Domicilios</button><button data-nq="Otro">Otro</button></div>
+      <textarea id="nqText" class="n-input area" placeholder="Cuéntanos en pocas palabras (opcional)"></textarea>
+      <button class="n-btn dkbrown full" id="nqSend" data-act="nSendQuestion" disabled>Enviar pregunta <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- N13 · Conocernos -->
+<section class="scr nscr" id="n-about">
+  <div class="n-frame">
+    <header class="n-top"><div class="n-brand dk"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural</span></div><button class="n-back" data-go="n-home">← Volver</button></header>
+    <div class="n-split">
+      <div class="n-split-img"><img src="assets/experiencia/al-natural/cafe.jpg" alt=""><p>Un café,<br>buena comida.</p></div>
+      <div class="n-card">
+        <p class="n-kicker">Conócenos</p>
+        <h2>Cocina real, hecha con calma.</h2>
+        <ul class="n-about">
+          <li><b>Quiénes somos</b><small>Un negocio de Tunja que elabora sus propios hojaldres, yogurt artesanal y café.</small></li>
+          <li><b>Qué hacemos</b><small>Café, cosas para comer, postres y bebidas naturales, en el local o para llevar.</small></li>
+          <li><b>Cómo trabajamos</b><small>Pides lo que quieres sin preguntar cada detalle: menú, reserva o pedido para tu evento.</small></li>
+          <li><b>Dónde estamos</b><small>Tunja, Boyacá.</small></li>
+        </ul>
+        <button class="n-btn dkbrown full" data-act="nStartBook">Quiero reservar <span>→</span></button>
+        <button class="n-finish" data-act="finish">Terminar →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- N14 · Resultado genérico -->
+<section class="scr nscr" id="n-result">
+  <div class="n-frame">
+    <div class="n-card n-confirm">
+      <div class="n-check"><i class="ic" style="--i:url(../experiencia/icons/check.svg)"></i></div>
+      <h2 id="nrTitle">Listo</h2>
+      <p class="n-mut big" id="nrSub"></p>
+      <button class="n-btn line" data-go="n-home">Volver al inicio</button>
+      <button class="n-finish" data-act="finish">Terminar →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      DANIEL — REVELACIÓN, CASOS, CIERRE
      ============================================================ -->
 <section class="scr dscr" id="s-reveal1">
@@ -513,6 +785,6 @@
 </section>
 
 </div>
-<script src="assets/js/experiencia.js?v=8"></script>
+<script src="assets/js/experiencia.js?v=16"></script>
 </body>
 </html>
