@@ -17,18 +17,502 @@
 <meta property="og:description" content="Vive como cliente real de un negocio y descubre qué es un recorrido diseñado entre un negocio y sus clientes.">
 <meta property="og:image" content="https://www.danielcardenas.co/assets/images/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Vivir la experiencia — Daniel Cárdenas">
-<meta name="twitter:description" content="Vive como cliente real de un negocio y descubre qué es un recorrido diseñado entre un negocio y sus clientes.">
-<meta name="twitter:image" content="https://www.danielcardenas.co/assets/images/og-cover.png">
 <meta name="robots" content="noindex,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.css">
-<link rel="stylesheet" href="assets/css/experiencia.css">
-<style>body{background:#151515}</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/experiencia.css?v=13">
 </head>
 <body>
-<div id="expOverlay"></div>
-<script src="assets/js/experiencia.js"></script>
+<div id="exp">
+<div class="progress"><i id="expProgress"></i></div>
+<a class="exp-exit" href="index.html" aria-label="Salir de la experiencia">✕</a>
+
+<!-- ============ DANIEL · 01 ENTRADA ============ -->
+<section class="scr dscr d-hero on" id="s-gate">
+  <div class="d-bg"></div>
+  <div class="d-wrap">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main">
+      <p class="eyebrow">Diseño de experiencias para negocios</p>
+      <h1>Hola, me alegra<br>que estés aquí.</h1>
+      <p class="lead">Tu negocio tiene un objetivo. Yo diseño el camino para llegar a él.</p>
+      <p class="lead strong">¿Quieres conocer el sitio o prefieres vivir una experiencia?</p>
+      <div class="d-cta">
+        <a class="btn ghost" href="index.html" data-track="gate_conocer">Conocer el sitio <span>→</span></a>
+        <button class="btn dark" data-go="s-know" data-track="gate_vivir">Vivir la experiencia <span>→</span></button>
+      </div>
+    </div>
+    <footer class="d-foot">danielcardenas.co</footer>
+  </div>
+</section>
+
+<!-- ============ DANIEL · 02 ¿SABES QUÉ ES? ============ -->
+<section class="scr dscr" id="s-know">
+  <div class="d-wrap center">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main narrow">
+      <p class="eyebrow">Antes de empezar</p>
+      <h2>¿Sabes qué es<br>una experiencia?</h2>
+      <div class="d-choices two">
+        <button class="d-choice" data-go="s-cat" data-track="know_si"><em>01</em><strong>Sí, lo sé</strong><small>Quiero verla en acción.</small></button>
+        <button class="d-choice" data-go="s-before" data-track="know_no"><em>02</em><strong>No</strong><small>Quiero descubrirlo.</small></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DANIEL · 03 ANTES ============ -->
+<section class="scr dscr" id="s-before">
+  <div class="d-wrap center">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main narrow">
+      <p class="eyebrow">Antes</p>
+      <h2>Durante mucho tiempo,<br>los negocios funcionaron así.</h2>
+      <div class="old-web">
+        <div class="old-bar"><i></i><i></i><i></i><span>tunegocio.com</span></div>
+        <div class="old-nav"><span>Inicio</span><span>Servicios</span><span>Nosotros</span><span>Contacto</span></div>
+        <div class="old-body">
+          <div class="old-lines"><i style="width:82%"></i><i style="width:64%"></i><i style="width:92%"></i><i style="width:70%"></i><i style="width:78%"></i></div>
+          <div class="old-card"><b>¿Qué necesitas?</b><i></i><i style="width:70%"></i></div>
+        </div>
+      </div>
+      <div class="chips-row"><span>llamar</span><span>escribir</span><span>preguntar</span><span>buscar información</span><span>explicar lo que necesitas</span><span>entender cómo funciona</span></div>
+      <p class="lead">El cliente buscaba, leía, intentaba entender y, muchas veces, terminaba preguntando.</p>
+      <button class="btn dark" data-go="s-change">Continuar <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DANIEL · 04 EL CAMBIO ============ -->
+<section class="scr dscr" id="s-change">
+  <div class="d-wrap center">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main narrow">
+      <p class="eyebrow">El cambio</p>
+      <h2>Pero las personas<br><em>cambiaron.</em></h2>
+      <p class="lead">Llegan desde distintos lugares con una necesidad concreta.</p>
+      <div class="d-choices two static">
+        <div class="d-choice"><em>01</em><strong>Instagram</strong></div>
+        <div class="d-choice"><em>02</em><strong>Google</strong></div>
+        <div class="d-choice"><em>03</em><strong>WhatsApp</strong></div>
+        <div class="d-choice"><em>04</em><strong>QR / punto físico</strong></div>
+      </div>
+      <button class="btn dark" data-go="s-idea">Continuar <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DANIEL · 05 LA IDEA ============ -->
+<section class="scr dscr" id="s-idea">
+  <div class="d-wrap center">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main narrow">
+      <p class="eyebrow">La idea</p>
+      <h2>No necesita aprender<br>cómo funciona tu negocio.</h2>
+      <p class="lead big">Necesita conseguir lo que vino a buscar.</p>
+      <p class="note-it">Vamos a vivirlo.</p>
+      <button class="btn dark" data-go="s-cat">Elegir una experiencia <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DANIEL · 06 CATEGORÍAS (una sola vez) ============ -->
+<section class="scr dscr" id="s-cat">
+  <div class="d-wrap center">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main">
+      <p class="eyebrow">Tu experiencia</p>
+      <h2>¿Qué experiencia<br>quieres vivir?</h2>
+      <p class="lead">Elige el negocio que más se parece al tuyo.</p>
+      <div class="d-choices four">
+        <button class="d-choice cat" data-cat="veterinaria"><em>01</em><strong>Veterinaria</strong><small>Salud, información, citas y seguimiento.</small></button>
+        <button class="d-choice cat soon" data-cat="comidas"><em>02</em><strong>Comidas</strong><small>Descubrir, elegir, pedir o reservar.</small><b>Próximamente</b></button>
+        <button class="d-choice cat soon" data-cat="inmobiliaria"><em>03</em><strong>Inmobiliaria</strong><small>Encontrar, comparar y avanzar.</small><b>Próximamente</b></button>
+        <button class="d-choice cat soon" data-cat="servicios"><em>04</em><strong>Servicios / asesoría</strong><small>Orientar, solicitar y continuar.</small><b>Próximamente</b></button>
+      </div>
+      <p class="cat-note" id="catNote" hidden>Esa experiencia está en construcción. Mientras tanto, vive la de Veterinaria — ya funciona completa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DANIEL · 07 PUENTE ============ -->
+<section class="scr dscr" id="s-bridge">
+  <div class="d-wrap center">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main narrow">
+      <p class="eyebrow">Veterinaria</p>
+      <h2>Perfecto.<br><em>Ahora vas a vivirlo.</em></h2>
+      <div class="bridge">
+        <div class="bridge-box before"><b>Antes</b><div class="old-nav sm"><span>Inicio</span><span>Servicios</span><span>Nosotros</span><span>Contacto</span></div><div class="old-lines"><i style="width:82%"></i><i style="width:63%"></i><i style="width:91%"></i></div></div>
+        <div class="bridge-arrow">→</div>
+        <div class="bridge-box"><b>Ahora</b><h3>¿Cómo podemos ayudarte?</h3><p>La persona llega con una necesidad. El recorrido la guía.</p></div>
+      </div>
+      <button class="btn dark" data-go="c-welcome" data-track="entra_clinica">Entrar como cliente <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLÍNICA PATITAS FELICES — identidad propia de la clínica
+     ============================================================ -->
+
+<!-- C1 · Bienvenida -->
+<section class="scr cscr" id="c-welcome">
+  <div class="c-frame">
+    <div class="c-hero">
+      <div class="c-hero-copy">
+        <div class="c-brand"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div>
+        <div class="c-hero-text">
+          <h1>Bienvenido</h1>
+          <p>Tu mascota,<br>en las mejores manos.</p>
+        </div>
+        <div class="c-hero-foot"><em></em><small>Un lugar donde cada patita cuenta.</small></div>
+      </div>
+      <img class="c-hero-dog" src="assets/experiencia/img/toby-hero.jpg" alt="Toby, Border Collie">
+      <button class="c-btn gold c-hero-btn" data-go="c-home">Comenzar <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- C2 · ¿En qué podemos ayudarte? -->
+<section class="scr cscr" id="c-home">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div></header>
+    <div class="c-card c-home-card">
+      <div class="c-greet"><h2>Hola <span class="wave">👋</span></h2><h3>¿En qué podemos ayudarte?</h3><p>Cuéntanos qué necesitas y te llevamos directo al siguiente paso.</p></div>
+      <div class="c-tiles">
+        <button class="c-tile" data-go="c-pets" data-track="v_mascota"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><b>Quiero saber<br>sobre mi mascota</b></button>
+        <button class="c-tile" data-act="startBooking" data-track="v_agendar"><i class="ic" style="--i:url(../experiencia/icons/calendar.svg)"></i><b>Quiero<br>agendar</b></button>
+        <button class="c-tile" data-go="c-question" data-track="v_pregunta"><i class="ic" style="--i:url(../experiencia/icons/chat.svg)"></i><b>Tengo una<br>pregunta</b></button>
+        <button class="c-tile alert" data-go="c-emergency" data-track="v_emergencia"><i class="ic" style="--i:url(../experiencia/icons/plus.svg)"></i><b>Tengo una<br>emergencia</b></button>
+        <button class="c-tile" data-go="c-id" data-track="v_cliente"><i class="ic" style="--i:url(../experiencia/icons/user.svg)"></i><b>Ya soy<br>cliente</b></button>
+        <button class="c-tile" data-go="c-about" data-track="v_conocerlos"><i class="ic" style="--i:url(../experiencia/icons/info.svg)"></i><b>Quiero<br>conocernos</b></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C3 · Selección de mascota -->
+<section class="scr cscr dark" id="c-pets">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand lt"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-home">← Volver</button></header>
+    <div class="c-pets-wrap">
+      <h2>¿De quién quieres saber?</h2>
+      <div class="c-pets">
+        <button class="c-pet sel" data-act="openPet" data-pet="Toby"><img src="assets/experiencia/img/toby-portrait.jpg" alt="Toby"><span>Toby</span><small>Border Collie · TOBY774</small></button>
+        <button class="c-pet" data-act="openPetSoon" data-pet="Luna"><img src="assets/experiencia/img/luna.jpg" alt="Luna"><span>Luna</span><small>Gata · LUNA221</small></button>
+        <button class="c-pet" data-act="openPetSoon" data-pet="Max"><img src="assets/experiencia/img/max.jpg" alt="Max"><span>Max</span><small>Golden Retriever · MAX109</small></button>
+      </div>
+      <button class="c-btn ghost-gold" data-act="openPetSoon" data-pet="otra">+ Agregar otra mascota</button>
+    </div>
+  </div>
+</section>
+
+<!-- C4 · Ya soy cliente -->
+<section class="scr cscr" id="c-id">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-home">← Volver</button></header>
+    <div class="c-card c-id-card">
+      <p class="c-kicker">Cliente recurrente</p>
+      <h2>Bienvenido de nuevo.</h2>
+      <p class="c-mut">Ingresa el código de tu mascota y entra directo a su perfil.</p>
+      <input id="petCode" class="c-input" value="TOBY774" placeholder="Ej. TOBY774" autocomplete="off">
+      <button class="c-btn dkgreen" data-act="codeGo">Continuar <span>→</span></button>
+      <p class="c-hint" id="codeHint" hidden>Para esta demostración usa <b>TOBY774</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- C5 · Perfil de Toby -->
+<section class="scr cscr" id="c-toby">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-home">← Inicio</button></header>
+    <div class="c-card c-profile">
+      <div class="c-banner">
+        <img src="assets/experiencia/img/toby-hero.jpg" alt="">
+        <div class="c-banner-copy"><h2>Toby</h2><p>Border Collie · TOBY774</p><span class="pill ok">● Paciente activo</span></div>
+        <span class="c-edit">Editar perfil</span>
+      </div>
+      <div class="c-tabs" id="petTabs">
+        <button class="on" data-tab="resumen">Resumen</button><button data-tab="historial">Historial</button><button data-tab="vacunas">Vacunas</button><button data-tab="alimentacion">Alimentación</button>
+      </div>
+      <div class="c-tabpane on" id="tab-resumen">
+        <div class="c-stats">
+          <div><b>3 años</b><small>Edad</small></div><div><b>21 kg</b><small>Peso</small></div><div><b>Macho</b><small>Sexo</small></div><div><b>Sano</b><small>Estado actual</small></div>
+        </div>
+        <p class="c-story">Toby es un perro activo, cariñoso y lleno de energía. Su última consulta fue hace 2 meses; su próximo control está por agendarse.</p>
+      </div>
+      <div class="c-tabpane" id="tab-historial">
+        <ol class="c-timeline">
+          <li><time>12 Ago 2026</time><div><b>Control general</b><small>Todo en orden</small></div></li>
+          <li><time>03 Feb 2026</time><div><b>Vacunación anual</b><small>Séxtuple</small></div></li>
+          <li><time>15 Dic 2025</time><div><b>Consulta por otitis</b><small>Tratamiento completado</small></div></li>
+          <li><time>28 Oct 2025</time><div><b>Desparasitación</b><small>Interna y externa</small></div></li>
+        </ol>
+      </div>
+      <div class="c-tabpane" id="tab-vacunas">
+        <ul class="c-vax">
+          <li><i class="ic" style="--i:url(../experiencia/icons/medicine.svg)"></i><div><b>Vacuna séxtuple</b><small>Aplicada 03 Feb 2026 · Próxima 03 Feb 2027</small></div><span class="pill ok">Al día</span></li>
+          <li><i class="ic" style="--i:url(../experiencia/icons/medicine.svg)"></i><div><b>Rabia</b><small>Aplicada 03 Feb 2026 · Próxima 03 Feb 2027</small></div><span class="pill ok">Al día</span></li>
+          <li><i class="ic" style="--i:url(../experiencia/icons/medicine.svg)"></i><div><b>Bordetella</b><small>Aplicada 15 Dic 2025 · Próxima 15 Dic 2026</small></div><span class="pill next">Próxima</span></li>
+          <li><i class="ic" style="--i:url(../experiencia/icons/medicine.svg)"></i><div><b>Leptospira</b><small>Aplicada 15 Dic 2025 · Próxima 15 Dic 2026</small></div><span class="pill next">Próxima</span></li>
+        </ul>
+      </div>
+      <div class="c-tabpane" id="tab-alimentacion">
+        <div class="c-food">
+          <div class="c-food-img"><img src="assets/experiencia/img/food.jpg" alt=""></div>
+          <div class="c-food-info">
+            <div class="row"><span>Alimento</span><b>Nutra Nuggets · Adulto</b></div>
+            <div class="row"><span>Ración diaria</span><b>320 g · 2 veces al día</b></div>
+            <div class="row"><span>Presentación</span><b>Bulto de 15 kg</b></div>
+            <div class="row"><span>Alcanza para</span><b>≈ 47 días</b></div>
+            <button class="c-btn dkgreen" data-go="c-food-order">Pedir comida <span>→</span></button>
+          </div>
+        </div>
+      </div>
+      <h3 class="c-what">¿Qué quieres hacer?</h3>
+      <div class="c-actions">
+        <button class="c-act" data-go="c-food-order"><i class="ic" style="--i:url(../experiencia/icons/food.svg)"></i><b>Pedir<br>comida</b></button>
+        <button class="c-act" data-go="c-med"><i class="ic" style="--i:url(../experiencia/icons/medicine.svg)"></i><b>Pedir<br>medicamento</b></button>
+        <button class="c-act" data-act="startBooking"><i class="ic" style="--i:url(../experiencia/icons/calendar.svg)"></i><b>Agendar<br>control</b></button>
+        <button class="c-act" data-act="tabHistorial"><i class="ic" style="--i:url(../experiencia/icons/history.svg)"></i><b>Ver<br>historial</b></button>
+        <button class="c-act alert" data-go="c-emergency"><i class="ic" style="--i:url(../experiencia/icons/plus.svg)"></i><b>Emergencia</b></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C6 · Agendar: día -->
+<section class="scr cscr" id="c-day">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-act="backFromBooking">← Volver</button></header>
+    <div class="c-split">
+      <div class="c-split-img"><img src="assets/experiencia/img/toby-running.jpg" alt="Toby corriendo"><p>Un control a tiempo es más momentos juntos.</p></div>
+      <div class="c-card c-cal">
+        <p class="c-kicker">Agendar control</p>
+        <h2>¿Qué día te viene bien?</h2>
+        <div class="c-month"><button data-act="monthPrev" aria-label="Mes anterior">‹</button><b id="monthLabel"></b><button data-act="monthNext" aria-label="Mes siguiente">›</button></div>
+        <div class="c-dow"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+        <div class="c-days" id="calDays"></div>
+        <button class="c-btn dkgreen" id="dayNext" data-act="dayNext" disabled>Continuar <span>→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C7 · Agendar: hora -->
+<section class="scr cscr" id="c-time">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-day">← Volver</button></header>
+    <div class="c-card c-time-card">
+      <p class="c-kicker">Agendar control</p>
+      <h2>¿Qué horario prefieres?</h2>
+      <p class="c-mut" id="timeDayLabel"></p>
+      <div class="c-slots" id="slots"></div>
+      <button class="c-btn dkgreen" id="timeNext" data-act="confirmBooking" disabled>Confirmar cita <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- C8 · Confirmación -->
+<section class="scr cscr" id="c-confirm">
+  <div class="c-frame">
+    <div class="c-card c-confirm">
+      <div class="c-check"><i class="ic" style="--i:url(../experiencia/icons/check.svg)"></i></div>
+      <h2>¡Listo!</h2>
+      <p class="c-mut big">Cita de Toby confirmada.</p>
+      <div class="c-detail">
+        <div><span>Fecha</span><b id="cfDate"></b></div>
+        <div><span>Hora</span><b id="cfTime"></b></div>
+        <div><span>Consulta</span><b>Control general</b></div>
+        <div><span>Clínica</span><b>Clínica Patitas Felices</b></div>
+        <div><span>Ubicación</span><b>Cra. 15 # 93-21, Bogotá</b></div>
+      </div>
+      <button class="c-btn dkgreen" data-act="downloadIcs">Ver en mi calendario</button>
+      <button class="c-btn line" data-go="c-home">Volver al inicio</button>
+      <button class="c-finish" data-act="finish">Terminar →</button>
+    </div>
+  </div>
+</section>
+
+<!-- C9 · Pedir comida -->
+<section class="scr cscr" id="c-food-order">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-toby">← Volver a Toby</button></header>
+    <div class="c-split">
+      <div class="c-split-img"><img src="assets/experiencia/img/food.jpg" alt=""></div>
+      <div class="c-card">
+        <p class="c-kicker">Pedido</p>
+        <h2>La comida de Toby.</h2>
+        <p class="c-mut">Ya sabemos qué come y cuánto. Solo confirma.</p>
+        <div class="c-detail flat">
+          <div><span>Alimento</span><b>Nutra Nuggets · Adulto</b></div>
+          <div><span>Presentación</span><b>Bulto de 15 kg</b></div>
+          <div><span>Cantidad</span><b>1 unidad</b></div>
+          <div><span>Entrega</span><b>Recoger en clínica · mañana</b></div>
+        </div>
+        <button class="c-btn dkgreen" data-act="sendResult" data-title="Pedido enviado" data-sub="El pedido de comida de Toby quedó en preparación. Te avisamos cuando esté listo.">Enviar pedido <span>→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C10 · Pedir medicamento -->
+<section class="scr cscr" id="c-med">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-toby">← Volver a Toby</button></header>
+    <div class="c-split">
+      <div class="c-split-img"><img src="assets/experiencia/img/vaccine.jpg" alt=""></div>
+      <div class="c-card">
+        <p class="c-kicker">Medicamento</p>
+        <h2>La indicación ya está registrada.</h2>
+        <p class="c-mut">Pide la renovación sin tener que llamar a preguntar cuál era.</p>
+        <div class="c-detail flat">
+          <div><span>Medicamento</span><b>Antiparasitario mensual</b></div>
+          <div><span>Última indicación</span><b>12 Ago 2026 · Dr. Ramírez</b></div>
+          <div><span>Dosis</span><b>1 tableta cada 30 días</b></div>
+        </div>
+        <button class="c-btn dkgreen" data-act="sendResult" data-title="Solicitud enviada" data-sub="Pedimos la renovación del medicamento de Toby. La clínica te confirma disponibilidad hoy.">Solicitar medicamento <span>→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C11 · Pregunta -->
+<section class="scr cscr" id="c-question">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-home">← Volver</button></header>
+    <div class="c-card c-id-card">
+      <p class="c-kicker">Tengo una pregunta</p>
+      <h2>¿Sobre qué es tu pregunta?</h2>
+      <div class="c-chips" id="qChips"><button data-q="Precios">Precios</button><button data-q="Un servicio">Un servicio</button><button data-q="Mi mascota">Mi mascota</button><button data-q="Otro">Otro</button></div>
+      <textarea id="qText" class="c-input area" placeholder="Cuéntanos en pocas palabras (opcional)"></textarea>
+      <button class="c-btn dkgreen" id="qSend" data-act="sendQuestion" disabled>Enviar pregunta <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- C12 · Emergencia -->
+<section class="scr cscr dark" id="c-emergency">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand lt"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-home">← Volver</button></header>
+    <div class="c-emerg">
+      <span class="pill live">● Urgencias abiertas · 24 h</span>
+      <h2>Estamos aquí.</h2>
+      <p>Sin formularios. Un veterinario de turno te atiende ahora mismo.</p>
+      <button class="c-btn gold big" data-act="sendResult" data-title="Te conectamos con el equipo" data-sub="Un veterinario de turno te está llamando. Mientras tanto, mantén a tu mascota tranquila y abrigada.">Llamar ahora <span>→</span></button>
+      <button class="c-btn ghost-gold" data-act="sendResult" data-title="Solicitud enviada" data-sub="Recibimos tu emergencia por WhatsApp. El equipo de turno te responde en este momento.">Escribir por WhatsApp</button>
+      <small>Cra. 15 # 93-21, Bogotá · a 10 minutos de ti</small>
+    </div>
+  </div>
+</section>
+
+<!-- C13 · Conocernos -->
+<section class="scr cscr" id="c-about">
+  <div class="c-frame">
+    <header class="c-top"><div class="c-brand dk"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div><button class="c-back" data-go="c-home">← Volver</button></header>
+    <div class="c-split">
+      <div class="c-split-img"><img src="assets/experiencia/img/paw-care.jpg" alt=""></div>
+      <div class="c-card">
+        <p class="c-kicker">Conócenos</p>
+        <h2>Cuidamos a tu mascota como si fuera nuestra.</h2>
+        <ul class="c-about">
+          <li><b>Quiénes somos</b><small>Un equipo de 4 veterinarios que conocen a cada paciente por su nombre.</small></li>
+          <li><b>Qué hacemos</b><small>Medicina preventiva, vacunación, consulta general y urgencias.</small></li>
+          <li><b>Cómo trabajamos</b><small>Toda la información de tu mascota en un solo lugar, sin repetirla cada vez.</small></li>
+          <li><b>Contacto</b><small>Cra. 15 # 93-21, Bogotá · Lun a Sáb, 8 a. m. – 6 p. m.</small></li>
+        </ul>
+        <button class="c-btn dkgreen" data-act="startBooking">Quiero agendar <span>→</span></button>
+        <button class="c-finish" data-act="finish">Terminar →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C14 · Resultado genérico -->
+<section class="scr cscr" id="c-result">
+  <div class="c-frame">
+    <div class="c-card c-confirm">
+      <div class="c-check"><i class="ic" style="--i:url(../experiencia/icons/check.svg)"></i></div>
+      <h2 id="rTitle">Listo</h2>
+      <p class="c-mut big" id="rSub"></p>
+      <button class="c-btn line" data-go="c-home">Volver al inicio</button>
+      <button class="c-finish" data-act="finish">Terminar →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DANIEL — REVELACIÓN, CASOS, CIERRE
+     ============================================================ -->
+<section class="scr dscr" id="s-reveal1">
+  <div class="d-wrap center">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main narrow">
+      <p class="eyebrow">Revelación</p>
+      <h2>¿Te diste cuenta<br>de lo que acabas de hacer?</h2>
+      <div class="checks">
+        <div><b>✓</b>No buscaste una página.</div>
+        <div><b>✓</b>No leíste un catálogo.</div>
+        <div><b>✓</b>No tuviste que preguntar por WhatsApp.</div>
+        <div><b>✓</b>Solo dijiste lo que necesitabas.</div>
+      </div>
+      <button class="btn dark" data-go="s-reveal2" data-track="revelacion">Descubrir qué acabas de vivir <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="scr dscr inv" id="s-reveal2">
+  <div class="d-wrap">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="reveal">
+      <div class="reveal-photo"><img src="assets/experiencia/img/daniel.jpeg" alt="Daniel Cárdenas"></div>
+      <div class="reveal-copy">
+        <p class="eyebrow">Eso es lo que hago</p>
+        <h2>Acabas de vivir<br><em>una experiencia diseñada.</em></h2>
+        <p class="lead">No diseñé una página para ti.<br><strong>Diseñé el camino que acabas de recorrer.</strong></p>
+        <div class="method"><div><b>01</b>Entender</div><div><b>02</b>Detectar</div><div><b>03</b>Diseñar</div><div><b>04</b>Construir</div><div><b>05</b>Mejorar</div></div>
+        <p class="lead sm">Diseño lo que pasa entre tu negocio y tus clientes.</p>
+        <button class="btn light" data-go="s-cases">Ver casos reales <span>→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scr dscr" id="s-cases">
+  <div class="d-wrap">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="d-main wide">
+      <p class="eyebrow">Casos reales</p>
+      <h2>La misma forma de pensar,<br><em>en negocios distintos.</em></h2>
+      <div class="cases">
+        <a class="case" href="trabajo/hojaldito/" target="_blank" rel="noopener"><div class="case-img"><img src="assets/images/cases/hojaldito-mockup-inicio.webp" alt="Hojaldito"></div><div class="case-body"><h3>Hojaldito</h3><p>Del interés → a una oportunidad comercial.</p></div></a>
+        <a class="case" href="trabajo/al-natural/" target="_blank" rel="noopener"><div class="case-img"><img src="assets/images/cases/al-natural-mockup-inicio.webp" alt="Al Natural"></div><div class="case-body"><h3>Al Natural</h3><p>Del descubrimiento → a la compra.</p></div></a>
+        <a class="case" href="trabajo/sena-vitrina/" target="_blank" rel="noopener"><div class="case-img"><img src="assets/images/cases/sena-mockup-inicio.webp" alt="SENA Vitrina"></div><div class="case-body"><h3>SENA Vitrina</h3><p>De la oferta → a la solicitud.</p></div></a>
+        <div class="case brice"><div class="case-img"><span>Reservas</span></div><div class="case-body"><h3>Brice</h3><p>De una necesidad → a una reserva.</p></div></div>
+      </div>
+      <button class="btn dark" data-go="s-close">Ahora piensa en tu negocio <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="scr dscr" id="s-close">
+  <div class="d-wrap">
+    <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
+    <div class="close-grid">
+      <div>
+        <p class="eyebrow">Ahora es tu turno</p>
+        <h2>Ahora imagina esto<br>en tu negocio.</h2>
+        <p class="lead">Tu cliente llega. ¿Qué debería poder hacer sin que tú tengas que explicárselo?</p>
+        <textarea id="idea" class="d-textarea" placeholder="Quiero que mis clientes puedan..."></textarea>
+        <button class="btn dark" data-act="handoff" data-track="cta_hablar">Quiero hablar con Daniel <span>→</span></button>
+      </div>
+      <div class="close-photo"><img src="assets/experiencia/img/daniel.jpeg" alt="Daniel Cárdenas"></div>
+    </div>
+  </div>
+</section>
+
+</div>
+<script src="assets/js/experiencia.js?v=8"></script>
 </body>
 </html>
