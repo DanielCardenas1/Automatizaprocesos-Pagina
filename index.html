@@ -34,13 +34,14 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home-v7.css?v=6">
+<link rel="stylesheet" href="assets/css/home-v7.css?v=10">
 </head>
 <body>
 
 <header class="dc-nav">
   <a class="dc-brand" href="#inicio"><img src="assets/images/home/logo-dc-white.png" alt="DC"><strong>Daniel Cárdenas</strong></a>
-  <nav class="dc-navlinks" aria-label="Principal"><a href="#experiencias">Experiencias</a><a href="#casos">Casos</a><a href="#metodo">Método</a><a href="#sobre-mi">Sobre mí</a></nav>
+  <button class="dc-menu" type="button" aria-expanded="false" aria-controls="dcNav">Menú</button>
+  <nav class="dc-navlinks" id="dcNav" aria-label="Principal"><a href="#experiencias">Experiencias</a><a href="#casos">Casos</a><a href="#metodo">Método</a><a href="#sobre-mi">Sobre mí</a><a class="only-m" href="#diagnostico" data-pre-diagnostic="1">Hablemos</a></nav>
   <a class="dc-navcta" href="#diagnostico" data-pre-diagnostic="1">Hablemos <span>→</span></a>
 </header>
 
@@ -49,10 +50,11 @@
 <!-- 1 · HERO -->
 <section class="dc-hero">
   <div class="dc-hero-content">
-    <p class="dc-eyebrow">Tu negocio tiene un objetivo.</p>
-    <h1>Yo diseño<br>el camino<br><em>para llegar a él.</em></h1>
-    <p class="dc-lead">Diseño lo que pasa entre tu negocio y tus clientes. Experiencias que simplifican, conectan y generan resultados reales.</p>
-    <div class="dc-actions"><a class="dc-btn" href="#experiencias" data-track="hero_como_funciona">Ver cómo funciona <span>→</span></a><a class="dc-btn ghost" href="#metodo">Conocer el método</a></div>
+    <p class="dc-eyebrow">Diseño de experiencias para negocios</p>
+    <h1>Tu negocio tiene un objetivo.<br><em>Yo diseño el camino para llegar a él.</em></h1>
+    <p class="dc-lead">Diseño lo que pasa entre tu negocio y tus clientes.</p>
+    <p class="dc-sub"><strong>Una experiencia</strong> es el recorrido completo para que tu cliente consiga lo que vino a buscar —agendar, pedir, reservar— sin llamar ni preguntar.</p>
+    <div class="dc-actions"><a class="dc-btn" href="#experiencias" data-track="hero_probar">Probar una experiencia <span>→</span></a><a class="dc-btn ghost" href="#metodo">Conocer el método</a></div>
     <ul class="dc-props">
       <li><b class="ico" style="--i:url(../images/home/icons/route.svg)"></b>Recorridos<br>más simples</li>
       <li><b class="ico" style="--i:url(../images/home/icons/heart.svg)"></b>Clientes más<br>satisfechos</li>
@@ -60,6 +62,7 @@
       <li><b class="ico" style="--i:url(../images/home/icons/chart.svg)"></b>Resultados<br>medibles</li>
     </ul>
   </div>
+  <a class="dc-scroll" href="#experiencias" aria-label="Seguir bajando"><span>Baja y pruébalo</span><i>↓</i></a>
 </section>
 
 <!-- 2 · PRUÉBALO -->
@@ -72,19 +75,19 @@
       <button type="button" role="tab" class="on" aria-selected="true" data-tab="vet">Veterinaria</button>
       <button type="button" role="tab" aria-selected="false" data-tab="food">Gastronomía</button>
       <button type="button" role="tab" aria-selected="false" data-tab="home">Inmobiliaria</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="serv">Servicios</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="serv">Servicios <small>pronto</small></button>
     </div>
     <div class="dc-pick-wrap">
-      <a class="dc-pick on" data-panel="vet" href="experiencia.html?exp=veterinaria" data-track="try_vet"><i class="ico" style="--i:url(../experiencia/icons/paw.svg)"></i><span><strong>Clínica<br>Patitas Felices</strong><small>Cuidado y bienestar para mascotas.</small><em>Ejemplo</em></span><b class="go">→</b></a>
-      <a class="dc-pick" data-panel="food" href="experiencia.html?exp=comidas" data-track="try_food"><i class="ico" style="--i:url(../experiencia/icons/utensils.svg)"></i><span><strong>Al Natural</strong><small>Café y comida con un recorrido de compra guiado.</small><em>Caso real</em></span><b class="go">→</b></a>
-      <a class="dc-pick" data-panel="home" href="https://construraizsas.inmo.co" target="_blank" rel="noopener" data-track="try_home"><i class="ico" style="--i:url(../images/home/icons/building.svg)"></i><span><strong>Construraíz</strong><small>Inmobiliaria con asesoría personalizada.</small><em>Prototipo</em></span><b class="go">↗</b></a>
-      <div class="dc-pick soon" data-panel="serv"><i class="ico" style="--i:url(../images/home/icons/briefcase.svg)"></i><span><strong>Servicios</strong><small>Estamos preparando esta experiencia.</small><em>Próximamente</em></span></div>
+      <a class="dc-pick on" data-panel="vet" href="experiencia.html?exp=veterinaria" data-track="try_vet"><i class="ico" style="--i:url(../experiencia/icons/paw.svg)"></i><span><strong>Clínica<br>Patitas Felices</strong><small>Cuidado y bienestar para mascotas.</small><em>Ejemplo</em></span><b class="go">Vivir esta experiencia <u>→</u></b></a>
+      <a class="dc-pick" data-panel="food" href="experiencia.html?exp=comidas" data-track="try_food"><i class="ico" style="--i:url(../experiencia/icons/utensils.svg)"></i><span><strong>Al Natural</strong><small>Café y comida con un recorrido de compra guiado.</small><em>Caso real</em></span><b class="go">Vivir esta experiencia <u>→</u></b></a>
+      <a class="dc-pick" data-panel="home" href="https://galardon-construraiz.vercel.app" target="_blank" rel="noopener" data-track="try_home"><i class="ico" style="--i:url(../images/home/icons/building.svg)"></i><span><strong>Construraíz</strong><small>Inmobiliaria con asesoría personalizada.</small><em>Prototipo</em></span><b class="go">Ver el sitio <u>↗</u></b><span class="dc-pick-note">Se abre en otra pestaña</span></a>
+      <div class="dc-pick soon" data-panel="serv"><i class="ico" style="--i:url(../images/home/icons/briefcase.svg)"></i><span><strong>Servicios</strong><small>Estamos preparando esta experiencia.</small><em>Próximamente</em></span><b class="go off">Próximamente</b></div>
     </div>
   </div>
-  <div class="dc-try-media" aria-hidden="true">
-    <figure class="tp on" data-panel="vet"><img src="assets/images/home/vet.jpg" alt="" style="object-position:94% 50%"><figcaption>Una experiencia pensada para quienes también son parte de tu historia.</figcaption></figure>
-    <figure class="tp" data-panel="food"><img src="assets/images/home/natural.jpg" alt="" style="object-position:76% 50%"><figcaption>Más que una comida, es un momento.</figcaption></figure>
-    <figure class="tp" data-panel="home"><img src="assets/images/home/construraiz.jpg" alt=""><figcaption>Encontrar el lugar correcto también se diseña.</figcaption></figure>
+  <div class="dc-try-media">
+    <figure class="tp on" data-panel="vet"><a class="tp-link" href="experiencia.html?exp=veterinaria" tabindex="-1" aria-hidden="true" data-track="try_vet_img"></a><img src="assets/images/home/vet.jpg" alt="" style="object-position:94% 50%"><figcaption>Una experiencia pensada para quienes también son parte de tu historia.</figcaption></figure>
+    <figure class="tp" data-panel="food"><a class="tp-link" href="experiencia.html?exp=comidas" tabindex="-1" aria-hidden="true" data-track="try_food_img"></a><img src="assets/images/home/natural.jpg" alt="" style="object-position:76% 50%"><figcaption>Más que una comida, es un momento.</figcaption></figure>
+    <figure class="tp" data-panel="home"><a class="tp-link" href="https://galardon-construraiz.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-track="try_home_img"></a><img src="assets/images/home/construraiz.jpg" alt=""><figcaption>Encontrar el lugar correcto también se diseña.</figcaption></figure>
     <figure class="tp" data-panel="serv"><img src="assets/images/home/fin.jpg" alt=""><figcaption>Aquí vivirá la próxima experiencia.</figcaption></figure>
   </div>
 </section>
@@ -97,10 +100,10 @@
     <p>Se trata de diseñar qué ocurre cuando una persona interactúa con tu negocio.</p>
   </div>
   <div class="dc-what-path">
-    <svg class="dc-path" viewBox="0 0 640 260" preserveAspectRatio="none" aria-hidden="true"><path d="M20 170 C 110 170, 150 70, 250 80 S 400 160, 470 120 S 580 50, 625 90" fill="none" stroke="#d6b98a" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/></svg>
-    <div class="dc-stage s1"><i style="--i:url(../images/home/icons/eye.svg)"></i><h3>Antes</h3><p>Descubre, entiende y decide.</p></div>
-    <div class="dc-stage s2"><i style="--i:url(../images/home/icons/cursor.svg)"></i><h3>Durante</h3><p>Interactúa, realiza su acción y vive la experiencia.</p></div>
-    <div class="dc-stage s3"><i style="--i:url(../images/home/icons/heart.svg)"></i><h3>Después</h3><p>Vuelve, recomienda y se convierte en cliente fiel.</p></div>
+    <svg class="dc-path" viewBox="0 0 640 260" preserveAspectRatio="none" aria-hidden="true"><path d="M102 125 C 180 125, 240 47, 320 47 S 470 112, 538 112" fill="none" stroke="#d6b98a" stroke-opacity=".85" stroke-width="1.6" stroke-dasharray="2 7" stroke-linecap="round"/></svg>
+    <div class="dc-stage s1"><i style="--i:url(../images/home/icons/eye.svg)"></i><h3>Antes</h3><p>Descubre, entiende y decide.</p><small>Ej.: ve la carta y entiende qué pedir.</small></div>
+    <div class="dc-stage s2"><i style="--i:url(../images/home/icons/cursor.svg)"></i><h3>Durante</h3><p>Interactúa, realiza su acción y vive la experiencia.</p><small>Ej.: agenda su cita sin llamar.</small></div>
+    <div class="dc-stage s3"><i style="--i:url(../images/home/icons/heart.svg)"></i><h3>Después</h3><p>Vuelve, recomienda y se convierte en cliente fiel.</p><small>Ej.: recibe su confirmación y vuelve a pedir.</small></div>
   </div>
 </section>
 
@@ -110,13 +113,14 @@
     <p class="dc-eyebrow dk">Casos y prototipos · Distintos negocios</p>
     <h2>Un mismo principio.<br>Recorridos únicos.</h2>
     <p class="dc-copy">Cada negocio tiene sus propias personas, necesidades y momentos. El diseño del recorrido se adapta a su realidad.</p>
+    <p class="dc-legend"><strong>Caso real:</strong> negocio que ya lo usa.<br><strong>Prototipo:</strong> propuesta que presenté a un cliente; aún no está en operación.</p>
     <a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1">Cuéntame tu caso <span>→</span></a>
   </div>
   <div class="dc-case-row">
     <a class="dc-case" href="trabajo/hojaldito/"><div class="dc-case-img"><img src="assets/images/home/case-hojaldito.jpg" alt="Hojaldito" loading="lazy"></div><div class="dc-case-body"><h3>Hojaldito</h3><p>Del interés a un nuevo punto de distribución.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
     <a class="dc-case" href="trabajo/al-natural/"><div class="dc-case-img"><img src="assets/images/home/case-al-natural.jpg" alt="Al Natural" loading="lazy"></div><div class="dc-case-body"><h3>Al Natural</h3><p>Compra guiada desde la web o con QR en la mesa.</p><div class="dc-case-foot"><em class="real">Caso real</em><b>→</b></div></div></a>
     <a class="dc-case" href="trabajo/sena-vitrina/"><div class="dc-case-img"><img src="assets/images/home/case-sena.jpg" alt="SENA Vitrina" loading="lazy"></div><div class="dc-case-body"><h3>SENA Vitrina</h3><p>Productos de los Centros SENA, guiados desde un QR.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
-    <a class="dc-case" href="https://brice-detailing.vercel.app/" target="_blank" rel="noopener"><div class="dc-case-img"><img src="assets/images/home/case-brice.jpg" alt="Brice" loading="lazy"></div><div class="dc-case-body"><h3>Brice</h3><p>Agendamiento y cotizaciones.</p><div class="dc-case-foot"><em class="real">Caso real</em><b>↗</b></div></div></a>
+    <a class="dc-case" href="https://brice-detailing.vercel.app/" target="_blank" rel="noopener"><div class="dc-case-img"><img src="assets/images/home/case-brice.jpg" alt="Brice" loading="lazy"></div><div class="dc-case-body"><h3>Brice</h3><p>Agendamiento y cotizaciones.</p><div class="dc-case-foot"><em class="real">Caso real</em><b class="ext">Ver sitio ↗</b></div></div></a>
   </div>
 </section>
 
@@ -158,6 +162,7 @@
     <div class="dc-final-copy">
       <p class="dc-eyebrow">Ahora imagina esto en tu negocio.</p>
       <h2>¿Qué deberían poder hacer tus clientes sin que tú tengas que explicárselo?</h2>
+      <a class="dc-wa" href="https://wa.me/573118262315?text=Hola%20Daniel%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20una%20experiencia%20para%20mi%20negocio." target="_blank" rel="noopener" data-track="final_whatsapp">¿Prefieres escribirme directo? <strong>WhatsApp →</strong></a>
       <div class="dc-final-pills"><span>Remoto, sin importar dónde estés</span><span>Propuesta en menos de 48 horas</span></div>
     </div>
     <div class="dc-contact">
@@ -165,9 +170,9 @@
       <div class="contact-flow-head"><span class="contact-step" id="contactStepLabel">01</span><div><strong>Empecemos.</strong><small id="contactStepHint">Elige la opción que más se ajuste.</small></div></div>
 
       <div class="contact-screen" id="contactScreenStart">
-        <h3>¿Quieres algo parecido?</h3>
+        <h3>¿Cómo quieres empezar?</h3>
         <div class="contact-choice-grid">
-          <button type="button" class="contact-choice contact-primary" data-contact-start="similar"><strong>Sí, quiero algo parecido</strong><span>Quiero revisar una experiencia similar para mi negocio.</span><b>→</b></button>
+          <button type="button" class="contact-choice contact-primary" data-contact-start="similar"><strong>Quiero una experiencia para mi negocio</strong><span>Te cuento qué haces y qué quieres facilitarles a tus clientes.</span><b>→</b></button>
           <button type="button" class="contact-choice" data-contact-start="question"><strong>Tengo una pregunta</strong><span>Hay algo que quiero aclarar antes de avanzar.</span><b>→</b></button>
         </div>
       </div>
@@ -222,6 +227,8 @@
 
 </main>
 
+<div class="dc-sticky" id="dcSticky" aria-hidden="true"><a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1" tabindex="-1">Hablemos <span>→</span></a><a class="dc-btn wa" href="https://wa.me/573118262315?text=Hola%20Daniel%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20una%20experiencia%20para%20mi%20negocio." target="_blank" rel="noopener" tabindex="-1">WhatsApp</a></div>
+
 <footer class="dc-footer">
   <div><strong>Daniel Cárdenas</strong><span>Diseño de experiencias para negocios</span></div>
   <nav aria-label="Pie"><a href="experiencia.html">Vivir la experiencia</a><a href="sistemas-internos.html">Procesos internos</a><a href="ideas/">Ideas</a><a href="aviso-privacidad.html">Privacidad</a><a href="https://wa.me/573118262315" target="_blank" rel="noopener">WhatsApp</a></nav>
@@ -229,6 +236,6 @@
 </footer>
 
 <script src="assets/js/home-v6.js?v=1"></script>
-<script src="assets/js/home-v7.js?v=2"></script>
+<script src="assets/js/home-v7.js?v=3"></script>
 </body>
 </html>

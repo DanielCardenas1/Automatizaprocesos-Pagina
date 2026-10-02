@@ -20,12 +20,12 @@
 <meta name="robots" content="noindex,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/experiencia.css?v=21">
+<link rel="stylesheet" href="assets/css/experiencia.css?v=22">
 </head>
 <body>
 <div id="exp">
 <div class="progress"><i id="expProgress"></i></div>
-<a class="exp-exit" href="index.html#experiencias" aria-label="Salir de la experiencia">✕</a>
+<a class="exp-exit" href="index.html#experiencias" aria-label="Salir de la experiencia"><span aria-hidden="true">✕</span> Salir</a>
 
 <!-- ============ DANIEL · 01 ENTRADA ============ -->
 <section class="scr dscr d-hero on" id="s-gate">
@@ -51,11 +51,12 @@
   <div class="d-wrap center">
     <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
     <div class="d-main narrow">
+      <button type="button" class="d-back" data-go="s-gate">← Volver</button>
       <p class="eyebrow">Antes de empezar</p>
       <h2>¿Sabes qué es<br>una experiencia?</h2>
       <div class="d-choices two">
-        <button class="d-choice" data-go="s-cat" data-track="know_si"><em>01</em><strong>Sí, lo sé</strong><small>Quiero verla en acción.</small></button>
-        <button class="d-choice" data-go="s-before" data-track="know_no"><em>02</em><strong>No</strong><small>Quiero descubrirlo.</small></button>
+        <button class="d-choice" data-go="s-cat" data-track="know_si"><i class="ic" style="--i:url(../experiencia/icons/check.svg)"></i><strong>Sí, lo sé</strong><small>Quiero verla en acción.</small></button>
+        <button class="d-choice" data-go="s-before" data-track="know_no"><i class="ic" style="--i:url(../experiencia/icons/info.svg)"></i><strong>No</strong><small>Quiero descubrirlo.</small></button>
       </div>
     </div>
   </div>
@@ -66,6 +67,7 @@
   <div class="d-wrap center">
     <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
     <div class="d-main narrow">
+      <button type="button" class="d-back" data-go="s-know">← Volver</button>
       <p class="eyebrow">Antes</p>
       <h2>Durante mucho tiempo,<br>los negocios funcionaron así.</h2>
       <div class="old-web">
@@ -88,14 +90,15 @@
   <div class="d-wrap center">
     <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
     <div class="d-main narrow">
+      <button type="button" class="d-back" data-go="s-before">← Volver</button>
       <p class="eyebrow">El cambio</p>
       <h2>Pero las personas<br><em>cambiaron.</em></h2>
       <p class="lead">Llegan desde distintos lugares con una necesidad concreta.</p>
       <div class="d-choices two static">
-        <div class="d-choice"><em>01</em><strong>Instagram</strong></div>
-        <div class="d-choice"><em>02</em><strong>Google</strong></div>
-        <div class="d-choice"><em>03</em><strong>WhatsApp</strong></div>
-        <div class="d-choice"><em>04</em><strong>QR / punto físico</strong></div>
+        <div class="d-choice"><i class="ic" style="--i:url(../images/home/icons/heart.svg)"></i><strong>Instagram</strong></div>
+        <div class="d-choice"><i class="ic" style="--i:url(../images/home/icons/search.svg)"></i><strong>Google</strong></div>
+        <div class="d-choice"><i class="ic" style="--i:url(../experiencia/icons/chat.svg)"></i><strong>WhatsApp</strong></div>
+        <div class="d-choice"><i class="ic" style="--i:url(../experiencia/icons/pin.svg)"></i><strong>QR / punto físico</strong></div>
       </div>
       <button class="btn dark" data-go="s-idea">Continuar <span>→</span></button>
     </div>
@@ -107,6 +110,7 @@
   <div class="d-wrap center">
     <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
     <div class="d-main narrow">
+      <button type="button" class="d-back" data-go="s-change">← Volver</button>
       <p class="eyebrow">La idea</p>
       <h2>No necesita aprender<br>cómo funciona tu negocio.</h2>
       <p class="lead big">Necesita conseguir lo que vino a buscar.</p>
@@ -121,14 +125,15 @@
   <div class="d-wrap center">
     <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
     <div class="d-main">
+      <button type="button" class="d-back" data-go="s-know">← Volver</button>
       <p class="eyebrow">Tu experiencia</p>
       <h2>¿Qué experiencia<br>quieres vivir?</h2>
       <p class="lead">Elige el negocio que más se parece al tuyo.</p>
       <div class="d-choices four">
-        <button class="d-choice cat" data-cat="veterinaria"><em>01</em><strong>Veterinaria</strong><small>Salud, información, citas y seguimiento.</small></button>
-        <button class="d-choice cat" data-cat="comidas"><em>02</em><strong>Comidas</strong><small>Descubrir, elegir, pedir o reservar.</small></button>
-        <button class="d-choice cat soon" data-cat="inmobiliaria"><em>03</em><strong>Inmobiliaria</strong><small>Encontrar, comparar y avanzar.</small><b>Próximamente</b></button>
-        <button class="d-choice cat soon" data-cat="servicios"><em>04</em><strong>Servicios / asesoría</strong><small>Orientar, solicitar y continuar.</small><b>Próximamente</b></button>
+        <button class="d-choice cat" data-cat="veterinaria"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><strong>Veterinaria</strong><small>Salud, información, citas y seguimiento.</small></button>
+        <button class="d-choice cat" data-cat="comidas"><i class="ic" style="--i:url(../experiencia/icons/utensils.svg)"></i><strong>Comidas</strong><small>Descubrir, elegir, pedir o reservar.</small></button>
+        <button class="d-choice cat soon" data-cat="inmobiliaria"><i class="ic" style="--i:url(../images/home/icons/building.svg)"></i><strong>Inmobiliaria</strong><small>Encontrar, comparar y avanzar.</small><b>Próximamente</b></button>
+        <button class="d-choice cat soon" data-cat="servicios"><i class="ic" style="--i:url(../images/home/icons/briefcase.svg)"></i><strong>Servicios / asesoría</strong><small>Orientar, solicitar y continuar.</small><b>Próximamente</b></button>
       </div>
       <p class="cat-note" id="catNote" hidden>Esa experiencia está en construcción. Mientras tanto, vive la de Veterinaria — ya funciona completa.</p>
     </div>
@@ -140,6 +145,7 @@
   <div class="d-wrap center">
     <header class="d-top"><img src="assets/images/logo-dc.webp" alt="DC"><span>Daniel Cárdenas</span></header>
     <div class="d-main narrow">
+      <button type="button" class="d-back" data-go="s-cat">← Volver</button>
       <p class="eyebrow" id="bridgeEyebrow">Veterinaria</p>
       <h2>Perfecto.<br><em>Ahora vas a vivirlo.</em></h2>
       <div class="bridge">
@@ -162,6 +168,7 @@
     <div class="c-hero">
       <div class="c-hero-copy">
         <div class="c-brand"><i class="ic" style="--i:url(../experiencia/icons/paw.svg)"></i><span>Clínica<br>Patitas Felices</span></div>
+        <p class="demo-chip">Ejemplo de experiencia · clínica ficticia</p>
         <div class="c-hero-text">
           <h1>Bienvenido</h1>
           <p>Tu mascota,<br>en las mejores manos.</p>
@@ -453,6 +460,7 @@
       <img class="n-hero-img" src="assets/experiencia/al-natural/hero.jpg" alt="">
       <div class="n-hero-copy">
         <div class="n-brand lt"><i class="ic" style="--i:url(../experiencia/icons/leaf.svg)"></i><span>Al Natural<small>Café · Comida · Buenos momentos</small></span></div>
+        <p class="demo-chip">Así vive un cliente la experiencia de Al Natural</p>
         <div class="n-hero-text">
           <h1>Bienvenido</h1>
           <p>Un café, buena comida<br>y un lugar para disfrutar.</p>
