@@ -20,13 +20,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home-v6.css?v=18">
+<link rel="stylesheet" href="assets/css/home-v6.css?v=21">
 </head>
 <body>
 
 <header class="dc-nav">
   <a class="dc-brand" href="#inicio"><img src="assets/images/home/logo-dc-white.png" alt="DC"><strong>Daniel Cárdenas</strong></a>
-  <nav class="dc-navlinks" aria-label="Principal"><a href="#experiencias">Experiencias</a><a href="#casos">Casos</a><a href="#metodo">Método</a></nav>
+  <nav class="dc-navlinks" aria-label="Principal"><a href="#experiencias">Experiencias</a><a href="#prototipos">Prototipos</a><a href="#casos">Casos</a><a href="#metodo">Método</a></nav>
   <a class="dc-navcta" href="#diagnostico" data-pre-diagnostic="1">Hablemos <span>↗</span></a>
 </header>
 
@@ -44,27 +44,17 @@
   </div>
 </section>
 
-<!-- 2 · PRUÉBALO -->
-<section class="dc-section dc-prueba" id="experiencias">
-  <div class="dc-prueba-head">
-    <p class="dc-eyebrow dk">No te lo voy a contar.</p>
-    <h2 class="dc-title">Pruébalo.</h2>
-    <p class="dc-copy">Cada tarjeta es una puerta. Entras como si fueras el cliente de ese negocio y vives el recorrido.</p>
-  </div>
-  <div class="dc-cards">
-    <a class="dc-card" href="experiencia.html?exp=veterinaria"><div class="dc-card-img"><img src="assets/images/home/vet.jpg" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Ejemplo</span><h3>Clínica<br>Patitas Felices</h3><p>Cuidado y bienestar para mascotas.</p><span class="dc-card-arrow">→</span></div></a>
-    <a class="dc-card" href="experiencia.html?exp=comidas"><div class="dc-card-img"><img src="assets/images/home/case-al-natural.jpg" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Prototipo</span><h3>Al Natural</h3><p>Café y comida con un recorrido de compra guiado.</p><span class="dc-card-arrow">→</span></div></a>
-    <a class="dc-card" href="trabajo/hojaldito/"><div class="dc-card-img"><img src="assets/images/home/case-hojaldito.jpg" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Caso real</span><h3>Hojaldito</h3><p>Pedidos, promociones y fidelización.</p><span class="dc-card-arrow">→</span></div></a>
-    <a class="dc-card" href="https://construraizsas.inmo.co" target="_blank" rel="noopener"><div class="dc-card-img"><img src="assets/images/home/construraiz.jpg" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Proyecto</span><h3>Construraíz</h3><p>Inmobiliaria con asesoría personalizada.</p><span class="dc-card-arrow">↗</span></div></a>
-    <a class="dc-card" href="sistemas-internos.html"><div class="dc-card-img"><img src="assets/images/system/dashboard.webp" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Detrás de escena</span><h3>Procesos<br>internos</h3><p>Lo que el cliente no ve, también funciona.</p><span class="dc-card-arrow">→</span></div></a>
-  </div>
+<!-- 2 · PRUÉBALO (intro + dos experiencias que se viven) -->
+<section class="dc-intro" id="experiencias">
+  <p class="dc-eyebrow dk">No te lo voy a contar.</p>
+  <h2 class="dc-title">Pruébalo.</h2>
+  <p class="dc-copy">Entras como si fueras el cliente de ese negocio y vives el recorrido completo.</p>
 </section>
-
 <!-- 3 · EXPERIENCIA CLÍNICA PATITAS FELICES -->
 <section class="dc-feature vet" id="vet">
   <p class="dc-note dc-note-r" aria-hidden="true">Su bienestar también<br>se vive diseñado.</p>
   <div class="dc-feature-copy">
-    <p class="dc-eyebrow">Experiencia · Clínica Patitas Felices</p>
+    <p class="dc-eyebrow">Pruébalo · Ejemplo · Clínica Patitas Felices</p>
     <h2>Tu mascota<br>también tiene<br>su historia.<br><em>Una experiencia<br>que la cuida.</em></h2>
     <ol class="dc-feature-list"><li><b style="--i:url(../experiencia/icons/calendar.svg)"></b>Agendar una consulta</li><li><b style="--i:url(../experiencia/icons/food.svg)"></b>Pedir su alimento</li><li><b style="--i:url(../experiencia/icons/medicine.svg)"></b>Medicamentos</li><li><b style="--i:url(../experiencia/icons/emergency.svg)"></b>Emergencias</li></ol>
     <a class="dc-btn" href="experiencia.html?exp=veterinaria" data-track="banner_vet">Vivir esta experiencia <span>→</span></a>
@@ -75,23 +65,36 @@
 <section class="dc-feature food" id="natural">
   <p class="dc-note dc-note-r" aria-hidden="true">Buena comida, buenos momentos, mejores historias.</p>
   <div class="dc-feature-copy">
-    <p class="dc-eyebrow">Experiencia · Al Natural</p>
+    <p class="dc-eyebrow">Pruébalo · Caso real · Al Natural</p>
     <h2>Más que una comida,<br>es un momento.<br><em>Un recorrido diseñado.</em></h2>
     <ol class="dc-feature-list"><li><b style="--i:url(../experiencia/icons/utensils.svg)"></b>Menú y recomendaciones</li><li><b style="--i:url(../experiencia/icons/bag.svg)"></b>Pedidos en línea</li><li><b style="--i:url(../experiencia/icons/calendar.svg)"></b>Reservas de mesa</li><li><b style="--i:url(../experiencia/icons/users.svg)"></b>Eventos</li></ol>
     <a class="dc-btn" href="experiencia.html?exp=comidas" data-track="banner_natural">Vivir esta experiencia <span>→</span></a>
   </div>
 </section>
 
+<!-- 4 · PROTOTIPOS PRESENTADOS -->
+<section class="dc-section dc-prueba" id="prototipos">
+  <div class="dc-prueba-head">
+    <p class="dc-eyebrow dk">Propuestas para cerrar negocios</p>
+    <h2 class="dc-title">Prototipos.</h2>
+    <p class="dc-copy">Experiencias que diseñé y presenté a clientes para mostrar cómo funcionaría su negocio. Aún no están en operación.</p>
+  </div>
+  <div class="dc-cards four">
+    <a class="dc-card" href="trabajo/hojaldito/"><div class="dc-card-img"><img src="assets/images/home/case-hojaldito.jpg" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Prototipo</span><h3>Hojaldito</h3><p>Pedidos, promociones y fidelización.</p><span class="dc-card-arrow">→</span></div></a>
+    <a class="dc-card" href="trabajo/sena-vitrina/"><div class="dc-card-img"><img src="assets/images/home/case-sena.jpg" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Prototipo</span><h3>SENA<br>Vitrina</h3><p>De la oferta a la solicitud.</p><span class="dc-card-arrow">→</span></div></a>
+    <a class="dc-card" href="https://construraizsas.inmo.co" target="_blank" rel="noopener"><div class="dc-card-img"><img src="assets/images/home/construraiz.jpg" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Prototipo</span><h3>Construraíz</h3><p>Inmobiliaria con asesoría personalizada.</p><span class="dc-card-arrow">↗</span></div></a>
+    <a class="dc-card" href="sistemas-internos.html"><div class="dc-card-img"><img src="assets/images/system/dashboard.webp" alt="" loading="lazy"></div><div class="dc-card-body"><span class="dc-tag">Detrás de escena</span><h3>Procesos<br>internos</h3><p>Lo que el cliente no ve, también funciona.</p><span class="dc-card-arrow">→</span></div></a>
+  </div>
+</section>
+
 <!-- 5 · CASOS REALES -->
 <section class="dc-section dc-cases" id="casos">
   <div class="dc-cases-head">
-    <p class="dc-eyebrow dk">Casos reales, resultados reales.</p>
+    <p class="dc-eyebrow dk">Casos reales</p>
     <h2 class="dc-title">Experiencias diseñadas para negocios reales.</h2>
   </div>
-  <div class="dc-case-grid">
-    <a class="dc-case" href="trabajo/hojaldito/"><div class="dc-case-img"><img src="assets/images/home/case-hojaldito.jpg" alt="Hojaldito" loading="lazy"></div><div class="dc-case-body"><h3>Hojaldito</h3><p>Del interés a una oportunidad comercial.</p><span>Ver caso →</span></div></a>
+  <div class="dc-case-grid two">
     <a class="dc-case" href="trabajo/al-natural/"><div class="dc-case-img"><img src="assets/images/home/case-al-natural.jpg" alt="Al Natural" loading="lazy"></div><div class="dc-case-body"><h3>Al Natural</h3><p>Del descubrimiento a la compra.</p><span>Ver caso →</span></div></a>
-    <a class="dc-case" href="trabajo/sena-vitrina/"><div class="dc-case-img"><img src="assets/images/home/case-sena.jpg" alt="SENA Vitrina" loading="lazy"></div><div class="dc-case-body"><h3>SENA Vitrina</h3><p>De la oferta a la solicitud.</p><span>Ver caso →</span></div></a>
     <div class="dc-case"><div class="dc-case-img"><img src="assets/images/home/case-brice.jpg" alt="Brice" loading="lazy"></div><div class="dc-case-body"><h3>Brice</h3><p>De una necesidad a una reserva.</p></div></div>
   </div>
 </section>
