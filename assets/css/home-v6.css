@@ -82,18 +82,18 @@ button,input,textarea,select{font:inherit}
 .dc-feature.food .dc-eyebrow{color:#f0b58a}
 
 /* ---------- 5 · casos ---------- */
-.dc-cases{background:#fff}
-.dc-cases-head{margin-bottom:38px;max-width:760px}
-.dc-cases .dc-title{font-size:clamp(38px,4vw,60px)}
-.dc-case-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.dc-case{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:block;transition:transform .25s var(--ease),box-shadow .25s}
+.dc-cases{background:#fff;display:grid;grid-template-columns:minmax(210px,.6fr) minmax(0,3fr);gap:36px;align-items:center;padding-top:76px;padding-bottom:76px}
+.dc-cases-head{max-width:300px}
+.dc-cases .dc-title{font-size:clamp(30px,2.9vw,44px);line-height:1}
+.dc-case-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.dc-case{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:40% 1fr;min-width:0;transition:transform .25s var(--ease),box-shadow .25s}
 a.dc-case:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(21,21,21,.09)}
-.dc-case-img{height:210px;overflow:hidden}
+.dc-case-img{min-height:150px;overflow:hidden}
 .dc-case-img img{width:100%;height:100%;object-fit:cover}
-.dc-case-body{padding:20px}
-.dc-case h3{font-size:30px;line-height:1;margin:0 0 8px}
-.dc-case p{font-size:13px;color:var(--mut);line-height:1.5;margin:0;min-height:40px}
-.dc-case-body span{display:inline-block;margin-top:14px;font-size:12px;font-weight:600}
+.dc-case-body{padding:14px 14px 14px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.dc-case h3{font-size:24px;line-height:1;margin:0 0 7px}
+.dc-case p{font-size:11.5px;color:var(--mut);line-height:1.45;margin:0}
+.dc-case-body span{display:inline-block;margin-top:10px;font-size:11.5px;font-weight:600}
 
 /* ---------- 6 · método ---------- */
 .dc-method{position:relative;background:linear-gradient(90deg,#fff 0%,#fff 40%,rgba(255,255,255,.88) 68%,rgba(255,255,255,.62) 100%),url('../images/home/montanas.jpg') right center/cover no-repeat;padding-top:120px;padding-bottom:130px}
@@ -170,7 +170,9 @@ a.dc-case:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(21,21,21,
   .dc-card{grid-column:span 2}
   .dc-card:nth-child(n+4){grid-column:span 3}
   .dc-card-img{height:170px}
-  .dc-case-grid{grid-template-columns:repeat(2,1fr)}
+  .dc-cases{grid-template-columns:1fr;gap:30px}
+  .dc-cases-head{max-width:760px}
+  .dc-case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .dc-method-track{grid-template-columns:repeat(3,1fr);row-gap:44px}
   .dc-final-in{grid-template-columns:1fr;gap:44px}
 }
@@ -206,6 +208,8 @@ a.dc-case:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(21,21,21,
   .dc-feature{padding:300px 22px 46px}
   .dc-feature h2{font-size:clamp(44px,13vw,56px)}
   .dc-case-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .dc-case{display:block}
+  .dc-case-img{min-height:0}
   .dc-case-img{height:120px}
   .dc-case-body{padding:14px}
   .dc-case h3{font-size:23px}
