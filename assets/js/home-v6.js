@@ -42,7 +42,7 @@ function saveLead(lead) {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(Object.assign({
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: conFecha.email_subject || 'Nuevo lead — Daniel Cárdenas',
+        subject: conFecha.email_subject || 'Nuevo lead | Daniel Cárdenas',
         from_name: 'Contacto danielcardenas.co'
       }, conFecha))
     }).catch(() => {});

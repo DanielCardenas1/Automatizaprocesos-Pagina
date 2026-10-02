@@ -39,7 +39,7 @@ var CASE_DEMOS = {
     paths: {
       despensa: {
         screens: [
-          { label:'Pregunta', desc:'"¿Qué quieres lograr hoy?" — arma tu despensa.' },
+          { label:'Pregunta', desc:'"¿Qué quieres lograr hoy?", así arma tu despensa.' },
           { label:'Respuesta', desc:'Eliges qué tipo de productos buscas.' },
           { label:'Producto disponible', desc:'Solo se muestra lo que hay en inventario ahora mismo.' },
           { label:'Agregar', desc:'Se suma al pedido sin salir de la conversación.' }

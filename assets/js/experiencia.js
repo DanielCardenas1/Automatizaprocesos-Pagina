@@ -288,7 +288,7 @@
     nConfirmOrder:function(){
       if(!cartCount()){ toast('Tu pedido está vacío.'); return; }
       var num = 'AN-'+(100+Math.floor(Math.random()*900));
-      var eta = N.mode==='Programado' ? 'Para la fecha y hora que elijas' : 'Listo en 10–15 minutos';
+      var eta = N.mode==='Programado' ? 'Para la fecha y hora que elijas' : 'Listo en 10 a 15 minutos';
       $('#odSub').textContent = 'Pedido '+num+' · '+eta+'.';
       $('#odDetail').innerHTML = Object.keys(N.cart).map(function(id){
         return '<div><span>'+N.cart[id]+' × '+prod(id).name+'</span><b>'+money(prod(id).price*N.cart[id])+'</b></div>';
