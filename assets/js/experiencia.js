@@ -426,6 +426,14 @@
     if(e.key==='Enter' && e.target && e.target.id==='petCode'){ ACTS.codeGo(); }
   });
 
-  track('exp_start');
-  go('s-gate');
+  /* Enlaces directos desde la home: experiencia.html?exp=veterinaria | comidas
+     entran de una vez al negocio elegido (la categoria ya viene decidida). */
+  var qs = new URLSearchParams(location.search), deep = CATEGORIES[qs.get('exp')];
+  track('exp_start', deep ? {entry:qs.get('exp')} : undefined);
+  if(deep && deep.ready){
+    state.category = qs.get('exp');
+    go(deep.welcome);
+  } else {
+    go('s-gate');
+  }
 })();

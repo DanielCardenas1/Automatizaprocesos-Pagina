@@ -222,8 +222,21 @@ trackEvent('page_view');
 // visitante, Daniel nunca lo ve si esa persona no toca un CTA. Web3Forms
 // manda cada lead a daniel@danielcardenas.co sin necesitar backend propio.
 const WEB3FORMS_ACCESS_KEY = '9b941d91-076c-4b07-bbac-3d8ec2abb159';
+
+// Captura silenciosa del canal de tráfico (utm_source en el link de bio/post)
+// para saber qué plataforma trajo a cada lead, sin pedirle nada al visitante.
+// No confundir con "origen", que ya se usa para el patrón/flujo interno del diagnóstico.
+(function capturarCanalTrafico() {
+  try {
+    const src = new URLSearchParams(location.search).get('utm_source');
+    if (src) sessionStorage.setItem('canal_trafico', src);
+  } catch (e) {}
+})();
+
 function saveLead(lead) {
-  const conFecha = Object.assign({ fecha: new Date().toISOString() }, lead);
+  let canalTrafico = 'directo';
+  try { canalTrafico = sessionStorage.getItem('canal_trafico') || 'directo'; } catch (e) {}
+  const conFecha = Object.assign({ fecha: new Date().toISOString(), canal_trafico: canalTrafico }, lead);
   try {
     const leads = JSON.parse(localStorage.getItem('ap_leads') || '[]');
     leads.push(conFecha);
@@ -235,8 +248,8 @@ function saveLead(lead) {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(Object.assign({
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: conFecha.email_subject || 'Nuevo lead — Automatiza Procesos',
-        from_name: 'Diagnóstico Automatiza Procesos'
+        subject: conFecha.email_subject || 'Nuevo lead — Daniel Cárdenas',
+        from_name: 'Contacto danielcardenas.co'
       }, conFecha))
     }).catch(() => {});
   } catch (e) {}
