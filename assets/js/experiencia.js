@@ -428,6 +428,24 @@
 
   /* Enlaces directos desde la home: experiencia.html?exp=veterinaria | comidas
      entran de una vez al negocio elegido (la categoria ya viene decidida). */
+  /* La X vuelve a la home en la misma parte de "Pruebalo", en la pestaña del negocio que se estaba viviendo
+     (si se llego desde la home, history.back() conserva ademas la posicion exacta del scroll). */
+  var exitLink = document.querySelector('.exp-exit');
+  if(exitLink){
+    exitLink.addEventListener('click', function(e){
+      var tabs = {veterinaria:'vet', comidas:'food'}, tab = tabs[state.category] || '';
+      var fromHome = false;
+      try {
+        var ref = document.referrer ? new URL(document.referrer) : null;
+        fromHome = !!ref && ref.origin === location.origin && /\/(index\.html)?$/.test(ref.pathname) && history.length > 1;
+      } catch(err){}
+      track('exp_exit', {from: state.current});
+      if(tab){ try { sessionStorage.setItem('home_tab', tab); } catch(err){} }
+      if(fromHome){ e.preventDefault(); history.back(); return; }
+      exitLink.setAttribute('href', 'index.html' + (tab ? '?tab=' + tab : '') + '#experiencias');
+    });
+  }
+
   var qs = new URLSearchParams(location.search), deep = CATEGORIES[qs.get('exp')];
   track('exp_start', deep ? {entry:qs.get('exp')} : undefined);
   if(deep && deep.ready){

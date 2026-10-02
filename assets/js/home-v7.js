@@ -17,6 +17,15 @@
   }
 
   tabs.forEach(function (t) {
-    t.addEventListener('click', function () { show(t.getAttribute('data-tab')); });
+    t.addEventListener('click', function () {
+      var key = t.getAttribute('data-tab');
+      show(key);
+      try { sessionStorage.setItem('home_tab', key); } catch (e) {}
+    });
   });
+
+  // Al volver de una experiencia (X) se muestra la pestaña del negocio que se estaba viviendo.
+  var wanted = null;
+  try { wanted = new URLSearchParams(location.search).get('tab') || sessionStorage.getItem('home_tab'); } catch (e) {}
+  if (wanted && document.querySelector('.dc-tabs [data-tab="' + wanted + '"]')) show(wanted);
 })();
