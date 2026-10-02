@@ -104,7 +104,7 @@ button.d-choice:hover{border-color:var(--d-ink);transform:translateY(-3px);box-s
 /* revelación */
 .checks{display:grid;gap:10px;max-width:520px;margin:34px auto 0;text-align:left}
 .checks div{display:flex;gap:12px;align-items:center;border:1px solid var(--d-line);border-radius:12px;padding:16px 18px;background:#fff;font-size:15px}
-.checks b{font:500 11px var(--mono);letter-spacing:.12em;color:var(--d-taupe)}
+.checks b{font:italic 500 20px/1 var(--serif);font-variant-numeric:lining-nums;color:var(--d-taupe)}
 .dscr.inv{background:#151515;color:#f2f2f2}
 .dscr.inv .d-top img{filter:brightness(0) invert(1)}
 .dscr.inv .lead{color:#b9b9b6}
