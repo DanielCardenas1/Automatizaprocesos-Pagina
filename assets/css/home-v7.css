@@ -35,6 +35,9 @@ button,input,textarea,select{font:inherit}
 .dc-navcta{border:1px solid rgba(255,255,255,.55);padding:10px 18px;border-radius:999px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;white-space:nowrap}
 
 
+.dc-anchor{position:absolute;top:-70px;left:0;width:1px;height:1px;pointer-events:none}
+.dc-try,.dc-cases,.dc-final{position:relative}
+
 /* ---------- iconos (máscara) ---------- */
 .ico{display:inline-block;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:0 0 auto}
 
