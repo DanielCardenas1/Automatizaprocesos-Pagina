@@ -40,7 +40,8 @@ button,input,textarea,select{font:inherit}
 .dc-hero h1{font-size:clamp(46px,5.4vw,88px);line-height:.9;letter-spacing:-.025em}
 .dc-hero h1 em{font-style:italic;color:var(--gold-l)}
 .dc-lead{font:500 clamp(19px,1.7vw,24px)/1.3 var(--serif);margin:30px 0 0;color:#fff}
-.dc-sub{font-size:15px;line-height:1.6;margin:12px 0 0;max-width:470px;color:rgba(255,255,255,.78)}
+.dc-sub{font-size:15.5px;line-height:1.6;margin:12px 0 0;max-width:500px;color:rgba(255,255,255,.88)}
+.dc-sub strong{color:var(--gold-l);font-weight:600}
 .dc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
 
 /* ---------- 2 · pruébalo ---------- */
