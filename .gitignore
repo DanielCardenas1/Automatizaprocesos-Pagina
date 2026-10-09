@@ -13,3 +13,7 @@ build/
 
 # Local logs
 *.log
+
+# Documentos internos (metodologia, segundo cerebro, briefs): nunca se publican con el sitio
+docs/
+Backups/
