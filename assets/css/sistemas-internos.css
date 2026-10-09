@@ -50,3 +50,6 @@
   .caso-card:nth-child(odd){border-right:none}
   .full-w{padding:28px 24px}
 }
+
+/* contraste AA para los rotulos (home.css los fuerza a #8b806e) */
+.eyebrow,.eyebrow.light{color:#6b634f!important}
