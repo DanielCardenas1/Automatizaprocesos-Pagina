@@ -94,4 +94,10 @@
        "noindex" (una política de privacidad no debe competir por posiciones
        de búsqueda), y Google recomienda no listar en el sitemap páginas
        marcadas como noindex. -->
+  <url>
+    <loc>https://www.danielcardenas.co/experiencia.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

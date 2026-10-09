@@ -33,13 +33,15 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home-v7.css?v=11">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="image" href="assets/images/home/hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/home-v7.css?v=12">
 </head>
 <body>
 
 <header class="dc-nav">
-  <a class="dc-brand" href="#inicio"><img src="assets/images/home/logo-dc-white.png" alt="DC"><strong>Daniel Cárdenas</strong></a>
+  <a class="dc-brand" href="#inicio"><img src="assets/images/home/logo-dc-white-sm.webp" alt="DC" width="36" height="34"><strong>Daniel Cárdenas</strong></a>
   <button class="dc-menu" type="button" aria-expanded="false" aria-controls="dcNav">Menú</button>
   <nav class="dc-navlinks" id="dcNav" aria-label="Principal"><a href="#experiencias">Experiencias</a><a href="#casos">Casos</a><a href="#metodo">Método</a><a href="#sobre-mi">Sobre mí</a><a class="only-m" href="#diagnostico" data-pre-diagnostic="1">Hablemos</a></nav>
   <a class="dc-navcta" href="#diagnostico" data-pre-diagnostic="1">Hablemos <span>→</span></a>
@@ -62,7 +64,7 @@
       <li><b class="ico" style="--i:url(../images/home/icons/chart.svg)"></b>Resultados<br>medibles</li>
     </ul>
   </div>
-  <a class="dc-scroll" href="#experiencias" aria-label="Seguir bajando"><span>Baja y pruébalo</span><i>↓</i></a>
+  <a class="dc-scroll" href="#experiencias" aria-label="Baja y pruébalo"><span>Baja y pruébalo</span><i>↓</i></a>
 </section>
 
 <!-- 2 · PRUÉBALO -->
@@ -85,10 +87,10 @@
     </div>
   </div>
   <div class="dc-try-media">
-    <figure class="tp on" data-panel="vet"><a class="tp-link" href="experiencia.html?exp=veterinaria" tabindex="-1" aria-hidden="true" data-track="try_vet_img"></a><img src="assets/images/home/vet.jpg" alt="" style="object-position:94% 50%"><figcaption>Una experiencia pensada para quienes también son parte de tu historia.</figcaption></figure>
-    <figure class="tp" data-panel="food"><a class="tp-link" href="experiencia.html?exp=comidas" tabindex="-1" aria-hidden="true" data-track="try_food_img"></a><img src="assets/images/home/natural.jpg" alt="" style="object-position:76% 50%"><figcaption>Más que una comida, es un momento.</figcaption></figure>
-    <figure class="tp" data-panel="home"><a class="tp-link" href="https://galardon-construraiz.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-track="try_home_img"></a><img src="assets/images/home/construraiz-experiencia.jpg" alt="" style="object-position:94% 50%"><figcaption>Encontrar el lugar correcto también se diseña.</figcaption></figure>
-    <figure class="tp" data-panel="serv"><img src="assets/images/home/fin.jpg" alt=""><figcaption>Aquí vivirá la próxima experiencia.</figcaption></figure>
+    <figure class="tp on" data-panel="vet"><a class="tp-link" href="experiencia.html?exp=veterinaria" tabindex="-1" aria-hidden="true" data-track="try_vet_img"></a><img src="assets/images/home/vet.webp" alt="" width="1600" height="682" loading="lazy" decoding="async" style="object-position:94% 50%"><figcaption>Una experiencia pensada para quienes también son parte de tu historia.</figcaption></figure>
+    <figure class="tp" data-panel="food"><a class="tp-link" href="experiencia.html?exp=comidas" tabindex="-1" aria-hidden="true" data-track="try_food_img"></a><img src="assets/images/home/natural.webp" alt="" width="1600" height="682" loading="lazy" decoding="async" style="object-position:76% 50%"><figcaption>Más que una comida, es un momento.</figcaption></figure>
+    <figure class="tp" data-panel="home"><a class="tp-link" href="https://galardon-construraiz.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-track="try_home_img"></a><img src="assets/images/home/construraiz-experiencia.webp" alt="" width="1600" height="682" loading="lazy" decoding="async" style="object-position:94% 50%"><figcaption>Encontrar el lugar correcto también se diseña.</figcaption></figure>
+    <figure class="tp" data-panel="serv"><img src="assets/images/home/fin.webp" alt="" width="1920" height="690" loading="lazy" decoding="async"><figcaption>Aquí vivirá la próxima experiencia.</figcaption></figure>
   </div>
 </section>
 
@@ -117,10 +119,10 @@
     <a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1">Cuéntame tu caso <span>→</span></a>
   </div>
   <div class="dc-case-row">
-    <a class="dc-case" href="trabajo/hojaldito/"><div class="dc-case-img"><img src="assets/images/home/case-hojaldito.jpg" alt="Hojaldito" loading="lazy"></div><div class="dc-case-body"><h3>Hojaldito</h3><p>Del interés a un nuevo punto de distribución.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
-    <a class="dc-case" href="trabajo/al-natural/"><div class="dc-case-img"><img src="assets/images/home/case-al-natural.jpg" alt="Al Natural" loading="lazy"></div><div class="dc-case-body"><h3>Al Natural</h3><p>Compra guiada desde la web o con QR en la mesa.</p><div class="dc-case-foot"><em class="real">Caso real</em><b>→</b></div></div></a>
-    <a class="dc-case" href="trabajo/sena-vitrina/"><div class="dc-case-img"><img src="assets/images/home/case-sena.jpg" alt="SENA Vitrina" loading="lazy"></div><div class="dc-case-body"><h3>SENA Vitrina</h3><p>Productos de los Centros SENA, guiados desde un QR.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
-    <a class="dc-case" href="https://brice-detailing.vercel.app/" target="_blank" rel="noopener"><div class="dc-case-img"><img src="assets/images/home/case-brice.jpg" alt="Brice" loading="lazy"></div><div class="dc-case-body"><h3>Brice</h3><p>Agendamiento y cotizaciones.</p><div class="dc-case-foot"><em class="real">Caso real</em><b class="ext">Ver sitio ↗</b></div></div></a>
+    <a class="dc-case" href="trabajo/hojaldito/"><div class="dc-case-img"><img src="assets/images/home/case-hojaldito.webp" alt="Hojaldito" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>Hojaldito</h3><p>Del interés a un nuevo punto de distribución.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
+    <a class="dc-case" href="trabajo/al-natural/"><div class="dc-case-img"><img src="assets/images/home/case-al-natural.webp" alt="Al Natural" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>Al Natural</h3><p>Compra guiada desde la web o con QR en la mesa.</p><div class="dc-case-foot"><em class="real">Caso real</em><b>→</b></div></div></a>
+    <a class="dc-case" href="trabajo/sena-vitrina/"><div class="dc-case-img"><img src="assets/images/home/case-sena.webp" alt="SENA Vitrina" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>SENA Vitrina</h3><p>Productos de los Centros SENA, guiados desde un QR.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
+    <a class="dc-case" href="https://brice-detailing.vercel.app/" target="_blank" rel="noopener"><div class="dc-case-img"><img src="assets/images/home/case-brice.webp" alt="Brice" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>Brice</h3><p>Agendamiento y cotizaciones.</p><div class="dc-case-foot"><em class="real">Caso real</em><b class="ext">Ver sitio ↗</b></div></div></a>
   </div>
 </section>
 
@@ -149,7 +151,7 @@
     <p class="dc-about-tag">Diseño lo que pasa entre<br>tu negocio y tus clientes.</p>
     <p>Creo en la tecnología como una herramienta para acercar personas, simplificar la complejidad y hacer que cada negocio viva una historia mejor con sus clientes.</p>
   </div>
-  <figure class="dc-about-photo"><img src="assets/images/profile/retrato.webp" alt="Daniel Cárdenas" loading="lazy"></figure>
+  <figure class="dc-about-photo"><img src="assets/images/profile/retrato-640.webp" alt="Daniel Cárdenas" width="640" height="960" loading="lazy" decoding="async"></figure>
   <div class="dc-about-quote">
     <blockquote>La tecnología es el medio.<br>El problema del negocio<br>es el punto de partida.</blockquote>
     <ul><li>Administrador de Empresas</li><li>Especialista en Alta Gerencia</li><li>Customer Experience</li></ul>
