@@ -32,11 +32,6 @@ function saveLead(lead) {
   try { canalTrafico = sessionStorage.getItem('canal_trafico') || 'directo'; } catch (e) {}
   const conFecha = Object.assign({ fecha: new Date().toISOString(), canal_trafico: canalTrafico }, lead);
   try {
-    const leads = JSON.parse(localStorage.getItem('ap_leads') || '[]');
-    leads.push(conFecha);
-    localStorage.setItem('ap_leads', JSON.stringify(leads));
-  } catch (e) {}
-  try {
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
