@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-400-normal.woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="preload" as="image" href="assets/images/home/hero.webp" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/home-v7.css?v=12">
+<link rel="stylesheet" href="assets/css/home-v7.css?v=14">
 </head>
 <body>
 
@@ -164,12 +164,11 @@
     <div class="dc-final-copy">
       <p class="dc-eyebrow">Ahora imagina esto en tu negocio.</p>
       <h2>¿Qué deberían poder hacer tus clientes sin que tú tengas que explicárselo?</h2>
-      <a class="dc-wa" href="https://wa.me/573118262315?text=Hola%20Daniel%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20una%20experiencia%20para%20mi%20negocio." target="_blank" rel="noopener" data-track="final_whatsapp">¿Prefieres escribirme directo? <strong>WhatsApp →</strong></a>
       <div class="dc-final-pills"><span>Remoto, sin importar dónde estés</span><span>Propuesta en menos de 48 horas</span></div>
     </div>
     <div class="dc-contact">
       <div class="diagnostic-box experience-contact-box" id="experienceContactBox">
-      <div class="contact-flow-head"><span class="contact-step" id="contactStepLabel">01</span><div><strong>Empecemos.</strong><small id="contactStepHint">Elige la opción que más se ajuste.</small></div></div>
+      <div class="contact-flow-head"><span class="contact-step" id="contactStepLabel">01</span><div><strong>Empecemos.</strong><small id="contactStepHint">Paso 1 de 3 · Elige una opción</small></div></div>
 
       <div class="contact-screen" id="contactScreenStart">
         <h3>¿Cómo quieres empezar?</h3>
@@ -180,36 +179,59 @@
       </div>
 
       <div class="contact-screen" id="contactScreenSimilar" hidden>
+        <button type="button" class="contact-back" data-contact-back>← Atrás</button>
         <p class="contact-kicker">TU NEGOCIO</p>
-        <h3>Cuéntame a qué te dedicas.</h3>
-        <p class="contact-help">No necesitas tener la solución clara. Cuéntame qué haces y qué te gustaría mejorar.</p>
-        <input class="contact-text" id="contactBusinessType" type="text" placeholder="Ej. Tengo una veterinaria, una panadería, soy contador...">
-        <p class="contact-kicker second">EL RECORRIDO</p>
-        <h3>¿Qué te gustaría hacer más fácil para tus clientes?</h3>
-        <textarea class="contact-textarea" id="contactGoal" placeholder="Cuéntame qué quieres que puedan hacer, encontrar, comprar, reservar o solicitar de una forma más sencilla."></textarea>
-        <button type="button" class="button dark contact-next" id="contactToData">Continuar <span>→</span></button>
+        <h3>¿Qué tipo de negocio tienes?</h3>
+        <div class="chip-group" id="chipsBusiness" role="radiogroup" aria-label="Tipo de negocio">
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="Veterinaria">Veterinaria</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="Comidas">Comidas</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="Inmobiliaria">Inmobiliaria</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="Servicios o asesoría">Servicios o asesoría</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="Salud y bienestar">Salud y bienestar</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="Tienda o comercio">Tienda o comercio</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="Otro">Otro</button>
+        </div>
+        <input class="contact-text chip-other" id="contactBusinessOther" type="text" placeholder="¿Cuál es tu negocio?" maxlength="80" hidden>
+        <p class="contact-kicker second">LO QUE QUIERES FACILITAR</p>
+        <h3>¿Qué te gustaría que tus clientes pudieran hacer sin llamarte?</h3>
+        <p class="contact-help">Puedes elegir varias. Si no estás seguro, déjalo vacío.</p>
+        <div class="chip-group" id="chipsGoal" role="group" aria-label="Lo que quieres facilitar">
+          <button type="button" class="chip" aria-pressed="false" data-val="Agendar citas">Agendar citas</button>
+          <button type="button" class="chip" aria-pressed="false" data-val="Hacer pedidos">Hacer pedidos</button>
+          <button type="button" class="chip" aria-pressed="false" data-val="Reservar">Reservar</button>
+          <button type="button" class="chip" aria-pressed="false" data-val="Pedir una cotización">Pedir una cotización</button>
+          <button type="button" class="chip" aria-pressed="false" data-val="Resolver dudas">Resolver dudas</button>
+        </div>
+        <input class="contact-text" id="contactMore" type="text" placeholder="¿Algo más que quieras contarme? (opcional)" maxlength="160">
+        <button type="button" class="button dark contact-next" id="contactToData" disabled>Continuar <span>→</span></button>
       </div>
 
       <div class="contact-screen" id="contactScreenQuestion" hidden>
+        <button type="button" class="contact-back" data-contact-back>← Atrás</button>
         <p class="contact-kicker">TU PREGUNTA</p>
         <h3>¿Qué quieres preguntarme?</h3>
-        <textarea class="contact-textarea" id="contactQuestion" placeholder="Escribe tu pregunta..."></textarea>
-        <button type="button" class="button dark contact-next" id="questionToData">Continuar <span>→</span></button>
+        <textarea class="contact-textarea" id="contactQuestion" placeholder="Escribe tu pregunta..." maxlength="500"></textarea>
+        <button type="button" class="button dark contact-next" id="questionToData" disabled>Continuar <span>→</span></button>
       </div>
 
       <div class="contact-screen" id="contactScreenData" hidden>
+        <button type="button" class="contact-back" data-contact-back>← Atrás</button>
         <p class="contact-kicker">CASI LISTO</p>
-        <h3>Perfecto. Déjame tus datos.</h3>
-        <p class="contact-help">Así puedo revisar tu caso y contactarte con contexto.</p>
-        <div class="contact-fields-single"><input id="contactName" type="text" placeholder="Tu nombre"><input id="contactWhatsApp" type="tel" placeholder="Tu WhatsApp"><input id="contactEmail" type="email" placeholder="Tu correo (opcional)"></div>
-        <div class="contact-schedule">
-          <p class="contact-kicker second">SI QUIERES CONVERSAR</p>
-          <h4>¿Qué día y hora te gustaría?</h4>
-          <div class="schedule-fields"><input id="contactDate" type="date"><select id="contactTime"><option value="">Selecciona una hora</option><option>8:00 a. m.</option><option>9:00 a. m.</option><option>10:00 a. m.</option><option>11:00 a. m.</option><option>2:00 p. m.</option><option>3:00 p. m.</option><option>4:00 p. m.</option><option>5:00 p. m.</option></select></div>
-          <p class="schedule-note">La hora queda pendiente de confirmación. Yo revisaré tu solicitud y te confirmaré directamente.</p>
+        <h3>¿Cómo te escribo?</h3>
+        <p class="contact-help">Solo necesito tu nombre y tu WhatsApp. Te escribo con contexto, para que no tengas que repetir nada.</p>
+        <div class="contact-fields-single"><input id="contactName" type="text" placeholder="Tu nombre" autocomplete="name"><input id="contactWhatsApp" type="tel" placeholder="Tu WhatsApp" autocomplete="tel" inputmode="tel"></div>
+        <button type="button" class="contact-linkbtn" id="contactAddEmail">+ Agregar correo (opcional)</button>
+        <input class="contact-text" id="contactEmail" type="email" placeholder="Tu correo" autocomplete="email" hidden>
+        <p class="contact-kicker second">¿CUÁNDO TE ESCRIBO?</p>
+        <div class="chip-group" id="chipsWhen" role="radiogroup" aria-label="Cuándo escribirte">
+          <button type="button" class="chip" role="radio" aria-checked="true" data-val="asap">Lo antes posible</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="manana">Mañana</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-val="elegir">Elegir día y hora</button>
         </div>
+        <div class="schedule-fields" id="contactWhenPick" hidden><input id="contactDate" type="date" aria-label="Día"><select id="contactTime" aria-label="Hora"><option value="">Selecciona una hora</option><option>8:00 a. m.</option><option>9:00 a. m.</option><option>10:00 a. m.</option><option>11:00 a. m.</option><option>2:00 p. m.</option><option>3:00 p. m.</option><option>4:00 p. m.</option><option>5:00 p. m.</option></select></div>
+        <p class="schedule-note">Yo confirmo la hora contigo por WhatsApp.</p>
         <div class="contact-consent">
-          <label><input type="checkbox" id="contactConsent"> <span>He leído y acepto el <a href="aviso-privacidad.html" target="_blank" rel="noopener">Política de tratamiento de datos y aviso de privacidad</a> y autorizo el uso de mis datos para que Daniel Cárdenas pueda contactarme sobre esta solicitud.</span></label>
+          <label><input type="checkbox" id="contactConsent"> <span>He leído y acepto la <a href="aviso-privacidad.html" target="_blank" rel="noopener">Política de tratamiento de datos y aviso de privacidad</a> y autorizo el uso de mis datos para que Daniel Cárdenas pueda contactarme sobre esta solicitud.</span></label>
         </div>
         <button type="button" class="button dark contact-send" id="contactSend">Solicitar conversación <span>↗</span></button>
         <div class="contact-feedback" id="contactFeedback" role="status"></div>
@@ -218,10 +240,13 @@
       <div class="contact-screen contact-success" id="contactScreenSuccess" hidden>
         <div class="success-mark">✓</div>
         <p class="contact-kicker">SOLICITUD RECIBIDA</p>
-        <h3>Perfecto. Tenemos tu caso.</h3>
-        <p>Recibí tu contexto y tu solicitud de horario. Voy a revisarlo y te confirmaré directamente.</p>
-        <strong>Te llevaré a WhatsApp para que la solicitud llegue con todo el contexto.</strong>
+        <h3>Listo, ya tengo tu solicitud.</h3>
+        <p>Te escribo por WhatsApp para confirmar la conversación. Si quieres adelantar, abre WhatsApp y envía tu mensaje: llegará con todo el contexto.</p>
+        <a class="button dark" id="contactSuccessWa" href="https://wa.me/573118262315" target="_blank" rel="noopener">Abrir WhatsApp con mi mensaje <span>↗</span></a>
+        <p class="contact-help success-extra">Mientras tanto, puedes <a href="experiencia.html">vivir una experiencia completa</a>.</p>
       </div>
+
+      <p class="contact-direct" id="contactDirect"><a id="contactDirectWa" href="https://wa.me/573118262315" target="_blank" rel="noopener">¿Prefieres escribirme directo? Abrir WhatsApp</a></p>
     </div>
     </div>
   </div>
@@ -237,7 +262,7 @@
   <span>© 2026</span>
 </footer>
 
-<script src="assets/js/home-v6.js?v=3"></script>
+<script src="assets/js/home-v6.js?v=4"></script>
 <script src="assets/js/home-v7.js?v=3"></script>
 </body>
 </html>
