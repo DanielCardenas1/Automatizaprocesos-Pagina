@@ -85,3 +85,9 @@ p+p{margin-top:-4px}
   .article{padding:10px 24px 80px}
   .cta{padding:28px 24px}
 }
+/* Escala y nitidez: etiquetas 12, enlaces 14; el énfasis dentro de texto sans va en seminegrita, no en cursiva inventada */
+.eyebrow,.hub-group-label,.layer-label{font-size:12px}
+p em,li em{font-style:normal;font-weight:600}
+nav a,footer a{font-size:14px}
+h1,h2{text-wrap:balance}
+.top-crumbs a,.cta a{font-size:14px}

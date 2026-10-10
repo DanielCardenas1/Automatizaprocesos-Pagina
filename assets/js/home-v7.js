@@ -75,7 +75,7 @@
 
 /* Mapa de la página: "dónde estoy y para dónde voy". */
 (function () {
-  var stops = [['experiencias', 'Pruébalo'], ['que-hago', 'Qué diseño'], ['casos', 'Casos y prototipos'], ['metodo', 'Cómo trabajo'], ['sobre-mi', 'Quién soy'], ['diagnostico', 'Hablemos']];
+  var stops = [['que-resuelvo', 'Qué resuelvo'], ['customer-experience', 'Customer Experience'], ['metodo', 'Cómo trabajo'], ['servicios', 'Servicios'], ['casos', 'Proyectos'], ['experiencias', 'Pruébalo'], ['capacidades', 'Capacidades'], ['sobre-mi', 'Sobre mí y contacto']];
   var bar = document.getElementById('dcWhere');
   if (!bar) return;
   var btn = bar.querySelector('.dc-where-btn'), list = document.getElementById('dcWhereList');

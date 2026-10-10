@@ -34,16 +34,18 @@
 </script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-garamond-400-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-400-normal.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts/fonts.css">
-<link rel="preload" as="image" href="assets/images/home/hero.webp" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/home-v7.css?v=30">
+<link rel="stylesheet" href="assets/fonts/fonts.css?v=2">
+<link rel="preload" as="image" href="assets/images/home/hero-estudio.webp" media="(min-width:761px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/images/home/hero-estudio-m.webp" media="(max-width:760px)" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/home-v7.css?v=43">
+<link rel="stylesheet" href="assets/css/home-v8.css?v=8">
 </head>
 <body>
 
 <header class="dc-nav">
   <a class="dc-brand" href="#inicio"><img src="assets/images/home/logo-dc-white-sm.webp" alt="DC" width="36" height="34"><strong>Daniel Cárdenas</strong></a>
   <button class="dc-menu" type="button" aria-expanded="false" aria-controls="dcNav">Menú</button>
-  <nav class="dc-navlinks" id="dcNav" aria-label="Principal"><a href="#experiencias">Pruébalo</a><a href="#casos">Casos</a><a href="#metodo">Método</a><a href="#sobre-mi">Sobre mí</a><a class="only-m" href="#diagnostico" data-pre-diagnostic="1">Hablemos</a></nav>
+  <nav class="dc-navlinks" id="dcNav" aria-label="Principal"><a href="#que-resuelvo">Qué resuelvo</a><a href="#customer-experience">Customer Experience</a><a href="#metodo">Cómo trabajo</a><a href="#servicios">Servicios</a><a href="#casos">Proyectos</a><a href="#experiencias">Pruébalo</a><a href="#sobre-mi">Sobre mí</a><a class="only-m" href="#diagnostico" data-pre-diagnostic="1">Hablemos</a></nav>
   <a class="dc-navcta" href="#diagnostico" data-pre-diagnostic="1">Hablemos <span>→</span></a>
 </header>
 
@@ -51,25 +53,178 @@
 
 <!-- 1 · HERO -->
 <section class="dc-hero">
+  <picture class="dc-hero-photo">
+    <source media="(max-width:760px)" srcset="assets/images/home/hero-estudio-m.webp" width="1200" height="860">
+    <img src="assets/images/home/hero-estudio.webp" alt="Una persona de espaldas dibuja sobre un tablero el recorrido de un cliente: bocetos de pantallas y notas con las palabras Entender, Detectar, Diseñar, Construir, Personas, Procesos, Tecnología y Resultados" width="1672" height="941" fetchpriority="high" decoding="async">
+  </picture>
   <div class="dc-hero-content">
-    <p class="dc-eyebrow">Experiencia del cliente para negocios</p>
-    <h1>Tu negocio tiene un objetivo.<br><em>Yo diseño el camino para llegar a él.</em></h1>
-    <p class="dc-lead">Hago que tus clientes puedan agendar, pedir o reservar desde el celular, sin llamarte ni preguntarte por WhatsApp.</p>
-    <div class="dc-actions"><a class="dc-btn" href="#experiencias" data-track="hero_probar">Ver cómo funciona <span>→</span></a><a class="dc-btn ghost" href="#metodo">Qué pasa si me escribes</a></div>
-    <ul class="dc-props">
-      <li><b class="ico" style="--i:url(../images/home/icons/route.svg)"></b>Agendan<br>sin llamarte</li>
-      <li><b class="ico" style="--i:url(../images/home/icons/heart.svg)"></b>Piden sin<br>preguntar precios</li>
-      <li><b class="ico" style="--i:url(../images/home/icons/gear.svg)"></b>Reservan sin<br>esperar respuesta</li>
-      <li><b class="ico" style="--i:url(../images/home/icons/chart.svg)"></b>Tú ves todo<br>en un solo lugar</li>
-    </ul>
+    <p class="dc-eyebrow">Estrategia · Experiencia · Diseño · Implementación</p>
+    <h1>Diseño lo que pasa entre tu negocio<br><em>y tus clientes.</em></h1>
+    <p class="dc-lead">Ayudo a las empresas a identificar oportunidades de mejora, diseñar experiencias que conecten con sus clientes y desarrollar soluciones que respondan a sus objetivos.</p>
+    <div class="dc-actions"><a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1" data-track="hero_proyecto">Hablemos de tu proyecto <span>→</span></a><a class="dc-btn ghost" href="#casos">Ver casos de estudio</a></div>
   </div>
-  <a class="dc-scroll" href="#experiencias" aria-label="Baja y pruébalo"><span>Baja y pruébalo</span><i>↓</i></a>
+  <a class="dc-scroll" href="#que-resuelvo" aria-label="Baja para ver más"><span>Descubre más</span><i>↓</i></a>
 </section>
 
-<!-- 2 · PRUÉBALO -->
+<!-- 2 · QUÉ PUEDO AYUDARTE A MEJORAR -->
+<section class="dc-help" id="que-resuelvo">
+  <div class="dc-help-in">
+    <div class="dc-help-head">
+      <div>
+        <p class="v8-eyebrow">1 de 8 · Qué puedo ayudarte a mejorar</p>
+        <h2 class="v8-h2">¿Qué está haciendo más difícil el <em>crecimiento de tu negocio?</em></h2>
+      </div>
+      <p class="v8-lead">A veces, el problema no es conseguir más clientes, sino lo que sucede después de que llegan. Identifico qué está dificultando tus objetivos y diseño soluciones para mejorar la experiencia de tus clientes y el funcionamiento de tu negocio.</p>
+    </div>
+    <ul class="dc-help-cards">
+      <li><i class="v8-ic" style="--i:url(../images/home/icons/user.svg)"></i><div><h3>Experiencia de tus clientes</h3><p>Cuando tus clientes tienen dificultades para encontrar información, comprender tus servicios o completar una acción.</p></div></li>
+      <li><i class="v8-ic" style="--i:url(../images/home/icons/chart.svg)"></i><div><h3>Procesos comerciales</h3><p>Cuando recibes consultas, pero resulta difícil organizarlas, darles seguimiento o convertirlas en oportunidades.</p></div></li>
+      <li><i class="v8-ic" style="--i:url(../images/home/icons/gear.svg)"></i><div><h3>Operación de tu negocio</h3><p>Cuando existen tareas repetitivas, información dispersa o procesos que podrían funcionar mejor.</p></div></li>
+      <li><i class="v8-ic" style="--i:url(../images/home/icons/nodes.svg)"></i><div><h3>Conexión entre canales</h3><p>Cuando tus clientes llegan por diferentes medios, pero la información y los procesos no están conectados adecuadamente.</p></div></li>
+    </ul>
+  </div>
+</section>
+<a class="dc-bridge" href="#customer-experience"><span class="dc-bridge-n">Sigue · 2 de 8</span><span class="dc-bridge-t">Customer Experience y diseño de experiencias</span><i aria-hidden="true">↓</i></a>
+
+<!-- 3 · CUSTOMER EXPERIENCE Y DISEÑO DE EXPERIENCIAS -->
+<section class="dc-cx" id="customer-experience"><span id="que-hago" class="dc-anchor"></span>
+  <div class="dc-cx-in">
+    <div class="dc-cx-copy">
+      <p class="v8-eyebrow gold">2 de 8 · Customer Experience · Diseño de experiencias</p>
+      <h2 class="v8-h2">Comprendo, diseño y conecto experiencias que <em>funcionan.</em></h2>
+      <p class="v8-lead">Analizo cómo se relacionan tus clientes con tu negocio, identifico fricciones y diseño mejores recorridos conectando personas, procesos y tecnología.</p>
+      <a class="dc-btn" href="#metodo">Ver cómo trabajo en CX <span>→</span></a>
+    </div>
+    <div class="dc-cx-panels">
+      <article class="dc-panel">
+        <header class="dc-panel-head"><span class="dc-num">01</span><h3>Entender</h3><p>Qué necesita el cliente.</p></header>
+        <div class="dc-map">
+          <b>Mapa de experiencia</b>
+          <div class="dc-map-cols" aria-hidden="true"><span>Descubre</span><span>Evalúa</span><span>Decide</span><span>Actúa</span><span>Fideliza</span></div>
+          <svg viewBox="0 0 300 160" role="img" aria-label="Curva de la experiencia del cliente en cinco etapas, con una emoción distinta en cada una" focusable="false">
+          <g fill="#e7e5df"><rect x="3" y="4" width="54" height="152" rx="6"/><rect x="63" y="4" width="54" height="152" rx="6"/><rect x="123" y="4" width="54" height="152" rx="6"/><rect x="183" y="4" width="54" height="152" rx="6"/><rect x="243" y="4" width="54" height="152" rx="6"/></g>
+          <path d="M6 92 C 34 52, 50 44, 78 90 S 122 140, 150 100 S 214 38, 270 66 S 292 78, 296 78" fill="none" stroke="#b9b6ad" stroke-width="1.6" stroke-dasharray="3 4"/>
+          <g><circle cx="30" cy="64" r="9" fill="#c94a3e"/><circle cx="90" cy="108" r="9" fill="#8a5cc2"/><circle cx="150" cy="100" r="9" fill="#e0a33a"/><circle cx="210" cy="55" r="9" fill="#3f9d6b"/><circle cx="270" cy="66" r="9" fill="#3b8fb5"/></g>
+          <g><circle cx="30" cy="64" r="3" fill="#fff"/><circle cx="90" cy="108" r="3" fill="#fff"/><circle cx="150" cy="100" r="3" fill="#fff"/><circle cx="210" cy="55" r="3" fill="#fff"/><circle cx="270" cy="66" r="3" fill="#fff"/></g>
+        </svg>
+          <ul class="dc-map-list"><li>Necesidades reales</li><li>Puntos de contacto</li><li>Fricciones y oportunidades</li></ul>
+        </div>
+      </article>
+      <article class="dc-panel">
+        <header class="dc-panel-head"><span class="dc-num">02</span><h3>Diseñar</h3><p>Cómo debería funcionar.</p></header>
+        <div class="dc-p2">
+          <div class="dc-phone-stage" aria-hidden="true">
+            <span class="dc-card-mini"></span>
+            <div class="dc-phone"><div class="dc-phone-screen"><b>Explora</b><span class="dc-chips"><i></i><i></i><i></i></span><span class="dc-tiles"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i></span></div></div>
+          </div>
+          <ul class="dc-p2-list">
+            <li><i class="v8-ic" style="--i:url(../images/home/icons/route.svg)"></i> Recorridos</li>
+            <li><i class="v8-ic" style="--i:url(../images/home/icons/pencil.svg)"></i> Bocetos</li>
+            <li><i class="v8-ic" style="--i:url(../images/home/icons/cursor.svg)"></i> Prototipos</li>
+            <li><i class="v8-ic" style="--i:url(../images/home/icons/eye.svg)"></i> Experiencias visuales</li>
+          </ul>
+        </div>
+      </article>
+      <article class="dc-panel">
+        <header class="dc-panel-head"><span class="dc-num">03</span><h3>Conectar</h3><p>Con procesos y tecnología.</p></header>
+        <div class="dc-flow" aria-label="Una persona hace una consulta, el proceso la atiende y llega a una solución">
+          <span class="dc-person"><i class="v8-ic" style="--i:url(../images/home/icons/user.svg)"></i></span><i class="dc-arrow">→</i>
+          <span class="dc-box">Consulta</span><i class="dc-arrow">→</i>
+          <span class="dc-box">Proceso</span><i class="dc-arrow">→</i>
+          <span class="dc-box">Solución</span>
+        </div>
+        <svg class="dc-loop" viewBox="0 0 200 26" aria-hidden="true" focusable="false"><path d="M64 3 C 64 24, 118 24, 118 6" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/><path d="M114 10l4-5 3 6" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/></svg>
+        <ul class="dc-checks"><li>Integraciones</li><li>Automatizaciones</li><li>Procesos conectados</li><li>Seguimiento y mejora</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+<a class="dc-bridge" href="#metodo"><span class="dc-bridge-n">Sigue · 3 de 8</span><span class="dc-bridge-t">Cómo trabajo, en cinco pasos</span><i aria-hidden="true">↓</i></a>
+
+<!-- 4 · METODOLOGÍA -->
+<section class="dc-m8" id="metodo">
+  <div class="dc-m8-in">
+    <div class="dc-m8-head">
+      <p class="v8-eyebrow">3 de 8 · Mi metodología</p>
+      <h2 class="v8-h2">De la comprensión a la implementación.</h2>
+      <p class="v8-lead">Un proceso claro para diseñar soluciones que respondan a necesidades reales.</p>
+    </div>
+    <ol class="dc-m8-steps">
+      <li><div class="dc-m8-top"><span class="dc-m8-ic"><i class="v8-ic" style="--i:url(../images/home/icons/search.svg)"></i></span><i class="dc-m8-arrow" aria-hidden="true">→</i></div><small>01</small><h3>Entender</h3><p>Comprendo el negocio, sus objetivos y sus clientes.</p><p class="dc-m8-get"><b>Recibes</b>Un resumen para que confirmes que te entendí.</p></li>
+      <li><div class="dc-m8-top"><span class="dc-m8-ic"><i class="v8-ic" style="--i:url(../images/home/icons/chart.svg)"></i></span><i class="dc-m8-arrow" aria-hidden="true">→</i></div><small>02</small><h3>Detectar</h3><p>Identifico fricciones y oportunidades.</p><p class="dc-m8-get"><b>Recibes</b>Qué encontré y qué no necesitas.</p></li>
+      <li><div class="dc-m8-top"><span class="dc-m8-ic"><i class="v8-ic" style="--i:url(../images/home/icons/pencil.svg)"></i></span><i class="dc-m8-arrow" aria-hidden="true">→</i></div><small>03</small><h3>Diseñar</h3><p>Transformo los hallazgos en soluciones concretas.</p><p class="dc-m8-get"><b>Recibes</b>El prototipo y la propuesta con precio. Tú decides.</p></li>
+      <li><div class="dc-m8-top"><span class="dc-m8-ic"><i class="v8-ic" style="--i:url(../images/home/icons/layers.svg)"></i></span><i class="dc-m8-arrow" aria-hidden="true">→</i></div><small>04</small><h3>Construir</h3><p>Implemento los componentes necesarios.</p><p class="dc-m8-get"><b>Recibes</b>Tu solución publicada, con el primer mes de acompañamiento incluido.</p></li>
+      <li><div class="dc-m8-top"><span class="dc-m8-ic"><i class="v8-ic" style="--i:url(../images/home/icons/growth.svg)"></i></span></div><small>05</small><h3>Mejorar</h3><p>Evalúo resultados y detecto nuevas oportunidades.</p><p class="dc-m8-get"><b>Recibes</b>Un plan mensual opcional, si quieres seguir mejorando.</p></li>
+    </ol>
+  </div>
+</section>
+<a class="dc-bridge" href="#servicios"><span class="dc-bridge-n">Sigue · 4 de 8</span><span class="dc-bridge-t">Servicios</span><i aria-hidden="true">↓</i></a>
+
+<!-- 5 · SERVICIOS -->
+<section class="dc-sv-sec" id="servicios">
+  <div class="dc-sv-in">
+    <div class="dc-sv-copy">
+      <p class="v8-eyebrow gold">4 de 8 · Servicios</p>
+      <h2 class="v8-h2">Cada negocio necesita una solución diferente.</h2>
+      <p class="v8-lead">Podemos empezar por entender qué sucede en tu negocio, diseñar una solución o trabajar en la mejora de algo que ya está funcionando.</p>
+      <a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1">Conoce más sobre mis servicios <span>→</span></a>
+    </div>
+    <div class="dc-sv-cards">
+      <article class="dc-sv">
+        <header><span class="dc-sv-ic"><i class="v8-ic" style="--i:url(../images/home/icons/docsearch.svg)"></i></span><h3>Diagnóstico y asesoría</h3></header>
+        <p>Analizo la situación actual, identifico oportunidades y establezco una ruta de mejora.</p>
+        <ul><li>Análisis de experiencia</li><li>Revisión de procesos</li><li>Recomendaciones priorizadas</li></ul>
+        <a class="dc-sv-link" href="#metodo">Ver detalles <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="dc-sv">
+        <header><span class="dc-sv-ic"><i class="v8-ic" style="--i:url(../images/home/icons/bulb.svg)"></i></span><h3>Diseño e implementación</h3></header>
+        <p>Diseño y desarrollo soluciones adaptadas a las necesidades de tu negocio.</p>
+        <ul><li>Recorridos de clientes</li><li>Diseño visual y UX/UI</li><li>Automatización e integraciones</li></ul>
+        <a class="dc-sv-link" href="sistemas-internos.html">Ver detalles <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="dc-sv">
+        <header><span class="dc-sv-ic"><i class="v8-ic" style="--i:url(../images/home/icons/growth.svg)"></i></span><h3>Acompañamiento y optimización</h3></header>
+        <p>Reviso el funcionamiento, identifico oportunidades y mejoro lo que ya está en marcha.</p>
+        <ul><li>Evaluación de resultados</li><li>Ajustes y mejoras</li><li>Nuevas oportunidades</li></ul>
+        <a class="dc-sv-link" href="#diagnostico">Ver detalles <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+<a class="dc-bridge" href="#casos"><span class="dc-bridge-n">Sigue · 5 de 8</span><span class="dc-bridge-t">Proyectos</span><i aria-hidden="true">↓</i></a>
+
+<!-- 6 · PROYECTOS -->
+<section class="dc-cases8" id="casos"><span id="prototipos" class="dc-anchor"></span><span id="trabajo" class="dc-anchor"></span><span id="sistemas" class="dc-anchor"></span>
+  <div class="dc-cases8-in">
+    <div class="dc-cases8-copy">
+      <p class="v8-eyebrow">5 de 8 · Proyectos</p>
+      <h2 class="v8-h2">Ideas que se convierten en soluciones.</h2>
+      <p class="v8-lead">Cada proyecto parte de un contexto diferente. Estos casos muestran cómo abordo problemas, diseño experiencias y construyo soluciones adaptadas a las necesidades de cada negocio.</p>
+      <p class="dc-legend8"><strong>Caso real:</strong> negocio que ya lo usa. <strong>Prototipo:</strong> recorrido diseñado que puedes probar; aún no está en operación.</p>
+      <a class="v8-link" href="sistemas-internos.html">Ver más trabajo <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="dc-pj-grid">
+      <a class="dc-pj" href="trabajo/hojaldito/">
+        <div class="dc-pj-img"><img src="assets/images/home/case-hojaldito.webp" alt="Hojaldito" width="640" height="360" loading="lazy" decoding="async"></div>
+        <div class="dc-pj-body"><h3>Hojaldito</h3><p>Diseño de recorridos comerciales para facilitar la distribución.</p><div class="dc-pj-tags"><span>CX</span><span>Recorridos</span><span>Comercialización</span><span class="dc-pj-state">Prototipo</span></div><span class="dc-pj-go">Ver caso <b aria-hidden="true">→</b></span></div>
+      </a>
+      <a class="dc-pj" href="trabajo/al-natural/">
+        <div class="dc-pj-img"><img src="assets/images/home/case-al-natural.webp" alt="Al Natural" width="640" height="360" loading="lazy" decoding="async"></div>
+        <div class="dc-pj-body"><h3>Al Natural</h3><p>Diseño de una experiencia de compra adaptada al negocio.</p><div class="dc-pj-tags"><span>CX</span><span>Diseño visual</span><span>E-commerce</span><span class="dc-pj-state">Caso real</span></div><span class="dc-pj-go">Ver caso <b aria-hidden="true">→</b></span></div>
+      </a>
+      <a class="dc-pj" href="trabajo/sena-vitrina/">
+        <div class="dc-pj-img"><img src="assets/images/home/case-sena.webp" alt="SENA Vitrina" width="640" height="360" loading="lazy" decoding="async"></div>
+        <div class="dc-pj-body"><h3>SENA Vitrina</h3><p>Conexión entre una oferta y las personas que pueden necesitarla.</p><div class="dc-pj-tags"><span>Experiencias digitales</span><span>Organización</span><span>CX</span><span class="dc-pj-state">Prototipo</span></div><span class="dc-pj-go">Ver caso <b aria-hidden="true">→</b></span></div>
+      </a>
+    </div>
+    <p class="dc-more8">También: <a href="https://brice-detailing.vercel.app/" target="_blank" rel="noopener">Brice, agendamiento y cotizaciones (caso real) ↗</a></p>
+  </div>
+</section>
+<a class="dc-bridge" href="#experiencias"><span class="dc-bridge-n">Sigue · 6 de 8</span><span class="dc-bridge-t">Pruébalo: vive una experiencia</span><i aria-hidden="true">↓</i></a>
+
 <section class="dc-try" id="experiencias"><span id="experiencia" class="dc-anchor"></span><span id="modal-demo-vet" class="dc-anchor"></span>
   <div class="dc-try-copy">
-    <p class="dc-eyebrow dk">1 de 6 · Pruébalo</p>
+    <p class="dc-eyebrow dk">6 de 8 · Pruébalo · Vive una experiencia</p>
     <h2 class="dc-try-title">Pruébalo.</h2>
     <p class="dc-copy">Elige un negocio y úsalo como si fueras su cliente.</p>
     <div class="dc-tabs" role="tablist" aria-label="Tipo de negocio">
@@ -89,84 +244,47 @@
     <figure class="tp" data-panel="home"><a class="tp-link" href="https://galardon-construraiz.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-track="try_home_img"></a><img src="assets/images/home/construraiz-experiencia.webp" alt="" width="1600" height="682" loading="lazy" decoding="async" style="object-position:94% 50%"><figcaption>Encontrar el lugar correcto, con asesoría desde el primer paso.</figcaption></figure>
   </div>
 </section>
-<a class="dc-bridge" href="#que-hago"><span class="dc-bridge-n">Sigue · 2 de 6</span><span class="dc-bridge-t">Qué es lo que diseño</span><i aria-hidden="true">↓</i></a>
+<a class="dc-bridge" href="#capacidades"><span class="dc-bridge-n">Sigue · 7 de 8</span><span class="dc-bridge-t">Capacidades</span><i aria-hidden="true">↓</i></a>
 
-<!-- 3 · QUÉ DISEÑO -->
-<section class="dc-what" id="que-hago">
-  <div class="dc-what-copy">
-    <p class="dc-eyebrow">2 de 6 · Qué diseño</p>
-    <h2>No es una página más bonita.</h2>
-    <p>Es lo que le pasa a tu cliente desde que te encuentra hasta que vuelve.</p>
-  </div>
-  <div class="dc-what-path">
-    <svg class="dc-path" viewBox="0 0 640 260" preserveAspectRatio="none" aria-hidden="true"><path d="M102 125 C 180 125, 240 47, 320 47 S 470 112, 538 112" fill="none" stroke="#d6b98a" stroke-opacity=".85" stroke-width="1.6" stroke-dasharray="2 7" stroke-linecap="round"/></svg>
-    <div class="dc-stage s1"><i style="--i:url(../images/home/icons/eye.svg)"></i><h3>Antes</h3><p>Te encuentra y entiende qué ofreces.</p><small>Ej.: ve la carta y sabe qué pedir.</small></div>
-    <div class="dc-stage s2"><i style="--i:url(../images/home/icons/cursor.svg)"></i><h3>Durante</h3><p>Hace lo que vino a hacer, por su cuenta.</p><small>Ej.: agenda su cita sin llamar.</small></div>
-    <div class="dc-stage s3"><i style="--i:url(../images/home/icons/heart.svg)"></i><h3>Después</h3><p>Recibe su confirmación y vuelve.</p><small>Ej.: la próxima vez pide más fácil.</small></div>
+<!-- 7 · CAPACIDADES -->
+<section class="dc-caps" id="capacidades">
+  <div class="dc-caps-in">
+    <div class="dc-caps-copy">
+      <p class="v8-eyebrow gold">7 de 8 · Capacidades</p>
+      <h2 class="v8-h2">Diferentes disciplinas. Una misma intención: <em>diseñar mejores soluciones.</em></h2>
+    </div>
+    <ul class="dc-caps-list">
+      <li><span class="dc-cap-ic"><i class="v8-ic" style="--i:url(../images/home/icons/nodes.svg)"></i></span><h3>Customer Experience (CX)</h3><p>Comprensión y mejora de la experiencia.</p></li>
+      <li><span class="dc-cap-ic"><i class="v8-ic" style="--i:url(../images/home/icons/route.svg)"></i></span><h3>Diseño de experiencias</h3><p>Recorridos, puntos de contacto.</p></li>
+      <li><span class="dc-cap-ic"><i class="v8-ic" style="--i:url(../images/home/icons/pencil.svg)"></i></span><h3>Diseño visual y UX/UI</h3><p>Interfaces claras y funcionales.</p></li>
+      <li><span class="dc-cap-ic"><i class="v8-ic" style="--i:url(../images/home/icons/gear.svg)"></i></span><h3>Optimización de procesos</h3><p>Mejora de la eficiencia y reducción de fricciones.</p></li>
+      <li><span class="dc-cap-ic"><i class="v8-ic" style="--i:url(../images/home/icons/layers.svg)"></i></span><h3>Tecnología y automatización</h3><p>Integraciones y herramientas digitales.</p></li>
+      <li><span class="dc-cap-ic"><i class="v8-ic" style="--i:url(../images/home/icons/growth.svg)"></i></span><h3>Análisis y mejora</h3><p>Evaluación y nuevas oportunidades.</p></li>
+    </ul>
   </div>
 </section>
-<a class="dc-bridge" href="#casos"><span class="dc-bridge-n">Sigue · 3 de 6</span><span class="dc-bridge-t">Casos reales y prototipos</span><i aria-hidden="true">↓</i></a>
+<a class="dc-bridge" href="#sobre-mi"><span class="dc-bridge-n">Sigue · 8 de 8</span><span class="dc-bridge-t">Sobre mí y contacto</span><i aria-hidden="true">↓</i></a>
 
-<!-- 4 · CASOS Y PROTOTIPOS -->
-<section class="dc-cases" id="casos"><span id="prototipos" class="dc-anchor"></span><span id="trabajo" class="dc-anchor"></span><span id="sistemas" class="dc-anchor"></span>
-  <div class="dc-cases-head">
-    <p class="dc-eyebrow dk">3 de 6 · Casos y prototipos</p>
-    <h2>Cuatro negocios.<br>Cada uno a su manera.</h2>
-    <p class="dc-copy">Cada negocio tiene clientes distintos, así que cada solución es distinta.</p>
-    <p class="dc-legend"><strong>Caso real:</strong> negocio que ya lo usa.<br><strong>Prototipo:</strong> recorrido diseñado que puedes probar; aún no está en operación.</p>
-    <a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1">Cuéntame tu caso <span>→</span></a>
-  </div>
-  <div class="dc-case-row">
-    <a class="dc-case" href="trabajo/hojaldito/"><div class="dc-case-img"><img src="assets/images/home/case-hojaldito.webp" alt="Hojaldito" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>Hojaldito</h3><p>Quien quiere vender o comprar ve precios y condiciones antes de escribir.</p><p class="dc-case-state">Prototipo que puedes recorrer. Aún sin operar.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
-    <a class="dc-case" href="trabajo/al-natural/"><div class="dc-case-img"><img src="assets/images/home/case-al-natural.webp" alt="Al Natural" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>Al Natural</h3><p>Compra guiada desde la web o con QR en la mesa.</p><p class="dc-case-state on">En operación: tienda en línea y QR en la mesa.</p><div class="dc-case-foot"><em class="real">Caso real</em><b>→</b></div></div></a>
-    <a class="dc-case" href="trabajo/sena-vitrina/"><div class="dc-case-img"><img src="assets/images/home/case-sena.webp" alt="SENA Vitrina" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>SENA Vitrina</h3><p>Escaneas un QR y llegas al producto del Centro SENA que lo hace.</p><p class="dc-case-state">Prototipo que puedes recorrer. Aún sin operar.</p><div class="dc-case-foot"><em>Prototipo</em><b>→</b></div></div></a>
-    <a class="dc-case" href="https://brice-detailing.vercel.app/" target="_blank" rel="noopener"><div class="dc-case-img"><img src="assets/images/home/case-brice.webp" alt="Brice" width="640" height="360" loading="lazy" decoding="async"></div><div class="dc-case-body"><h3>Brice</h3><p>Agendamiento y cotizaciones.</p><p class="dc-case-state on">En operación: se agenda y cotiza desde la web.</p><div class="dc-case-foot"><em class="real">Caso real</em><b class="ext">Ver sitio ↗</b></div></div></a>
-  </div>
-</section>
-<a class="dc-bridge" href="#metodo"><span class="dc-bridge-n">Sigue · 4 de 6</span><span class="dc-bridge-t">Cómo trabajo, en cinco pasos</span><i aria-hidden="true">↓</i></a>
-
-<!-- 5 · MÉTODO -->
-<section class="dc-method" id="metodo">
-  <div class="dc-method-copy">
-    <p class="dc-eyebrow">4 de 6 · Cómo trabajo</p>
-    <h2>Esto pasa<br><em>si me escribes.</em></h2>
-    <p>Cinco pasos, siempre en el mismo orden. Ves tu recorrido funcionando antes de decidir si se construye.</p>
-    <a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1">Hablemos de tu negocio <span>→</span></a>
-  </div>
-  <div class="dc-steps">
-    <div class="dc-step"><i style="--i:url(../images/home/icons/search.svg)"></i><h3>Entender</h3><p>Hablamos y yo tomo nota de todo. Esa misma tarde te escribo lo que entendí.</p><p class="dc-step-get"><b>Recibes</b>Un resumen para que confirmes que te entendí.</p></div>
-    <div class="dc-step"><i style="--i:url(../images/home/icons/bulb.svg)"></i><h3>Detectar</h3><p>Estudio tu caso, de 1 a 2 días. Busco dónde se pierde tu cliente.</p><p class="dc-step-get"><b>Recibes</b>Qué encontré y qué no necesitas.</p></div>
-    <div class="dc-step"><i style="--i:url(../images/home/icons/pencil.svg)"></i><h3>Diseñar</h3><p>En una reunión recorres tu experiencia funcionando, en tu celular.</p><p class="dc-step-get"><b>Recibes</b>El prototipo y la propuesta con precio. Tú decides.</p></div>
-    <div class="dc-step"><i style="--i:url(../images/home/icons/gear.svg)"></i><h3>Construir</h3><p>Se hace por partes pequeñas y la pruebo con personas antes de entregarla.</p><p class="dc-step-get"><b>Recibes</b>Tu experiencia publicada, con el primer mes de acompañamiento incluido.</p></div>
-    <div class="dc-step"><i style="--i:url(../images/home/icons/chart.svg)"></i><h3>Mejorar</h3><p>Miramos qué usa la gente y qué conviene ajustar.</p><p class="dc-step-get"><b>Recibes</b>Un plan mensual opcional, si quieres seguir mejorando.</p></div>
-  </div>
-</section>
-<a class="dc-bridge" href="#sobre-mi"><span class="dc-bridge-n">Sigue · 5 de 6</span><span class="dc-bridge-t">Quién soy</span><i aria-hidden="true">↓</i></a>
-
-<!-- 6 · EL TRABAJO TIENE UN NOMBRE -->
-<section class="dc-about" id="sobre-mi">
-  <div class="dc-about-copy">
-    <p class="dc-eyebrow">5 de 6 · Quién soy</p>
-    <h2>Daniel<br><em>Cárdenas</em></h2>
-    <p class="dc-about-tag">Diseño lo que pasa entre<br>tu negocio y tus clientes.</p>
-    <p>Empiezo por entender cómo compra tu cliente y qué le estorba. La tecnología viene después, y solo si hace falta.</p>
-  </div>
-  <figure class="dc-about-photo"><img src="assets/images/profile/retrato-640.webp" alt="Daniel Cárdenas" width="640" height="960" loading="lazy" decoding="async"></figure>
-  <div class="dc-about-quote">
-    <blockquote>La tecnología es el medio.<br>El problema del negocio<br>es el punto de partida.</blockquote>
-    <ul><li><strong>Especialidad en Customer Experience</strong><small>EUDE Business School, 250 horas, 2025</small></li><li><strong>Especialista en Alta Gerencia</strong><small>Fundación Universitaria del Área Andina, 2025</small></li><li><strong>Administrador de Empresas</strong><small>Fundación Universitaria del Área Andina, 2024</small></li></ul>
-    <p class="dc-about-where">Tunja, Boyacá. Trabajo remoto y presencial. Desde 2014 en administración, procesos y operaciones.</p>
-  </div>
-</section>
-<a class="dc-bridge" href="#diagnostico"><span class="dc-bridge-n">Sigue · 6 de 6</span><span class="dc-bridge-t">Hablemos de tu negocio</span><i aria-hidden="true">↓</i></a>
-
-<!-- 7 · CTA FINAL (con el formulario de contacto real) -->
-<section class="dc-final" id="diagnostico"><span id="stageInputWrap" class="dc-anchor"></span>
-  <div class="dc-final-in">
-    <div class="dc-final-copy">
-      <p class="dc-eyebrow">6 de 6 · Hablemos</p>
-      <h2>¿Qué deberían poder hacer tus clientes sin que tú tengas que explicárselo?</h2>
-      <div class="dc-final-pills"><span>Remoto, sin importar dónde estés</span><span>Te respondo en menos de 24 horas</span><span>Propuesta en menos de 48 horas</span></div>
+<!-- 8 · SOBRE MÍ Y CONTACTO -->
+<div class="dc-closing">
+  <section class="dc-ab" id="sobre-mi">
+    <figure class="dc-ab-photo"><img src="assets/images/profile/retrato-640.webp" srcset="assets/images/profile/retrato-640.webp 640w, assets/images/profile/retrato.webp 900w" sizes="(max-width:1100px) 38vw, 22vw" alt="Daniel Cárdenas" width="640" height="960" loading="lazy" decoding="async"></figure>
+    <div class="dc-ab-body">
+      <p class="v8-eyebrow">8 de 8 · Sobre mí</p>
+      <h2 class="v8-h2">Entiendo el negocio. Diseño la experiencia. Construyo la solución.</h2>
+      <p class="v8-lead">Soy Daniel Cárdenas, Administrador de Empresas y Especialista en Alta Gerencia. Me interesa comprender cómo funcionan las cosas, identificar qué podría hacerse mejor y transformar esas oportunidades en soluciones que puedan llevarse a la práctica.</p>
+      <ul class="dc-ab-creds"><li><strong>Especialidad en Customer Experience</strong><small>EUDE Business School, 250 horas, 2025</small></li><li><strong>Especialista en Alta Gerencia</strong><small>Fundación Universitaria del Área Andina, 2025</small></li><li><strong>Administrador de Empresas</strong><small>Fundación Universitaria del Área Andina, 2024</small></li></ul>
+      <p class="dc-ab-where">Tunja, Boyacá. Trabajo remoto y presencial. Desde 2014 en administración, procesos y operaciones.</p>
+      <a class="v8-link" href="sistemas-internos.html">Conoce más sobre mí <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+  <section class="dc-ct" id="diagnostico"><span id="stageInputWrap" class="dc-anchor"></span>
+    <div class="dc-ct-copy">
+      <p class="v8-eyebrow gold">8 de 8 · Contacto</p>
+      <h2 class="v8-h2">¿Qué te gustaría mejorar en tu negocio?</h2>
+      <p class="v8-lead">Cuéntame qué está pasando. Podemos empezar por comprender el problema y explorar qué tendría sentido hacer.</p>
+      <a class="dc-btn" href="#experienceContactBox">Iniciar conversación <span>→</span></a>
+      <div class="dc-ct-pills"><span>La primera conversación es gratis</span><span>Remoto, sin importar dónde estés</span><span>Te respondo en menos de 24 horas</span><span>Propuesta en menos de 48 horas</span></div>
     </div>
     <div class="dc-contact">
       <div class="diagnostic-box experience-contact-box" id="experienceContactBox">
@@ -256,23 +374,25 @@
       <p class="contact-direct" id="contactDirect"><a id="contactDirectWa" href="https://wa.me/573118262315" target="_blank" rel="noopener">¿Prefieres escribirme directo? Abrir WhatsApp</a> <span aria-hidden="true">·</span> <a href="mailto:daniel@danielcardenas.co">daniel@danielcardenas.co</a></p>
     </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 </main>
 
 <div class="dc-where" id="dcWhere" aria-hidden="true">
   <button type="button" class="dc-where-btn" aria-expanded="false" aria-controls="dcWhereList" tabindex="-1">
-    <span class="dc-where-n" id="dcWhereN">1 de 6</span><span class="dc-where-t" id="dcWhereT">Pruébalo</span><span class="dc-where-c" aria-hidden="true">▾</span>
+    <span class="dc-where-n" id="dcWhereN">1 de 8</span><span class="dc-where-t" id="dcWhereT">Qué resuelvo</span><span class="dc-where-c" aria-hidden="true">▾</span>
   </button>
   <span class="dc-where-bar" aria-hidden="true"><i id="dcWhereFill"></i></span>
   <ol class="dc-where-list" id="dcWhereList" aria-label="Mapa de la página" hidden>
-    <li><a href="#experiencias">Pruébalo</a></li>
-    <li><a href="#que-hago">Qué diseño</a></li>
-    <li><a href="#casos">Casos y prototipos</a></li>
+    <li><a href="#que-resuelvo">Qué resuelvo</a></li>
+    <li><a href="#customer-experience">Customer Experience</a></li>
     <li><a href="#metodo">Cómo trabajo</a></li>
-    <li><a href="#sobre-mi">Quién soy</a></li>
-    <li><a href="#diagnostico">Hablemos</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#casos">Proyectos</a></li>
+    <li><a href="#experiencias">Pruébalo</a></li>
+    <li><a href="#capacidades">Capacidades</a></li>
+    <li><a href="#sobre-mi">Sobre mí y contacto</a></li>
   </ol>
 </div>
 <div class="dc-sticky" id="dcSticky" aria-hidden="true"><a class="dc-btn" href="#diagnostico" data-pre-diagnostic="1" tabindex="-1">Hablemos <span>→</span></a><a class="dc-btn wa" href="https://wa.me/573118262315?text=Hola%20Daniel%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20una%20experiencia%20para%20mi%20negocio." target="_blank" rel="noopener" tabindex="-1">WhatsApp</a></div>
@@ -284,6 +404,6 @@
 </footer>
 
 <script src="assets/js/home-v6.js?v=7"></script>
-<script src="assets/js/home-v7.js?v=5"></script>
+<script src="assets/js/home-v7.js?v=6"></script>
 </body>
 </html>

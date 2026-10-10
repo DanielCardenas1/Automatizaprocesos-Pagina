@@ -63,3 +63,15 @@
 .case-page .demo-device{--bg:#F5F1E8;--s:#EFE9DA;--w:#FAF8F3;--ink:#18201D;--ink2:#5F6B62;--ink3:#5C6A60;--bdr:#D8D4CA;--dark:#1b1a18;--dark2:#1b1a18;--dark-ink:#F5F1E8;--dark-ink2:#d8d3c8;--dark-bdr:#8f7b5d;--accent:#6A5C42;--accent2:#6A5C42;--accent-light:#b5a58c}
 .case-live{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:18px;padding:0 20px;border:1px solid var(--ink);border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;color:var(--ink)}
 .case-live:hover{background:var(--ink);color:#fff}
+/* Escala unificada, igual que la home: 12 etiquetas, 14 apoyo y controles, 16 lectura */
+.case-page .brand-name{font-size:16px}
+.case-page .brand-sub{font-size:12px}
+.case-page .btn-wa{font-size:14px}
+.case-page .footer-brand{font-size:16px}
+.case-page .footer-tag,.case-page .footer-links a{font-size:14px}
+.case-eyebrow,.case-label,.case-number,.case-quote-by{font-size:12px}
+.case-page .case-back a{font-size:14px}
+.case-tag,.case-flow span,.case-card p,.case-live{font-size:14px}
+.case-page .case-demo .back-link{font-family:var(--f-sans);font-size:14px;min-height:44px}
+.case-cta-btn{font-size:15px}
+h1,h2{text-wrap:balance}
