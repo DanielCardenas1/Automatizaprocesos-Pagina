@@ -1,5 +1,5 @@
 /* Case studies — editorial portfolio */
-.case-page{background:#fbfaf7;color:var(--ink)}
+.case-page{background:#fff;color:var(--ink)}
 .case-page nav{position:relative}
 .case-page .case-wrap{max-width:1180px;margin:0 auto;padding:0 44px}
 .case-back{padding-top:28px}
@@ -24,7 +24,7 @@
 .case-flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:28px}
 .case-flow span{background:var(--s);padding:10px 14px;border-radius:100px;font-size:12px;font-weight:600}
 .case-flow b{font-weight:400;color:var(--ink3)}
-.case-image{margin-top:34px;background:#f1eee7;border-radius:24px;padding:22px;overflow:hidden}
+.case-image{margin-top:34px;background:#f2f2f2;border-radius:24px;padding:22px;overflow:hidden}
 .case-image img{width:100%;display:block;max-height:620px;object-fit:contain;border-radius:14px}
 .case-split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
 .case-card{border:1px solid var(--bdr);border-radius:20px;padding:28px;background:rgba(255,255,255,.55)}
@@ -42,3 +42,24 @@
 .case-next small{display:block;font-family:var(--f-mono);font-size:10px;color:var(--ink3);margin-bottom:6px}
 .case-next strong{font-family:var(--f-display);font-size:24px}
 @media(max-width:850px){.case-page .case-wrap{padding:0 22px}.case-hero{grid-template-columns:1fr;gap:24px;padding-top:32px;padding-bottom:58px}.case-hero-media{min-height:300px}.case-hero-media img{max-height:390px}.case-grid{grid-template-columns:1fr;gap:18px}.case-section{padding:54px 0}.case-split{grid-template-columns:1fr}.case-dark{padding:32px}.case-next{flex-direction:column}}
+.case-back a{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
+.case-tag{font-size:12px}
+.case-next{align-items:flex-start}
+.case-next a{display:block;min-height:44px}
+.case-next small{font-size:12px}
+.case-quote-by{display:block;margin-top:10px;font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.case-dark .case-quote-by{color:rgba(255,255,255,.7)}
+.case-cta{display:flex;align-items:center;justify-content:space-between;gap:28px;padding-top:44px;padding-bottom:44px;border-top:1px solid var(--bdr)}
+.case-cta h2{font-family:var(--f-display);font-size:30px;line-height:1.1;margin:0 0 8px}
+.case-cta p{margin:0;max-width:520px;font-size:16px;line-height:1.5;color:var(--ink2)}
+.case-cta-btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;background:#151515;color:#fff;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
+.case-cta-btn:hover{background:#2a2a2a}
+.case-cta-btn:focus-visible{outline:3px solid #151515;outline-offset:3px}
+.case-page .footer-links a,.case-page .nav-links a{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:850px){.case-cta{flex-direction:column;align-items:flex-start}.case-cta-btn{width:100%;justify-content:center}}
+/* Paleta de la marca en el marco de las páginas de caso: negro carbón, grises, blanco y dorado */
+.case-page{--bg:#f2f2f2;--s:#e9e9e9;--w:#fff;--ink:#151515;--ink2:#5e5f5d;--ink3:#5e5f5d;--bdr:#d9d9d9;--dark:#151515;--dark2:#151515;--dark-ink:#f2f2f2;--dark-ink2:#cfcfcf;--dark-bdr:#8a816e;--accent:#6b634f;--accent2:#6b634f;--accent-light:#c9ad7f}
+/* La maqueta del cliente dentro de la demo conserva su propia paleta */
+.case-page .demo-device{--bg:#F5F1E8;--s:#EFE9DA;--w:#FAF8F3;--ink:#18201D;--ink2:#5F6B62;--ink3:#5C6A60;--bdr:#D8D4CA;--dark:#1b1a18;--dark2:#1b1a18;--dark-ink:#F5F1E8;--dark-ink2:#d8d3c8;--dark-bdr:#8f7b5d;--accent:#6A5C42;--accent2:#6A5C42;--accent-light:#b5a58c}
+.case-live{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:18px;padding:0 20px;border:1px solid var(--ink);border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;color:var(--ink)}
+.case-live:hover{background:var(--ink);color:#fff}

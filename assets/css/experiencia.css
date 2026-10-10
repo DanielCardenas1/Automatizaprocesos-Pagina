@@ -565,3 +565,4 @@ body.in-cafe .exp-exit{border-color:rgba(138,74,43,.4);background:rgba(251,248,2
 .d-back:hover{color:var(--d-ink)}
 .d-main > .d-back{display:block;margin:0 auto 6px 0}
 .demo-chip{display:inline-block;margin:14px 0 0;font:600 12.5px/1.3 var(--sans);padding:8px 14px;border-radius:999px;background:rgba(0,0,0,.35);color:#fff;border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(4px)}
+.case-flag{display:block;margin-top:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.75}

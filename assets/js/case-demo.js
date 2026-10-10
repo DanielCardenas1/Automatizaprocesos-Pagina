@@ -9,25 +9,34 @@
 var CASE_DEMOS = {
   hojaldre: {
     choices: [
-      { path:'tienda', label:'Vender en mi negocio', desc:'Tengo un establecimiento y quiero incorporar Hojaldito a mi oferta.' },
-      { path:'socio', label:'Ser Socio Ganador', desc:'Puedo abrir nuevas oportunidades y conseguir otros puntos de distribución.' }
+      { path:'tienda', label:'Quiero vender Hojaldito en mi negocio', desc:'Tengo un establecimiento y quiero saber si me sirve y cómo pedir.' },
+      { path:'evento', label:'Lo necesito para un evento', desc:'Quiero precio y disponibilidad para un día puntual.' },
+      { path:'repetir', label:'Ya compro Hojaldito', desc:'Quiero repetir mi pedido o avisar de un problema.' }
     ],
     paths: {
       tienda: {
         screens: [
-          { label:'Catálogo mayorista', desc:'Precios por volumen y disponibilidad según tu zona.' },
-          { label:'Calcula tu margen', desc:'Simulador de ganancia según cuánto quieras vender.' },
-          { label:'Confirma pedido', desc:'Cantidad, ciudad y datos de contacto.' }
+          { label:'Tu negocio y tu zona', desc:'Eliges el tipo de negocio y si estás en Tunja o en un municipio cercano.' },
+          { label:'Tus condiciones', desc:'Ves el pedido mínimo, el horario para pedir y el horario de entrega que te aplican.' },
+          { label:'Tu oportunidad', desc:'Calculas un pedido y un margen de ejemplo, antes de dejar ningún dato.' },
+          { label:'Tus datos', desc:'Dejas tu contacto y eliges cuándo recibir una muestra.' }
         ],
-        success:{ title:'✓ Pedido enviado', text:'Hojaldito recibe negocio, cantidad y ciudad, listo para coordinar la entrega.' }
+        success:{ title:'✓ Muestra solicitada', text:'Hojaldito recibe el negocio, la zona y el contacto, y la solicitud queda registrada con su estado.' }
       },
-      socio: {
+      evento: {
         screens: [
-          { label:'Zona disponible', desc:'Mapa de zonas libres para abrir un nuevo punto.' },
-          { label:'Comisión estimada', desc:'Cálculo de comisión según el volumen proyectado.' },
-          { label:'Agenda llamada', desc:'Elige un horario para hablar con el equipo comercial.' }
+          { label:'Fecha y cantidad', desc:'Dices para qué día es y cuántas unidades necesitas, más o menos.' },
+          { label:'Municipio', desc:'Indicas dónde es el evento.' },
+          { label:'WhatsApp con el mensaje armado', desc:'Se abre la conversación con tus datos ya escritos.' }
         ],
-        success:{ title:'✓ Solicitud enviada', text:'Hojaldito recibe zona, contacto y disponibilidad, listo para agendar la llamada.' }
+        success:{ title:'✓ Consulta enviada', text:'Hojaldito recibe la fecha, la cantidad y el lugar ya claros, y responde con precio y disponibilidad.' }
+      },
+      repetir: {
+        screens: [
+          { label:'Qué necesitas hoy', desc:'Repetir el último pedido, cambiar la cantidad o el sabor, o avisar de un problema.' },
+          { label:'WhatsApp con tu mensaje', desc:'Se abre la conversación con lo que elegiste y el horario de pedido y entrega.' }
+        ],
+        success:{ title:'✓ Mensaje listo', text:'Hojaldito entiende qué necesitas sin que vuelvas a explicar quién eres.' }
       }
     }
   },

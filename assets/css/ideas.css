@@ -1,5 +1,5 @@
 :root{
-  --ink:#1b1a18;--muted:#6A5C42;--paper:#f8f7f3;--soft:#eef1ed;--line:#d9ddd9;
+  --ink:#151515;--muted:#6b634f;--paper:#f5f5f5;--soft:#eef1ed;--line:#d9ddd9;
   --sans:'DM Sans',system-ui,sans-serif;--serif:'Cormorant Garamond',Georgia,serif;--mono:'DM Mono',monospace;
 }
 *{box-sizing:border-box}
@@ -48,7 +48,7 @@ p+p{margin-top:-4px}
 
 .cta{margin-top:50px;padding:36px 34px;border-radius:20px;background:var(--ink);color:#fff}
 .cta h2,.cta h3{font-family:var(--serif);font-weight:500;font-size:26px;margin:0 0 10px;letter-spacing:-.4px}
-.cta p{color:#d8d3c8;margin:0 0 22px;font-size:14px}
+.cta p{color:#d9d9d9;margin:0 0 22px;font-size:14px}
 .cta a{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);text-decoration:none;border-radius:100px;padding:14px 22px;font:600 13px var(--sans)}
 
 /* Capas de un recorrido (usado en /diseno-de-recorridos-de-cliente/) */

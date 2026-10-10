@@ -71,3 +71,54 @@
     });
   }
 })();
+
+
+/* Mapa de la página: "dónde estoy y para dónde voy". */
+(function () {
+  var stops = [['experiencias', 'Pruébalo'], ['que-hago', 'Qué diseño'], ['casos', 'Casos y prototipos'], ['metodo', 'Cómo trabajo'], ['sobre-mi', 'Quién soy'], ['diagnostico', 'Hablemos']];
+  var bar = document.getElementById('dcWhere');
+  if (!bar) return;
+  var btn = bar.querySelector('.dc-where-btn'), list = document.getElementById('dcWhereList');
+  var n = document.getElementById('dcWhereN'), t = document.getElementById('dcWhereT'), fill = document.getElementById('dcWhereFill');
+  var secs = stops.map(function (s) { return document.getElementById(s[0]); });
+  var hero = document.querySelector('.dc-hero');
+  var links = list.querySelectorAll('a');
+  var cur = -1, shown = false, ticking = false;
+
+  function setOpen(o) { btn.setAttribute('aria-expanded', o ? 'true' : 'false'); list.hidden = !o; }
+  btn.addEventListener('click', function () { setOpen(list.hidden); });
+  list.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !list.hidden) { setOpen(false); btn.focus(); } });
+  document.addEventListener('click', function (e) { if (!list.hidden && !bar.contains(e.target)) setOpen(false); });
+
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight, probe = vh * 0.4, idx = -1, frac = 0;
+    for (var i = 0; i < secs.length; i++) {
+      if (!secs[i]) continue;
+      var r = secs[i].getBoundingClientRect();
+      if (r.top <= probe) { idx = i; frac = Math.min(1, Math.max(0, (probe - r.top) / Math.max(1, r.height))); }
+    }
+    var show = idx >= 0 && hero.getBoundingClientRect().bottom < vh * 0.55;
+    if (show !== shown) {
+      shown = show;
+      bar.classList.toggle('show', show);
+      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+      btn.tabIndex = show ? 0 : -1;
+      if (!show) setOpen(false);
+    }
+    if (idx >= 0 && idx !== cur) {
+      cur = idx;
+      n.textContent = (idx + 1) + ' de ' + secs.length;
+      t.textContent = stops[idx][1];
+      for (var k = 0; k < links.length; k++) {
+        if (k === idx) links[k].setAttribute('aria-current', 'true'); else links[k].removeAttribute('aria-current');
+      }
+    }
+    if (idx >= 0) fill.style.width = (((idx + frac) / secs.length) * 100).toFixed(1) + '%';
+  }
+  function request() { if (!ticking) { ticking = true; setTimeout(update, 40); } }
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  update();
+})();

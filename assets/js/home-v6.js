@@ -31,17 +31,26 @@ function saveLead(lead) {
   let canalTrafico = 'directo';
   try { canalTrafico = sessionStorage.getItem('canal_trafico') || 'directo'; } catch (e) {}
   const conFecha = Object.assign({ fecha: new Date().toISOString(), canal_trafico: canalTrafico }, lead);
-  try {
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.assign({
-        access_key: WEB3FORMS_ACCESS_KEY,
-        subject: conFecha.email_subject || 'Nuevo lead | Daniel Cárdenas',
-        from_name: 'Contacto danielcardenas.co'
-      }, conFecha))
-    }).catch(() => {});
-  } catch (e) {}
+  // Devuelve una promesa que dice si el servicio confirmó el envío (true) o no (false).
+  return new Promise(function (resolve) {
+    const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timer = setTimeout(function () { if (ctl) ctl.abort(); resolve(false); }, 10000);
+    const fin = function (ok) { clearTimeout(timer); resolve(ok); };
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        signal: ctl ? ctl.signal : undefined,
+        body: JSON.stringify(Object.assign({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: conFecha.email_subject || 'Nuevo lead | Daniel Cárdenas',
+          from_name: 'Contacto danielcardenas.co'
+        }, conFecha))
+      }).then(function (r) {
+        return r.json().then(function (j) { fin(!!(r.ok && j && j.success)); }, function () { fin(r.ok); });
+      }).catch(function () { fin(false); });
+    } catch (e) { fin(false); }
+  });
 }
 
 /* Formulario de contacto: 3 pasos cortos que se contestan tocando. El brief completo lo hace Daniel en la primera reunión,
@@ -105,31 +114,61 @@ function saveLead(lead) {
     const chip=e.target.closest('.chip');
     if(chip){
       const group=chip.parentElement;
-      if(group.id==='chipsBusiness'){ pick(group,chip,false); state.business=chip.dataset.val; const o=$('contactBusinessOther'); o.hidden=(state.business!=='Otro'); if(!o.hidden) o.focus(); }
+      if(group.id==='chipsBusiness'){ pick(group,chip,false); state.business=chip.dataset.val; const o=$('contactBusinessOther'); o.hidden=(state.business!=='Otro'); $('lblBizOther').hidden=o.hidden; if(!o.hidden) o.focus(); }
       else if(group.id==='chipsGoal'){ pick(group,chip,true); }
       else if(group.id==='chipsWhen'){ pick(group,chip,false); state.when=chip.dataset.val; $('contactWhenPick').hidden=(state.when!=='elegir'); }
       syncNext(); return;
     }
-    if(e.target.closest('#contactAddEmail')){ $('contactEmail').hidden=false; e.target.closest('#contactAddEmail').hidden=true; $('contactEmail').focus(); return; }
+    if(e.target.closest('#contactAddEmail')){ $('contactEmail').hidden=false; $('lblEmail').hidden=false; e.target.closest('#contactAddEmail').hidden=true; $('contactEmail').focus(); return; }
     if(e.target.closest('#contactToData')||e.target.closest('#questionToData')){ show('data'); $('contactName')?.focus(); return; }
     if(e.target.closest('#contactSend')){ send(); return; }
   });
   ['contactBusinessOther','contactMore','contactQuestion'].forEach(id=>{ const el=$(id); if(el) el.addEventListener('input',syncNext); });
 
+  /* Errores junto al campo, con texto concreto. */
+  function setErr(field, errId, msg){ const e=$(errId); if(e){ e.textContent=msg; e.hidden=false; } const f=$(field); if(f) f.setAttribute('aria-invalid','true'); }
+  function clearErr(field, errId){ const e=$(errId); if(e){ e.textContent=''; e.hidden=true; } const f=$(field); if(f) f.removeAttribute('aria-invalid'); }
+  function checkName(){ if(!val('contactName')){ setErr('contactName','errName','Falta tu nombre.'); return false; } clearErr('contactName','errName'); return true; }
+  function checkWa(){ if(val('contactWhatsApp').replace(/\D/g,'').length<7){ setErr('contactWhatsApp','errWa','Falta tu WhatsApp, con el número completo. Por ejemplo: 310 123 4567.'); return false; } clearErr('contactWhatsApp','errWa'); return true; }
+  function checkConsent(){ if(!$('contactConsent').checked){ setErr('contactConsent','errConsent','Marca la casilla para aceptar el aviso de privacidad.'); return false; } clearErr('contactConsent','errConsent'); return true; }
+  function checkWhen(){ const e=$('errWhen'); if(!whenText()){ e.textContent='Elige el día y la hora, o toca "Lo antes posible".'; e.hidden=false; return false; } e.textContent=''; e.hidden=true; return true; }
+  $('contactName').addEventListener('blur',checkName);
+  $('contactWhatsApp').addEventListener('blur',checkWa);
+  $('contactName').addEventListener('input',()=>{ if($('contactName').hasAttribute('aria-invalid')) checkName(); });
+  $('contactWhatsApp').addEventListener('input',()=>{ if($('contactWhatsApp').hasAttribute('aria-invalid')) checkWa(); });
+  $('contactConsent').addEventListener('change',checkConsent);
+  ['contactDate','contactTime'].forEach(id=>{ const el=$(id); if(el) el.addEventListener('change',()=>{ if(!$('errWhen').hidden) checkWhen(); }); });
+
+  function mostrarExito(ok){
+    $('successMark').textContent = ok ? '✓' : '!';
+    $('successMark').classList.toggle('warn', !ok);
+    $('successKicker').textContent = ok ? 'SOLICITUD RECIBIDA' : 'FALTA UN PASO';
+    $('successTitle').textContent = ok ? 'Listo, ya tengo tu solicitud.' : 'Tu solicitud no se envió sola.';
+    $('successText').innerHTML = ok
+      ? '<strong>Te escribo por WhatsApp en menos de 24 horas</strong> para confirmar la conversación. Si quieres adelantar, abre WhatsApp y envía tu mensaje: llegará con todo el contexto.'
+      : '<strong>Puede ser tu conexión.</strong> Toca el botón y envíame tu mensaje por WhatsApp: llega con todo el contexto y te respondo en menos de 24 horas.';
+    show('success');
+  }
+
   function send(){
     const name=val('contactName'), wa=val('contactWhatsApp'), email=val('contactEmail');
-    const fb=$('contactFeedback');
-    if(!name||wa.replace(/\D/g,'').length<7){ fb.textContent='Escribe tu nombre y un WhatsApp válido para poder contactarte.'; return; }
-    if(!$('contactConsent').checked){ fb.textContent='Para enviar tu solicitud, acepta el aviso de privacidad.'; return; }
+    const okName=checkName(), okWa=checkWa(), okConsent=checkConsent();
+    if(!okName){ $('contactName').focus(); return; }
+    if(!okWa){ $('contactWhatsApp').focus(); return; }
+    if(!okConsent){ $('contactConsent').scrollIntoView({block:'center',behavior:'smooth'}); return; }
+    if(!checkWhen()) return;
     const cuando=whenText();
-    if(!cuando){ fb.textContent='Elige el día y la hora, o selecciona "Lo antes posible".'; return; }
-    fb.textContent='';
     const similar=state.mode==='similar';
     const lines=introLines().concat(['','Nombre: '+name,'WhatsApp: '+wa,'Correo: '+(email||'No indicó'),'Cuándo escribirme: '+cuando,'','La hora queda pendiente de tu confirmación.']);
     const msg=lines.join('\n');
-    try{ saveLead({tipo_solicitud:'solicitud_conversacion',modalidad:similar?'QUIERO UNA EXPERIENCIA':'TENGO UNA PREGUNTA',nombre:name,whatsapp:wa,email,negocio_tipo:similar?business():'',objetivo:similar?goalText():'',pregunta:similar?'':val('contactQuestion'),cuando_escribirle:cuando,fecha_solicitada:state.when==='elegir'?val('contactDate'):'',hora_solicitada:state.when==='elegir'?val('contactTime'):'',consentimiento_datos:true,mensaje_whatsapp:msg,email_subject:'Nuevo lead | '+(similar?'quiere una experiencia ('+(business()||'sin tipo')+')':'pregunta')}); }catch(err){}
     $('contactSuccessWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
-    show('success');
+    const btn=$('contactSend'); const etiqueta=btn.innerHTML;
+    btn.disabled=true; btn.textContent='Enviando…';
+    saveLead({tipo_solicitud:'solicitud_conversacion',modalidad:similar?'QUIERO UNA EXPERIENCIA':'TENGO UNA PREGUNTA',nombre:name,whatsapp:wa,email,negocio_tipo:similar?business():'',objetivo:similar?goalText():'',pregunta:similar?'':val('contactQuestion'),cuando_escribirle:cuando,fecha_solicitada:state.when==='elegir'?val('contactDate'):'',hora_solicitada:state.when==='elegir'?val('contactTime'):'',consentimiento_datos:true,mensaje_whatsapp:msg,email_subject:'Nuevo lead | '+(similar?'quiere una experiencia ('+(business()||'sin tipo')+')':'pregunta')}).then(ok=>{
+      btn.disabled=false; btn.innerHTML=etiqueta;
+      trackEvent('lead_enviado',{ok:ok,modalidad:similar?'experiencia':'pregunta'});
+      mostrarExito(ok);
+    });
   }
 
   // La fecha elegible empieza mañana.
@@ -142,7 +181,7 @@ function saveLead(lead) {
       const k=String(biz).toLowerCase();
       let hit=[...bg.querySelectorAll('.chip')].find(c=>c.dataset.val.toLowerCase().startsWith(k)||k.startsWith(c.dataset.val.toLowerCase().split(' ')[0]));
       if(!hit){ hit=bg.querySelector('[data-val="Otro"]'); $('contactBusinessOther').value=String(biz).slice(0,80); }
-      pick(bg,hit,false); state.business=hit.dataset.val; $('contactBusinessOther').hidden=(state.business!=='Otro');
+      pick(bg,hit,false); state.business=hit.dataset.val; $('contactBusinessOther').hidden=(state.business!=='Otro'); $('lblBizOther').hidden=$('contactBusinessOther').hidden;
     }
     if(goal){
       const g=String(goal), low=g.toLowerCase();
