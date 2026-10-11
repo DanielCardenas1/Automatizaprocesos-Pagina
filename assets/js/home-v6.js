@@ -4,6 +4,8 @@
    de #diagnostico y la entrega de contexto desde experiencia.html.
    (Extraido de home.js, que sigue siendo el motor de la home anterior.)
    ============================================================ */
+// Respeta la preferencia de "reducir movimiento": sin ella el scroll es suave; con ella, directo.
+const SCROLL_SUAVE = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'auto' : 'smooth';
 function trackEvent(name, data) {
   data = data || {};
   window.dataLayer = window.dataLayer || [];
@@ -60,7 +62,10 @@ function saveLead(lead) {
   const screens={start:$('contactScreenStart'),similar:$('contactScreenSimilar'),question:$('contactScreenQuestion'),data:$('contactScreenData'),success:$('contactScreenSuccess')};
   if(!screens.start)return;
   const WA='573118262315';
-  const state={mode:null,business:'',goals:[],when:'asap'};
+  const SERVICIOS={diagnostico:'Diagnóstico y asesoría',diseno:'Diseño e implementación',acompanamiento:'Acompañamiento y optimización'};
+  const state={mode:null,business:'',goals:[],when:'asap',service:'',origin:''};
+  // Contexto de procedencia: ?servicio=diagnostico|diseno|acompanamiento y ?origen=pagina-de-donde-llegas (solo letras, números y guiones).
+  try{ const q=new URLSearchParams(location.search); const sv=q.get('servicio'); if(sv && SERVICIOS[sv]) state.service=sv; state.origin=(q.get('origen')||'').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,60); }catch(e){}
   const hint=$('contactStepHint');
   const hints={start:'Paso 1 de 3 · Elige una opción',similar:'Paso 2 de 3 · Toca lo que más se parezca',question:'Paso 2 de 3 · Escribe tu pregunta',data:'Paso 3 de 3 · Solo tu nombre y WhatsApp',success:'Listo'};
   const val=id=>(($(id)&&$(id).value)||'').trim();
@@ -75,9 +80,15 @@ function saveLead(lead) {
   function waLink(lines){ return 'https://wa.me/'+WA+'?text='+encodeURIComponent(lines.join('\n')); }
   function introLines(){
     const l=['Hola Daniel, vi tu página y quiero hablar contigo.'];
+    if(state.service) l.push('Me interesa: '+SERVICIOS[state.service]);
     if(state.mode==='question'){ const q=val('contactQuestion'); if(q) l.push('','Mi pregunta: '+q); }
     else { const b=business(), g=goalText(); if(b) l.push('','Mi negocio: '+b); if(g) l.push('Quiero que mis clientes puedan: '+g); }
     return l;
+  }
+  function showService(){
+    const n=$('contactServiceNote'); if(!n) return;
+    n.hidden=!state.service;
+    if(state.service) $('contactServiceName').textContent=SERVICIOS[state.service];
   }
   function updateDirect(){ const a=$('contactDirectWa'); if(a) a.href=waLink(introLines()); }
 
@@ -87,7 +98,9 @@ function saveLead(lead) {
     hint.textContent=hints[name];
     const d=$('contactDirect'); if(d) d.hidden=(name==='success');
     if(typeof trackEvent==='function') trackEvent('contact_step',{step:name});
-    screens[name].scrollIntoView({behavior:'smooth',block:'nearest'});
+    screens[name].scrollIntoView({behavior:SCROLL_SUAVE,block:'nearest'});
+    // Lleva el foco al encabezado de la pantalla nueva para que el lector de pantalla la anuncie (en "data" lo recibe el primer campo).
+    if(name!=='data'){ const h=screens[name].querySelector('h3'); if(h){ h.tabIndex=-1; h.focus({preventScroll:true}); } }
   }
   function syncNext(){
     const n=$('contactToData'); if(n) n.disabled=!business();
@@ -119,6 +132,7 @@ function saveLead(lead) {
       else if(group.id==='chipsWhen'){ pick(group,chip,false); state.when=chip.dataset.val; $('contactWhenPick').hidden=(state.when!=='elegir'); }
       syncNext(); return;
     }
+    if(e.target.closest('#contactServiceClear')){ state.service=''; showService(); updateDirect(); trackEvent('contact_service_clear'); return; }
     if(e.target.closest('#contactAddEmail')){ $('contactEmail').hidden=false; $('lblEmail').hidden=false; e.target.closest('#contactAddEmail').hidden=true; $('contactEmail').focus(); return; }
     if(e.target.closest('#contactToData')||e.target.closest('#questionToData')){ show('data'); $('contactName')?.focus(); return; }
     if(e.target.closest('#contactSend')){ send(); return; }
@@ -130,12 +144,21 @@ function saveLead(lead) {
   function clearErr(field, errId){ const e=$(errId); if(e){ e.textContent=''; e.hidden=true; } const f=$(field); if(f) f.removeAttribute('aria-invalid'); }
   function checkName(){ if(!val('contactName')){ setErr('contactName','errName','Falta tu nombre.'); return false; } clearErr('contactName','errName'); return true; }
   function checkWa(){ if(val('contactWhatsApp').replace(/\D/g,'').length<7){ setErr('contactWhatsApp','errWa','Falta tu WhatsApp, con el número completo. Por ejemplo: 310 123 4567.'); return false; } clearErr('contactWhatsApp','errWa'); return true; }
+  function checkEmail(){ const v=val('contactEmail'); if(v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ setErr('contactEmail','errEmail','Revisa tu correo: debe verse como nombre@dominio.com. Si prefieres, déjalo vacío.'); return false; } clearErr('contactEmail','errEmail'); return true; }
   function checkConsent(){ if(!$('contactConsent').checked){ setErr('contactConsent','errConsent','Marca la casilla para aceptar el aviso de privacidad.'); return false; } clearErr('contactConsent','errConsent'); return true; }
-  function checkWhen(){ const e=$('errWhen'); if(!whenText()){ e.textContent='Elige el día y la hora, o toca "Lo antes posible".'; e.hidden=false; return false; } e.textContent=''; e.hidden=true; return true; }
+  function checkWhen(){
+    const e=$('errWhen'); let msg='';
+    if(!whenText()) msg='Elige el día y la hora, o toca "Lo antes posible".';
+    else if(state.when==='elegir' && val('contactDate') < $('contactDate').min) msg='Elige un día desde mañana.';
+    if(msg){ e.textContent=msg; e.hidden=false; return false; }
+    e.textContent=''; e.hidden=true; return true;
+  }
   $('contactName').addEventListener('blur',checkName);
   $('contactWhatsApp').addEventListener('blur',checkWa);
   $('contactName').addEventListener('input',()=>{ if($('contactName').hasAttribute('aria-invalid')) checkName(); });
   $('contactWhatsApp').addEventListener('input',()=>{ if($('contactWhatsApp').hasAttribute('aria-invalid')) checkWa(); });
+  $('contactEmail').addEventListener('blur',checkEmail);
+  $('contactEmail').addEventListener('input',()=>{ if($('contactEmail').hasAttribute('aria-invalid')) checkEmail(); });
   $('contactConsent').addEventListener('change',checkConsent);
   ['contactDate','contactTime'].forEach(id=>{ const el=$(id); if(el) el.addEventListener('change',()=>{ if(!$('errWhen').hidden) checkWhen(); }); });
 
@@ -152,11 +175,12 @@ function saveLead(lead) {
 
   function send(){
     const name=val('contactName'), wa=val('contactWhatsApp'), email=val('contactEmail');
-    const okName=checkName(), okWa=checkWa(), okConsent=checkConsent();
+    const okName=checkName(), okWa=checkWa(), okEmail=checkEmail(), okConsent=checkConsent(), okWhen=checkWhen();
     if(!okName){ $('contactName').focus(); return; }
     if(!okWa){ $('contactWhatsApp').focus(); return; }
-    if(!okConsent){ $('contactConsent').scrollIntoView({block:'center',behavior:'smooth'}); return; }
-    if(!checkWhen()) return;
+    if(!okEmail){ $('contactEmail').focus(); return; }
+    if(!okWhen){ const w=$('contactWhenPick'); (w.hidden?$('errWhen'):$('contactDate')).scrollIntoView({block:'center',behavior:SCROLL_SUAVE}); if(!w.hidden) $('contactDate').focus(); return; }
+    if(!okConsent){ $('contactConsent').focus(); $('contactConsent').scrollIntoView({block:'center',behavior:SCROLL_SUAVE}); return; }
     const cuando=whenText();
     const similar=state.mode==='similar';
     const lines=introLines().concat(['','Nombre: '+name,'WhatsApp: '+wa,'Correo: '+(email||'No indicó'),'Cuándo escribirme: '+cuando,'','La hora queda pendiente de tu confirmación.']);
@@ -164,7 +188,7 @@ function saveLead(lead) {
     $('contactSuccessWa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
     const btn=$('contactSend'); const etiqueta=btn.innerHTML;
     btn.disabled=true; btn.textContent='Enviando…';
-    saveLead({tipo_solicitud:'solicitud_conversacion',modalidad:similar?'QUIERO UNA EXPERIENCIA':'TENGO UNA PREGUNTA',nombre:name,whatsapp:wa,email,negocio_tipo:similar?business():'',objetivo:similar?goalText():'',pregunta:similar?'':val('contactQuestion'),cuando_escribirle:cuando,fecha_solicitada:state.when==='elegir'?val('contactDate'):'',hora_solicitada:state.when==='elegir'?val('contactTime'):'',consentimiento_datos:true,mensaje_whatsapp:msg,email_subject:'Nuevo lead | '+(similar?'quiere una experiencia ('+(business()||'sin tipo')+')':'pregunta')}).then(ok=>{
+    saveLead({tipo_solicitud:'solicitud_conversacion',modalidad:similar?'QUIERO UNA EXPERIENCIA':'TENGO UNA PREGUNTA',nombre:name,whatsapp:wa,email,negocio_tipo:similar?business():'',objetivo:similar?goalText():'',pregunta:similar?'':val('contactQuestion'),cuando_escribirle:cuando,fecha_solicitada:state.when==='elegir'?val('contactDate'):'',hora_solicitada:state.when==='elegir'?val('contactTime'):'',consentimiento_datos:true,mensaje_whatsapp:msg,servicio_interes:state.service?SERVICIOS[state.service]:'',origen_pagina:state.origin,email_subject:'Nuevo lead | '+(similar?'quiere una experiencia ('+(business()||'sin tipo')+')':'pregunta')+(state.service?' · '+SERVICIOS[state.service]:'')}).then(ok=>{
       btn.disabled=false; btn.innerHTML=etiqueta;
       trackEvent('lead_enviado',{ok:ok,modalidad:similar?'experiencia':'pregunta'});
       mostrarExito(ok);
@@ -191,6 +215,8 @@ function saveLead(lead) {
     }
     syncNext();
   };
+  showService();
+  if(state.service||state.origin) trackEvent('contact_context',{service:state.service,origin:state.origin});
   syncNext();
 })();
 
@@ -199,7 +225,7 @@ function saveLead(lead) {
   document.addEventListener('click',e=>{
     const link=e.target.closest('[data-pre-diagnostic="1"]'); if(!link)return;
     e.preventDefault(); const diag=document.getElementById('diagnostico');
-    if(diag){trackEvent('cta_pre_diagnostic',{cta:(link.textContent||'').trim()});diag.scrollIntoView({behavior:'smooth',block:'start'});}
+    if(diag){trackEvent('cta_pre_diagnostic',{cta:(link.textContent||'').trim()});diag.scrollIntoView({behavior:SCROLL_SUAVE,block:'start'});}
   });
 })();
 
@@ -216,6 +242,6 @@ function saveLead(lead) {
   const starter=document.querySelector('[data-contact-start="similar"]');
   if(starter) starter.click();
   const section=document.getElementById('diagnostico');
-  if(section) setTimeout(()=>section.scrollIntoView({behavior:'smooth',block:'start'}), 60);
+  if(section) setTimeout(()=>section.scrollIntoView({behavior:SCROLL_SUAVE,block:'start'}), 60);
 })();
 

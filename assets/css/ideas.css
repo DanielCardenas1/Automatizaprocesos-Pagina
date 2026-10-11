@@ -91,3 +91,15 @@ p em,li em{font-style:normal;font-weight:600}
 nav a,footer a{font-size:14px}
 h1,h2{text-wrap:balance}
 .top-crumbs a,.cta a{font-size:14px}
+
+/* Listas numeradas y bloque "Para seguir" (servicio + caso + texto relacionado) */
+.article ol{margin:0 0 18px;padding-left:24px;max-width:640px}
+.article ol li{font-size:16px;line-height:1.75;color:#3a3733;margin:0 0 8px}
+.related{margin:56px 0 0;padding:30px 0 0;border-top:1px solid var(--line)}
+.related-label{font:600 12px var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.related .cases{margin-top:14px}
+.related .case-link b{font-size:13px}
+.hub-service{display:inline-block;margin-top:10px;font:600 13px var(--sans);color:var(--muted)}
+.hub-note{margin:16px 0 0;font-size:14px}
+/* Mínimo 12px también en la numeración de pasos y en los enlaces de las tarjetas */
+.method-step span,.case-link b{font-size:12px}

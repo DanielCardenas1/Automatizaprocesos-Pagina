@@ -63,3 +63,4 @@ h1,h2{text-wrap:balance}
 .footer strong{font-size:16px}
 .mcta-t span{font-size:12px}
 .modal-title em{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic}
+.main-nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px}

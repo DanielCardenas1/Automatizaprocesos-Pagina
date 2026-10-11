@@ -142,7 +142,7 @@
       if(v==='TOBY774'){ $('#codeHint').hidden = true; setTab('resumen'); go('c-toby'); }
       else { $('#codeHint').hidden = false; }
     },
-    tabHistorial:function(){ setTab('historial'); var t=$('#petTabs'); if(t) t.scrollIntoView({behavior:'smooth',block:'center'}); },
+    tabHistorial:function(){ setTab('historial'); var t=$('#petTabs'); if(t) t.scrollIntoView({behavior:(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)?'auto':'smooth',block:'center'}); },
     monthPrev:function(){
       var now = new Date(), prev = new Date(state.month.getFullYear(), state.month.getMonth()-1, 1);
       if(prev >= new Date(now.getFullYear(), now.getMonth(), 1)){ state.month = prev; renderCalendar(); }

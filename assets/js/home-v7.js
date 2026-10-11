@@ -10,6 +10,7 @@
       var on = t.getAttribute('data-tab') === key;
       t.classList.toggle('on', on);
       t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
     });
     picks.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-panel') === key); });
     panels.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-panel') === key); });
@@ -28,6 +29,7 @@
   var wanted = null;
   try { wanted = new URLSearchParams(location.search).get('tab') || sessionStorage.getItem('home_tab'); } catch (e) {}
   if (wanted && document.querySelector('.dc-tabs [data-tab="' + wanted + '"]')) show(wanted);
+  else tabs.forEach(function (t) { t.tabIndex = t.classList.contains('on') ? 0 : -1; });
 })();
 
 
@@ -39,6 +41,9 @@
       var open = nav.classList.toggle('open');
       menu.setAttribute('aria-expanded', open ? 'true' : 'false');
       menu.textContent = open ? 'Cerrar' : 'Menú';
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); menu.textContent = 'Menú'; menu.focus(); }
     });
     nav.addEventListener('click', function (e) {
       if (e.target.closest('a')) { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); menu.textContent = 'Menú'; }
@@ -62,11 +67,11 @@
   var list = document.querySelector('.dc-tabs');
   if (list) {
     list.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      if (['ArrowRight', 'ArrowLeft', 'Home', 'End'].indexOf(e.key) < 0) return;
       var tabs = Array.prototype.slice.call(list.querySelectorAll('[data-tab]'));
       var i = tabs.indexOf(document.activeElement);
       if (i < 0) return;
-      var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      var n = e.key === 'Home' ? tabs[0] : e.key === 'End' ? tabs[tabs.length - 1] : tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
       n.focus(); n.click(); e.preventDefault();
     });
   }

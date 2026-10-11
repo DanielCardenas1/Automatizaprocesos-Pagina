@@ -30,3 +30,6 @@
 .demo-screen .success-card p{margin:0;color:var(--ink2);font-size:12.5px;line-height:1.5}
 .case-demo .back-link{border:0;background:none;padding:0;margin-top:14px;font-size:11px;color:var(--accent);cursor:pointer;display:block}
 @media(max-width:600px){.demo-choice-list{grid-template-columns:1fr}}
+/* Mínimo 12px en la maqueta de la demostración */
+.demo-url{font-size:12px}
+.demo-choice small{font-size:12px}

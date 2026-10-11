@@ -571,3 +571,7 @@ body.in-cafe .exp-exit{border-color:rgba(138,74,43,.4);background:rgba(251,248,2
 .c-kicker,.n-kicker,.c-edit,.c-stats small,.c-pet small,.c-timeline time,.pill,.n-feats span,.n-track span,.n-modes small,.n-usual small,.n-tags span,.n-brand small,li small{font-size:12px}
 .scr .n-modes small,.scr .d-choice b,.scr .n-brand small,.scr .case-img span{font-size:12px}
 .scr .c-vax small,.scr .case.brice .case-img span,.scr .cases .case-img span{font-size:12px}
+.scr .c-dow span,.scr .n-days-head span,.scr .n-dow span{font-size:12px}
+/* Aviso de demostración en las pantallas de confirmación: que nadie crea que reservó, pidió o escribió de verdad */
+.demo-note{margin:18px 0 6px;padding:11px 14px;border-radius:12px;background:rgba(21,21,21,.06);border-left:3px solid currentColor;font-size:14px;line-height:1.45;text-align:left;color:inherit}
+.demo-note strong{font-weight:700}
